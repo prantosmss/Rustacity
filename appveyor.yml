@@ -2,7 +2,7 @@
 #if you want to work on this, please talk with us on
 # https://lists.sourceforge.net/lists/listinfo/audacity-devel
 #build time is circa 7 mins.
-version: 2.4.1-alpha-{build}
+version: 0.1.0-alpha-{build}
 image: Visual Studio 2017
 shallow_clone: true # reduce traffic
 install:
@@ -35,5 +35,5 @@ build_script: # build all targets except `help`
     copy %WXWIN%\lib\vc_dll\*.dll win\Release\
 artifacts:
 - path: win\Release
-  name: 'audacity-%APPVEYOR_BUILD_VERSION%-%APPVEYOR_REPO_COMMIT%'
+  name: 'rustacity-%APPVEYOR_BUILD_VERSION%-%APPVEYOR_REPO_COMMIT%'
 

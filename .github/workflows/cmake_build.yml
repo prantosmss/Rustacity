@@ -1,6 +1,8 @@
 #
 # CMake based build for Audacity
 #
+# Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
+#
 name: CMake Build
 
 #
@@ -36,24 +38,24 @@ jobs:
         config:
         - {
             name: "Windows_32bit",
-            os: windows-latest,
-            generator: "Visual Studio 16 2019",
+            os: windows-2022,
+            generator: "Visual Studio 17 2022",
             platform: "Win32"
           }
         - {
             name: "Windows_64bit",
-            os: windows-latest,
-            generator: "Visual Studio 16 2019",
+            os: windows-2022,
+            generator: "Visual Studio 17 2022",
             platform: "x64"
           }
         - {
-            name: "Ubuntu_18.04",
-            os: ubuntu-18.04,
+            name: "Ubuntu_24.04",
+            os: ubuntu-24.04,
             generator: "Unix Makefiles"
           }
         - {
             name: "macOS",
-            os: macos-latest,
+            os: macos-15-intel,
             generator: "Xcode"
           }
 
@@ -62,9 +64,9 @@ jobs:
     # SHARED: Checkout source
     # =========================================================================
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v7
     #  with:
-    #    ref: master
+    #    ref: main
 
     # =========================================================================
     # SHARED: Retrieve git hashes and set up for cache
@@ -81,23 +83,23 @@ jobs:
         wxhash="wx_${wxhash}_${RUNNER_OS}_${{matrix.config.platform}}"
 
         # Export the commit hash to further steps
-        echo "::set-env name=WXHASH::${wxhash}"
+        echo "WXHASH=${wxhash}" >> "$GITHUB_ENV"
 
         # Get the short hash
         shorthash=$(git show -s --format='%h')
 
         # Export the short hash for the upload step
-        echo "::set-env name=SHORTHASH::${shorthash}"
+        echo "SHORTHASH=${shorthash}" >> "$GITHUB_ENV"
 
         # Export the destination directory name
-        echo "::set-env name=DEST::${{matrix.config.name}}_${shorthash}"
+        echo "DEST=${{matrix.config.name}}_${shorthash}" >> "$GITHUB_ENV"
 
     # =========================================================================
     # SHARED: Create and/or retrieve wxWidgets cached build
     # =========================================================================
     - name: Populate cache
       id: cache
-      uses: actions/cache@v1
+      uses: actions/cache@v6
       with:
         # Increment the number at the end to force recreation of the cache
         key: ${{ env.WXHASH }}.8
@@ -316,7 +318,7 @@ jobs:
     # SHARED: Attach the artifact to the workflow results
     # =========================================================================
     - name: Upload artifact
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v7
       with:
         name: ${{ matrix.config.name }}_${{ env.SHORTHASH }}
         path: ${{ github.sha }}.zip

@@ -1,3 +1,4 @@
+# Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
 name: Build Audacity
 
 on:
@@ -18,7 +19,10 @@ jobs:
     strategy:
         fail-fast: false
         matrix:
-            os: [windows-2019, ubuntu-16.04, ubuntu-18.04, macos-latest]
+            # windows-2019, ubuntu-16.04 and ubuntu-18.04 runner images have
+            # been retired by GitHub, so use currently supported images.
+            # The macOS build hardcodes x86_64, so use the Intel runner.
+            os: [windows-2022, ubuntu-24.04, macos-15-intel]
             #os: [macos-latest]
 
     runs-on: ${{ matrix.os }}
@@ -31,9 +35,9 @@ jobs:
     # SHARED: Checkout source
     # =========================================================================
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v7
       with:
-        ref: master
+        ref: main
 
     # =========================================================================
     # SHARED: Retrieve the commit hash and generate revision header
@@ -47,8 +51,8 @@ jobs:
         git show -s --format="#define REV_LONG \"%H\"%n#define REV_TIME \"%cd\"%n" >src/RevisionIdent.h
 
         # Export the long and short hashs to further steps
-        echo "::set-env name=LONGHASH::$(git show -s --format='%H')"
-        echo "::set-env name=SHORTHASH::$(git show -s --format='%h')"
+        echo "LONGHASH=$(git show -s --format='%H')" >> "$GITHUB_ENV"
+        echo "SHORTHASH=$(git show -s --format='%h')" >> "$GITHUB_ENV"
 
     # =========================================================================
     # SHARED: Retrieve the wxWidgets source and export the commit hash
@@ -63,13 +67,13 @@ jobs:
         cd wxWidgets
 
         # Export the commit hash to further steps
-        echo "::set-env name=WXHASH::$(git show -s --format='%H')"
+        echo "WXHASH=$(git show -s --format='%H')" >> "$GITHUB_ENV"
 
     # =========================================================================
     # SHARED: Create and/or retrieve wxWidgets cached build
     # =========================================================================
     - name: Cache wxWidgets
-      uses: actions/cache@v1
+      uses: actions/cache@v6
       with:
         # Increment the number at the end to force recreation of the cache
         key: wxWidgets_${{ matrix.os }}_${{ env.WXHASH }}.8
@@ -79,7 +83,7 @@ jobs:
     # WINDOWS: Setup Nuget (for all versions of Windows) 
     # =========================================================================
     - name: Setup Nuget
-      uses: nuget/setup-nuget@v1
+      uses: nuget/setup-nuget@v4
       if: startswith( matrix.os, 'windows' )
 
     # =========================================================================
@@ -90,7 +94,7 @@ jobs:
       shell: cmd
       run: |
         :: Set up Visual Studio environment
-        CALL "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+        CALL "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
         ECHO ON
 
         :: Setup environment
@@ -314,7 +318,7 @@ jobs:
     # SHARED: Attach the artifact to the workflow results
     # =========================================================================
     - name: Upload artifact
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v7
       with:
         name: ${{ matrix.os }}_${{ env.SHORTHASH }}
         path: ${{ env.LONGHASH }}.zip
