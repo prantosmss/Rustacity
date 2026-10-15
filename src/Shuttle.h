@@ -11,7 +11,7 @@
 #ifndef __RUSTACITY_SHUTTLE__
 #define __RUSTACITY_SHUTTLE__
 
-#include "../include/audacity/ComponentInterface.h"
+#include "../include/rustacity/ComponentInterface.h"
 
 class ComponentInterfaceSymbol;
 class WrappedType;

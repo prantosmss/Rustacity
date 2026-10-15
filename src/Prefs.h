@@ -31,7 +31,7 @@
 
 #include "Rustacity.h"
 
-#include "../include/audacity/ComponentInterface.h"
+#include "../include/rustacity/ComponentInterface.h"
 #include "MemoryX.h" // for wxArrayStringEx
 
 #include <memory>
