@@ -5,7 +5,7 @@
 #ifdef EXPERIMENTAL_DA
 RustacityLogo ICON "darkaudacity.ico"
 #else
-RustacityLogo ICON "audacity.ico"
+RustacityLogo ICON "rustacity.ico"
 #endif
 
 #include <winuser.h>
