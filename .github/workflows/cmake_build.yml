@@ -102,7 +102,7 @@ jobs:
       uses: actions/cache@v6
       with:
         # Increment the number at the end to force recreation of the cache
-        key: ${{ env.WXHASH }}.8
+        key: ${{ env.WXHASH }}.9
         path: ${{ env.WXWIN }}
 
     # =========================================================================
@@ -228,6 +228,18 @@ jobs:
 
           # Build and install to cached path
           make -j $(sysctl -n hw.ncpu) install DESTDIR="${WXWIN}"
+
+          # wx's configure-based `make install` only copies the file list
+          # in $(ALL_HEADERS), which omits every header directory named
+          # "private".  Our sources include <wx/osx/private.h>
+          # (FileDialogPrivate.mm, KeyboardCapture.cpp, VSTControlOSX.h,
+          # AUControl.h), and that header includes
+          # wx/osx/private/datatransfer.h, so without this the compile
+          # fails with "file not found".  Overlay the complete source
+          # header tree so no header class is left out; the generated
+          # setup.h is safe as configure puts it in lib/wx/include and
+          # the source tree has no include/wx/setup.h.
+          cp -a include/wx/. "${WXWIN}/usr/local/include/wx-3.1-release/wx/"
           cd ..
 
           # Clean up
