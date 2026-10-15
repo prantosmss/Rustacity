@@ -1273,7 +1273,20 @@ elseif( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
    add_executable( Wrapper "${WRAPPER_SOURCES}" )
    add_dependencies( "${TARGET}" Wrapper )
 
-   set_target_property_all( "Wrapper" RUNTIME_OUTPUT_DIRECTORY "${_EXEDIR}" )
+   # Build Wrapper in the shared output directory and copy it into the
+   # bundle afterwards.  Having it output directly into
+   # Rustacity.app/Contents/MacOS makes Xcode's new build system report
+   # "Multiple commands produce .../Contents/MacOS" since that directory
+   # is also created by the bundle target itself.
+   set_target_property_all( "Wrapper" RUNTIME_OUTPUT_DIRECTORY "${_DESTDIR}" )
+   add_custom_command(
+      TARGET
+         ${TARGET}
+      COMMAND
+         ${CMAKE_COMMAND} -E copy_if_different
+            "$<TARGET_FILE:Wrapper>" "$<TARGET_FILE_DIR:${TARGET}>/"
+      POST_BUILD
+   )
    organize_source( "${WRAPPER_ROOT}" "mac" "${WRAPPER_SOURCES}" )
 
 else()
