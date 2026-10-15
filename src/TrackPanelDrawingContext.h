@@ -1,6 +1,6 @@
 /**********************************************************************
 
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
 
  TrackPanelDrawingContext.h
 
@@ -8,8 +8,8 @@
 
  **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_PANEL_DRAWING_CONTEXT__
-#define __AUDACITY_TRACK_PANEL_DRAWING_CONTEXT__
+#ifndef __RUSTACITY_TRACK_PANEL_DRAWING_CONTEXT__
+#define __RUSTACITY_TRACK_PANEL_DRAWING_CONTEXT__
 
 #include "MemoryX.h"
 

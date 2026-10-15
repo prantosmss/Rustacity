@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Generator.h
 
@@ -24,7 +24,7 @@
 
 #include "TimeWarper.h"
 
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 bool Generator::Process()
 {

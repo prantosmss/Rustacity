@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   VSTControlMSW.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef AUDACITY_VSTCONTROLMSW_H
-#define AUDACITY_VSTCONTROLMSW_H
+#ifndef RUSTACITY_VSTCONTROLMSW_H
+#define RUSTACITY_VSTCONTROLMSW_H
 
 #include <Windows.h>
 

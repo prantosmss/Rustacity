@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportFLAC.cpp
 
@@ -22,7 +22,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #include "../Experimental.h"
 
@@ -136,7 +136,7 @@ class FLACImportPlugin final : public ImportPlugin
    wxString GetPluginStringID() override { return wxT("libflac"); }
    TranslatableString GetPluginFormatDescription() override;
    std::unique_ptr<ImportFileHandle> Open(
-      const FilePath &Filename, AudacityProject*)  override;
+      const FilePath &Filename, RustacityProject*)  override;
 };
 
 
@@ -291,7 +291,7 @@ TranslatableString FLACImportPlugin::GetPluginFormatDescription()
 
 
 std::unique_ptr<ImportFileHandle> FLACImportPlugin::Open(
-   const FilePath &filename, AudacityProject*)
+   const FilePath &filename, RustacityProject*)
 {
    // First check if it really is a FLAC file
 

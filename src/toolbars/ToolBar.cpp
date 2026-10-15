@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ToolBar.cpp
 
@@ -24,7 +24,7 @@ in which buttons can be placed.
 
 *//**********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "ToolBar.h"
 
 #include "../Experimental.h"
@@ -329,7 +329,7 @@ END_EVENT_TABLE()
 //
 // Constructor
 //
-ToolBar::ToolBar( AudacityProject &project,
+ToolBar::ToolBar( RustacityProject &project,
                   int type,
                   const TranslatableString &label,
                   const wxString &section,
@@ -891,7 +891,7 @@ void ToolBar::MakeAlternateImages(AButton &button, int idx,
 }
 
 void ToolBar::SetButtonToolTip
-(AudacityProject &theProject,
+(RustacityProject &theProject,
  AButton &button, const ComponentInterfaceSymbol commands[], size_t nCommands)
 {
    TranslatableString result;

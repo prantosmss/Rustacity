@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 Scrubbing.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "Scrubbing.h"
 
 #include "../../Experimental.h"
@@ -196,22 +196,22 @@ void Scrubber::ScrubPoller::Notify()
    mScrubber.ContinueScrubbingUI();
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-  []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+  []( RustacityProject &parent ){
      return std::make_shared< Scrubber >( &parent ); }
 };
 
-Scrubber &Scrubber::Get( AudacityProject &project )
+Scrubber &Scrubber::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< Scrubber >( key );
 }
 
-const Scrubber &Scrubber::Get( const AudacityProject &project )
+const Scrubber &Scrubber::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-Scrubber::Scrubber(AudacityProject *project)
+Scrubber::Scrubber(RustacityProject *project)
    : mScrubToken(-1)
    , mPaused(true)
    , mScrubSpeedDisplayCountdown(0)
@@ -244,7 +244,7 @@ Scrubber::~Scrubber()
 }
 
 static const auto HasWaveDataPred =
-   [](const AudacityProject &project){
+   [](const RustacityProject &project){
       auto range = TrackList::Get( project ).Any<const WaveTrack>()
          + [](const WaveTrack *pTrack){
             return pTrack->GetEndTime() > pTrack->GetStartTime();
@@ -1109,7 +1109,7 @@ wxString Scrubber::StatusMessageForWave() const
 
 static ProjectStatus::RegisteredStatusWidthFunction
 registeredStatusWidthFunction{
-   []( const AudacityProject &, StatusBarField field )
+   []( const RustacityProject &, StatusBarField field )
       -> ProjectStatus::StatusWidthResult
    {
       if ( field == stateStatusBarField ) {
@@ -1212,7 +1212,7 @@ void Scrubber::OnKeyboardScrubForwards(const CommandContext &context)
 namespace {
 
 static const auto finder =
-   [](AudacityProject &project) -> CommandHandlerObject&
+   [](RustacityProject &project) -> CommandHandlerObject&
      { return Scrubber::Get( project ); };
 
 using namespace MenuTable;
@@ -1232,7 +1232,7 @@ BaseItemSharedPtr ToolbarMenu()
                item.flags,
                item.StatusTest
                   ? // a checkmark item
-                     Options{}.CheckTest( [&item](AudacityProject &project){
+                     Options{}.CheckTest( [&item](RustacityProject &project){
                      return ( Scrubber::Get(project).*(item.StatusTest) )(); } )
                   : // not a checkmark item
                      Options{}

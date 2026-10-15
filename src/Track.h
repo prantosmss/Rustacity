@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Track.h
 
@@ -8,10 +8,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK__
-#define __AUDACITY_TRACK__
+#ifndef __RUSTACITY_TRACK__
+#define __RUSTACITY_TRACK__
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 
 #include "Experimental.h"
 
@@ -41,7 +41,7 @@ class TrackControls;
 class TrackView;
 class WaveTrack;
 class NoteTrack;
-class AudacityProject;
+class RustacityProject;
 class ZoomInfo;
 
 using TrackArray = std::vector< Track* >;
@@ -181,7 +181,7 @@ using AttachedTrackObjects = ClientData::Site<
    Track, ClientData::Base, ClientData::SkipCopying, std::shared_ptr
 >;
 
-class AUDACITY_DLL_API Track /* not final */
+class RUSTACITY_DLL_API Track /* not final */
    : public XMLTagHandler
    , public AttachedTrackObjects
    , public std::enable_shared_from_this<Track> // see SharedPointer()
@@ -714,7 +714,7 @@ protected:
    std::shared_ptr<CommonTrackCell> mpControls;
 };
 
-class AUDACITY_DLL_API AudioTrack /* not final */ : public Track
+class RUSTACITY_DLL_API AudioTrack /* not final */ : public Track
 {
 public:
    AudioTrack(const std::shared_ptr<DirManager> &projDirManager)
@@ -729,7 +729,7 @@ public:
    { return false; }
 };
 
-class AUDACITY_DLL_API PlayableTrack /* not final */ : public AudioTrack
+class RUSTACITY_DLL_API PlayableTrack /* not final */ : public AudioTrack
 {
 public:
    PlayableTrack(const std::shared_ptr<DirManager> &projDirManager)
@@ -1092,35 +1092,35 @@ struct TrackListEvent : public wxCommandEvent
 };
 
 // Posted when the set of selected tracks changes.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_TRACKLIST_SELECTION_CHANGE, TrackListEvent);
 
 // Posted when certain fields of a track change.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_TRACKLIST_TRACK_DATA_CHANGE, TrackListEvent);
 
 // Posted when a track needs to be scrolled into view.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_TRACKLIST_TRACK_REQUEST_VISIBLE, TrackListEvent);
 
 // Posted when tracks are reordered but otherwise unchanged.
 // mpTrack points to the moved track that is earliest in the New ordering.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_TRACKLIST_PERMUTED, TrackListEvent);
 
 // Posted when some track changed its height.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_TRACKLIST_RESIZING, TrackListEvent);
 
 // Posted when a track has been added to a tracklist.
 // Also posted when one track replaces another
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_TRACKLIST_ADDITION, TrackListEvent);
 
 // Posted when a track has been deleted from a tracklist.
 // Also posted when one track replaces another.
 // mpTrack points to the first track after the deletion, if there is one.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_TRACKLIST_DELETION, TrackListEvent);
 
 /** \brief TrackList is a flat linked list of tracks supporting Add,  Remove,
@@ -1149,15 +1149,15 @@ class TrackList final
    void clear() = delete;
 
  public:
-   static TrackList &Get( AudacityProject &project );
-   static const TrackList &Get( const AudacityProject &project );
+   static TrackList &Get( RustacityProject &project );
+   static const TrackList &Get( const RustacityProject &project );
  
    // Create an empty TrackList
    // Don't call directly -- use Create() instead
-   explicit TrackList( AudacityProject *pOwner );
+   explicit TrackList( RustacityProject *pOwner );
 
    // Create an empty TrackList
-   static std::shared_ptr<TrackList> Create( AudacityProject *pOwner );
+   static std::shared_ptr<TrackList> Create( RustacityProject *pOwner );
 
    // Move is defined in terms of Swap
    void Swap(TrackList &that);
@@ -1166,8 +1166,8 @@ class TrackList final
    virtual ~TrackList();
 
    // Find the owning project, which may be null
-   AudacityProject *GetOwner() { return mOwner; }
-   const AudacityProject *GetOwner() const { return mOwner; }
+   RustacityProject *GetOwner() { return mOwner; }
+   const RustacityProject *GetOwner() const { return mOwner; }
 
    // Iteration
 
@@ -1566,7 +1566,7 @@ public:
    bool HasPendingTracks() const;
 
 private:
-   AudacityProject *mOwner;
+   RustacityProject *mOwner;
 
    // Need to put pending tracks into a list so that GetLink() works
    ListOfTracks mPendingUpdates;
@@ -1574,14 +1574,14 @@ private:
    std::vector< Updater > mUpdaters;
 };
 
-class AUDACITY_DLL_API TrackFactory final
+class RUSTACITY_DLL_API TrackFactory final
    : public ClientData::Base
 {
  public:
-   static TrackFactory &Get( AudacityProject &project );
-   static const TrackFactory &Get( const AudacityProject &project );
-   static TrackFactory &Reset( AudacityProject &project );
-   static void Destroy( AudacityProject &project );
+   static TrackFactory &Get( RustacityProject &project );
+   static const TrackFactory &Get( const RustacityProject &project );
+   static TrackFactory &Reset( RustacityProject &project );
+   static void Destroy( RustacityProject &project );
 
    TrackFactory( const ProjectSettings &settings,
       const std::shared_ptr<DirManager> &dirManager, const ZoomInfo *zoomInfo)
@@ -1597,7 +1597,7 @@ class AUDACITY_DLL_API TrackFactory final
    const ProjectSettings &mSettings;
    const std::shared_ptr<DirManager> mDirManager;
    const ZoomInfo *const mZoomInfo;
-   friend class AudacityProject;
+   friend class RustacityProject;
  public:
    // These methods are defined in WaveTrack.cpp, NoteTrack.cpp,
    // LabelTrack.cpp, and TimeTrack.cpp respectively

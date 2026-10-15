@@ -19,7 +19,7 @@
 #include "Command.h"
 #include "CommandType.h"
 
-class DragCommand : public AudacityCommand
+class DragCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -31,7 +31,7 @@ public:
    bool DefineParams( ShuttleParams & S ) override;
    void PopulateOrExchange(ShuttleGui & S) override;
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_II#move_mouse");};
 
    bool Apply(const CommandContext & context) override;

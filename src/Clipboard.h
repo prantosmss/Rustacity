@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Clipboard.h
 
@@ -8,19 +8,19 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_CLIPBOARD__
-#define __AUDACITY_CLIPBOARD__
+#ifndef __RUSTACITY_CLIPBOARD__
+#define __RUSTACITY_CLIPBOARD__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include <memory>
 #include <wx/event.h> // to inherit wxEvtHandler
 
-class AudacityProject;
+class RustacityProject;
 class TrackList;
 
 // An event emitted by the clipboard whenever its contents change.
-wxDECLARE_EXPORTED_EVENT( AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT( RUSTACITY_DLL_API,
                           EVT_CLIPBOARD_CHANGE, wxCommandEvent );
 
 class Clipboard final
@@ -35,20 +35,20 @@ public:
    double T1() const { return mT1; }
    double Duration() const { return mT1 - mT0; }
 
-   AudacityProject *Project() const { return mProject; }
+   RustacityProject *Project() const { return mProject; }
 
    void Clear();
    
    void Assign(
      TrackList && newContents, double t0, double t1,
-     AudacityProject *pProject );
+     RustacityProject *pProject );
 
 private:
    Clipboard();
    ~Clipboard();
 
    std::shared_ptr<TrackList> mTracks;
-   AudacityProject *mProject{};
+   RustacityProject *mProject{};
    double mT0{ 0 };
    double mT1{ 0 };
 };

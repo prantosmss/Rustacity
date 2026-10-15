@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TrackPanelAx.cpp
 
@@ -14,7 +14,7 @@
 
 *//*******************************************************************/
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "TrackPanelAx.h"
 
 // For compilers that support precompilation, includes "wx/wx.h".
@@ -36,7 +36,7 @@
 
 wxDEFINE_EVENT(EVT_TRACK_FOCUS_CHANGE, wxCommandEvent);
 
-TrackPanelAx::TrackPanelAx( AudacityProject &project )
+TrackPanelAx::TrackPanelAx( RustacityProject &project )
    :
 #if wxUSE_ACCESSIBILITY
      WindowAccessible( nullptr ) // window pointer must be set after construction
@@ -727,23 +727,23 @@ wxAccStatus TrackPanelAx::Select(int childId, wxAccSelectionFlags selectFlags)
 
 #endif // wxUSE_ACCESSIBILITY
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-   []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+   []( RustacityProject &parent ){
       return std::make_shared< TrackFocus >( parent );
    }
 };
 
-TrackFocus &TrackFocus::Get( AudacityProject &project )
+TrackFocus &TrackFocus::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< TrackFocus >( key );
 }
 
-const TrackFocus &TrackFocus::Get( const AudacityProject &project )
+const TrackFocus &TrackFocus::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-TrackFocus::TrackFocus( AudacityProject &project )
+TrackFocus::TrackFocus( RustacityProject &project )
    : mProject{ project }
 {
 }

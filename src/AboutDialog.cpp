@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AboutDialog.cpp
 
@@ -25,7 +25,7 @@ hold information about one contributor to Audacity.
 *//********************************************************************/
 
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "AboutDialog.h"
 
 #include "Experimental.h"
@@ -51,7 +51,7 @@ hold information about one contributor to Audacity.
 #ifdef EXPERIMENTAL_DA
 #include "../images/DarkAudacityLogoWithName.xpm"
 #else
-#include "../images/AudacityLogoWithName.xpm"
+#include "../images/RustacityLogoWithName.xpm"
 #endif
 
 // Notice this is a "system include".  This is on purpose and only until
@@ -358,7 +358,7 @@ visit our [[https://forum.audacityteam.org/|forum]].");
       #undef _
       #define _(s) wxGetTranslation((s))
       << wxT("<h3>DarkAudacity ")
-      << wxString(AUDACITY_VERSION_STRING)
+      << wxString(RUSTACITY_VERSION_STRING)
       << wxT("</center></h3>")
       << wxT("Customised version of the Audacity free, open source, cross-platform software " )
       << wxT("for recording and editing sounds.")
@@ -367,7 +367,7 @@ visit our [[https://forum.audacityteam.org/|forum]].");
 
 #else
       << XO("<h3>Rustacity ")
-      << wxString(AUDACITY_VERSION_STRING)
+      << wxString(RUSTACITY_VERSION_STRING)
       << wxT("</center></h3>")
       << XO("Rustacity, an Audacity fork: the free, open source, cross-platform software for recording and editing sounds.")
 #endif
@@ -451,8 +451,8 @@ visit our [[https://forum.audacityteam.org/|forum]].");
    auto pPage = S.StartNotebookPage( XO("Rustacity") );
    S.StartVerticalLay(1);
    {
-      //v For now, change to AudacityLogoWithName via old-fashioned way, not Theme.
-      wxBitmap logo(AudacityLogoWithName_xpm); //v
+      //v For now, change to RustacityLogoWithName via old-fashioned way, not Theme.
+      wxBitmap logo(RustacityLogoWithName_xpm); //v
 
       // JKC: Resize to 50% of size.  Later we may use a smaller xpm as
       // our source, but this allows us to tweak the size - if we want to.

@@ -20,7 +20,7 @@ This class now lists
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "GetInfoCommand.h"
 
 #include "LoadCommands.h"
@@ -690,7 +690,7 @@ void GetInfoCommand::ExploreAdornments( const CommandContext &context,
 void GetInfoCommand::ExploreTrackPanel( const CommandContext &context,
    wxPoint P, wxWindow * pWin, int WXUNUSED(Id), int depth )
 {
-   AudacityProject * pProj = &context.project;
+   RustacityProject * pProj = &context.project;
    auto &tp = TrackPanel::Get( *pProj );
    auto &viewInfo = ViewInfo::Get( *pProj );
 

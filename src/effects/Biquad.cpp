@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 Biquad.cpp
 
@@ -10,7 +10,7 @@ Max Maisel
 ***********************************************************************/
 
 #include "Biquad.h"
-#include "Audacity.h"
+#include "Rustacity.h"
 #include <cmath>
 
 #define square(a) ((a)*(a))

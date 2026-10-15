@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   CommandManager.cpp
 
@@ -75,7 +75,7 @@ CommandManager.  It holds the callback for one command.
 
 *//******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include "../Experimental.h"
 
@@ -96,7 +96,7 @@ CommandManager.  It holds the callback for one command.
 #include "../Menus.h"
 
 #include "../Project.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/HelpSystem.h"
 
 
@@ -143,20 +143,20 @@ SubMenuListEntry::~SubMenuListEntry()
 }
 
 ///
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-   [](AudacityProject&) {
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+   [](RustacityProject&) {
       return std::make_unique<CommandManager>();
    }
 };
 
-CommandManager &CommandManager::Get( AudacityProject &project )
+CommandManager &CommandManager::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< CommandManager >( key );
 }
 
-const CommandManager &CommandManager::Get( const AudacityProject &project )
+const CommandManager &CommandManager::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
 static CommandManager::MenuHook &sMenuHook()
@@ -477,7 +477,7 @@ wxMenu * CommandManager::CurrentMenu() const
    return tmpCurrentSubMenu;
 }
 
-void CommandManager::UpdateCheckmarks( AudacityProject &project )
+void CommandManager::UpdateCheckmarks( RustacityProject &project )
 {
    for ( const auto &entry : mCommandList ) {
       if ( entry->menu && entry->checkmarkFn && !entry->isOccult) {
@@ -488,7 +488,7 @@ void CommandManager::UpdateCheckmarks( AudacityProject &project )
 
 
 
-void CommandManager::AddItem(AudacityProject &project,
+void CommandManager::AddItem(RustacityProject &project,
                              const CommandID &name,
                              const TranslatableString &label_in,
                              CommandHandlerFinder finder,
@@ -533,7 +533,7 @@ void CommandManager::AddItem(AudacityProject &project,
 auto CommandManager::Options::MakeCheckFn(
    const wxString key, bool defaultValue ) -> CommandListEntry::CheckFn
 {
-   return [=](AudacityProject&){ return gPrefs->ReadBool( key, defaultValue ); };
+   return [=](RustacityProject&){ return gPrefs->ReadBool( key, defaultValue ); };
 }
 
 ///
@@ -1016,7 +1016,7 @@ TranslatableString CommandManager::DescribeCommandsAndShortcuts(
 ///
 ///
 ///
-bool CommandManager::FilterKeyEvent(AudacityProject *project, const wxKeyEvent & evt, bool permit)
+bool CommandManager::FilterKeyEvent(RustacityProject *project, const wxKeyEvent & evt, bool permit)
 {
    if (!project)
       return false;
@@ -1128,7 +1128,7 @@ bool CommandManager::FilterKeyEvent(AudacityProject *project, const wxKeyEvent &
 /// returning true iff successful.  If you pass any flags,
 ///the command won't be executed unless the flags are compatible
 ///with the command's flags.
-bool CommandManager::HandleCommandEntry(AudacityProject &project,
+bool CommandManager::HandleCommandEntry(RustacityProject &project,
    const CommandListEntry * entry,
    CommandFlag flags, bool alwaysEnabled, const wxEvent * evt)
 {
@@ -1166,7 +1166,7 @@ bool CommandManager::HandleCommandEntry(AudacityProject &project,
 ///the command won't be executed unless the flags are compatible
 ///with the command's flags.
 bool CommandManager::HandleMenuID(
-   AudacityProject &project, int id, CommandFlag flags, bool alwaysEnabled)
+   RustacityProject &project, int id, CommandFlag flags, bool alwaysEnabled)
 {
    CommandListEntry *entry = mCommandNumericIDHash[id];
 
@@ -1218,7 +1218,7 @@ CommandManager::HandleTextualCommand(const CommandID & Str,
 }
 
 void CommandManager::GetCategories(
-   wxArrayString &cats, AudacityProject * /* p */)
+   wxArrayString &cats, RustacityProject * /* p */)
 {
    cats.clear();
 
@@ -1417,7 +1417,7 @@ void CommandManager::HandleXMLEndTag(const wxChar *tag)
 {
    /*
    if (!wxStrcmp(tag, wxT("audacitykeyboard"))) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Loaded %d keyboard shortcuts\n")
             .Format( mXMLKeysRead ),
          XO("Loading Keyboard Shortcuts"),
@@ -1435,7 +1435,7 @@ void CommandManager::WriteXML(XMLWriter &xmlFile) const
 // may throw
 {
    xmlFile.StartTag(wxT("audacitykeyboard"));
-   xmlFile.WriteAttr(wxT("audacityversion"), AUDACITY_VERSION_STRING);
+   xmlFile.WriteAttr(wxT("audacityversion"), RUSTACITY_VERSION_STRING);
 
    for(const auto &entry : mCommandList) {
 
@@ -1545,7 +1545,7 @@ void CommandManager::RemoveDuplicateShortcuts()
       " because their default shortcut is new or changed, and is the same shortcut"
       " that you have assigned to another command.")
          + disabledShortcuts;
-      AudacityMessageBox(message, XO("Shortcuts have been removed"), wxOK | wxCENTRE);
+      RustacityMessageBox(message, XO("Shortcuts have been removed"), wxOK | wxCENTRE);
 
       gPrefs->Flush();
       MenuCreator::RebuildAllMenuBars();
@@ -1561,12 +1561,12 @@ static struct InstallHandlers
       KeyboardCapture::SetPreFilter( []( wxKeyEvent & ) {
          // We must have a project since we will be working with the
          // CommandManager, which is tied to individual projects.
-         AudacityProject *project = GetActiveProject();
+         RustacityProject *project = GetActiveProject();
          return project && GetProjectFrame( *project ).IsEnabled();
       } );
       KeyboardCapture::SetPostFilter( []( wxKeyEvent &key ) {
          // Capture handler window didn't want it, so ask the CommandManager.
-         AudacityProject *project = GetActiveProject();
+         RustacityProject *project = GetActiveProject();
          auto &manager = CommandManager::Get( *project );
          return manager.FilterKeyEvent(project, key);
       } );

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 EnvelopeHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "EnvelopeHandle.h"
 
 #include "../../Experimental.h"
@@ -34,7 +34,7 @@ EnvelopeHandle::EnvelopeHandle( Envelope *pEnvelope )
 {
 }
 
-void EnvelopeHandle::Enter(bool, AudacityProject *)
+void EnvelopeHandle::Enter(bool, RustacityProject *)
 {
 #ifdef EXPERIMENTAL_TRACK_PANEL_HIGHLIGHTING
    mChangeHighlight = RefreshCode::RefreshCell;
@@ -54,7 +54,7 @@ UIHandlePtr EnvelopeHandle::HitAnywhere
 
 namespace {
    void GetTimeTrackData
-      (const AudacityProject &project, const TimeTrack &tt,
+      (const RustacityProject &project, const TimeTrack &tt,
        double &dBRange, bool &dB, float &zoomMin, float &zoomMax)
    {
       const auto &viewInfo = ViewInfo::Get( project );
@@ -72,7 +72,7 @@ namespace {
 UIHandlePtr EnvelopeHandle::TimeTrackHitTest
 (std::weak_ptr<EnvelopeHandle> &holder,
  const wxMouseState &state, const wxRect &rect,
- const AudacityProject *pProject, const std::shared_ptr<TimeTrack> &tt)
+ const RustacityProject *pProject, const std::shared_ptr<TimeTrack> &tt)
 {
    auto envelope = tt->GetEnvelope();
    if (!envelope)
@@ -89,7 +89,7 @@ UIHandlePtr EnvelopeHandle::TimeTrackHitTest
 UIHandlePtr EnvelopeHandle::WaveTrackHitTest
 (std::weak_ptr<EnvelopeHandle> &holder,
  const wxMouseState &state, const wxRect &rect,
- const AudacityProject *pProject, const std::shared_ptr<WaveTrack> &wt)
+ const RustacityProject *pProject, const std::shared_ptr<WaveTrack> &wt)
 {
    /// method that tells us if the mouse event landed on an
    /// envelope boundary.
@@ -112,7 +112,7 @@ UIHandlePtr EnvelopeHandle::WaveTrackHitTest
 
 UIHandlePtr EnvelopeHandle::HitEnvelope
 (std::weak_ptr<EnvelopeHandle> &holder,
- const wxMouseState &state, const wxRect &rect, const AudacityProject *pProject,
+ const wxMouseState &state, const wxRect &rect, const RustacityProject *pProject,
  Envelope *envelope, float zoomMin, float zoomMax,
  bool dB, float dBRange, bool timeTrack)
 {
@@ -164,7 +164,7 @@ UIHandlePtr EnvelopeHandle::HitEnvelope
 }
 
 UIHandle::Result EnvelopeHandle::Click
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    using namespace RefreshCode;
    const bool unsafe = ProjectAudioIO::Get( *pProject ).IsAudioActive();
@@ -232,7 +232,7 @@ UIHandle::Result EnvelopeHandle::Click
 }
 
 UIHandle::Result EnvelopeHandle::Drag
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    using namespace RefreshCode;
    const wxMouseEvent &event = evt.event;
@@ -248,7 +248,7 @@ UIHandle::Result EnvelopeHandle::Drag
 }
 
 HitTestPreview EnvelopeHandle::Preview
-(const TrackPanelMouseState &, AudacityProject *pProject)
+(const TrackPanelMouseState &, RustacityProject *pProject)
 {
    const bool unsafe = ProjectAudioIO::Get( *pProject ).IsAudioActive();
    static auto disabledCursor =
@@ -269,7 +269,7 @@ HitTestPreview EnvelopeHandle::Preview
 }
 
 UIHandle::Result EnvelopeHandle::Release
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject,
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject,
  wxWindow *)
 {
    const wxMouseEvent &event = evt.event;
@@ -293,7 +293,7 @@ UIHandle::Result EnvelopeHandle::Release
    return needUpdate ? RefreshCell : RefreshNone;
 }
 
-UIHandle::Result EnvelopeHandle::Cancel(AudacityProject *pProject)
+UIHandle::Result EnvelopeHandle::Cancel(RustacityProject *pProject)
 {
    ProjectHistory::Get( *pProject ).RollbackState();
    mEnvelopeEditors.clear();

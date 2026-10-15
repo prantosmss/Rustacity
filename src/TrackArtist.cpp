@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TrackArtist.cpp
 
@@ -38,7 +38,7 @@ audio tracks.
 
 *//*******************************************************************/
 
-#include "Audacity.h" // for USE_* macros and HAVE_ALLOCA_H
+#include "Rustacity.h" // for USE_* macros and HAVE_ALLOCA_H
 #include "TrackArtist.h"
 
 #include "Experimental.h"

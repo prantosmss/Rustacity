@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Wahwah.cpp
 
@@ -18,7 +18,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Wahwah.h"
 #include "LoadEffects.h"
 
@@ -122,7 +122,7 @@ EffectType EffectWahwah::GetType()
 
 bool EffectWahwah::SupportsRealtime()
 {
-#if defined(EXPERIMENTAL_REALTIME_AUDACITY_EFFECTS)
+#if defined(EXPERIMENTAL_REALTIME_RUSTACITY_EFFECTS)
    return true;
 #else
    return false;

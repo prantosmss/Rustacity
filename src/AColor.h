@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AColor.h
 
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_COLOR__
-#define __AUDACITY_COLOR__
+#ifndef __RUSTACITY_COLOR__
+#define __RUSTACITY_COLOR__
 
 #include <memory>
 #include <wx/brush.h> // member variable

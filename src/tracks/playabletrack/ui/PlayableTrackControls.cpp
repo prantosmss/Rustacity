@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 PlayableTrackControls.cpp
 
@@ -10,7 +10,7 @@ Paul Licameli split from TrackInfo.cpp
 
 #include "PlayableTrackControls.h"
 
-#include "../../../Audacity.h"
+#include "../../../Rustacity.h"
 #include "../../../Experimental.h"
 
 #include "PlayableTrackButtonHandles.h"

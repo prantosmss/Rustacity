@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ButtonHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli
 
 **********************************************************************/
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "ButtonHandle.h"
 
 #include "../../HitTestResult.h"
@@ -27,13 +27,13 @@ ButtonHandle::~ButtonHandle()
 {
 }
 
-void ButtonHandle::Enter(bool, AudacityProject *)
+void ButtonHandle::Enter(bool, RustacityProject *)
 {
    mChangeHighlight = RefreshCode::RefreshCell;
 }
 
 UIHandle::Result ButtonHandle::Click
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    using namespace RefreshCode;
    auto pTrack = TrackList::Get( *pProject ).Lock(mpTrack);
@@ -56,7 +56,7 @@ UIHandle::Result ButtonHandle::Click
 }
 
 UIHandle::Result ButtonHandle::Drag
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    const wxMouseEvent &event = evt.event;
    using namespace RefreshCode;
@@ -71,7 +71,7 @@ UIHandle::Result ButtonHandle::Drag
 }
 
 HitTestPreview ButtonHandle::Preview
-(const TrackPanelMouseState &st, AudacityProject *project)
+(const TrackPanelMouseState &st, RustacityProject *project)
 {
    // No special cursor
    TranslatableString message;
@@ -81,7 +81,7 @@ HitTestPreview ButtonHandle::Preview
 }
 
 UIHandle::Result ButtonHandle::Release
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject,
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject,
  wxWindow *pParent)
 {
    using namespace RefreshCode;
@@ -96,7 +96,7 @@ UIHandle::Result ButtonHandle::Release
    return result;
 }
 
-UIHandle::Result ButtonHandle::Cancel(AudacityProject *WXUNUSED(pProject))
+UIHandle::Result ButtonHandle::Cancel(RustacityProject *WXUNUSED(pProject))
 {
    using namespace RefreshCode;
    return RefreshCell; // perhaps unnecessarily if pointer is out of the box

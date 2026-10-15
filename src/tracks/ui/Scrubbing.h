@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 Scrubbing.h
 
@@ -8,10 +8,10 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SCRUBBING__
-#define __AUDACITY_SCRUBBING__
+#ifndef __RUSTACITY_SCRUBBING__
+#define __RUSTACITY_SCRUBBING__
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "../../Experimental.h"
 
 #include <vector>
@@ -25,7 +25,7 @@ Paul Licameli split from TrackPanel.cpp
 #include "../../commands/CommandManager.h" // for MenuTable
 #include "../../../include/audacity/Types.h"
 
-class AudacityProject;
+class RustacityProject;
 class TranslatableString;
 
 // Conditionally compile either a separate thead, or else use a timer in the main
@@ -44,11 +44,11 @@ class Scrubber final
    , private PrefsListener
 {
 public:   
-   static Scrubber &Get( AudacityProject &project );
-   static const Scrubber &Get( const AudacityProject &project );
+   static Scrubber &Get( RustacityProject &project );
+   static const Scrubber &Get( const RustacityProject &project );
 
    explicit
-   Scrubber(AudacityProject *project);
+   Scrubber(RustacityProject *project);
    Scrubber( const Scrubber & ) PROHIBITED;
    Scrubber &operator=( const Scrubber & ) PROHIBITED;
    ~Scrubber();
@@ -176,7 +176,7 @@ private:
    int mLogMaxScrubSpeed;
 #endif
 
-   AudacityProject *mProject;
+   RustacityProject *mProject;
    wxWindowRef mWindow;
 
    DECLARE_EVENT_TABLE()

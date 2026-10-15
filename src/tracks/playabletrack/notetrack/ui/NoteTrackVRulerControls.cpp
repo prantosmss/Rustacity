@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 NoteTrackVRulerControls.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../../../Audacity.h" // for USE_* macros
+#include "../../../../Rustacity.h" // for USE_* macros
 
 #ifdef USE_MIDI
 #include "NoteTrackVRulerControls.h"
@@ -36,7 +36,7 @@ NoteTrackVRulerControls::~NoteTrackVRulerControls()
 
 std::vector<UIHandlePtr> NoteTrackVRulerControls::HitTest
 (const TrackPanelMouseState &st,
- const AudacityProject *pProject)
+ const RustacityProject *pProject)
 {
    std::vector<UIHandlePtr> results;
    UIHandlePtr result;
@@ -56,7 +56,7 @@ std::vector<UIHandlePtr> NoteTrackVRulerControls::HitTest
 }
 
 unsigned NoteTrackVRulerControls::HandleWheelRotation
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    using namespace RefreshCode;
    const wxMouseEvent &event = evt.event;

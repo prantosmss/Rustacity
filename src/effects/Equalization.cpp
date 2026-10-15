@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
 
    EffectEqualization.cpp
 
@@ -52,7 +52,7 @@
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Equalization.h"
 #include "LoadEffects.h"
 
@@ -3540,7 +3540,7 @@ void EditCurvesDialog::OnRename(wxCommandEvent & WXUNUSED(event))
       {   // Show the dialog and bail if the user cancels
          bad = false;
          // build the dialog
-         AudacityTextEntryDialog dlg( this,
+         RustacityTextEntryDialog dlg( this,
             XO("Rename '%s' to...").Format( mEditCurves[ item ].Name ),
             XO("Rename...") );
          dlg.SetTextValidator( wxFILTER_EXCLUDE_CHAR_LIST );

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ThemePrefs.h
 
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_THEME_PREFS__
-#define __AUDACITY_THEME_PREFS__
+#ifndef __RUSTACITY_THEME_PREFS__
+#define __RUSTACITY_THEME_PREFS__
 
 #include <wx/defs.h>
 #include <wx/event.h> // to declare a custom event type
@@ -22,7 +22,7 @@
 class ShuttleGui;
 
 // An event sent to the application when the user changes choice of theme
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_THEME_CHANGE, wxCommandEvent);
 
 #define THEME_PREFS_PLUGIN_SYMBOL ComponentInterfaceSymbol{ XO("Theme") }

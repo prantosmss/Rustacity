@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ExportMultiple.cpp
 
@@ -15,7 +15,7 @@
 
 *//********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ExportMultiple.h"
 
 #include <wx/defs.h>
@@ -51,7 +51,7 @@
 #include "../Tags.h"
 #include "../WaveTrack.h"
 #include "../widgets/HelpSystem.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ErrorDialog.h"
 #include "../widgets/ProgressDialog.h"
 
@@ -128,7 +128,7 @@ BEGIN_EVENT_TABLE(MouseEvtHandler, wxEvtHandler)
    EVT_LEFT_DCLICK(MouseEvtHandler::OnMouse)
 END_EVENT_TABLE()
 
-ExportMultipleDialog::ExportMultipleDialog(AudacityProject *project)
+ExportMultipleDialog::ExportMultipleDialog(RustacityProject *project)
 : wxDialogWrapper( &GetProjectFrame( *project ),
    wxID_ANY, XO("Export Multiple") )
 , mExporter{ *project }
@@ -185,7 +185,7 @@ int ExportMultipleDialog::ShowModal()
    // Cannot export if all audio tracks are muted.
    if (mNumWaveTracks == 0)
    {
-      ::AudacityMessageBox(
+      ::RustacityMessageBox(
          XO("All audio is muted."),
          XO("Cannot Export Multiple"),
          wxOK | wxCENTRE,
@@ -195,7 +195,7 @@ int ExportMultipleDialog::ShowModal()
 
    if ((mNumWaveTracks < 1) && (mNumLabels < 1))
    {
-      ::AudacityMessageBox(
+      ::RustacityMessageBox(
          XO(
 "You have no unmuted Audio Tracks and no applicable \
 \nlabels, so you cannot export to separate audio files."),
@@ -506,7 +506,7 @@ void ExportMultipleDialog::OnCreate(wxCommandEvent& WXUNUSED(event))
       return;
    }
 
-   ::AudacityMessageBox(
+   ::RustacityMessageBox(
       XO("\"%s\" successfully created.").Format( fn.GetPath() ),
       XO("Export Multiple"),
       wxOK | wxCENTRE,
@@ -667,7 +667,7 @@ bool ExportMultipleDialog::DirOk()
    auto prompt = XO("\"%s\" doesn't exist.\n\nWould you like to create it?")
       .Format( fn.GetFullPath() );
 
-   int action = AudacityMessageBox(
+   int action = RustacityMessageBox(
       prompt,
       XO("Warning"),
       wxYES_NO | wxICON_EXCLAMATION);
@@ -870,7 +870,7 @@ ProgressResult ExportMultipleDialog::ExportMultipleByLabel(bool byName,
       ok = DoExport(pDialog, channels, activeSetting.destfile, false,
          activeSetting.t0, activeSetting.t1, activeSetting.filetags);
       if (ok == ProgressResult::Stopped) {
-         AudacityMessageDialog dlgMessage(
+         RustacityMessageDialog dlgMessage(
             nullptr,
             XO("Continue to export remaining files?"),
             XO("Export"),
@@ -1023,7 +1023,7 @@ ProgressResult ExportMultipleDialog::ExportMultipleByTrack(bool byName,
          activeSetting.channels, activeSetting.destfile, true,
          activeSetting.t0, activeSetting.t1, activeSetting.filetags);
       if (ok == ProgressResult::Stopped) {
-         AudacityMessageDialog dlgMessage(
+         RustacityMessageDialog dlgMessage(
             nullptr,
             XO("Continue to export remaining files?"),
             XO("Export"),
@@ -1159,7 +1159,7 @@ wxString ExportMultipleDialog::MakeFileName(const wxString &input)
             .Format( input, excluded );
       }
 
-      AudacityTextEntryDialog dlg( this, msg, XO("Save As..."), newname );
+      RustacityTextEntryDialog dlg( this, msg, XO("Save As..."), newname );
 
 
       // And tell the validator about excluded chars

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TracksBehaviorsPrefs.cpp
 
@@ -14,7 +14,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "TracksBehaviorsPrefs.h"
 
 #include "../Experimental.h"
@@ -133,7 +133,7 @@ bool TracksBehaviorsPrefs::Commit()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "TracksBehaviors",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew TracksBehaviorsPrefs(parent, winid);

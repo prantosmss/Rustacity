@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Repair.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_REPAIR__
-#define __AUDACITY_EFFECT_REPAIR__
+#ifndef __RUSTACITY_EFFECT_REPAIR__
+#define __RUSTACITY_EFFECT_REPAIR__
 
 #include "Effect.h"
 
@@ -47,4 +47,4 @@ private:
                    size_t repairLen);
 };
 
-#endif // __AUDACITY_EFFECT_REPAIT__
+#endif // __RUSTACITY_EFFECT_REPAIT__

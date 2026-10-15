@@ -6,10 +6,10 @@
 //
 //
 
-#ifndef __AUDACITY_FILE_EXCEPTION__
-#define __AUDACITY_FILE_EXCEPTION__
+#ifndef __RUSTACITY_FILE_EXCEPTION__
+#define __RUSTACITY_FILE_EXCEPTION__
 
-#include "AudacityException.h"
+#include "RustacityException.h"
 #include <wx/filename.h> // wxFileName member variable
 
 class FileException /* not final */ : public MessageBoxException

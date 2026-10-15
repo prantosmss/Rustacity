@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   KeyView.cpp
 
@@ -11,7 +11,7 @@
 
 *//*********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "KeyView.h"
 
 #include <wx/setup.h> // for wxUSE_* macros

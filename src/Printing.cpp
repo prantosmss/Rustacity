@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Printing.cpp
 
@@ -8,13 +8,13 @@
 
 *******************************************************************//*!
 
-\class AudacityPrintout
+\class RustacityPrintout
 \brief Derived from wxPrintout, this class helps with printing.
 
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Printing.h"
 
 #include <wx/defs.h>
@@ -28,7 +28,7 @@
 #include "ViewInfo.h"
 #include "WaveTrack.h"
 #include "widgets/Ruler.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 
 #include "TrackPanelDrawingContext.h"
 
@@ -41,10 +41,10 @@ wxPrintData &gPrintData()
    return theData;
 }
 
-class AudacityPrintout final : public wxPrintout
+class RustacityPrintout final : public wxPrintout
 {
  public:
-   AudacityPrintout(wxString title,
+   RustacityPrintout(wxString title,
                     TrackList *tracks, TrackPanel &panel):
       wxPrintout(title),
       mTracks(tracks)
@@ -62,7 +62,7 @@ class AudacityPrintout final : public wxPrintout
    TrackList *mTracks;
 };
 
-bool AudacityPrintout::OnPrintPage(int WXUNUSED(page))
+bool RustacityPrintout::OnPrintPage(int WXUNUSED(page))
 {
    wxDC *dc = GetDC();
    if (!dc)
@@ -135,17 +135,17 @@ bool AudacityPrintout::OnPrintPage(int WXUNUSED(page))
    return true;
 }
 
-bool AudacityPrintout::HasPage(int page)
+bool RustacityPrintout::HasPage(int page)
 {
    return (page==1);
 }
 
-bool AudacityPrintout::OnBeginDocument(int startPage, int endPage)
+bool RustacityPrintout::OnBeginDocument(int startPage, int endPage)
 {
    return wxPrintout::OnBeginDocument(startPage, endPage);
 }
 
-void AudacityPrintout::GetPageInfo(int *minPage, int *maxPage,
+void RustacityPrintout::GetPageInfo(int *minPage, int *maxPage,
                                    int *selPageFrom, int *selPageTo)
 {
    *minPage = 1;
@@ -171,10 +171,10 @@ void HandlePrint(
    wxPrintDialogData printDialogData(gPrintData());
 
    wxPrinter printer(&printDialogData);
-   AudacityPrintout printout(name, tracks, panel);
+   RustacityPrintout printout(name, tracks, panel);
    if (!printer.Print(parent, &printout, true)) {
       if (wxPrinter::GetLastError() == wxPRINTER_ERROR) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("There was a problem printing."),
             XO("Print"),
             wxOK);

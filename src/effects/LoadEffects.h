@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LoadEffects.h
 
@@ -8,7 +8,7 @@
 
 **********************************************************************/
 
-#include "audacity/ModuleInterface.h"
+#include "rustacity/ModuleInterface.h"
 
 #include <functional>
 #include <memory>

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 CommonTrackView.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from class TrackView
 
 **********************************************************************/
 
-#ifndef __AUDACITY_COMMON_TRACK_VIEW__
-#define __AUDACITY_COMMON_TRACK_VIEW__
+#ifndef __RUSTACITY_COMMON_TRACK_VIEW__
+#define __RUSTACITY_COMMON_TRACK_VIEW__
 
 #include "TrackView.h" // to inherit
 
@@ -28,7 +28,7 @@ public:
    // uniformly in all tracks, disregarding track contents.
    // Do not further override this...
    std::vector<UIHandlePtr> HitTest
-      (const TrackPanelMouseState &, const AudacityProject *pProject)
+      (const TrackPanelMouseState &, const RustacityProject *pProject)
       final override;
 
    void TimeShiftHitTest();
@@ -39,7 +39,7 @@ protected:
    // Rather override this for subclasses:
    virtual std::vector<UIHandlePtr> DetailedHitTest
       (const TrackPanelMouseState &,
-       const AudacityProject *pProject, int currentTool, bool bMultiTool)
+       const RustacityProject *pProject, int currentTool, bool bMultiTool)
       = 0;
 
    std::weak_ptr<SelectHandle> mSelectHandle;

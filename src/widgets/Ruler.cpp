@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Ruler.cpp
 
@@ -54,7 +54,7 @@ array of Ruler::Label.
 
 *//******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Ruler.h"
 
 #include "../Experimental.h"

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODDecodeFlacTask.h
 
@@ -25,8 +25,8 @@ robust enough to allow all the user changes such as copy/paste, DELETE, and so o
 
 
 
-#ifndef __AUDACITY_ODDecodeFLACTask__
-#define __AUDACITY_ODDecodeFLACTask__
+#ifndef __RUSTACITY_ODDecodeFLACTask__
+#define __RUSTACITY_ODDecodeFLACTask__
 
 #include <vector>
 #include <wx/ffile.h> // data member

@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef __AUDACITY_COMMAND_FLAG__
-#define __AUDACITY_COMMAND_FLAG__
+#ifndef __RUSTACITY_COMMAND_FLAG__
+#define __RUSTACITY_COMMAND_FLAG__
 
 // Flags used in command handling.
 
@@ -16,9 +16,9 @@
 #include <utility>
 #include <wx/string.h>
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
-class AudacityProject;
+class RustacityProject;
 
 // Increase the template parameter as needed to allow more flags
 constexpr size_t NCommandFlags = 64;
@@ -88,7 +88,7 @@ struct CommandFlagOptions{
 class ReservedCommandFlag : public CommandFlag
 {
 public:
-   using Predicate = std::function< bool( const AudacityProject& ) >;
+   using Predicate = std::function< bool( const RustacityProject& ) >;
    ReservedCommandFlag( const Predicate &predicate,
       const CommandFlagOptions &options = {} );
 };
@@ -106,8 +106,8 @@ public:
 // while they may not have been initialized yet, during static initialization.
 struct MenuItemEnabler {
    using Flags = std::function< CommandFlag() >;
-   using Test = std::function< bool( const AudacityProject& ) >;
-   using Action = std::function< void( AudacityProject&, CommandFlag ) >;
+   using Test = std::function< bool( const RustacityProject& ) >;
+   using Action = std::function< void( RustacityProject&, CommandFlag ) >;
 
    const Flags actualFlags;
    const Flags possibleFlags;

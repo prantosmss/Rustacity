@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   NoiseRemoval.h
 
@@ -9,10 +9,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_NOISE_REMOVAL__
-#define __AUDACITY_EFFECT_NOISE_REMOVAL__
+#ifndef __RUSTACITY_EFFECT_NOISE_REMOVAL__
+#define __RUSTACITY_EFFECT_NOISE_REMOVAL__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include "../Experimental.h"
 

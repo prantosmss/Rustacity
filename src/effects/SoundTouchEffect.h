@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SoundTouchEffect.h
 
@@ -12,12 +12,12 @@
 
 **********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #if USE_SOUNDTOUCH
 
-#ifndef __AUDACITY_EFFECT_SOUNDTOUCH__
-#define __AUDACITY_EFFECT_SOUNDTOUCH__
+#ifndef __RUSTACITY_EFFECT_SOUNDTOUCH__
+#define __RUSTACITY_EFFECT_SOUNDTOUCH__
 
 #include "Effect.h"
 

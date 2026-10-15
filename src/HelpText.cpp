@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   HelpText.cpp
 
@@ -12,7 +12,7 @@
 \brief Given a key, returns some html.
 *//********************************************************************/
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "HelpText.h"
 
 #include "Experimental.h"
@@ -239,7 +239,7 @@ static wxString HelpTextBuiltIn( const wxString & Key )
 #ifdef EXPERIMENTAL_DA
          // Deliberately not translated.
          << wxT("<center><h3>DarkAudacity ")
-         << AUDACITY_VERSION_STRING
+         << RUSTACITY_VERSION_STRING
          << wxT("</h3></center>")
          << wxT("<br><br>DarkAudacity is based on Audacity:")
          << wxT("<ul><li>")
@@ -259,7 +259,7 @@ static wxString HelpTextBuiltIn( const wxString & Key )
          << wxT("</li></ul>")
 #else
          << wxT("<center><h3>Audacity ")
-         << AUDACITY_VERSION_STRING
+         << RUSTACITY_VERSION_STRING
          << wxT("</h3><h3>")
          << XO("How to get help")
          << wxT("</h3></center>")
@@ -376,7 +376,7 @@ wxString FormatHtmlText( const wxString & Text ){
 
 // Function to give the extra arguments to put on the version check string.
 const wxString VerCheckArgs(){
-   wxString result = wxString("from_ver=") + AUDACITY_VERSION_STRING;
+   wxString result = wxString("from_ver=") + RUSTACITY_VERSION_STRING;
 #ifdef REV_LONG
    result += wxString("&CommitId=")+wxString(REV_LONG).Left(6);
 #endif

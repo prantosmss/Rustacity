@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ProgressDialog.h
 
@@ -15,10 +15,10 @@
 
 *************************************************************************/
 
-#ifndef __AUDACITY_WIDGETS_PROGRESSDIALOG__
-#define __AUDACITY_WIDGETS_PROGRESSDIALOG__
+#ifndef __RUSTACITY_WIDGETS_PROGRESSDIALOG__
+#define __RUSTACITY_WIDGETS_PROGRESSDIALOG__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include <vector>
 #include <wx/defs.h>
@@ -52,7 +52,7 @@ enum ProgressDialogFlags
 /// ProgressDialog Class
 ////////////////////////////////////////////////////////////
 
-class AUDACITY_DLL_API ProgressDialog /* not final */ : public wxDialogWrapper
+class RUSTACITY_DLL_API ProgressDialog /* not final */ : public wxDialogWrapper
 {
 public:
    ProgressDialog();
@@ -153,7 +153,7 @@ private:
    DECLARE_EVENT_TABLE()
 };
 
-class AUDACITY_DLL_API TimerProgressDialog final : public ProgressDialog
+class RUSTACITY_DLL_API TimerProgressDialog final : public ProgressDialog
 {
 public:
    TimerProgressDialog(const wxLongLong_t duration,

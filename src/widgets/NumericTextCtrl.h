@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   NumericTextCtrl.h
 
@@ -12,10 +12,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TIME_TEXT_CTRL__
-#define __AUDACITY_TIME_TEXT_CTRL__
+#ifndef __RUSTACITY_TIME_TEXT_CTRL__
+#define __RUSTACITY_TIME_TEXT_CTRL__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include "../MemoryX.h"
 #include "../../include/audacity/ComponentInterface.h"
@@ -29,9 +29,9 @@
 // One event type for each type of control.  Event is raised when a control
 // changes its format.  Owners of controls of the same type can listen and
 // update their formats to agree.
-DECLARE_EXPORTED_EVENT_TYPE(AUDACITY_DLL_API, EVT_TIMETEXTCTRL_UPDATED, -1);
-DECLARE_EXPORTED_EVENT_TYPE(AUDACITY_DLL_API, EVT_FREQUENCYTEXTCTRL_UPDATED, -1);
-DECLARE_EXPORTED_EVENT_TYPE(AUDACITY_DLL_API, EVT_BANDWIDTHTEXTCTRL_UPDATED,
+DECLARE_EXPORTED_EVENT_TYPE(RUSTACITY_DLL_API, EVT_TIMETEXTCTRL_UPDATED, -1);
+DECLARE_EXPORTED_EVENT_TYPE(RUSTACITY_DLL_API, EVT_FREQUENCYTEXTCTRL_UPDATED, -1);
+DECLARE_EXPORTED_EVENT_TYPE(RUSTACITY_DLL_API, EVT_BANDWIDTHTEXTCTRL_UPDATED,
                             -1);
 
 /** \brief struct to hold a formatting control string and its user facing name
@@ -279,4 +279,4 @@ private:
    DECLARE_EVENT_TABLE()
 };
 
-#endif // __AUDACITY_TIME_TEXT_CTRL__
+#endif // __RUSTACITY_TIME_TEXT_CTRL__

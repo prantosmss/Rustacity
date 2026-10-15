@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WaveformSettings.cpp
 
@@ -13,7 +13,7 @@ Paul Licameli
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "WaveformSettings.h"
 
 #include "GUISettings.h"

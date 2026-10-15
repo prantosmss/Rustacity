@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SelectionBar.cpp
 
@@ -26,7 +26,7 @@ with changes in the SelectionBar.
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "SelectionBar.h"
 
 #include "SelectionBarListener.h"
@@ -107,7 +107,7 @@ BEGIN_EVENT_TABLE(SelectionBar, ToolBar)
    EVT_COMMAND(wxID_ANY, EVT_CAPTURE_KEY, SelectionBar::OnCaptureKey)
 END_EVENT_TABLE()
 
-SelectionBar::SelectionBar( AudacityProject &project )
+SelectionBar::SelectionBar( RustacityProject &project )
 : ToolBar(project, SelectionBarID, XO("Selection"), wxT("Selection")),
   mListener(NULL), mRate(0.0),
   mStart(0.0), mEnd(0.0), mLength(0.0), mCenter(0.0), mAudio(0.0),
@@ -135,15 +135,15 @@ SelectionBar::~SelectionBar()
 {
 }
 
-SelectionBar &SelectionBar::Get( AudacityProject &project )
+SelectionBar &SelectionBar::Get( RustacityProject &project )
 {
    auto &toolManager = ToolManager::Get( project );
    return *static_cast<SelectionBar*>( toolManager.GetToolBar(SelectionBarID) );
 }
 
-const SelectionBar &SelectionBar::Get( const AudacityProject &project )
+const SelectionBar &SelectionBar::Get( const RustacityProject &project )
 {
-   return Get( const_cast<AudacityProject&>( project )) ;
+   return Get( const_cast<RustacityProject&>( project )) ;
 }
 
 void SelectionBar::Create(wxWindow * parent)
@@ -813,7 +813,7 @@ void SelectionBar::OnSnapTo(wxCommandEvent & WXUNUSED(event))
 }
 
 static RegisteredToolbarFactory factory{ SelectionBarID,
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       return ToolBar::Holder{ safenew SelectionBar{ project } }; }
 };
 

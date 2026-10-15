@@ -1,4 +1,4 @@
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "../Experimental.h"
 
 #include "../CommonCommandFlags.h"
@@ -32,7 +32,7 @@
 #include "../prefs/QualityPrefs.h"
 #include "../tracks/playabletrack/wavetrack/ui/WaveTrackControls.h"
 #include "../widgets/ASlider.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ProgressDialog.h"
 
 #include <wx/combobox.h>
@@ -48,7 +48,7 @@
 namespace {
 
 void DoMixAndRender
-(AudacityProject &project, bool toNewTrack)
+(RustacityProject &project, bool toNewTrack)
 {
    const auto &settings = ProjectSettings::Get( project );
    auto &tracks = TrackList::Get( project );
@@ -156,7 +156,7 @@ void DoMixAndRender
    }
 }
 
-void DoPanTracks(AudacityProject &project, float PanValue)
+void DoPanTracks(RustacityProject &project, float PanValue)
 {
    auto &tracks = TrackList::Get( project );
    auto &window = ProjectWindow::Get( project );
@@ -200,7 +200,7 @@ static const std::vector< ComponentInterfaceSymbol >
 const size_t kAlignLabelsCount(){ return alignLabels().size(); }
 
 void DoAlign
-(AudacityProject &project, int index, bool moveSel)
+(RustacityProject &project, int index, bool moveSel)
 {
    auto &tracks = TrackList::Get( project );
    auto &selectedRegion = ViewInfo::Get( project ).selectedRegion;
@@ -491,7 +491,7 @@ enum{
    kAudacitySortByName = (1 << 2),
 };
 
-void DoSortTracks( AudacityProject &project, int flags )
+void DoSortTracks( RustacityProject &project, int flags )
 {
    auto GetTime = [](const Track *t) {
       return t->TypeSwitch< double >(
@@ -568,7 +568,7 @@ void DoSortTracks( AudacityProject &project, int flags )
    tracks.Permute(arr);
 }
 
-void SetTrackGain(AudacityProject &project, WaveTrack * wt, LWSlider * slider)
+void SetTrackGain(RustacityProject &project, WaveTrack * wt, LWSlider * slider)
 {
    wxASSERT(wt);
    float newValue = slider->Get();
@@ -582,7 +582,7 @@ void SetTrackGain(AudacityProject &project, WaveTrack * wt, LWSlider * slider)
    TrackPanel::Get( project ).RefreshTrack(wt);
 }
 
-void SetTrackPan(AudacityProject &project, WaveTrack * wt, LWSlider * slider)
+void SetTrackPan(RustacityProject &project, WaveTrack * wt, LWSlider * slider)
 {
    wxASSERT(wt);
    float newValue = slider->Get();
@@ -684,7 +684,7 @@ void OnNewTimeTrack(const CommandContext &context)
    auto &window = ProjectWindow::Get( project );
 
    if ( *tracks.Any<TimeTrack>().begin() ) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO(
 "This version of Audacity only allows one time track for each project window.") );
       return;
@@ -793,7 +793,7 @@ void OnResample(const CommandContext &context)
          break;
       }
 
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("The entered value is invalid"),
          XO("Error"),
          wxICON_ERROR,
@@ -958,7 +958,7 @@ void OnScoreAlign(const CommandContext &context)
    if(numWaveTracksSelected == 0 ||
       numNoteTracksSelected != 1 ||
       numOtherTracksSelected != 0){
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Please select at least one audio track and one MIDI track.") );
       return;
    }
@@ -1031,7 +1031,7 @@ void OnScoreAlign(const CommandContext &context)
 
    if (result == SA_SUCCESS) {
       tracks->Replace(nt, holder);
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Alignment completed: MIDI from %.2f to %.2f secs, Audio from %.2f to %.2f secs.")
             .Format(
                params.mMidiStart, params.mMidiEnd,
@@ -1039,7 +1039,7 @@ void OnScoreAlign(const CommandContext &context)
       ProjectHistory::Get( project )
          .PushState(XO("Sync MIDI with Audio"), XO("Sync MIDI with Audio"));
    } else if (result == SA_TOOSHORT) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO(
 "Alignment error: input too short: MIDI from %.2f to %.2f secs, Audio from %.2f to %.2f secs.")
             .Format(
@@ -1051,7 +1051,7 @@ void OnScoreAlign(const CommandContext &context)
       return; // no message when user cancels alignment
    } else {
       //project.OnUndo(); // recover any changes to note track
-      AudacityMessageBox( XO("Internal error reported by alignment process.") );
+      RustacityMessageBox( XO("Internal error reported by alignment process.") );
    }
 }
 #endif /* EXPERIMENTAL_SCOREALIGN */
@@ -1280,9 +1280,9 @@ void OnTrackMoveBottom(const CommandContext &context)
 
 } // namespace
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static TrackActions::Handler instance;
    return instance;
 };
@@ -1323,7 +1323,7 @@ BaseItemSharedPtr TracksMenu()
             // Stereo to Mono is an oddball command that is also subject to control
             // by the plug-in manager, as if an effect.  Decide whether to show or
             // hide it.
-            [](AudacityProject&) -> BaseItemPtr {
+            [](RustacityProject&) -> BaseItemPtr {
                const PluginID ID =
                   EffectManager::Get().GetEffectByIdentifier(wxT("StereoToMono"));
                const PluginDescriptor *plug = PluginManager::Get().GetPlugin(ID);

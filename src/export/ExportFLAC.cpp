@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ExportFLAC.cpp
 
@@ -18,7 +18,7 @@ and libvorbis examples, Monty <monty@xiph.org>
 
 **********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #ifdef USE_LIBFLAC
 
@@ -39,7 +39,7 @@ and libvorbis examples, Monty <monty@xiph.org>
 #include "../Tags.h"
 #include "../Track.h"
 
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ProgressDialog.h"
 #include "../wxFileNameWrapper.h"
 
@@ -213,7 +213,7 @@ public:
    // Required
 
    void OptionsCreate(ShuttleGui &S, int format) override;
-   ProgressResult Export(AudacityProject *project,
+   ProgressResult Export(RustacityProject *project,
                std::unique_ptr<ProgressDialog> &pDialog,
                unsigned channels,
                const wxFileNameWrapper &fName,
@@ -226,7 +226,7 @@ public:
 
 private:
 
-   bool GetMetadata(AudacityProject *project, const Tags *tags);
+   bool GetMetadata(RustacityProject *project, const Tags *tags);
 
    // Should this be a stack variable instead in Export?
    FLAC__StreamMetadataHandle mMetadata;
@@ -245,7 +245,7 @@ ExportFLAC::ExportFLAC()
    SetDescription(XO("FLAC Files"),0);
 }
 
-ProgressResult ExportFLAC::Export(AudacityProject *project,
+ProgressResult ExportFLAC::Export(RustacityProject *project,
                         std::unique_ptr<ProgressDialog> &pDialog,
                         unsigned numChannels,
                         const wxFileNameWrapper &fName,
@@ -281,7 +281,7 @@ ProgressResult ExportFLAC::Export(AudacityProject *project,
    // See note in GetMetadata() about a bug in libflac++ 1.1.2
    if (success && !GetMetadata(project, metadata)) {
       // TODO: more precise message
-      AudacityMessageBox( XO("Unable to export") );
+      RustacityMessageBox( XO("Unable to export") );
       return ProgressResult::Cancelled;
    }
 
@@ -334,7 +334,7 @@ ProgressResult ExportFLAC::Export(AudacityProject *project,
 
    if (!success) {
       // TODO: more precise message
-      AudacityMessageBox( XO("Unable to export") );
+      RustacityMessageBox( XO("Unable to export") );
       return ProgressResult::Cancelled;
    }
 
@@ -344,7 +344,7 @@ ProgressResult ExportFLAC::Export(AudacityProject *project,
    wxFFile f;     // will be closed when it goes out of scope
    const auto path = fName.GetFullPath();
    if (!f.Open(path, wxT("w+b"))) {
-      AudacityMessageBox( XO("FLAC export couldn't open %s").Format( path ) );
+      RustacityMessageBox( XO("FLAC export couldn't open %s").Format( path ) );
       return ProgressResult::Cancelled;
    }
 
@@ -353,7 +353,7 @@ ProgressResult ExportFLAC::Export(AudacityProject *project,
    // libflac can't (under Windows).
    int status = encoder.init(f.fp());
    if (status != FLAC__STREAM_ENCODER_INIT_STATUS_OK) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("FLAC encoder failed to initialize\nStatus: %d")
             .Format( status ) );
       return ProgressResult::Cancelled;
@@ -408,7 +408,7 @@ ProgressResult ExportFLAC::Export(AudacityProject *project,
                reinterpret_cast<FLAC__int32**>( tmpsmplbuf.get() ),
                samplesThisRun) ) {
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             updateResult = ProgressResult::Cancelled;
             break;
          }
@@ -446,7 +446,7 @@ void ExportFLAC::OptionsCreate(ShuttleGui &S, int format)
 //      expects that array to be valid until the stream is initialized.
 //
 //      This has been fixed in 1.1.4.
-bool ExportFLAC::GetMetadata(AudacityProject *project, const Tags *tags)
+bool ExportFLAC::GetMetadata(RustacityProject *project, const Tags *tags)
 {
    // Retrieve tags if needed
    if (tags == NULL)

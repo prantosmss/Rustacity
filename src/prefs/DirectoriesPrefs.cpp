@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   DirectoriesPrefs.cpp
 
@@ -15,7 +15,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "DirectoriesPrefs.h"
 
 #include <math.h>
@@ -35,7 +35,7 @@
 #include "../FileNames.h"
 #include "../Prefs.h"
 #include "../ShuttleGui.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 enum {
    TempDirID = 1000,
@@ -166,7 +166,7 @@ void DirectoriesPrefs::OnChooseTempDir(wxCommandEvent & e)
       wxFileName tmpDirPath;
       tmpDirPath.AssignDir(dlog.GetPath());
 
-      // Append an "audacity_temp" directory to this path if necessary (the
+      // Append an "rustacity_temp" directory to this path if necessary (the
       // default, the existing pref (as stored in the control), and any path
       // ending in a directory with the same name as what we'd add should be OK
       // already)
@@ -177,7 +177,7 @@ void DirectoriesPrefs::OnChooseTempDir(wxCommandEvent & e)
       // Clearing Bug 1271 residual issue.  Let's NOT have temp in the name.
       newDirName = wxT("SessionData");
 #else
-      newDirName = wxT(".audacity_temp");
+      newDirName = wxT(".rustacity_temp");
 #endif
       auto dirsInPath = tmpDirPath.GetDirs();
 
@@ -228,7 +228,7 @@ bool DirectoriesPrefs::Validate()
 
    wxString path{tempDir.GetPath()};
    if( !FileNames::IsTempDirectoryNameOK( path ) ) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Directory %s is not suitable (at risk of being cleaned out)")
             .Format( path ),
          XO("Error"),
@@ -236,7 +236,7 @@ bool DirectoriesPrefs::Validate()
       return false;
    }
    if (!tempDir.DirExists()) {
-      int ans = AudacityMessageBox(
+      int ans = RustacityMessageBox(
          XO("Directory %s does not exist. Create it?")
             .Format( path ),
          XO("New Temporary Directory"),
@@ -257,7 +257,7 @@ bool DirectoriesPrefs::Validate()
       tempDir.AppendDir(wxT("canicreate"));
       path =  tempDir.GetPath();
       if (!tempDir.Mkdir(0755)) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("Directory %s is not writable")
                .Format( path ),
             XO("Error"),
@@ -271,7 +271,7 @@ bool DirectoriesPrefs::Validate()
    wxFileName oldDir;
    oldDir.SetPath(gPrefs->Read(wxT("/Directories/TempDir")));
    if (tempDir != oldDir) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO(
 "Changes to temporary directory will not take effect until Audacity is restarted"),
          XO("Temp Directory Update"),
@@ -291,7 +291,7 @@ bool DirectoriesPrefs::Commit()
 
 PrefsPanel::Factory
 DirectoriesPrefsFactory() {
-   return [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   return [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew DirectoriesPrefs(parent, winid);

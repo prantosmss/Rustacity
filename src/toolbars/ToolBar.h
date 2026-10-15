@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ToolBar.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TOOLBAR__
-#define __AUDACITY_TOOLBAR__
+#ifndef __RUSTACITY_TOOLBAR__
+#define __RUSTACITY_TOOLBAR__
 
 #include "../Experimental.h"
 
@@ -49,7 +49,7 @@ class ToolBarResizer;
 //
 // Custom event
 //
-DECLARE_EXPORTED_EVENT_TYPE(AUDACITY_DLL_API, EVT_TOOLBAR_UPDATED, -1);
+DECLARE_EXPORTED_EVENT_TYPE(RUSTACITY_DLL_API, EVT_TOOLBAR_UPDATED, -1);
 
 //
 // Height of a single line toolbar
@@ -88,7 +88,7 @@ enum ToolBarID
 // How may pixels padding each side of a floating toolbar
 enum { ToolBarFloatMargin = 1 };
 
-class AudacityProject;
+class RustacityProject;
 
 class ToolBar /* not final */
 : public wxPanelWrapper
@@ -99,7 +99,7 @@ class ToolBar /* not final */
 
    using Holder = wxWindowPtr<ToolBar>;
 
-   ToolBar( AudacityProject &project,
+   ToolBar( RustacityProject &project,
       int type, const TranslatableString & label, const wxString & section,
       bool resizable = false);
    virtual ~ToolBar();
@@ -174,7 +174,7 @@ public:
 
    static
    void SetButtonToolTip
-      (AudacityProject &project, AButton &button,
+      (RustacityProject &project, AButton &button,
        // If a shortcut key is defined for the command, then it is appended,
        // parenthesized, after the translated name.
        const ComponentInterfaceSymbol commands[], size_t nCommands);
@@ -230,7 +230,7 @@ public:
    void OnMouseEvents(wxMouseEvent &event);
 
  protected:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
    TranslatableString mLabel;
    wxString mSection;
    int mType;
@@ -257,7 +257,7 @@ public:
 };
 
 struct RegisteredToolbarFactory {
-   using Function = std::function< ToolBar::Holder( AudacityProject & ) >;
+   using Function = std::function< ToolBar::Holder( RustacityProject & ) >;
    using Functions = std::vector< Function >;
 
    RegisteredToolbarFactory( int id, const Function &function );

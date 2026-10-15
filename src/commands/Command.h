@@ -18,9 +18,9 @@
 #define __COMMAND__
 
 #include "CommandSignature.h"
-#include "../commands/AudacityCommand.h"
+#include "../commands/RustacityCommand.h"
 
-class AudacityApp;
+class RustacityApp;
 class CommandContext;
 class CommandOutputTargets;
 
@@ -28,9 +28,9 @@ class CommandOutputTargets;
 class OldStyleCommand /* not final */
 {
 public:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
-   OldStyleCommand(AudacityProject &project) : mProject{ project } {};
+   OldStyleCommand(RustacityProject &project) : mProject{ project } {};
    virtual ~OldStyleCommand() { }
    virtual ComponentInterfaceSymbol GetSymbol() = 0;
    virtual CommandSignature &GetSignature() = 0;
@@ -98,7 +98,7 @@ protected:
 public:
    /// Constructor should not be called directly; only by a factory which
    /// ensures name and params are set appropriately for the command.
-   CommandImplementation(AudacityProject &project, OldStyleCommandType &type);
+   CommandImplementation(RustacityProject &project, OldStyleCommandType &type);
 
    virtual ~CommandImplementation();
 

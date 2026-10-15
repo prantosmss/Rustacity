@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   PrefsDialog.h
 
@@ -9,14 +9,14 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PREFS_DIALOG__
-#define __AUDACITY_PREFS_DIALOG__
+#ifndef __RUSTACITY_PREFS_DIALOG__
+#define __RUSTACITY_PREFS_DIALOG__
 
 #include <functional>
 #include <vector>
 #include "../widgets/wxPanelWrapper.h" // to inherit
 
-class AudacityProject;
+class RustacityProject;
 class wxTreebook;
 class wxTreeEvent;
 class PrefsPanel;
@@ -28,7 +28,7 @@ class ShuttleGui;
 #define CONST const
 #endif
 
-class AudacityProject;
+class RustacityProject;
 
 class PrefsDialog /* not final */ : public wxDialogWrapper
 {
@@ -37,7 +37,7 @@ class PrefsDialog /* not final */ : public wxDialogWrapper
     struct PrefsNode {
        using Factory =
          std::function< PrefsPanel * (
-            wxWindow *parent, wxWindowID winid, AudacityProject *) >;
+            wxWindow *parent, wxWindowID winid, RustacityProject *) >;
        Factory factory;
        size_t nChildren{ 0 };
        bool expanded{ false };
@@ -52,7 +52,7 @@ class PrefsDialog /* not final */ : public wxDialogWrapper
    static Factories &DefaultFactories();
 
    PrefsDialog(wxWindow * parent,
-      AudacityProject *pProject, // may be null
+      RustacityProject *pProject, // may be null
       const TranslatableString &titlePrefix = XO("Preferences:"),
       Factories &factories = DefaultFactories());
    virtual ~PrefsDialog();
@@ -98,14 +98,14 @@ class GlobalPrefsDialog final : public PrefsDialog
 {
 public:
    GlobalPrefsDialog(
-      wxWindow * parent, AudacityProject *pProject,
+      wxWindow * parent, RustacityProject *pProject,
       Factories &factories = DefaultFactories());
    virtual ~GlobalPrefsDialog();
    long GetPreferredPage() override;
    void SavePreferredPage() override;
 };
 
-class AudacityProject;
-void DoReloadPreferences( AudacityProject &project );
+class RustacityProject;
+void DoReloadPreferences( RustacityProject &project );
 
 #endif

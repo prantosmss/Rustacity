@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LabelTrack.h
 
@@ -19,7 +19,7 @@
 
 class wxTextFile;
 
-class AudacityProject;
+class RustacityProject;
 class DirManager;
 class NotifyingSelectedRegion;
 class TimeWarper;
@@ -83,7 +83,7 @@ public:
 
 using LabelArray = std::vector<LabelStruct>;
 
-class AUDACITY_DLL_API LabelTrack final
+class RUSTACITY_DLL_API LabelTrack final
    : public Track
    , public wxEvtHandler
 {
@@ -205,18 +205,18 @@ struct LabelTrackEvent : TrackListEvent
 };
 
 // Posted when a label is added.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_LABELTRACK_ADDITION, LabelTrackEvent);
 
 // Posted when a label is deleted.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_LABELTRACK_DELETION, LabelTrackEvent);
 
 // Posted when a label is repositioned in the sequence of labels.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_LABELTRACK_PERMUTED, LabelTrackEvent);
 
 // Posted when the track is selected or unselected.
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_LABELTRACK_SELECTION, LabelTrackEvent);
 #endif

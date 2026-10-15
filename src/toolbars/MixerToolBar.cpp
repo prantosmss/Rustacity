@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MixerToolBar.cpp
 
@@ -14,7 +14,7 @@
 *//*******************************************************************/
 
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "MixerToolBar.h"
 
 #include "ToolManager.h"
@@ -55,7 +55,7 @@ BEGIN_EVENT_TABLE(MixerToolBar, ToolBar)
 END_EVENT_TABLE()
 
 //Standard constructor
-MixerToolBar::MixerToolBar( AudacityProject &project )
+MixerToolBar::MixerToolBar( RustacityProject &project )
 : ToolBar(project, MixerBarID, XO("Mixer"), wxT("Mixer"), true)
 {
    mInputSliderVolume = 0.0;
@@ -67,15 +67,15 @@ MixerToolBar::~MixerToolBar()
 {
 }
 
-MixerToolBar &MixerToolBar::Get( AudacityProject &project )
+MixerToolBar &MixerToolBar::Get( RustacityProject &project )
 {
    auto &toolManager = ToolManager::Get( project );
    return *static_cast<MixerToolBar*>( toolManager.GetToolBar(MixerBarID) );
 }
 
-const MixerToolBar &MixerToolBar::Get( const AudacityProject &project )
+const MixerToolBar &MixerToolBar::Get( const RustacityProject &project )
 {
-   return Get( const_cast<AudacityProject&>( project )) ;
+   return Get( const_cast<RustacityProject&>( project )) ;
 }
 
 void MixerToolBar::Create(wxWindow *parent)
@@ -140,8 +140,8 @@ void MixerToolBar::OnAudioCapture(wxCommandEvent & event)
 {
    event.Skip();
 
-   AudacityProject *p = &mProject;
-   if ((AudacityProject *) event.GetEventObject() != p)
+   RustacityProject *p = &mProject;
+   if ((RustacityProject *) event.GetEventObject() != p)
    {
       mEnabled = !event.GetInt();
       mInputSlider->Enable(mEnabled);
@@ -332,7 +332,7 @@ void MixerToolBar::SetToolTips()
 }
 
 static RegisteredToolbarFactory factory{ MixerBarID,
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       return ToolBar::Holder{ safenew MixerToolBar{ project } }; }
 };
 

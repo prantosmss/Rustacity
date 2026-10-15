@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODWaveTrackTaskQueue.h
 
@@ -19,8 +19,8 @@ tasks associated with a WaveTrack.
 
 
 
-#ifndef __AUDACITY_ODWAVETRACKTASKQUEUE__
-#define __AUDACITY_ODWAVETRACKTASKQUEUE__
+#ifndef __RUSTACITY_ODWAVETRACKTASKQUEUE__
+#define __RUSTACITY_ODWAVETRACKTASKQUEUE__
 
 #include <vector>
 #include "ODTaskThread.h"

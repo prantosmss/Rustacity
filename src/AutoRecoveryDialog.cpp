@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 AutoRecoveryDialog.cpp
 
@@ -13,7 +13,7 @@ Paul Licameli split from AutoRecovery.cpp
 #include "FileNames.h"
 #include "ProjectManager.h"
 #include "ShuttleGui.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/wxPanelWrapper.h"
 
 #include <wx/evtloop.h>
@@ -24,7 +24,7 @@ Paul Licameli split from AutoRecovery.cpp
 enum {
    ID_RECOVER_ALL = 10000,
    ID_RECOVER_NONE,
-   ID_QUIT_AUDACITY,
+   ID_QUIT_RUSTACITY,
    ID_FILE_LIST
 };
 
@@ -60,7 +60,7 @@ AutoRecoveryDialog::AutoRecoveryDialog(wxWindow *parent) :
 BEGIN_EVENT_TABLE(AutoRecoveryDialog, wxDialogWrapper)
    EVT_BUTTON(ID_RECOVER_ALL, AutoRecoveryDialog::OnRecoverAll)
    EVT_BUTTON(ID_RECOVER_NONE, AutoRecoveryDialog::OnRecoverNone)
-   EVT_BUTTON(ID_QUIT_AUDACITY, AutoRecoveryDialog::OnQuitAudacity)
+   EVT_BUTTON(ID_QUIT_RUSTACITY, AutoRecoveryDialog::OnQuitAudacity)
 END_EVENT_TABLE()
 
 void AutoRecoveryDialog::PopulateOrExchange(ShuttleGui& S)
@@ -88,7 +88,7 @@ void AutoRecoveryDialog::PopulateOrExchange(ShuttleGui& S)
 
       S.StartHorizontalLay();
       {
-         S.Id(ID_QUIT_AUDACITY).AddButton(XO("Quit Audacity"));
+         S.Id(ID_QUIT_RUSTACITY).AddButton(XO("Quit Audacity"));
          S.Id(ID_RECOVER_NONE).AddButton(XO("Discard Projects"));
          S.Id(ID_RECOVER_ALL).AddButton(XO("Recover Projects"));
       }
@@ -125,12 +125,12 @@ void AutoRecoveryDialog::PopulateList()
 
 void AutoRecoveryDialog::OnQuitAudacity(wxCommandEvent & WXUNUSED(event))
 {
-   EndModal(ID_QUIT_AUDACITY);
+   EndModal(ID_QUIT_RUSTACITY);
 }
 
 void AutoRecoveryDialog::OnRecoverNone(wxCommandEvent & WXUNUSED(event))
 {
-   int ret = AudacityMessageBox(
+   int ret = RustacityMessageBox(
       XO(
 "Are you sure you want to discard all recoverable projects?\n\nChoosing \"Yes\" discards all recoverable projects immediately."),
       XO("Confirm Discard Projects"),
@@ -152,7 +152,7 @@ static bool HaveFilesToRecover()
    wxDir dir(FileNames::AutoSaveDir());
    if (!dir.IsOpened())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not enumerate files in auto save directory."),
          XO("Error"),
          wxICON_STOP);
@@ -177,7 +177,7 @@ static bool RemoveAllAutoSaveFiles()
       {
          // I don't think this error message is actually useful.
          // -dmazzoni
-         //AudacityMessageBox(
+         //RustacityMessageBox(
          //   XO("Could not remove auto save file: %s".Format( files[i] ),
          //   XO("Error"),
          //   wxICON_STOP);
@@ -188,12 +188,12 @@ static bool RemoveAllAutoSaveFiles()
    return true;
 }
 
-static bool RecoverAllProjects(AudacityProject** pproj)
+static bool RecoverAllProjects(RustacityProject** pproj)
 {
    wxDir dir(FileNames::AutoSaveDir());
    if (!dir.IsOpened())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not enumerate files in auto save directory."),
          XO("Error"),
          wxICON_STOP);
@@ -209,7 +209,7 @@ static bool RecoverAllProjects(AudacityProject** pproj)
 
    for (unsigned int i = 0; i < files.size(); i++)
    {
-      AudacityProject* proj{};
+      RustacityProject* proj{};
       if (*pproj)
       {
          // Reuse existing project window
@@ -226,7 +226,7 @@ static bool RecoverAllProjects(AudacityProject** pproj)
    return true;
 }
 
-bool ShowAutoRecoveryDialogIfNeeded(AudacityProject** pproj,
+bool ShowAutoRecoveryDialogIfNeeded(RustacityProject** pproj,
                                     bool *didRecoverAnything)
 {
    if (didRecoverAnything)
@@ -260,7 +260,7 @@ bool ShowAutoRecoveryDialogIfNeeded(AudacityProject** pproj,
          return RecoverAllProjects(pproj);
 
       default:
-         // This includes ID_QUIT_AUDACITY
+         // This includes ID_QUIT_RUSTACITY
          return false;
       }
    } else

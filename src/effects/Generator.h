@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Generator.h
 
@@ -15,8 +15,8 @@
 **********************************************************************/
 
 
-#ifndef __AUDACITY_GENERATOR__
-#define __AUDACITY_GENERATOR__
+#ifndef __RUSTACITY_GENERATOR__
+#define __RUSTACITY_GENERATOR__
 
 #include "Effect.h"
 

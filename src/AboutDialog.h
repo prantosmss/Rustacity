@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AboutDialog.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_ABOUT_DLG__
-#define __AUDACITY_ABOUT_DLG__
+#ifndef __RUSTACITY_ABOUT_DLG__
+#define __RUSTACITY_ABOUT_DLG__
 
 #include <vector>
 #include "widgets/wxPanelWrapper.h" // to inherit

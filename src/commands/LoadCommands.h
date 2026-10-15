@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LoadCommands.h
 
@@ -9,14 +9,14 @@
 
 **********************************************************************/
 
-#include "audacity/ModuleInterface.h"
+#include "rustacity/ModuleInterface.h"
 
 #include <functional>
 #include <memory>
 #include <unordered_map>
 #include "../MemoryX.h"
 
-class AudacityCommand;
+class RustacityCommand;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -30,7 +30,7 @@ public:
    BuiltinCommandsModule(ModuleManagerInterface *moduleManager, const wxString *path);
    virtual ~BuiltinCommandsModule();
 
-   using Factory = std::function< std::unique_ptr<AudacityCommand> () >;
+   using Factory = std::function< std::unique_ptr<RustacityCommand> () >;
 
    // Typically you make a static object of this type in the .cpp file that
    // also implements the Command subclass.
@@ -72,7 +72,7 @@ public:
 private:
    // BuiltinEffectModule implementation
 
-   std::unique_ptr<AudacityCommand> Instantiate(const PluginPath & path);
+   std::unique_ptr<RustacityCommand> Instantiate(const PluginPath & path);
 
 private:
    struct Entry;

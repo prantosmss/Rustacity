@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   EffectUI.cpp
 
@@ -11,7 +11,7 @@
 
 **********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "EffectUI.h"
 
 #include "../Experimental.h"
@@ -82,7 +82,7 @@ BEGIN_EVENT_TABLE(EffectRack, wxFrame)
    EVT_COMMAND_RANGE(ID_FAV,    ID_FAV + 99,    wxEVT_COMMAND_BUTTON_CLICKED, EffectRack::OnFav)
 END_EVENT_TABLE()
 
-EffectRack::EffectRack( AudacityProject &project )
+EffectRack::EffectRack( RustacityProject &project )
 :  wxFrame( &GetProjectFrame( project ),
       wxID_ANY,
       _("Effects Rack"),
@@ -299,7 +299,7 @@ void EffectRack::OnTimer(wxTimerEvent & WXUNUSED(evt))
 
 void EffectRack::OnApply(wxCommandEvent & WXUNUSED(evt))
 {
-   AudacityProject *project = &mProject;
+   RustacityProject *project = &mProject;
 
    bool success = false;
    auto state = UndoManager::Get( *project ).GetCurrentState();
@@ -575,8 +575,8 @@ void EffectRack::UpdateActive()
 
 namespace
 {
-AudacityProject::AttachedWindows::RegisteredFactory sKey{
-   []( AudacityProject &parent ) -> wxWeakRef< wxWindow > {
+RustacityProject::AttachedWindows::RegisteredFactory sKey{
+   []( RustacityProject &parent ) -> wxWeakRef< wxWindow > {
       auto result = safenew EffectRack( parent );
       result->CenterOnParent();
       return result;
@@ -584,7 +584,7 @@ AudacityProject::AttachedWindows::RegisteredFactory sKey{
 };
 }
 
-EffectRack &EffectRack::Get( AudacityProject &project )
+EffectRack &EffectRack::Get( RustacityProject &project )
 {
    return project.AttachedWindows::Get< EffectRack >( sKey );
 }
@@ -655,9 +655,9 @@ private:
 #include "../ProjectAudioManager.h"
 #include "../ShuttleGui.h"
 #include "../ViewInfo.h"
-#include "../commands/AudacityCommand.h"
+#include "../commands/RustacityCommand.h"
 #include "../commands/CommandContext.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/HelpSystem.h"
 
 #include <wx/bmpbuttn.h>
@@ -717,7 +717,7 @@ EVT_MENU_RANGE(kFactoryPresetsID, kFactoryPresetsID + 999, EffectUIHost::OnFacto
 END_EVENT_TABLE()
 
 EffectUIHost::EffectUIHost(wxWindow *parent,
-                           AudacityProject &project,
+                           RustacityProject &project,
                            Effect *effect,
                            EffectUIClientInterface *client)
 :  wxDialogWrapper(parent, wxID_ANY, effect->GetName(),
@@ -751,8 +751,8 @@ EffectUIHost::EffectUIHost(wxWindow *parent,
 }
 
 EffectUIHost::EffectUIHost(wxWindow *parent,
-                           AudacityProject &project,
-                           AudacityCommand *command,
+                           RustacityProject &project,
+                           RustacityCommand *command,
                            EffectUIClientInterface *client)
 :  wxDialogWrapper(parent, wxID_ANY, XO("Some Command") /*command->GetName()*/,
                    wxDefaultPosition, wxDefaultSize,
@@ -1541,7 +1541,7 @@ void EffectUIHost::OnDeletePreset(wxCommandEvent & evt)
 {
    auto preset = mUserPresets[evt.GetId() - kDeletePresetID];
    
-   int res = AudacityMessageBox(
+   int res = RustacityMessageBox(
                                 XO("Are you sure you want to delete \"%s\"?").Format( preset ),
                                 XO("Delete Preset"),
                                 wxICON_QUESTION | wxYES_NO);
@@ -1595,7 +1595,7 @@ void EffectUIHost::OnSaveAs(wxCommandEvent & WXUNUSED(evt))
       name = text->GetValue();
       if (name.empty())
       {
-         AudacityMessageDialog md(
+         RustacityMessageDialog md(
                                   this,
                                   XO("You must specify a name"),
                                   XO("Save Preset") );
@@ -1606,7 +1606,7 @@ void EffectUIHost::OnSaveAs(wxCommandEvent & WXUNUSED(evt))
       
       if ( make_iterator_range( mUserPresets ).contains( name ) )
       {
-         AudacityMessageDialog md(
+         RustacityMessageDialog md(
                                   this,
                                   XO("Preset already exists.\n\nReplace?"),
                                   XO("Save Preset"),
@@ -1645,7 +1645,7 @@ void EffectUIHost::OnImport(wxCommandEvent & WXUNUSED(evt))
 void EffectUIHost::OnExport(wxCommandEvent & WXUNUSED(evt))
 {
    // may throw
-   // exceptions are handled in AudacityApp::OnExceptionInMainLoop
+   // exceptions are handled in RustacityApp::OnExceptionInMainLoop
    mClient->ExportPresets();
    
    return;
@@ -1860,7 +1860,7 @@ wxDialog *EffectUI::DialogFactory( wxWindow &parent, EffectHostInterface *pHost,
 /* static */ bool EffectUI::DoEffect(
    const PluginID & ID, const CommandContext &context, unsigned flags )
 {
-   AudacityProject &project = context.project;
+   RustacityProject &project = context.project;
    const auto &settings = ProjectSettings::Get( project );
    auto &tracks = TrackList::Get( project );
    auto &trackPanel = TrackPanel::Get( project );

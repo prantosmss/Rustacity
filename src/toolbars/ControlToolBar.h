@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
 
   ControlToolbar.h
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_CONTROL_TOOLBAR__
-#define __AUDACITY_CONTROL_TOOLBAR__
+#ifndef __RUSTACITY_CONTROL_TOOLBAR__
+#define __RUSTACITY_CONTROL_TOOLBAR__
 
 #include "ToolBar.h"
 
@@ -26,19 +26,19 @@ class wxWindow;
 class wxStatusBar;
 
 class AButton;
-class AudacityProject;
+class RustacityProject;
 
 // In the GUI, ControlToolBar appears as the "Transport Toolbar". "Control Toolbar" is historic.
 class ControlToolBar final : public ToolBar {
 
  public:
 
-   ControlToolBar( AudacityProject &project );
+   ControlToolBar( RustacityProject &project );
    virtual ~ControlToolBar();
 
-   static ControlToolBar *Find( AudacityProject &project );
-   static ControlToolBar &Get( AudacityProject &project );
-   static const ControlToolBar &Get( const AudacityProject &project );
+   static ControlToolBar *Find( RustacityProject &project );
+   static ControlToolBar &Get( RustacityProject &project );
+   static const ControlToolBar &Get( const RustacityProject &project );
 
    void Create(wxWindow *parent) override;
 

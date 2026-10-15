@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2008 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -11,14 +11,14 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_DEPENDENCIES__
-#define __AUDACITY_DEPENDENCIES__
+#ifndef __RUSTACITY_DEPENDENCIES__
+#define __RUSTACITY_DEPENDENCIES__
 
 #include <list>
 #include "MemoryX.h"
 #include "wxFileNameWrapper.h" // member variable
 
-class AudacityProject;
+class RustacityProject;
 
 class AliasedFile
 {
@@ -56,11 +56,11 @@ using AliasedFileArray = std::list<AliasedFile>;
 // user requests it, and returns True if the user continues.
 // Returns false if the user clicks Cancel, meaning that they do
 // not want to go ahead with the Save/Save As operation.
-bool ShowDependencyDialogIfNeeded(AudacityProject *project,
+bool ShowDependencyDialogIfNeeded(RustacityProject *project,
                                   bool isSaving);
 
 // Returns a list of aliased files associated with a project.
-void FindDependencies(AudacityProject *project,
+void FindDependencies(RustacityProject *project,
                       AliasedFileArray &outAliasedFiles);
 
 #endif

@@ -1,15 +1,15 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectManager.h
 
-Paul Licameli split from AudacityProject.h
+Paul Licameli split from RustacityProject.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_MANAGER__
-#define __AUDACITY_PROJECT_MANAGER__
+#ifndef __RUSTACITY_PROJECT_MANAGER__
+#define __RUSTACITY_PROJECT_MANAGER__
 
 #include <memory>
 
@@ -19,7 +19,7 @@ Paul Licameli split from AudacityProject.h
 class wxTimer;
 class wxTimerEvent;
 
-class AudacityProject;
+class RustacityProject;
 struct AudioIOStartStreamOptions;
 
 ///\brief Object associated with a project for high-level management of the
@@ -30,26 +30,26 @@ class ProjectManager final
    , public ClientData::Base
 {
 public:
-   static ProjectManager &Get( AudacityProject &project );
-   static const ProjectManager &Get( const AudacityProject &project );
+   static ProjectManager &Get( RustacityProject &project );
+   static const ProjectManager &Get( const RustacityProject &project );
 
-   explicit ProjectManager( AudacityProject &project );
+   explicit ProjectManager( RustacityProject &project );
    ProjectManager( const ProjectManager & ) PROHIBITED;
    ProjectManager &operator=( const ProjectManager & ) PROHIBITED;
    ~ProjectManager() override;
 
    // This is the factory for projects:
-   static AudacityProject *New();
+   static RustacityProject *New();
 
    // The function that imports files can act as a factory too, and for that
    // reason remains in this class, not in ProjectFileManager
-   static void OpenFiles(AudacityProject *proj);
+   static void OpenFiles(RustacityProject *proj);
 
    // Return the given project if that is not NULL, else create a project.
    // Then open the given project path.
    // But if an exception escapes this function, create no NEW project.
-   static AudacityProject *OpenProject(
-      AudacityProject *pProject,
+   static RustacityProject *OpenProject(
+      RustacityProject *pProject,
       const FilePath &fileNameArg, bool addtohistory = true);
 
    void ResetProjectToEmpty();
@@ -73,7 +73,7 @@ private:
    void RestartTimer();
 
    // non-static data members
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    std::unique_ptr<wxTimer> mTimer;
 

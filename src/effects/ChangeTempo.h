@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ChangeTempo.h
 
@@ -11,11 +11,11 @@
 
 **********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #if USE_SOUNDTOUCH
 
-#ifndef __AUDACITY_EFFECT_CHANGETEMPO__
-#define __AUDACITY_EFFECT_CHANGETEMPO__
+#ifndef __RUSTACITY_EFFECT_CHANGETEMPO__
+#define __RUSTACITY_EFFECT_CHANGETEMPO__
 
 #if USE_SBSMS
 #include "SBSMSEffect.h"
@@ -105,6 +105,6 @@ private:
    DECLARE_EVENT_TABLE()
 };
 
-#endif // __AUDACITY_EFFECT_CHANGETEMPO__
+#endif // __RUSTACITY_EFFECT_CHANGETEMPO__
 
 #endif // USE_SOUNDTOUCH

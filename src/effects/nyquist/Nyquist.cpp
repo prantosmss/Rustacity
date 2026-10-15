@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Nyquist.cpp
 
@@ -24,7 +24,7 @@ effects from this one class.
 
 *//*******************************************************************/
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 #include "Nyquist.h"
 
 #include "../../Experimental.h"
@@ -68,7 +68,7 @@ effects from this one class.
 #include "../../WaveClip.h"
 #include "../../WaveTrack.h"
 #include "../../widgets/valnum.h"
-#include "../../widgets/AudacityMessageBox.h"
+#include "../../widgets/RustacityMessageBox.h"
 #include "../../Prefs.h"
 #include "../../wxFileNameWrapper.h"
 #include "../../prefs/GUIPrefs.h"
@@ -691,10 +691,10 @@ bool NyquistEffect::Process()
 
       mProps = wxEmptyString;
 
-      mProps += wxString::Format(wxT("(putprop '*AUDACITY* (list %d %d %d) 'VERSION)\n"), AUDACITY_VERSION, AUDACITY_RELEASE, AUDACITY_REVISION);
+      mProps += wxString::Format(wxT("(putprop '*RUSTACITY* (list %d %d %d) 'VERSION)\n"), RUSTACITY_VERSION, RUSTACITY_RELEASE, RUSTACITY_REVISION);
       wxString lang = gPrefs->Read(wxT("/Locale/Language"), wxT(""));
       lang = (lang.empty())? GUIPrefs::SetLang(lang) : lang;
-      mProps += wxString::Format(wxT("(putprop '*AUDACITY* \"%s\" 'LANGUAGE)\n"), lang);
+      mProps += wxString::Format(wxT("(putprop '*RUSTACITY* \"%s\" 'LANGUAGE)\n"), lang);
 
       mProps += wxString::Format(wxT("(setf *DECIMAL-SEPARATOR* #\\%c)\n"), wxNumberFormatter::GetDecimalSeparator());
 
@@ -2120,7 +2120,7 @@ bool NyquistEffect::Parse(
                //       wxOK | wxICON_EXCLAMATION,
                //       XO("Nyquist Warning") );
 
-               // Note that the AudacityApp's mLogger has not yet been created,
+               // Note that the RustacityApp's mLogger has not yet been created,
                // so this brings up an alert box, but after the Audacity frame is up.
                wxLogWarning(str);
                return true;
@@ -2448,7 +2448,7 @@ void NyquistEffect::OSCallback()
 
 FilePaths NyquistEffect::GetNyquistSearchPath()
 {
-   const auto &audacityPathList = FileNames::AudacityPathList();
+   const auto &audacityPathList = FileNames::RustacityPathList();
    FilePaths pathList;
 
    for (size_t i = 0; i < audacityPathList.size(); i++)

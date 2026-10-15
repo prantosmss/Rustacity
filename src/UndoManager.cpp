@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   UndoManager.cpp
 
@@ -20,7 +20,7 @@ UndoManager
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "UndoManager.h"
 
 #include <wx/hashset.h>
@@ -65,22 +65,22 @@ struct UndoStackElem {
    TranslatableString shortDescription;
 };
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-   [](AudacityProject &project)
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+   [](RustacityProject &project)
       { return std::make_unique<UndoManager>( project ); }
 };
 
-UndoManager &UndoManager::Get( AudacityProject &project )
+UndoManager &UndoManager::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< UndoManager >( key );
 }
 
-const UndoManager &UndoManager::Get( const AudacityProject &project )
+const UndoManager &UndoManager::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-UndoManager::UndoManager( AudacityProject &project )
+UndoManager::UndoManager( RustacityProject &project )
    : mProject{ project }
 {
    current = -1;

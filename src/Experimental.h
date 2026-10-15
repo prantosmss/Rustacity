@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Experimental.h
 
@@ -30,9 +30,9 @@
 #ifndef __EXPERIMENTAL__
 #define __EXPERIMENTAL__
 
-#ifndef __AUDACITY_H__
-// Audacity.h is needed for the USE_* macros
-#error Must include Audacity.h before Experimental.h
+#ifndef __RUSTACITY_H__
+// Rustacity.h is needed for the USE_* macros
+#error Must include Rustacity.h before Experimental.h
 #endif
 
 // ACH 08 Jan 2014
@@ -161,7 +161,7 @@
 #ifdef EXPERIMENTAL_NOTEBOOK
    #include "widgets/GuiFactory.h"
    #include "widgets/APanel.h"
-   extern void AddPages(   AudacityProject * pProj, GuiFactory & Factory,  wxNotebook  * pNotebook );
+   extern void AddPages(   RustacityProject * pProj, GuiFactory & Factory,  wxNotebook  * pNotebook );
 #endif
 
 #ifdef EXPERIMENTAL_NYQUIST_INSPECTOR
@@ -178,7 +178,7 @@
 #define EXPERIMENTAL_MODULE_PREFS
 
 // Define to allow realtime processing in Audacity effects that have been converted.
-#define EXPERIMENTAL_REALTIME_AUDACITY_EFFECTS
+#define EXPERIMENTAL_REALTIME_RUSTACITY_EFFECTS
 
 // Define to include the effects rack (such as it is).
 //#define EXPERIMENTAL_EFFECTS_RACK

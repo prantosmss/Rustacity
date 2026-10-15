@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Languages.h
 
@@ -8,17 +8,17 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_LANGUAGES__
-#define __AUDACITY_LANGUAGES__
+#ifndef __RUSTACITY_LANGUAGES__
+#define __RUSTACITY_LANGUAGES__
 
 class wxArrayString;
 class wxString;
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 void GetLanguages(
    wxArrayString &langCodes, TranslatableStrings &langNames);
 
 wxString GetSystemLanguageCode();
 
-#endif // __AUDACITY_LANGUAGES__
+#endif // __RUSTACITY_LANGUAGES__

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 SpectrogramSettings.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SPECTROGRAM_SETTINGS__
-#define __AUDACITY_SPECTROGRAM_SETTINGS__
+#ifndef __RUSTACITY_SPECTROGRAM_SETTINGS__
+#define __RUSTACITY_SPECTROGRAM_SETTINGS__
 
 #include "../Experimental.h"
 

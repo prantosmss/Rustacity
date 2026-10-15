@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   NoiseReduction.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_NOISE_REDUCTION__
-#define __AUDACITY_EFFECT_NOISE_REDUCTION__
+#ifndef __RUSTACITY_EFFECT_NOISE_REDUCTION__
+#define __RUSTACITY_EFFECT_NOISE_REDUCTION__
 
 #include "Effect.h"
 

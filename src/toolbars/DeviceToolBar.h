@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   DeviceToolbar.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_DEVICE_TOOLBAR__
-#define __AUDACITY_DEVICE_TOOLBAR__
+#ifndef __RUSTACITY_DEVICE_TOOLBAR__
+#define __RUSTACITY_DEVICE_TOOLBAR__
 
 #include <vector>
 #include "ToolBar.h"
@@ -19,17 +19,17 @@ class wxPoint;
 class wxChoice;
 struct DeviceSourceMap;
 
-class AudacityProject;
+class RustacityProject;
 
 class DeviceToolBar final : public ToolBar {
 
  public:
 
-   DeviceToolBar( AudacityProject &project );
+   DeviceToolBar( RustacityProject &project );
    virtual ~DeviceToolBar();
 
-   static DeviceToolBar &Get( AudacityProject &project );
-   static const DeviceToolBar &Get( const AudacityProject &project );
+   static DeviceToolBar &Get( RustacityProject &project );
+   static const DeviceToolBar &Get( const RustacityProject &project );
 
    void Create(wxWindow * parent) override;
 

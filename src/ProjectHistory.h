@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectHistory.h
 
@@ -8,12 +8,12 @@ Paul Licameli split from ProjectManager.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_HISTORY__
-#define __AUDACITY_PROJECT_HISTORY__
+#ifndef __RUSTACITY_PROJECT_HISTORY__
+#define __RUSTACITY_PROJECT_HISTORY__
 
 #include "ClientData.h"
 
-class AudacityProject;
+class RustacityProject;
 struct UndoState;
 enum class UndoPush : unsigned char;
 
@@ -21,10 +21,10 @@ class ProjectHistory final
    : public ClientData::Base
 {
 public:
-   static ProjectHistory &Get( AudacityProject &project );
-   static const ProjectHistory &Get( const AudacityProject &project );
+   static ProjectHistory &Get( RustacityProject &project );
+   static const ProjectHistory &Get( const RustacityProject &project );
 
-   explicit ProjectHistory( AudacityProject &project )
+   explicit ProjectHistory( RustacityProject &project )
       : mProject{ project }
    {}
    ProjectHistory( const ProjectHistory & ) PROHIBITED;
@@ -52,7 +52,7 @@ public:
    void SetDirty( bool value ) { mDirty = value; }
 
 private:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    bool mDirty{ false };
 };

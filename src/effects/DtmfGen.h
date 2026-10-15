@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   DtmfGen.h
 
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_DTMF__
-#define __AUDACITY_EFFECT_DTMF__
+#ifndef __RUSTACITY_EFFECT_DTMF__
+#define __RUSTACITY_EFFECT_DTMF__
 
 #include "Effect.h"
 

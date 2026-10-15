@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SpectralSelectionBarListener.h
 
@@ -8,13 +8,13 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SPECTRAL_SELECTION_BAR_LISTENER__
-#define __AUDACITY_SPECTRAL_SELECTION_BAR_LISTENER__
+#ifndef __RUSTACITY_SPECTRAL_SELECTION_BAR_LISTENER__
+#define __RUSTACITY_SPECTRAL_SELECTION_BAR_LISTENER__
 
-#include "../Audacity.h"
-#include "audacity/Types.h"
+#include "../Rustacity.h"
+#include "rustacity/Types.h"
 
-class AUDACITY_DLL_API SpectralSelectionBarListener /* not final */ {
+class RUSTACITY_DLL_API SpectralSelectionBarListener /* not final */ {
 
  public:
 

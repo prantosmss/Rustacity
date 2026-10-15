@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ToolManager.cpp
 
@@ -24,7 +24,7 @@
 
 *//**********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ToolManager.h"
 
 #include "../Experimental.h"
@@ -71,7 +71,7 @@
 // Constructor
 //
 ToolFrame::ToolFrame
-   ( AudacityProject *parent, ToolManager *manager, ToolBar *bar, wxPoint pos )
+   ( RustacityProject *parent, ToolManager *manager, ToolBar *bar, wxPoint pos )
    : wxFrame( FindProjectFrame( parent ),
           bar->GetId(),
           wxEmptyString,
@@ -358,27 +358,27 @@ auto ToolManager::SetGetTopPanelHook( const GetTopPanelHook &hook )
    return result;
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-  []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+  []( RustacityProject &parent ){
      auto &window = GetProjectFrame( parent );
      return std::make_shared< ToolManager >(
         &parent, getTopPanelHook()( window ) ); }
 };
 
-ToolManager &ToolManager::Get( AudacityProject &project )
+ToolManager &ToolManager::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< ToolManager >( key );
 }
 
-const ToolManager &ToolManager::Get( const AudacityProject &project )
+const ToolManager &ToolManager::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
 //
 // Constructor
 //
-ToolManager::ToolManager( AudacityProject *parent, wxWindow *topDockParent )
+ToolManager::ToolManager( RustacityProject *parent, wxWindow *topDockParent )
 : wxEvtHandler()
 {
    if ( !topDockParent )
@@ -678,7 +678,7 @@ void ToolManager::Reset()
    // If audio was playing, we stopped the VU meters,
    // It would be nice to show them again, but hardly essential as
    // they will show up again on the next play.
-   // SetVUMeters(AudacityProject *p);
+   // SetVUMeters(RustacityProject *p);
    Updated();
 }
 
@@ -1566,12 +1566,12 @@ AttachedToolBarMenuItem::AttachedToolBarMenuItem(
    , mAttachedItem{
       Registry::Placement{ wxT("View/Other/Toolbars/Toolbars/Other"), hint },
       (  MenuTable::FinderScope(
-            [this](AudacityProject &) -> CommandHandlerObject&
+            [this](RustacityProject &) -> CommandHandlerObject&
                { return *this; } ),
          MenuTable::Command( name, label_in,
             &AttachedToolBarMenuItem::OnShowToolBar,
             AlwaysEnabledFlag,
-            CommandManager::Options{}.CheckTest( [id](AudacityProject &project){
+            CommandManager::Options{}.CheckTest( [id](RustacityProject &project){
                auto &toolManager = ToolManager::Get( project );
                return toolManager.IsVisible( id ); } ) ) ) }
    , mExcludeIds{ std::move( excludeIDs ) }

@@ -1,6 +1,6 @@
 /**********************************************************************
 
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
 
 
  ScrubbingToolbar.h
@@ -9,8 +9,8 @@
 
  **********************************************************************/
 
-#ifndef __AUDACITY_SCRUBBING_TOOLBAR__
-#define __AUDACITY_SCRUBBING_TOOLBAR__
+#ifndef __RUSTACITY_SCRUBBING_TOOLBAR__
+#define __RUSTACITY_SCRUBBING_TOOLBAR__
 
 
 
@@ -18,7 +18,7 @@
 
 #include "ToolBar.h"
 
-class AudacityProject;
+class RustacityProject;
 
 class wxCommandEvent;
 class wxDC;
@@ -40,11 +40,11 @@ class ScrubbingToolBar final : public ToolBar {
 
 public:
 
-   ScrubbingToolBar( AudacityProject &project );
+   ScrubbingToolBar( RustacityProject &project );
    virtual ~ScrubbingToolBar();
 
-   static ScrubbingToolBar &Get( AudacityProject &project );
-   static const ScrubbingToolBar &Get( const AudacityProject &project );
+   static ScrubbingToolBar &Get( RustacityProject &project );
+   static const ScrubbingToolBar &Get( const RustacityProject &project );
 
    void Create(wxWindow *parent) override;
 

@@ -1,13 +1,13 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Contrast.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_CONTRAST_DIALOG__
-#define __AUDACITY_CONTRAST_DIALOG__
+#ifndef __RUSTACITY_CONTRAST_DIALOG__
+#define __RUSTACITY_CONTRAST_DIALOG__
 
 #include "../widgets/wxPanelWrapper.h" // to inherit
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   KeyConfigPrefs.cpp
 
@@ -19,7 +19,7 @@ KeyConfigPrefs and MousePrefs use.
 
 *//*********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include "KeyConfigPrefs.h"
 
@@ -45,7 +45,7 @@ KeyConfigPrefs and MousePrefs use.
 #include "../FileNames.h"
 
 #include "../widgets/KeyView.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 #if wxUSE_ACCESSIBILITY
 #include "../widgets/WindowAccessible.h"
@@ -86,7 +86,7 @@ BEGIN_EVENT_TABLE(KeyConfigPrefs, PrefsPanel)
 END_EVENT_TABLE()
 
 KeyConfigPrefs::KeyConfigPrefs(
-   wxWindow * parent, wxWindowID winid, AudacityProject *pProject,
+   wxWindow * parent, wxWindowID winid, RustacityProject *pProject,
    const CommandID &name)
 /* i18n-hint: as in computer keyboard (not musical!) */
 :  PrefsPanel(parent, winid, XO("Keyboard")),
@@ -506,7 +506,7 @@ void KeyConfigPrefs::OnImport(wxCommandEvent & WXUNUSED(event))
    // getting new settings
    XMLFileReader reader;
    if (!reader.Parse(mManager, file)) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          reader.GetErrorStr(),
          XO("Error Importing Keyboard Shortcuts"),
          wxOK | wxCENTRE,
@@ -528,7 +528,7 @@ void KeyConfigPrefs::OnImport(wxCommandEvent & WXUNUSED(event))
       mKeys = oldKeys;
 
       // output an error message
-      AudacityMessageBox(XO("The file with the shortcuts contains illegal shortcut duplicates for \"") +
+      RustacityMessageBox(XO("The file with the shortcuts contains illegal shortcut duplicates for \"") +
          fMatching + XO("\" and \"") + sMatching + XO("\".\nNothing is imported."),
          XO("Error Importing Keyboard Shortcuts"),
          wxICON_ERROR | wxCENTRE, this);
@@ -550,7 +550,7 @@ void KeyConfigPrefs::OnImport(wxCommandEvent & WXUNUSED(event))
          "but have their shortcuts removed because of the conflict with other new shortcuts:\n") +
          disabledShortcuts;
 
-   AudacityMessageBox(message, XO("Loading Keyboard Shortcuts"), wxOK | wxCENTRE);
+   RustacityMessageBox(message, XO("Loading Keyboard Shortcuts"), wxOK | wxCENTRE);
 }
 
 void KeyConfigPrefs::OnExport(wxCommandEvent & WXUNUSED(event))
@@ -729,7 +729,7 @@ void KeyConfigPrefs::SetKeyForSelected(const NormalizedKeyString & key)
 
    if (!mView->CanSetKey(mCommandSelected))
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("You may not assign a key to this entry"),
          XO("Error"),
          wxICON_ERROR | wxCENTRE,
@@ -746,7 +746,7 @@ void KeyConfigPrefs::SetKeyForSelected(const NormalizedKeyString & key)
 void KeyConfigPrefs::OnSet(wxCommandEvent & WXUNUSED(event))
 {
    if (mCommandSelected == wxNOT_FOUND) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("You must select a binding before assigning a shortcut"),
          XO("Error"),
          wxICON_WARNING | wxCENTRE,
@@ -773,7 +773,7 @@ void KeyConfigPrefs::OnSet(wxCommandEvent & WXUNUSED(event))
          .Format(
             mManager->GetCategoryFromName(newname),
             mManager->GetPrefixedLabelFromName(newname) );
-      if (wxCANCEL == AudacityMessageBox(
+      if (wxCANCEL == RustacityMessageBox(
             XO(
 "The keyboard shortcut '%s' is already assigned to:\n\n\t'%s'\n\nClick OK to assign the shortcut to\n\n\t'%s'\n\ninstead. Otherwise, click Cancel.")
                .Format(
@@ -899,7 +899,7 @@ void KeyConfigPrefs::Cancel()
 PrefsPanel::Factory
 KeyConfigPrefsFactory( const CommandID &name )
 {
-   return [=](wxWindow *parent, wxWindowID winid, AudacityProject *pProject)
+   return [=](wxWindow *parent, wxWindowID winid, RustacityProject *pProject)
    {
       wxASSERT(parent); // to justify safenew
       auto result = safenew KeyConfigPrefs{ parent, winid, pProject, name };

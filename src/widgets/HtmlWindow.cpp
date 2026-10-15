@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   HtmlWindow.cpp
 
@@ -19,7 +19,7 @@
 
 *//**********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "HtmlWindow.h"
 
 #include <wx/setup.h> // for wxUSE_* macros

@@ -20,7 +20,7 @@ messaging from a command back to its invoker.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "CommandContext.h"
 
 #include <map>
@@ -33,7 +33,7 @@ messaging from a command back to its invoker.
 #include "CommandTargets.h"
 
 CommandContext::CommandContext(
-      AudacityProject &p
+      RustacityProject &p
       , const wxEvent *e
       , int ii
       , const CommandParameter &param
@@ -48,7 +48,7 @@ CommandContext::CommandContext(
 }
    
 CommandContext::CommandContext(
-      AudacityProject &p,
+      RustacityProject &p,
       std::unique_ptr<CommandOutputTargets> target)
       : project{ p }
       // Revisit and use std_unique pointer for pOutput??
@@ -87,8 +87,8 @@ void CommandContext::Progress( double d ) const
       pOutput->Progress( d );
 }
 
-AudacityApp * CommandContext::GetApp() const
-{  return (AudacityApp *) wxTheApp;}
+RustacityApp * CommandContext::GetApp() const
+{  return (RustacityApp *) wxTheApp;}
 
 void CommandContext::StartArray() const
 {

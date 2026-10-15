@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LabelTrack.cpp
 
@@ -28,7 +28,7 @@ for drawing different aspects of the label and its text box.
 
 *//*******************************************************************/
 
-#include "Audacity.h" // for HAVE_GTK
+#include "Rustacity.h" // for HAVE_GTK
 #include "LabelTrack.h"
 
 #include "tracks/ui/TrackView.h"
@@ -47,7 +47,7 @@ for drawing different aspects of the label and its text box.
 #include "ProjectFileIORegistry.h"
 
 #include "effects/TimeWarper.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 
 wxDEFINE_EVENT(EVT_LABELTRACK_ADDITION, LabelTrackEvent);
 wxDEFINE_EVENT(EVT_LABELTRACK_DELETION, LabelTrackEvent);
@@ -56,7 +56,7 @@ wxDEFINE_EVENT(EVT_LABELTRACK_SELECTION, LabelTrackEvent);
 
 static ProjectFileIORegistry::Entry registerFactory{
    wxT( "labeltrack" ),
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       auto &trackFactory = TrackFactory::Get( project );
       auto &tracks = TrackList::Get( project );
       auto result = tracks.Add(trackFactory.NewLabelTrack());
@@ -521,7 +521,7 @@ void LabelTrack::Import(wxTextFile & in)
       catch(const LabelStruct::BadFormatException&) { error = true; }
    }
    if (error)
-      ::AudacityMessageBox( XO("One or more saved labels could not be read.") );
+      ::RustacityMessageBox( XO("One or more saved labels could not be read.") );
    SortLabels();
 }
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LoadCommands.cpp
 
@@ -13,9 +13,9 @@
 modelled on BuiltinEffectsModule
 *****************************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "LoadCommands.h"
-#include "AudacityCommand.h"
+#include "RustacityCommand.h"
 
 #include "../Prefs.h"
 
@@ -51,7 +51,7 @@ void BuiltinCommandsModule::DoRegistration(
 // When the module is builtin to Audacity, we use the same function, but it is
 // declared static so as not to clash with other builtin modules.
 // ============================================================================
-DECLARE_MODULE_ENTRY(AudacityModule)
+DECLARE_MODULE_ENTRY(RustacityModule)
 {
    // Create and register the importer
    // Trust the module manager not to leak this
@@ -106,7 +106,7 @@ VendorSymbol BuiltinCommandsModule::GetVendor()
 wxString BuiltinCommandsModule::GetVersion()
 {
    // This "may" be different if this were to be maintained as a separate DLL
-   return AUDACITY_VERSION_STRING;
+   return RUSTACITY_VERSION_STRING;
 }
 
 TranslatableString BuiltinCommandsModule::GetDescription()
@@ -158,7 +158,7 @@ bool BuiltinCommandsModule::AutoRegisterPlugins(PluginManagerInterface & pm)
          // Uses Generic Registration, not Default.
          // Registers as TypeGeneric, not TypeEffect.
          DiscoverPluginsAtPath(path, ignoredErrMsg,
-            PluginManagerInterface::AudacityCommandRegistrationCallback);
+            PluginManagerInterface::RustacityCommandRegistrationCallback);
       }
    }
 
@@ -209,8 +209,8 @@ ComponentInterface *BuiltinCommandsModule::CreateInstance(const PluginPath & pat
 void BuiltinCommandsModule::DeleteInstance(ComponentInterface *instance)
 {
    // Releases the resource.
-   std::unique_ptr < AudacityCommand > {
-      dynamic_cast<AudacityCommand *>(instance)
+   std::unique_ptr < RustacityCommand > {
+      dynamic_cast<RustacityCommand *>(instance)
    };
 }
 
@@ -218,7 +218,7 @@ void BuiltinCommandsModule::DeleteInstance(ComponentInterface *instance)
 // BuiltinCommandsModule implementation
 // ============================================================================
 
-std::unique_ptr<AudacityCommand> BuiltinCommandsModule::Instantiate(const PluginPath & path)
+std::unique_ptr<RustacityCommand> BuiltinCommandsModule::Instantiate(const PluginPath & path)
 {
    wxASSERT(path.StartsWith(BUILTIN_GENERIC_COMMAND_PREFIX));
    auto iter = mCommands.find( path );

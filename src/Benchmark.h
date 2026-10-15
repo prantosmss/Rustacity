@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Benchmark.h
 
@@ -8,11 +8,11 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_BENCHMARK__
-#define __AUDACITY_BENCHMARK__
+#ifndef __RUSTACITY_BENCHMARK__
+#define __RUSTACITY_BENCHMARK__
 
 class ProjectSettings;
 
 void RunBenchmark( wxWindow *parent, const ProjectSettings &settings );
 
-#endif // define __AUDACITY_BENCHMARK__
+#endif // define __RUSTACITY_BENCHMARK__

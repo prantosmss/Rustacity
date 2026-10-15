@@ -13,7 +13,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "BatchEvalCommand.h"
 
 #include "CommandContext.h"
@@ -39,7 +39,7 @@ void BatchEvalCommandType::BuildSignature(CommandSignature &signature)
    signature.AddParameter(wxT("MacroName"), wxT(""), std::move(macroValidator));
 }
 
-OldStyleCommandPointer BatchEvalCommandType::Create( AudacityProject *project,
+OldStyleCommandPointer BatchEvalCommandType::Create( RustacityProject *project,
    std::unique_ptr<CommandOutputTargets> && WXUNUSED(target))
 {
    return std::make_shared<BatchEvalCommand>(*project, *this);

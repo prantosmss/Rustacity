@@ -21,7 +21,7 @@ capture the more lengthy output from some commands.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "CommandTargets.h"
 
 #include <wx/app.h>
@@ -29,7 +29,7 @@ capture the more lengthy output from some commands.
 #include <wx/string.h>
 #include <wx/textctrl.h>
 #include "../ShuttleGui.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/wxPanelWrapper.h"
 
 #include <locale>
@@ -254,7 +254,7 @@ void BriefCommandMessageTarget::EndField(){
 void MessageBoxTarget::Update(const wxString &message)
 {
    // Should these messages be localized?
-   AudacityMessageBox( Verbatim( message ) );
+   RustacityMessageBox( Verbatim( message ) );
 }
 
 
@@ -302,7 +302,7 @@ BriefCommandOutputTargets::~BriefCommandOutputTargets()
 
 
 
-class AUDACITY_DLL_API LongMessageDialog /* not final */ : public wxDialogWrapper
+class RUSTACITY_DLL_API LongMessageDialog /* not final */ : public wxDialogWrapper
 {
 public:
    // constructors and destructors

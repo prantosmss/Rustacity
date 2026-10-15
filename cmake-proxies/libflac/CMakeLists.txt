@@ -1,6 +1,6 @@
 
 # FIXME:  Once switch to cmake is made, remove Windows pragmas
-#         from AudacityApp.cpp and change target name to "flac/flac++"
+#         from RustacityApp.cpp and change target name to "flac/flac++"
 add_library( ${TARGET} STATIC )
 add_library( ${TARGET}++ STATIC )
 

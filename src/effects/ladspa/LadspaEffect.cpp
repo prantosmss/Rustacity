@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LadspaEffect.cpp
 
@@ -22,7 +22,7 @@ effects from this one class.
 *//*******************************************************************/
 
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "LadspaEffect.h"       // This class's header file
 
 #include <float.h>
@@ -81,7 +81,7 @@ const static wxChar *kShippedEffects[] =
 // When the module is builtin to Audacity, we use the same function, but it is
 // declared static so as not to clash with other builtin modules.
 // ============================================================================
-DECLARE_MODULE_ENTRY(AudacityModule)
+DECLARE_MODULE_ENTRY(RustacityModule)
 {
    // Create and register the importer
    // Trust the module manager not to leak this

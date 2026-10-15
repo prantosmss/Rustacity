@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   WaveClip.cpp
 
@@ -1739,7 +1739,7 @@ void WaveClip::Clear(double t0, double t1)
 
 void WaveClip::ClearAndAddCutLine(double t0, double t1)
 // WEAK-GUARANTEE
-// this WaveClip remains destructible in case of AudacityException.
+// this WaveClip remains destructible in case of RustacityException.
 // But some cutlines may be deleted
 {
    if (t0 > GetEndTime() || t1 < GetStartTime())

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Snap.h
 
@@ -12,14 +12,14 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SNAP__
-#define __AUDACITY_SNAP__
+#ifndef __RUSTACITY_SNAP__
+#define __RUSTACITY_SNAP__
 
 #include <vector>
 #include <wx/defs.h>
 #include "widgets/NumericTextCtrl.h" // member variable
 
-class AudacityProject;
+class RustacityProject;
 class Track;
 using TrackArray = std::vector< Track* >;
 class TrackClipArray;
@@ -110,7 +110,7 @@ private:
 
 private:
 
-   const AudacityProject *mProject;
+   const RustacityProject *mProject;
    const TrackList *mTracks;
    const TrackClipArray *mClipExclusions;
    const TrackArray *mTrackExclusions;

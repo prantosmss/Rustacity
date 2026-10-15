@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WaveformSettings.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WAVEFORM_SETTINGS__
-#define __AUDACITY_WAVEFORM_SETTINGS__
+#ifndef __RUSTACITY_WAVEFORM_SETTINGS__
+#define __RUSTACITY_WAVEFORM_SETTINGS__
 
 #include "../Internat.h" // for TranslatableStrings
 

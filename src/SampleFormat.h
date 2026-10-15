@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SampleFormat.h
 
@@ -8,15 +8,15 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SAMPLE_FORMAT__
-#define __AUDACITY_SAMPLE_FORMAT__
+#ifndef __RUSTACITY_SAMPLE_FORMAT__
+#define __RUSTACITY_SAMPLE_FORMAT__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include "MemoryX.h"
 #include <wx/defs.h>
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 //
 // Definitions / Meta-Information

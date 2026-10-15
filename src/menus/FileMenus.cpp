@@ -1,4 +1,4 @@
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "../Experimental.h"
 
 #include "../BatchCommands.h"
@@ -23,7 +23,7 @@
 #include "../export/ExportMultiple.h"
 #include "../import/Import.h"
 #include "../import/ImportMIDI.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/FileHistory.h"
 
 #ifdef USE_MIDI
@@ -36,7 +36,7 @@
 
 // private helper classes and functions
 namespace {
-void DoExport( AudacityProject &project, const FileExtension & Format )
+void DoExport( RustacityProject &project, const FileExtension & Format )
 {
    auto &tracks = TrackList::Get( project );
 
@@ -220,7 +220,7 @@ void OnExportLabels(const CommandContext &context)
    auto numLabelTracks = trackRange.size();
 
    if (numLabelTracks == 0) {
-      AudacityMessageBox( XO("There are no label tracks to export.") );
+      RustacityMessageBox( XO("There are no label tracks to export.") );
       return;
    }
    else
@@ -258,7 +258,7 @@ void OnExportLabels(const CommandContext &context)
    f.Create();
    f.Open();
    if (!f.IsOpened()) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO( "Couldn't write to file: %s" ).Format( fName ) );
       return;
    }
@@ -292,12 +292,12 @@ void OnExportMIDI(const CommandContext &context)
    const auto numNoteTracksSelected = range.size();
 
    if(numNoteTracksSelected > 1) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Please select only one Note Track at a time.") );
       return;
    }
    else if(numNoteTracksSelected < 1) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Please select a Note Track.") );
       return;
    }
@@ -355,7 +355,7 @@ void OnExportMIDI(const CommandContext &context)
          auto msg = XO(
 "You have selected a filename with an unrecognized file extension.\nDo you want to continue?");
          auto title = XO("Export MIDI");
-         int id = AudacityMessageBox( msg, title, wxYES_NO );
+         int id = RustacityMessageBox( msg, title, wxYES_NO );
          if (id == wxNO) {
             continue;
          } else if (id == wxYES) {
@@ -384,7 +384,7 @@ void OnImport(const CommandContext &context)
 
    // PRL:  This affects FFmpegImportPlugin::Open which resets the preference
    // to false.  Should it also be set to true on other paths that reach
-   // AudacityProject::Import ?
+   // RustacityProject::Import ?
    gPrefs->Write(wxT("/NewImportingSession"), true);
 
    //sort selected files by OD status.  Load non OD first so user can edit asap.
@@ -430,7 +430,7 @@ void OnImportLabels(const CommandContext &context)
 
       f.Open(fileName);
       if (!f.IsOpened()) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("Could not open file: %s").Format( fileName ) );
          return;
       }
@@ -540,9 +540,9 @@ void OnExit(const CommandContext &WXUNUSED(context) )
 
 } // namespace
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static FileActions::Handler instance;
    return instance;
 };
@@ -591,7 +591,7 @@ BaseItemSharedPtr FileMenu()
    #endif
             ,
             Special( wxT("PopulateRecentFilesStep"),
-            [](AudacityProject &, wxMenu &theMenu){
+            [](RustacityProject &, wxMenu &theMenu){
                // Recent Files and Recent Projects menus
                auto &history = FileHistory::Global();
                history.UseMenu( &theMenu );

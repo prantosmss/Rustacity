@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportPlugin.h
 
@@ -42,17 +42,17 @@ but little else.
 
 *//*******************************************************************/
 
-#ifndef __AUDACITY_IMPORTER__
-#define __AUDACITY_IMPORTER__
+#ifndef __RUSTACITY_IMPORTER__
+#define __RUSTACITY_IMPORTER__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 #include "../Internat.h"
 
 #include "ImportRaw.h" // defines TrackHolders
 
-class AudacityProject;
+class RustacityProject;
 class wxArrayString;
 class ProgressDialog;
 enum class ProgressResult : unsigned;
@@ -94,7 +94,7 @@ public:
    // format, false otherwise.  This puts the importer into the open
    // state.
    virtual std::unique_ptr<ImportFileHandle> Open(
-      const FilePath &Filename, AudacityProject*) = 0;
+      const FilePath &Filename, RustacityProject*) = 0;
 
    virtual ~ImportPlugin() { }
 

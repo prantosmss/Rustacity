@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MidiIOPrefs.cpp
 
@@ -23,7 +23,7 @@ other settings.
 
 *//********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "MidiIOPrefs.h"
 
 #include "../Experimental.h"
@@ -40,7 +40,7 @@ other settings.
 
 #include "../Prefs.h"
 #include "../ShuttleGui.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 #define DEFAULT_SYNTH_LATENCY 5
 
@@ -294,7 +294,7 @@ bool MidiIOPrefs::Validate()
 {
    long latency;
    if (!mLatency->GetValue().ToLong(&latency)) {
-      AudacityMessageBox( XO(
+      RustacityMessageBox( XO(
 "The MIDI Synthesizer Latency must be an integer") );
       return false;
    }
@@ -304,7 +304,7 @@ bool MidiIOPrefs::Validate()
 #ifdef EXPERIMENTAL_MIDI_OUT
 namespace{
 PrefsPanel::Registration sAttachment{ "MidiIO",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew MidiIOPrefs(parent, winid);

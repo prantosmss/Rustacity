@@ -1,10 +1,10 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectAudioIO.h
 
-Paul Licameli split from AudacityProject.h
+Paul Licameli split from RustacityProject.h
 
 **********************************************************************/
 
@@ -13,7 +13,7 @@ Paul Licameli split from AudacityProject.h
 
 #include "ClientData.h" // to inherit
 
-class AudacityProject;
+class RustacityProject;
 class MeterPanelBase;
 
 ///\ brief Holds per-project state needed for interaction with AudioIO,
@@ -22,10 +22,10 @@ class ProjectAudioIO final
    : public ClientData::Base
 {
 public:
-   static ProjectAudioIO &Get( AudacityProject &project );
-   static const ProjectAudioIO &Get( const AudacityProject &project );
+   static ProjectAudioIO &Get( RustacityProject &project );
+   static const ProjectAudioIO &Get( const RustacityProject &project );
 
-   explicit ProjectAudioIO( AudacityProject &project );
+   explicit ProjectAudioIO( RustacityProject &project );
    ProjectAudioIO( const ProjectAudioIO & ) PROHIBITED;
    ProjectAudioIO &operator=( const ProjectAudioIO & ) PROHIBITED;
    ~ProjectAudioIO();
@@ -40,7 +40,7 @@ public:
    void SetCaptureMeter(MeterPanelBase *capture);
 
 private:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    // Project owned meters
    MeterPanelBase *mPlaybackMeter{};

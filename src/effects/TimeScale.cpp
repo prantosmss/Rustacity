@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TimeScale.cpp
 
@@ -13,7 +13,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_SBSMS
+#include "../Rustacity.h" // for USE_SBSMS
 
 #if USE_SBSMS
 #include "TimeScale.h"

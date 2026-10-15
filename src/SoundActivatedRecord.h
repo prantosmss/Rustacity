@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SoundActivatedRecord.cpp
 
@@ -13,8 +13,8 @@
 
 ********************************************************************/
 
-#ifndef __AUDACITY_SOUND_ACTIVATED_RECORD__
-#define __AUDACITY_SOUND_ACTIVATED_RECORD__
+#ifndef __RUSTACITY_SOUND_ACTIVATED_RECORD__
+#define __RUSTACITY_SOUND_ACTIVATED_RECORD__
 
 #include "widgets/wxPanelWrapper.h" // to inherit
 

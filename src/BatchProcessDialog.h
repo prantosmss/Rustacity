@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   BatchProcessDialog.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_MACROS_WINDOW__
-#define __AUDACITY_MACROS_WINDOW__
+#ifndef __RUSTACITY_MACROS_WINDOW__
+#define __RUSTACITY_MACROS_WINDOW__
 
 #include <wx/defs.h>
 
@@ -22,14 +22,14 @@ class wxListCtrl;
 class wxListEvent;
 class wxButton;
 class wxTextCtrl;
-class AudacityProject;
+class RustacityProject;
 class ShuttleGui;
 
 class ApplyMacroDialog : public wxDialogWrapper {
  public:
    // constructors and destructors
    ApplyMacroDialog(
-      wxWindow * parent, AudacityProject &project, bool bInherited=false);
+      wxWindow * parent, RustacityProject &project, bool bInherited=false);
    virtual ~ApplyMacroDialog();
  public:
    // Populate methods NOT virtual.
@@ -63,7 +63,7 @@ class ApplyMacroDialog : public wxDialogWrapper {
    wxString mMacroBeingRenamed;
 
 protected:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
    const MacroCommandsCatalog mCatalog;
 
    DECLARE_EVENT_TABLE()
@@ -73,7 +73,7 @@ class MacrosWindow final : public ApplyMacroDialog
 {
 public:
    MacrosWindow(
-      wxWindow * parent, AudacityProject &project, bool bExpanded=true);
+      wxWindow * parent, RustacityProject &project, bool bExpanded=true);
    ~MacrosWindow();
    void UpdateDisplay( bool bExpanded );
 
@@ -122,7 +122,7 @@ private:
    void InsertCommandAt(int item);
    bool SaveChanges();
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    wxButton *mRemove;
    wxButton *mRename;

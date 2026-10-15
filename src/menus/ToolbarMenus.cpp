@@ -1,4 +1,4 @@
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include "../Menus.h"
 #include "../ProjectSettings.h"
@@ -29,9 +29,9 @@ void OnResetToolBars(const CommandContext &context)
 
 } // namespace
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static ToolbarActions::Handler instance;
    return instance;
 };
@@ -45,7 +45,7 @@ using namespace MenuTable;
 
 auto ToolbarCheckFn( int toolbarId ) -> CommandListEntry::CheckFn
 {
-   return [toolbarId](AudacityProject &project){
+   return [toolbarId](RustacityProject &project){
       auto &toolManager = ToolManager::Get( project );
       return toolManager.IsVisible(toolbarId);
    };

@@ -1,10 +1,10 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectSettings.cpp
 
-Paul Licameli split from AudacityProject.cpp
+Paul Licameli split from RustacityProject.cpp
 
 **********************************************************************/
 
@@ -20,7 +20,7 @@ Paul Licameli split from AudacityProject.cpp
 wxDEFINE_EVENT(EVT_PROJECT_SETTINGS_CHANGE, wxCommandEvent);
 
 namespace {
-   void Notify( AudacityProject &project, ProjectSettings::EventCode code )
+   void Notify( RustacityProject &project, ProjectSettings::EventCode code )
    {
       wxCommandEvent e{ EVT_PROJECT_SETTINGS_CHANGE };
       e.SetInt( static_cast<int>( code ) );
@@ -28,26 +28,26 @@ namespace {
    }
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory
+static const RustacityProject::AttachedObjects::RegisteredFactory
 sProjectSettingsKey{
-  []( AudacityProject &project ){
+  []( RustacityProject &project ){
      auto result = std::make_shared< ProjectSettings >( project );
      return result;
    }
 };
 
-ProjectSettings &ProjectSettings::Get( AudacityProject &project )
+ProjectSettings &ProjectSettings::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< ProjectSettings >(
       sProjectSettingsKey );
 }
 
-const ProjectSettings &ProjectSettings::Get( const AudacityProject &project )
+const ProjectSettings &ProjectSettings::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-ProjectSettings::ProjectSettings(AudacityProject &project)
+ProjectSettings::ProjectSettings(RustacityProject &project)
    : mProject{ project }
    , mSelectionFormat{ NumericTextCtrl::LookupFormat(
       NumericConverter::TIME,

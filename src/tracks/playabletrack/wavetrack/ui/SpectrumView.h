@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 SpectrumView.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from WaveTrackView.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SPECTRUM_VIEW__
-#define __AUDACITY_SPECTRUM_VIEW__
+#ifndef __RUSTACITY_SPECTRUM_VIEW__
+#define __RUSTACITY_SPECTRUM_VIEW__
 
 #include "WaveTrackView.h" // to inherit
 
@@ -42,7 +42,7 @@ private:
 
    std::vector<UIHandlePtr> DetailedHitTest(
       const TrackPanelMouseState &state,
-      const AudacityProject *pProject, int currentTool, bool bMultiTool )
+      const RustacityProject *pProject, int currentTool, bool bMultiTool )
       override;
 
 protected:

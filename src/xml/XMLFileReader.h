@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   XMLFileReader.h
 
@@ -8,7 +8,7 @@
 
 **********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include <vector>
 #include "expat.h"
@@ -16,7 +16,7 @@
 #include "XMLTagHandler.h"
 #include "Internat.h" // for TranslatableString
 
-class AUDACITY_DLL_API XMLFileReader final {
+class RUSTACITY_DLL_API XMLFileReader final {
  public:
    XMLFileReader();
    ~XMLFileReader();

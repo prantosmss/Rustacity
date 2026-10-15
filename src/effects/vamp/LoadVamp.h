@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LoadVamp.h
 
@@ -8,15 +8,15 @@
 
 **********************************************************************/
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 
 #if defined(USE_VAMP)
 
 #include <memory>
 
-#include "audacity/ModuleInterface.h"
-#include "audacity/EffectInterface.h"
-#include "audacity/PluginInterface.h"
+#include "rustacity/ModuleInterface.h"
+#include "rustacity/EffectInterface.h"
+#include "rustacity/PluginInterface.h"
 
 #include <vamp-hostsdk/PluginLoader.h>
 

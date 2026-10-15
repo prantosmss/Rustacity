@@ -6,7 +6,7 @@
 
 **********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include <wx/defs.h>
 
@@ -33,10 +33,10 @@
 #include "effects/EffectManager.h"
 #include "effects/EffectUI.h"
 #include "effects/nyquist/Nyquist.h"
-#include "../images/AudacityLogo.xpm"
+#include "../images/RustacityLogo.xpm"
 #include "../../src/commands/CommandContext.h"
 #include "../../src/commands/CommandManager.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 
 #include "NyqBench.h"
 
@@ -141,7 +141,7 @@ and replace the main project window with our own wxFrame.
 */
 
 namespace {
-CommandHandlerObject &findme(AudacityProject&)
+CommandHandlerObject &findme(RustacityProject&)
 {
    return *NyqBench::GetBench();
 }
@@ -178,7 +178,7 @@ extern "C"
    {
       // For now, the versions must match exactly for Audacity to 
       // agree to load the module.
-      return AUDACITY_VERSION_STRING;
+      return RUSTACITY_VERSION_STRING;
    }
 
    extern int DLL_API ModuleDispatch(ModuleDispatchTypes type);
@@ -732,7 +732,7 @@ NyqBench::NyqBench(wxWindow * parent)
    mShowCode = (gPrefs->Read(wxT("NyqBench/ShowScript"), true) != 0);
    mShowOutput = (gPrefs->Read(wxT("NyqBench/ShowOutput"), true) != 0);
 
-   SetIcon(wxICON(AudacityLogo));
+   SetIcon(wxICON(RustacityLogo));
    SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE));
    ShuttleGui S(this, eIsCreating);
    PopulateOrExchange(S);
@@ -1093,7 +1093,7 @@ void NyqBench::OnSave(wxCommandEvent & e)
 
    if (!mScript->SaveFile(mPath.GetFullPath()))
    {
-      AudacityMessageBox(XO("Script was not saved."),
+      RustacityMessageBox(XO("Script was not saved."),
                    XO("Warning"),
                    wxICON_EXCLAMATION,
                    this);
@@ -1123,7 +1123,7 @@ void NyqBench::OnSaveAs(wxCommandEvent & e)
 
    if (!mScript->SaveFile(mPath.GetFullPath()))
    {
-      AudacityMessageBox(XO("Script was not saved."),
+      RustacityMessageBox(XO("Script was not saved."),
                    XO("Warning"),
                    wxICON_EXCLAMATION,
                    this);
@@ -1395,7 +1395,7 @@ void NyqBench::OnGo(wxCommandEvent & e)
    mEffect->SetCommand(mScript->GetValue());
    mEffect->RedirectOutput();
 
-   AudacityProject *p = GetActiveProject();
+   RustacityProject *p = GetActiveProject();
    wxASSERT(p != NULL);
 
    if (p) {
@@ -1498,7 +1498,7 @@ void NyqBench::OnFindDialog(wxFindDialogEvent & e)
    }
 
    if (pos == wxString::npos) {
-      AudacityMessageBox(XO("No matches found"),
+      RustacityMessageBox(XO("No matches found"),
                    XO("Nyquist Effect Workbench"),
                    wxOK | wxCENTER,
                    e.GetDialog());
@@ -1587,7 +1587,7 @@ void NyqBench::OnViewUpdate(wxUpdateUIEvent & e)
 
 void NyqBench::OnRunUpdate(wxUpdateUIEvent & e)
 {
-   AudacityProject *p = GetActiveProject();
+   RustacityProject *p = GetActiveProject();
    wxToolBar *tbar = GetToolBar();
    wxMenuBar *mbar = GetMenuBar();
 
@@ -1636,7 +1636,7 @@ bool NyqBench::Validate()
 {
    if (mScript->GetLastPosition() > 0 && mScript->IsModified()) {
       int ans;
-      ans = AudacityMessageBox(XO("Code has been modified. Are you sure?"),
+      ans = RustacityMessageBox(XO("Code has been modified. Are you sure?"),
                          XO("Warning"),
                          wxYES_NO | wxICON_QUESTION,
                          this);

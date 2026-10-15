@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 UIHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli
 
 **********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "UIHandle.h"
 
 #include "RefreshCode.h"
@@ -17,7 +17,7 @@ UIHandle::~UIHandle()
 {
 }
 
-void UIHandle::Enter(bool, AudacityProject *)
+void UIHandle::Enter(bool, RustacityProject *)
 {
 }
 
@@ -36,7 +36,7 @@ bool UIHandle::HasEscape() const
    return false;
 }
 
-bool UIHandle::Escape(AudacityProject *)
+bool UIHandle::Escape(RustacityProject *)
 {
    return false;
 }
@@ -46,6 +46,6 @@ bool UIHandle::StopsOnKeystroke()
    return false;
 }
 
-void UIHandle::OnProjectChange(AudacityProject *)
+void UIHandle::OnProjectChange(RustacityProject *)
 {
 }

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   NoiseReduction.cpp
 
@@ -36,7 +36,7 @@
 *//****************************************************************//**
 */
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "NoiseReduction.h"
 
 #include "../Experimental.h"
@@ -51,7 +51,7 @@
 #include "../RealFFTf.h"
 
 #include "../WaveTrack.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/valnum.h"
 
 #include <algorithm>

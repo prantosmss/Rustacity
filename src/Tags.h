@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Tags.h
 
@@ -26,10 +26,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TAGS__
-#define __AUDACITY_TAGS__
+#ifndef __RUSTACITY_TAGS__
+#define __RUSTACITY_TAGS__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include "xml/XMLTagHandler.h"
 
@@ -40,7 +40,7 @@
 
 #include <memory>
 #include <unordered_map>
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class wxArrayString;
 class wxComboBox;
@@ -49,7 +49,7 @@ class wxGridCellStringRenderer;
 class wxGridEvent;
 class wxTextCtrl;
 
-class AudacityProject;
+class RustacityProject;
 class Grid;
 class ShuttleGui;
 class TagsEditorDialog;
@@ -67,7 +67,7 @@ using TagMap = std::unordered_map< wxString, wxString >;
 #define TAG_SOFTWARE wxT("Software")
 #define TAG_COPYRIGHT wxT("Copyright")
 
-class AUDACITY_DLL_API Tags final
+class RUSTACITY_DLL_API Tags final
    : public XMLTagHandler
    , public std::enable_shared_from_this< Tags >
    , public ClientData::Base
@@ -75,11 +75,11 @@ class AUDACITY_DLL_API Tags final
 
  public:
 
-   static Tags &Get( AudacityProject &project );
-   static const Tags &Get( const AudacityProject &project );
+   static Tags &Get( RustacityProject &project );
+   static const Tags &Get( const RustacityProject &project );
    // Returns reference to *tags
    static Tags &Set(
-      AudacityProject &project, const std::shared_ptr<Tags> &tags );
+      RustacityProject &project, const std::shared_ptr<Tags> &tags );
 
    Tags();  // constructor
    Tags( const Tags& ) = default;

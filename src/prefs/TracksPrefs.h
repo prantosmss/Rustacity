@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TracksPrefs.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACKS_PREFS__
-#define __AUDACITY_TRACKS_PREFS__
+#ifndef __RUSTACITY_TRACKS_PREFS__
+#define __RUSTACITY_TRACKS_PREFS__
 
 //#include <wx/defs.h>
 

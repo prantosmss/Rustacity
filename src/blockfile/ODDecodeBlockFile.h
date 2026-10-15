@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODDecodeBlockFile.h
 
@@ -24,8 +24,8 @@ Also, see ODPCMAliasBlockFile for a similar file.
 
 
 
-#ifndef __AUDACITY_ODDecodeBlockFile__
-#define __AUDACITY_ODDecodeBlockFile__
+#ifndef __RUSTACITY_ODDecodeBlockFile__
+#define __RUSTACITY_ODDecodeBlockFile__
 
 #include "SimpleBlockFile.h"
 #include <wx/atomic.h> // member variable

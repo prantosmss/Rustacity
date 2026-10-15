@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   EffectManager.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECTMANAGER__
-#define __AUDACITY_EFFECTMANAGER__
+#ifndef __RUSTACITY_EFFECTMANAGER__
+#define __RUSTACITY_EFFECTMANAGER__
 
 #include "../Experimental.h"
 
@@ -18,11 +18,11 @@
 #include <vector>
 
 #include <unordered_map>
-#include "audacity/EffectInterface.h"
-#include "audacity/Types.h"
+#include "rustacity/EffectInterface.h"
+#include "rustacity/Types.h"
 
-class AudacityCommand;
-class AudacityProject;
+class RustacityCommand;
+class RustacityProject;
 class CommandContext;
 class CommandMessageTarget;
 class ComponentInterfaceSymbol;
@@ -34,18 +34,18 @@ class wxString;
 typedef wxString PluginID;
 
 using EffectMap = std::unordered_map<wxString, Effect *>;
-using AudacityCommandMap = std::unordered_map<wxString, AudacityCommand *>;
+using RustacityCommandMap = std::unordered_map<wxString, RustacityCommand *>;
 using EffectOwnerMap = std::unordered_map< wxString, std::shared_ptr<Effect> >;
 
 #if defined(EXPERIMENTAL_EFFECTS_RACK)
 class EffectRack;
 #endif
-class AudacityCommand;
+class RustacityCommand;
 
 
 class NotifyingSelectedRegion;
 
-class AUDACITY_DLL_API EffectManager
+class RUSTACITY_DLL_API EffectManager
 {
 public:
 
@@ -138,10 +138,10 @@ public:
    Effect *GetEffect(const PluginID & ID);
 
 private:
-   AudacityCommand *GetAudacityCommand(const PluginID & ID);
+   RustacityCommand *GetAudacityCommand(const PluginID & ID);
 
    EffectMap mEffects;
-   AudacityCommandMap mCommands;
+   RustacityCommandMap mCommands;
    EffectOwnerMap mHostEffects;
 
    int mNumEffects;

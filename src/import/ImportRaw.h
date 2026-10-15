@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportRaw.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_IMPORT_RAW__
-#define __AUDACITY_IMPORT_RAW__
+#ifndef __RUSTACITY_IMPORT_RAW__
+#define __RUSTACITY_IMPORT_RAW__
 
 #include "../MemoryX.h"
 

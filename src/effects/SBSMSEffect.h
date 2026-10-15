@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SBSMSEffect.h
 
@@ -11,10 +11,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_SBSMS__
-#define __AUDACITY_EFFECT_SBSMS__
+#ifndef __RUSTACITY_EFFECT_SBSMS__
+#define __RUSTACITY_EFFECT_SBSMS__
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #if USE_SBSMS
 

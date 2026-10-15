@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   QualityPrefs.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_QUALITY_PREFS__
-#define __AUDACITY_QUALITY_PREFS__
+#ifndef __RUSTACITY_QUALITY_PREFS__
+#define __RUSTACITY_QUALITY_PREFS__
 
 #include <vector>
 #include <wx/defs.h>

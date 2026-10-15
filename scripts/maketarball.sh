@@ -179,7 +179,7 @@ else
    exit 1
 fi
 
-if [ ! -f "src/Audacity.h" ] ; then
+if [ ! -f "src/Rustacity.h" ] ; then
    echo "$0 must be run from top-level audacity directory"
    exit 1
 fi
@@ -268,11 +268,11 @@ eval $(cpp -E <<CPPEOF | sed -e 's/wxT("//g' \
                              -e 's/$/"/' \
                              -e '/^v_/p' \
                              -e 'd'
-#include "src/Audacity.h"
-v_major=AUDACITY_VERSION
-v_minor=AUDACITY_RELEASE
-v_micro=AUDACITY_REVISION
-v_suffix=AUDACITY_SUFFIX
+#include "src/Rustacity.h"
+v_major=RUSTACITY_VERSION
+v_minor=RUSTACITY_RELEASE
+v_micro=RUSTACITY_REVISION
+v_suffix=RUSTACITY_SUFFIX
 CPPEOF
 )
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TimeDialog.cpp
 
@@ -13,7 +13,7 @@
 
 *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "TimeDialog.h"
 
 #include <wx/defs.h>

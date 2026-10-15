@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   FileNames.h
 
@@ -8,14 +8,14 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_FILE_NAMES__
-#define __AUDACITY_FILE_NAMES__
+#ifndef __RUSTACITY_FILE_NAMES__
+#define __RUSTACITY_FILE_NAMES__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include <wx/dir.h> // for wxDIR_FILES
 #include <wx/string.h> // function return value
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 #include "MemoryX.h"
 
 class wxFileName;
@@ -43,7 +43,7 @@ namespace FileNames
    // Frequently used types
    extern const FileType
         AllFiles // *
-      , AudacityProjects // *.aup
+      , RustacityProjects // *.aup
       , DynamicLibraries // depends on the operating system
       , TextFiles // *.txt
       , XMLFiles; // *.xml, *.XML
@@ -77,10 +77,10 @@ namespace FileNames
     *
     * On Unix this will include the directory Audacity was installed into,
     * plus the current user's .audacity-data/Plug-Ins directory.  Additional
-    * directories can be specified using the AUDACITY_PATH environment
+    * directories can be specified using the RUSTACITY_PATH environment
     * variable.  On Windows or Mac OS, this will include the directory
     * which contains the Audacity program. */
-   const FilePaths &AudacityPathList();
+   const FilePaths &RustacityPathList();
    void SetAudacityPathList( FilePaths list );
 
    // originally an ExportMultipleDialog method. Append suffix if newName appears in otherNames.

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportExportPrefs.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_IMPORT_EXPORT_PREFS__
-#define __AUDACITY_IMPORT_EXPORT_PREFS__
+#ifndef __RUSTACITY_IMPORT_EXPORT_PREFS__
+#define __RUSTACITY_IMPORT_EXPORT_PREFS__
 
 #include <wx/defs.h>
 

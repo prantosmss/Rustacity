@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ViewInfo.cpp
 
@@ -148,8 +148,8 @@ void NotifyingSelectedRegion::Notify( bool delayed )
       ProcessEvent( evt );
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-   []( AudacityProject &project ) {
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+   []( RustacityProject &project ) {
       auto result =
          std::make_unique<ViewInfo>(0.0, 1.0, ZoomInfo::GetDefaultZoom());
       project.Bind(EVT_TRACK_PANEL_TIMER,
@@ -159,14 +159,14 @@ static const AudacityProject::AttachedObjects::RegisteredFactory key{
    }
 };
 
-ViewInfo &ViewInfo::Get( AudacityProject &project )
+ViewInfo &ViewInfo::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< ViewInfo >( key );
 }
 
-const ViewInfo &ViewInfo::Get( const AudacityProject &project )
+const ViewInfo &ViewInfo::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
 ViewInfo::ViewInfo(double start, double screenDuration, double pixelsPerSecond)

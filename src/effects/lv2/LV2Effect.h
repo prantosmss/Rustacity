@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LV2Effect.h
 
@@ -9,7 +9,7 @@
 
 *********************************************************************/
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 
 #if USE_LV2
 

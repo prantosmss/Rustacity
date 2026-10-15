@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Phaser
 
@@ -13,8 +13,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_PHASER__
-#define __AUDACITY_EFFECT_PHASER__
+#ifndef __RUSTACITY_EFFECT_PHASER__
+#define __RUSTACITY_EFFECT_PHASER__
 
 #include "Effect.h"
 

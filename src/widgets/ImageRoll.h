@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImageRoll.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_IMAGE_ROLL__
-#define __AUDACITY_IMAGE_ROLL__
+#ifndef __RUSTACITY_IMAGE_ROLL__
+#define __RUSTACITY_IMAGE_ROLL__
 
 #include <vector>
 // #include <wx/dc.h> // for enum wxRasterOperationMode
@@ -94,4 +94,4 @@ class ImageRollPanel final : public wxPanelWrapper
 
 };
 
-#endif // __AUDACITY_IMAGE_ROLL__
+#endif // __RUSTACITY_IMAGE_ROLL__

@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef __AUDACITY_IMPORT_FORWARDS__
-#define __AUDACITY_IMPORT_FORWARDS__
+#ifndef __RUSTACITY_IMPORT_FORWARDS__
+#define __RUSTACITY_IMPORT_FORWARDS__
 
 #include <vector>
 #include "../MemoryX.h"

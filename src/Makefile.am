@@ -1,17 +1,17 @@
-bin_PROGRAMS = audacity
+bin_PROGRAMS = rustacity
 
 desktopdir = $(datadir)/applications
-desktop_DATA = audacity.desktop
+desktop_DATA = rustacity.desktop
 
 mimedir = $(datarootdir)/mime/packages
-dist_mime_DATA = audacity.xml
+dist_mime_DATA = rustacity.xml
 
-check_LTLIBRARIES = libaudacity.la
+check_LTLIBRARIES = librustacity.la
 
-libaudacity_la_CPPFLAGS = $(WX_CXXFLAGS)
-libaudacity_la_LIBADD = $(WX_LIBS)
+librustacity_la_CPPFLAGS = $(WX_CXXFLAGS)
+librustacity_la_LIBADD = $(WX_LIBS)
 
-libaudacity_la_SOURCES = \
+librustacity_la_SOURCES = \
 	BlockFile.cpp \
 	BlockFile.h \
 	DirManager.cpp \
@@ -48,7 +48,7 @@ libaudacity_la_SOURCES = \
 	xml/XMLTagHandler.h \
 	$(NULL)
 
-audacity_CPPFLAGS = \
+rustacity_CPPFLAGS = \
 	-std=c++11 \
 	-Wno-deprecated-declarations \
 	-D__STDC_CONSTANT_MACROS \
@@ -80,11 +80,11 @@ audacity_CPPFLAGS = \
 #  /usr/local/include/wx-2.8/wx/buffer.h:289:9: note: in expansion of macro 'wxCHECK_RET'
 #           wxCHECK_RET( m_bufdata->m_data, wxT("invalid wxMemoryBuffer") );
 #           ^
-audacity_CXXFLAGS = \
+rustacity_CXXFLAGS = \
    -Wno-unused-local-typedefs
 
-audacity_LDFLAGS = -rdynamic
-audacity_LDADD = \
+rustacity_LDFLAGS = -rdynamic
+rustacity_LDADD = \
 	$(EXPAT_LIBS) \
 	$(FILEDIALOG_LIBS) \
 	$(PORTAUDIO_LIBS) \
@@ -95,8 +95,8 @@ audacity_LDADD = \
 	$(WX_LIBS) \
 	$(NULL)
 
-audacity_SOURCES = \
-	$(libaudacity_la_SOURCES) \
+rustacity_SOURCES = \
+	$(librustacity_la_SOURCES) \
 	AboutDialog.cpp \
 	AboutDialog.h \
 	AColor.cpp \
@@ -105,13 +105,13 @@ audacity_SOURCES = \
 	AdornedRulerPanel.h \
 	AllThemeResources.h \
 	AttachedVirtualFunction.h \
-	Audacity.h \
-	AudacityApp.cpp \
-	AudacityApp.h \
-	AudacityException.cpp \
-	AudacityException.h \
-	AudacityLogger.cpp \
-	AudacityLogger.h \
+	Rustacity.h \
+	RustacityApp.cpp \
+	RustacityApp.h \
+	RustacityException.cpp \
+	RustacityException.h \
+	RustacityLogger.cpp \
+	RustacityLogger.h \
 	AudioIO.cpp \
 	AudioIO.h \
 	AudioIOBase.cpp \
@@ -337,8 +337,8 @@ audacity_SOURCES = \
 	wxFileNameWrapper.h \
 	commands/AppCommandEvent.cpp \
 	commands/AppCommandEvent.h \
-	commands/AudacityCommand.cpp \
-	commands/AudacityCommand.h \
+	commands/RustacityCommand.cpp \
+	commands/RustacityCommand.h \
 	commands/BatchEvalCommand.cpp \
 	commands/BatchEvalCommand.h \
 	commands/Command.cpp \
@@ -750,8 +750,8 @@ audacity_SOURCES = \
 	widgets/ASlider.h \
 	widgets/AttachableScrollBar.cpp \
 	widgets/AttachableScrollBar.h \
-	widgets/AudacityMessageBox.cpp \
-	widgets/AudacityMessageBox.h \
+	widgets/RustacityMessageBox.cpp \
+	widgets/RustacityMessageBox.h \
 	widgets/BackedPanel.cpp \
 	widgets/BackedPanel.h \
 	widgets/ErrorDialog.cpp \
@@ -805,18 +805,18 @@ audacity_SOURCES = \
 	$(NULL)
 
 if USE_AUDIO_UNITS
-audacity_CPPFLAGS += $(AUDIOUNITS_CFLAGS)
-audacity_LDADD += $(AUDIOUNITS_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(AUDIOUNITS_CFLAGS)
+rustacity_LDADD += $(AUDIOUNITS_LIBS)
+rustacity_SOURCES += \
 	effects/audiounits/AudioUnitEffect.cpp \
 	effects/audiounits/AudioUnitEffect.h \
 	$(NULL)
 endif
 
 if USE_FFMPEG
-audacity_CPPFLAGS += $(FFMPEG_CFLAGS)
-audacity_LDADD += $(FFMPEG_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(FFMPEG_CFLAGS)
+rustacity_LDADD += $(FFMPEG_LIBS)
+rustacity_SOURCES += \
 	export/ExportFFmpeg.cpp \
 	export/ExportFFmpegDialogs.cpp \
 	export/ExportFFmpegDialogs.h \
@@ -825,17 +825,17 @@ audacity_SOURCES += \
 endif
 
 if USE_GSTREAMER
-audacity_CPPFLAGS += $(GSTREAMER_CFLAGS)
-audacity_LDADD += $(GSTREAMER_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(GSTREAMER_CFLAGS)
+rustacity_LDADD += $(GSTREAMER_LIBS)
+rustacity_SOURCES += \
 	import/ImportGStreamer.cpp \
 	$(NULL)
 endif
 
 if USE_LADSPA
-audacity_CPPFLAGS += $(LADSPA_CFLAGS)
-audacity_LDADD += $(LADSPA_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(LADSPA_CFLAGS)
+rustacity_LDADD += $(LADSPA_LIBS)
+rustacity_SOURCES += \
 	effects/ladspa/ladspa.h \
 	effects/ladspa/LadspaEffect.cpp \
 	effects/ladspa/LadspaEffect.h \
@@ -843,33 +843,33 @@ audacity_SOURCES += \
 endif
 
 if USE_LAME
-audacity_CPPFLAGS += $(LAME_CFLAGS)
-audacity_LDADD += $(LAME_LIBS)
+rustacity_CPPFLAGS += $(LAME_CFLAGS)
+rustacity_LDADD += $(LAME_LIBS)
 endif
 
 if USE_LIBFLAC
-audacity_CPPFLAGS += $(FLAC_CFLAGS)
-audacity_LDADD += $(FLAC_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(FLAC_CFLAGS)
+rustacity_LDADD += $(FLAC_LIBS)
+rustacity_SOURCES += \
 	ondemand/ODDecodeFlacTask.cpp \
 	ondemand/ODDecodeFlacTask.h \
 	$(NULL)
 endif
 
 if USE_LIBID3TAG
-audacity_CPPFLAGS += $(ID3TAG_CFLAGS)
-audacity_LDADD += $(ID3TAG_LIBS)
+rustacity_CPPFLAGS += $(ID3TAG_CFLAGS)
+rustacity_LDADD += $(ID3TAG_LIBS)
 endif
 
 if USE_LIBMAD
-audacity_CPPFLAGS += $(LIBMAD_CFLAGS)
-audacity_LDADD += $(LIBMAD_LIBS)
+rustacity_CPPFLAGS += $(LIBMAD_CFLAGS)
+rustacity_LDADD += $(LIBMAD_LIBS)
 endif
 
 if USE_LIBNYQUIST
-audacity_CPPFLAGS += $(LIBNYQUIST_CFLAGS)
-audacity_LDADD += $(LIBNYQUIST_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(LIBNYQUIST_CFLAGS)
+rustacity_LDADD += $(LIBNYQUIST_LIBS)
+rustacity_SOURCES += \
 	effects/nyquist/LoadNyquist.cpp \
 	effects/nyquist/LoadNyquist.h \
 	effects/nyquist/Nyquist.cpp \
@@ -878,24 +878,24 @@ audacity_SOURCES += \
 endif
 
 if USE_LIBSOUNDTOUCH
-audacity_CPPFLAGS += $(SOUNDTOUCH_CFLAGS)
-audacity_LDADD += $(SOUNDTOUCH_LIBS)
+rustacity_CPPFLAGS += $(SOUNDTOUCH_CFLAGS)
+rustacity_LDADD += $(SOUNDTOUCH_LIBS)
 endif
 
 if USE_LIBTWOLAME
-audacity_CPPFLAGS += $(LIBTWOLAME_CFLAGS)
-audacity_LDADD += $(LIBTWOLAME_LIBS)
+rustacity_CPPFLAGS += $(LIBTWOLAME_CFLAGS)
+rustacity_LDADD += $(LIBTWOLAME_LIBS)
 endif
 
 if USE_LIBVORBIS
-audacity_CPPFLAGS += $(LIBVORBIS_CFLAGS)
-audacity_LDADD += $(LIBVORBIS_LIBS)
+rustacity_CPPFLAGS += $(LIBVORBIS_CFLAGS)
+rustacity_LDADD += $(LIBVORBIS_LIBS)
 endif
 
 if USE_LV2
-audacity_CPPFLAGS += $(LV2_CFLAGS)
-audacity_LDADD += $(LV2_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(LV2_CFLAGS)
+rustacity_LDADD += $(LV2_LIBS)
+rustacity_SOURCES += \
 	effects/lv2/LoadLV2.cpp \
 	effects/lv2/LoadLV2.h \
 	effects/lv2/LV2Effect.cpp \
@@ -909,9 +909,9 @@ audacity_SOURCES += \
 endif
 
 if USE_PORTSMF
-audacity_CPPFLAGS += $(PORTSMF_CFLAGS)
-audacity_LDADD += $(PORTSMF_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(PORTSMF_CFLAGS)
+rustacity_LDADD += $(PORTSMF_LIBS)
+rustacity_SOURCES += \
 	NoteTrack.cpp \
 	NoteTrack.h \
 	import/ImportMIDI.cpp \
@@ -920,27 +920,27 @@ audacity_SOURCES += \
 endif
 
 if USE_PORTMIDI
-audacity_CPPFLAGS += $(PORTMIDI_CFLAGS)
-audacity_LDADD += $(PORTMIDI_LIBS)
+rustacity_CPPFLAGS += $(PORTMIDI_CFLAGS)
+rustacity_LDADD += $(PORTMIDI_LIBS)
 endif
 
 if USE_QUICKTIME
-audacity_CPPFLAGS += $(QUICKTIME_CFLAGS)
-audacity_LDADD += $(QUICKTIME_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(QUICKTIME_CFLAGS)
+rustacity_LDADD += $(QUICKTIME_LIBS)
+rustacity_SOURCES += \
 	import/ImportQT.cpp \
 	$(NULL)
 endif
 
 if USE_SBSMS
-audacity_CPPFLAGS += $(SBSMS_CFLAGS)
-audacity_LDADD += $(SBSMS_LIBS)
+rustacity_CPPFLAGS += $(SBSMS_CFLAGS)
+rustacity_LDADD += $(SBSMS_LIBS)
 endif
 
 if USE_VAMP
-audacity_CPPFLAGS += $(VAMP_CFLAGS)
-audacity_LDADD += $(VAMP_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(VAMP_CFLAGS)
+rustacity_LDADD += $(VAMP_LIBS)
+rustacity_SOURCES += \
 	effects/vamp/LoadVamp.cpp \
 	effects/vamp/LoadVamp.h \
 	effects/vamp/VampEffect.cpp \
@@ -949,9 +949,9 @@ audacity_SOURCES += \
 endif
 
 if USE_VST
-audacity_CPPFLAGS += $(VST_CFLAGS)
-audacity_LDADD += $(VST_LIBS)
-audacity_SOURCES += \
+rustacity_CPPFLAGS += $(VST_CFLAGS)
+rustacity_LDADD += $(VST_LIBS)
+rustacity_SOURCES += \
 	effects/VST/aeffectx.h \
 	effects/VST/VSTEffect.cpp \
 	effects/VST/VSTEffect.h \
@@ -961,9 +961,9 @@ audacity_SOURCES += \
 endif
 
 # TODO: Check *.cpp and *.h files if they are needed.
-EXTRA_DIST = audacity.desktop.in xml/audacityproject.dtd \
-	AudacityHeaders.cpp \
-	AudacityHeaders.h \
+EXTRA_DIST = rustacity.desktop.in xml/audacityproject.dtd \
+	RustacityHeaders.cpp \
+	RustacityHeaders.h \
 	CrossFade.cpp \
 	CrossFade.h \
 	effects/ScoreAlignDialog.cpp \

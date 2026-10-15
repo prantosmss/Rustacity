@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   HelpText.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_HELP_TEXT__
-#define __AUDACITY_HELP_TEXT__
+#ifndef __RUSTACITY_HELP_TEXT__
+#define __RUSTACITY_HELP_TEXT__
 
 class TranslatableString;
 class wxString;

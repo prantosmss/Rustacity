@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ImportGStreamer.cpp
 
@@ -23,7 +23,7 @@ Licensed under the GNU General Public License v2 or later
 
 *//*******************************************************************/
 
-#include "../Audacity.h"	// needed before GStreamer.h // for USE_* macros
+#include "../Rustacity.h"	// needed before GStreamer.h // for USE_* macros
 
 #if defined(USE_GSTREAMER)
 #include "ImportGStreamer.h"
@@ -248,7 +248,7 @@ public:
 
    ///! Probes the file and opens it if appropriate
    std::unique_ptr<ImportFileHandle> Open(
-      const wxString &Filename, AudacityProject*) override;
+      const wxString &Filename, RustacityProject*) override;
 };
 
 // ============================================================================
@@ -410,7 +410,7 @@ GStreamerImportPlugin::GetSupportedExtensions()
 // ----------------------------------------------------------------------------
 // Open the file and return an importer "file handle"
 std::unique_ptr<ImportFileHandle> GStreamerImportPlugin::Open(
-   const wxString &filename, AudacityProject*)
+   const wxString &filename, RustacityProject*)
 {
    auto handle = std::make_unique<GStreamerImportFileHandle>(filename);
 
@@ -943,7 +943,7 @@ GStreamerImportFileHandle::Init()
    // Add the decoder to the pipeline
    if (!gst_bin_add(GST_BIN(mPipeline.get()), mDec))
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to add decoder to pipeline"),
          XO("GStreamer Importer"));
 
@@ -955,7 +955,7 @@ GStreamerImportFileHandle::Init()
    GstStateChangeReturn state = gst_element_set_state(mPipeline.get(), GST_STATE_PAUSED);
    if (state == GST_STATE_CHANGE_FAILURE)
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to set stream state to paused."),
          XO("GStreamer Importer"));
       return false;
@@ -1085,7 +1085,7 @@ GStreamerImportFileHandle::Import(TrackFactory *trackFactory,
    // Can't do much if we don't have any streams to process
    if (!haveStreams)
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("File doesn't contain any audio streams."),
          XO("GStreamer Importer"));
       return ProgressResult::Failed;
@@ -1095,7 +1095,7 @@ GStreamerImportFileHandle::Import(TrackFactory *trackFactory,
    GstStateChangeReturn state = gst_element_set_state(mPipeline.get(), GST_STATE_PLAYING);
    if (state == GST_STATE_CHANGE_FAILURE)
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to import file, state change failed."),
          XO("GStreamer Importer"));
       return ProgressResult::Failed;
@@ -1212,7 +1212,7 @@ GStreamerImportFileHandle::ProcessBusMessage(bool & success)
                debug ? wxString::FromUTF8(debug.get()) : wxT(""));
             auto msg = XO("GStreamer Error: %s").Format( m );
 #if defined(_DEBUG)
-            AudacityMessageBox( msg );
+            RustacityMessageBox( msg );
 #else
             wxLogMessage( msg.Debug() );
 #endif

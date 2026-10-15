@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   FileNames.cpp
 
@@ -20,7 +20,7 @@ used throughout Audacity into this one place.
 
 *//********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "FileNames.h"
 
 #include "Experimental.h"
@@ -36,7 +36,7 @@ used throughout Audacity into this one place.
 #include "Internat.h"
 #include "PlatformCompatibility.h"
 #include "wxFileNameWrapper.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "../lib-src/FileDialog/FileDialog.h"
 
 #if defined(__WXMAC__) || defined(__WXGTK__)
@@ -53,7 +53,7 @@ const FileNames::FileType
      FileNames::AllFiles{ XO("All files"), { wxT("") } }
      /* i18n-hint an Audacity project is the state of the program, stored as
      files that can be reopened to resume the session later */
-   , FileNames::AudacityProjects{ XO("Audacity projects"), { wxT("aup") }, true }
+   , FileNames::RustacityProjects{ XO("Audacity projects"), { wxT("aup") }, true }
    , FileNames::DynamicLibraries{
 #if defined(__WXMSW__)
       XO("Dynamically Linked Libraries"), { wxT("dll") }, true
@@ -264,7 +264,7 @@ FilePath FileNames::DataDir()
       // the prefs are stored in the user data dir provided by the OS.
       wxFileName exePath(PlatformCompatibility::GetExecutablePath());
 #if defined(__WXMAC__)
-      // Path ends for example in "Audacity.app/Contents/MacOSX"
+      // Path ends for example in "Rustacity.app/Contents/MacOSX"
       //exePath.RemoveLastDir();
       //exePath.RemoveLastDir();
       // just remove the MacOSX part.
@@ -298,16 +298,16 @@ FilePath FileNames::HtmlHelpDir()
 {
 #if defined(__WXMAC__)
    wxFileName exePath(PlatformCompatibility::GetExecutablePath());
-      // Path ends for example in "Audacity.app/Contents/MacOSX"
+      // Path ends for example in "Rustacity.app/Contents/MacOSX"
       //exePath.RemoveLastDir();
       //exePath.RemoveLastDir();
       // just remove the MacOSX part.
       exePath.RemoveLastDir();
 
-   //for mac this puts us within the .app: Audacity.app/Contents/SharedSupport/
+   //for mac this puts us within the .app: Rustacity.app/Contents/SharedSupport/
    return wxFileName( exePath.GetPath()+wxT("/help/manual"), wxEmptyString ).GetFullPath();
 #else
-   //linux goes into /*prefix*/share/audacity/
+   //linux goes into /*prefix*/share/rustacity/
    //windows (probably) goes into the dir containing the .exe
    wxString dataDir = FileNames::LowerCaseAppNameInPath( wxStandardPaths::Get().GetDataDir());
    return wxFileName( dataDir+wxT("/help/manual"), wxEmptyString ).GetFullPath();
@@ -357,7 +357,7 @@ FilePath FileNames::BaseDir()
 #if defined(__WXMAC__)
    baseDir = PlatformCompatibility::GetExecutablePath();
 
-   // Path ends for example in "Audacity.app/Contents/MacOSX"
+   // Path ends for example in "Rustacity.app/Contents/MacOSX"
    //baseDir.RemoveLastDir();
    //baseDir.RemoveLastDir();
    // just remove the MacOSX part.
@@ -367,7 +367,7 @@ FilePath FileNames::BaseDir()
    // the "Debug" directory in debug builds.
    baseDir = PlatformCompatibility::GetExecutablePath();
 #else
-   // Linux goes into /*prefix*/share/audacity/
+   // Linux goes into /*prefix*/share/rustacity/
    baseDir = FileNames::LowerCaseAppNameInPath(wxStandardPaths::Get().GetDataDir());
 #endif
 
@@ -638,7 +638,7 @@ bool FileNames::IsMidi(const FilePath &fName)
 
 static FilePaths sAudacityPathList;
 
-const FilePaths &FileNames::AudacityPathList()
+const FilePaths &FileNames::RustacityPathList()
 {
    return sAudacityPathList;
 }
@@ -720,7 +720,7 @@ char *FileNames::VerifyFilename(const wxString &s, bool input)
       wxFileName ff(name);
       FileExtension ext;
       while ((char *) (const char *)name.mb_str() == NULL) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO(
 "The specified filename could not be converted due to Unicode character use."));
 

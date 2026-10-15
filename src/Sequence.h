@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Sequence.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SEQUENCE__
-#define __AUDACITY_SEQUENCE__
+#ifndef __RUSTACITY_SEQUENCE__
+#define __RUSTACITY_SEQUENCE__
 
 #include <vector>
 
@@ -17,7 +17,7 @@
 #include "xml/XMLTagHandler.h"
 #include "ondemand/ODTaskThread.h"
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class BlockFile;
 using BlockFilePtr = std::shared_ptr<BlockFile>;
@@ -294,5 +294,5 @@ private:
 
 };
 
-#endif // __AUDACITY_SEQUENCE__
+#endif // __RUSTACITY_SEQUENCE__
 

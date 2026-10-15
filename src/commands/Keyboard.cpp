@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Keyboard.cpp
 
@@ -9,7 +9,7 @@
 
 **********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Keyboard.h"
 
 #include <wx/event.h>

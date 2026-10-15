@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AudioIOListener.h
 
@@ -10,14 +10,14 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_AUDIO_IO_LISTENER__
-#define __AUDACITY_AUDIO_IO_LISTENER__
+#ifndef __RUSTACITY_AUDIO_IO_LISTENER__
+#define __RUSTACITY_AUDIO_IO_LISTENER__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 class AutoSaveFile;
 
-class AUDACITY_DLL_API AudioIOListener /* not final */ {
+class RUSTACITY_DLL_API AudioIOListener /* not final */ {
 public:
    AudioIOListener() {}
    virtual ~AudioIOListener() {}

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 EnvelopeHandle.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_ENVELOPE_HANDLE__
-#define __AUDACITY_ENVELOPE_HANDLE__
+#ifndef __RUSTACITY_ENVELOPE_HANDLE__
+#define __RUSTACITY_ENVELOPE_HANDLE__
 
 #include "../../UIHandle.h"
 
@@ -32,7 +32,7 @@ class EnvelopeHandle final : public UIHandle
    static UIHandlePtr HitEnvelope
       (std::weak_ptr<EnvelopeHandle> &holder,
        const wxMouseState &state, const wxRect &rect,
-       const AudacityProject *pProject,
+       const RustacityProject *pProject,
        Envelope *envelope, float zoomMin, float zoomMax,
        bool dB, float dBRange, bool timeTrack);
 
@@ -47,31 +47,31 @@ public:
    static UIHandlePtr TimeTrackHitTest
       (std::weak_ptr<EnvelopeHandle> &holder,
        const wxMouseState &state, const wxRect &rect,
-       const AudacityProject *pProject, const std::shared_ptr<TimeTrack> &tt);
+       const RustacityProject *pProject, const std::shared_ptr<TimeTrack> &tt);
    static UIHandlePtr WaveTrackHitTest
       (std::weak_ptr<EnvelopeHandle> &holder,
        const wxMouseState &state, const wxRect &rect,
-       const AudacityProject *pProject, const std::shared_ptr<WaveTrack> &wt);
+       const RustacityProject *pProject, const std::shared_ptr<WaveTrack> &wt);
 
    Envelope *GetEnvelope() const { return mEnvelope; }
 
-   void Enter(bool forward, AudacityProject *) override;
+   void Enter(bool forward, RustacityProject *) override;
 
    Result Click
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    Result Drag
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    HitTestPreview Preview
-      (const TrackPanelMouseState &state, AudacityProject *pProject)
+      (const TrackPanelMouseState &state, RustacityProject *pProject)
       override;
 
    Result Release
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject,
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject,
       wxWindow *pParent) override;
 
-   Result Cancel(AudacityProject *pProject) override;
+   Result Cancel(RustacityProject *pProject) override;
 
    bool StopsOnKeystroke() override { return true; }
 

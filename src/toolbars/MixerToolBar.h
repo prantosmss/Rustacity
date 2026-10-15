@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MixerToolbar.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_MIXER_TOOLBAR__
-#define __AUDACITY_MIXER_TOOLBAR__
+#ifndef __RUSTACITY_MIXER_TOOLBAR__
+#define __RUSTACITY_MIXER_TOOLBAR__
 
 #include "ToolBar.h"
 
@@ -17,17 +17,17 @@ class wxSize;
 class wxPoint;
 
 class ASlider;
-class AudacityProject;
+class RustacityProject;
 
 class MixerToolBar final : public ToolBar {
 
  public:
 
-   MixerToolBar( AudacityProject &project );
+   MixerToolBar( RustacityProject &project );
    virtual ~MixerToolBar();
 
-   static MixerToolBar &Get( AudacityProject &project );
-   static const MixerToolBar &Get( const AudacityProject &project );
+   static MixerToolBar &Get( RustacityProject &project );
+   static const MixerToolBar &Get( const RustacityProject &project );
 
    void Create(wxWindow * parent) override;
 

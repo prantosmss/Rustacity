@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 NoteTrackVZoomHandle.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_NOTE_TRACK_VZOOM_HANDLE__
-#define __AUDACITY_NOTE_TRACK_VZOOM_HANDLE__
+#ifndef __RUSTACITY_NOTE_TRACK_VZOOM_HANDLE__
+#define __RUSTACITY_NOTE_TRACK_VZOOM_HANDLE__
 
 class wxMouseState;
 class NoteTrack;
@@ -36,23 +36,23 @@ public:
 
    std::shared_ptr<NoteTrack> GetTrack() const { return mpTrack.lock(); }
 
-   void Enter(bool forward, AudacityProject *) override;
+   void Enter(bool forward, RustacityProject *) override;
 
    Result Click
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    Result Drag
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    HitTestPreview Preview
-      (const TrackPanelMouseState &state, AudacityProject *pProject)
+      (const TrackPanelMouseState &state, RustacityProject *pProject)
       override;
 
    Result Release
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject,
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject,
        wxWindow *pParent) override;
 
-   Result Cancel(AudacityProject *pProject) override;
+   Result Cancel(RustacityProject *pProject) override;
 
 private:
    // TrackPanelDrawable implementation

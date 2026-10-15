@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LV2Effect.cpp
 
@@ -9,7 +9,7 @@
 
 **********************************************************************/
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 
 #if defined(USE_LV2)
 
@@ -48,7 +48,7 @@
 
 #include "../../ShuttleGui.h"
 #include "../../widgets/valnum.h"
-#include "../../widgets/AudacityMessageBox.h"
+#include "../../widgets/RustacityMessageBox.h"
 #include "../../widgets/wxPanelWrapper.h"
 #include "../../widgets/NumericTextCtrl.h"
 
@@ -1566,7 +1566,7 @@ bool LV2Effect::PopulateUI(ShuttleGui &S)
    mMaster = InitInstance(mSampleRate);
    if (mMaster == NULL)
    {
-      AudacityMessageBox( XO("Couldn't instantiate effect") );
+      RustacityMessageBox( XO("Couldn't instantiate effect") );
       return false;
    }
 

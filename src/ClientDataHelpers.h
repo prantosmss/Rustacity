@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ClientDataHelpers.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_CLIENT_DATA_HELPERS__
-#define __AUDACITY_CLIENT_DATA_HELPERS__
+#ifndef __RUSTACITY_CLIENT_DATA_HELPERS__
+#define __RUSTACITY_CLIENT_DATA_HELPERS__
 
 #include <memory>
 #include <mutex>

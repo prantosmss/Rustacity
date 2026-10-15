@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Project.cpp
 
@@ -9,7 +9,7 @@
 
 *//*******************************************************************/
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "Project.h"
 
 #include "KeyboardCapture.h"
@@ -49,7 +49,7 @@ auto AllProjects::rend() const -> const_reverse_iterator
    return gAudacityProjects.rend();
 }
 
-auto AllProjects::Remove( AudacityProject &project ) -> value_type
+auto AllProjects::Remove( RustacityProject &project ) -> value_type
 {
    ODLocker locker{ &Mutex() };
    auto start = begin(), finish = end(), iter = std::find_if(
@@ -97,20 +97,20 @@ ODLock &AllProjects::Mutex()
    return theMutex;
 };
 
-int AudacityProject::mProjectCounter=0;// global counter.
+int RustacityProject::mProjectCounter=0;// global counter.
 
 /* Define Global Variables */
 //This is a pointer to the currently-active project.
-static AudacityProject *gActiveProject;
+static RustacityProject *gActiveProject;
 //This array holds onto all of the projects currently open
 AllProjects::Container AllProjects::gAudacityProjects;
 
-AUDACITY_DLL_API AudacityProject *GetActiveProject()
+RUSTACITY_DLL_API RustacityProject *GetActiveProject()
 {
    return gActiveProject;
 }
 
-void SetActiveProject(AudacityProject * project)
+void SetActiveProject(RustacityProject * project)
 {
    if ( gActiveProject != project ) {
       gActiveProject = project;
@@ -124,7 +124,7 @@ void SetActiveProject(AudacityProject * project)
 #endif
 }
 
-AudacityProject::AudacityProject()
+RustacityProject::RustacityProject()
 {
    mProjectNo = mProjectCounter++; // Bug 322
    AttachedObjects::BuildAll();
@@ -132,21 +132,21 @@ AudacityProject::AudacityProject()
    // from menu items.
 }
 
-AudacityProject::~AudacityProject()
+RustacityProject::~RustacityProject()
 {
 }
 
-void AudacityProject::SetFrame( wxFrame *pFrame )
+void RustacityProject::SetFrame( wxFrame *pFrame )
 {
    mFrame = pFrame;
 }
 
-void AudacityProject::SetPanel( wxWindow *pPanel )
+void RustacityProject::SetPanel( wxWindow *pPanel )
 {
    mPanel = pPanel;
 }
 
-wxString AudacityProject::GetProjectName() const
+wxString RustacityProject::GetProjectName() const
 {
    wxString name = wxFileNameFromPath(mFileName);
 
@@ -158,7 +158,7 @@ wxString AudacityProject::GetProjectName() const
    return name;
 }
 
-AUDACITY_DLL_API wxFrame &GetProjectFrame( AudacityProject &project )
+RUSTACITY_DLL_API wxFrame &GetProjectFrame( RustacityProject &project )
 {
    auto ptr = project.GetFrame();
    if ( !ptr )
@@ -166,7 +166,7 @@ AUDACITY_DLL_API wxFrame &GetProjectFrame( AudacityProject &project )
    return *ptr;
 }
 
-AUDACITY_DLL_API const wxFrame &GetProjectFrame( const AudacityProject &project )
+RUSTACITY_DLL_API const wxFrame &GetProjectFrame( const RustacityProject &project )
 {
    auto ptr = project.GetFrame();
    if ( !ptr )
@@ -174,7 +174,7 @@ AUDACITY_DLL_API const wxFrame &GetProjectFrame( const AudacityProject &project 
    return *ptr;
 }
 
-AUDACITY_DLL_API wxWindow &GetProjectPanel( AudacityProject &project )
+RUSTACITY_DLL_API wxWindow &GetProjectPanel( RustacityProject &project )
 {
    auto ptr = project.GetPanel();
    if ( !ptr )
@@ -182,8 +182,8 @@ AUDACITY_DLL_API wxWindow &GetProjectPanel( AudacityProject &project )
    return *ptr;
 }
 
-AUDACITY_DLL_API const wxWindow &GetProjectPanel(
-   const AudacityProject &project )
+RUSTACITY_DLL_API const wxWindow &GetProjectPanel(
+   const RustacityProject &project )
 {
    auto ptr = project.GetPanel();
    if ( !ptr )

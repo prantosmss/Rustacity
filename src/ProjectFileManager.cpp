@@ -1,10 +1,10 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectFileManager.cpp
 
-Paul Licameli split from AudacityProject.cpp
+Paul Licameli split from RustacityProject.cpp
 
 **********************************************************************/
 
@@ -55,30 +55,30 @@ Paul Licameli split from AudacityProject.cpp
 #include "ondemand/ODManager.h"
 #include "ondemand/ODTask.h"
 #include "toolbars/SelectionBar.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/ErrorDialog.h"
 #include "widgets/FileHistory.h"
 #include "widgets/Warning.h"
 #include "xml/XMLFileReader.h"
 
-static const AudacityProject::AttachedObjects::RegisteredFactory sFileManagerKey{
-   []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory sFileManagerKey{
+   []( RustacityProject &parent ){
       auto result = std::make_shared< ProjectFileManager >( parent );
       return result;
    }
 };
 
-ProjectFileManager &ProjectFileManager::Get( AudacityProject &project )
+ProjectFileManager &ProjectFileManager::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< ProjectFileManager >( sFileManagerKey );
 }
 
-const ProjectFileManager &ProjectFileManager::Get( const AudacityProject &project )
+const ProjectFileManager &ProjectFileManager::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-ProjectFileManager::ProjectFileManager( AudacityProject &project )
+ProjectFileManager::ProjectFileManager( RustacityProject &project )
 : mProject{ project }
 {
 }
@@ -88,7 +88,7 @@ ProjectFileManager::~ProjectFileManager() = default;
 namespace {
 
 const char *const defaultHelpUrl =
-   "FAQ:Errors_on_opening_or_recovering_an_Audacity_project";
+   "FAQ:Errors_on_opening_or_recovering_an_Rustacity_project";
 
 using Pair = std::pair< const char *, const char * >;
 const Pair helpURLTable[] = {
@@ -153,7 +153,7 @@ auto ProjectFileManager::ReadProjectFile( const FilePath &fileName )
       if (!asf.Decode(fileName))
       {
          auto message = AutoSaveFile::FailureMessage( fileName );
-         AudacityMessageBox(
+         RustacityMessageBox(
             message,
             XO("Error decoding file"),
             wxOK | wxCENTRE,
@@ -346,7 +346,7 @@ private:
 };
 #endif
 
-// Assumes AudacityProject::mFileName has been set to the desired path.
+// Assumes RustacityProject::mFileName has been set to the desired path.
 bool ProjectFileManager::DoSave (const bool fromSaveAs,
                               const bool bWantSaveCopy,
                               const bool bLossless /*= false*/)
@@ -370,7 +370,7 @@ bool ProjectFileManager::DoSave (const bool fromSaveAs,
       {
          if ( UndoManager::Get( proj ).UnsavedChanges()
          && settings.EmptyCanBeDirty()) {
-            int result = AudacityMessageBox(
+            int result = RustacityMessageBox(
                XO(
 "Your project is now empty.\nIf saved, the project will have no tracks.\n\nTo save any previously open tracks:\nClick 'No', Edit > Undo until all tracks\nare open, then File > Save Project.\n\nSave anyway?"),
                XO("Warning - Empty Project"),
@@ -413,7 +413,7 @@ bool ProjectFileManager::DoSave (const bool fromSaveAs,
          bOK = wxRemoveFile(safetyFileName);
 
       if ( !wxRenameFile(fileName, safetyFileName) ) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO(
 "Audacity failed to write file %s.\nPerhaps disk is full or not writable.")
                .Format( safetyFileName ),
@@ -438,7 +438,7 @@ bool ProjectFileManager::DoSave (const bool fromSaveAs,
       // strOtherNamesArray is a temporary array of file names, used only when
       // saving compressed
       if (!success) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO(
 "Could not save project. Perhaps %s \nis not writable or the disk is full.")
                .Format( project ),
@@ -465,7 +465,7 @@ bool ProjectFileManager::DoSave (const bool fromSaveAs,
       projPath = wxPathOnly(project);
 
       if( !wxDir::Exists( projPath ) ){
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO(
 "Could not save project. Path not found. Try creating \ndirectory \"%s\" before saving project with this name.")
                .Format( projPath ),
@@ -755,7 +755,7 @@ bool ProjectFileManager::SaveAs(const wxString & newFileName, bool bWantSaveCopy
    //We should only overwrite it if this project already has the same name, where the user
    //simply chose to use the save as command although the save command would have the effect.
    if( !bOwnsNewAupName && wxFileExists(newFileName)) {
-      AudacityMessageDialog m(
+      RustacityMessageDialog m(
          nullptr,
          XO("The project was not saved because the file name provided would overwrite another project.\nPlease try again and select an original name."),
          XO("Error Saving Project"),
@@ -865,7 +865,7 @@ For an audio file that will open in other apps, use 'Export'.\n");
          filename.GetPath(),
          filename.GetFullName(),
          wxT("aup"),
-         { FileNames::AudacityProjects },
+         { FileNames::RustacityProjects },
          wxFD_SAVE | wxRESIZE_BORDER,
          &window);
 
@@ -880,7 +880,7 @@ For an audio file that will open in other apps, use 'Export'.\n");
 
    if ((bWantSaveCopy||!bPrompt) && filename.FileExists()) {
       // Saving a copy of the project should never overwrite an existing project.
-      AudacityMessageDialog m(
+      RustacityMessageDialog m(
          nullptr,
          XO("Saving a copy must not overwrite an existing saved project.\nPlease try again and select an original name."),
          XO("Error Saving Copy of Project"),
@@ -919,7 +919,7 @@ If you select \"Yes\" the project\n\"%s\"\n\
 will be irreversibly overwritten.").Format( fName, fName );
 
          // For safety, there should NOT be an option to hide this warning.
-         int result = AudacityMessageBox(
+         int result = RustacityMessageBox(
             Message,
             /* i18n-hint: Heading: A warning that a project is about to be overwritten.*/
             XO("Overwrite Project Warning"),
@@ -932,7 +932,7 @@ will be irreversibly overwritten.").Format( fName, fName );
       else
       {
          // Overwrite disallowed. The destination project is open in another window.
-         AudacityMessageDialog m(
+         RustacityMessageDialog m(
             nullptr,
             XO("The project will not saved because the selected project is open in another window.\nPlease try again and select an original name."),
             XO("Error Saving Project"),
@@ -1095,7 +1095,7 @@ bool ProjectFileManager::IsAlreadyOpen(const FilePath &projPathName)
       XO("%s is already open in another window.")
          .Format( newProjPathName.GetName() );
       wxLogError(errMsg.Translation()); //Debug?
-      AudacityMessageBox(
+      RustacityMessageBox(
          errMsg,
          XO("Error Opening Project"),
          wxOK | wxCENTRE);
@@ -1105,7 +1105,7 @@ bool ProjectFileManager::IsAlreadyOpen(const FilePath &projPathName)
 }
 
 XMLTagHandler *
-ProjectFileManager::RecordingRecoveryFactory( AudacityProject &project ) {
+ProjectFileManager::RecordingRecoveryFactory( RustacityProject &project ) {
    auto &ProjectFileManager = Get( project );
    auto &ptr = ProjectFileManager.mRecordingRecoveryHandler;
    if (!ptr)
@@ -1123,18 +1123,18 @@ ProjectFileManager::sRecoveryFactory{
 class ImportXMLTagHandler final : public XMLTagHandler
 {
  public:
-   ImportXMLTagHandler(AudacityProject* pProject) { mProject = pProject; }
+   ImportXMLTagHandler(RustacityProject* pProject) { mProject = pProject; }
 
    bool HandleXMLTag(const wxChar *tag, const wxChar **attrs) override;
    XMLTagHandler *HandleXMLChild(const wxChar * WXUNUSED(tag))  override
       { return NULL; }
 
    // Don't want a WriteXML method because ImportXMLTagHandler is not a WaveTrack.
-   // <import> tags are instead written by AudacityProject::WriteXML.
+   // <import> tags are instead written by RustacityProject::WriteXML.
    //    void WriteXML(XMLWriter &xmlFile) /* not override */ { wxASSERT(false); }
 
  private:
-   AudacityProject* mProject;
+   RustacityProject* mProject;
 };
 
 bool ImportXMLTagHandler::HandleXMLTag(const wxChar *tag, const wxChar **attrs)
@@ -1163,7 +1163,7 @@ bool ImportXMLTagHandler::HandleXMLTag(const wxChar *tag, const wxChar **attrs)
    GuardedCall(
       [&] {
          ProjectFileManager::Get( *mProject ).Import(strAttr, &trackArray); },
-      [&] (AudacityException*) { trackArray.clear(); }
+      [&] (RustacityException*) { trackArray.clear(); }
    );
 
    if (trackArray.empty())
@@ -1199,7 +1199,7 @@ bool ImportXMLTagHandler::HandleXMLTag(const wxChar *tag, const wxChar **attrs)
 };
 
 XMLTagHandler *
-ProjectFileManager::ImportHandlerFactory( AudacityProject &project ) {
+ProjectFileManager::ImportHandlerFactory( RustacityProject &project ) {
    auto &ProjectFileManager = Get( project );
    auto &ptr = ProjectFileManager.mImportXMLTagHandler;
    if (!ptr)
@@ -1214,7 +1214,7 @@ ProjectFileManager::sImportHandlerFactory{
 };
 
 // FIXME:? TRAP_ERR This should return a result that is checked.
-//    See comment in AudacityApp::MRUOpen().
+//    See comment in RustacityApp::MRUOpen().
 void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory)
 {
    auto &project = mProject;
@@ -1232,8 +1232,8 @@ void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory
       PlatformCompatibility::GetLongFileName(fileNameArg));
 
    // Make sure it isn't already open.
-   // Vaughan, 2011-03-25: This was done previously in AudacityProject::OpenFiles()
-   //    and AudacityApp::MRUOpen(), but if you open an aup file by double-clicking it
+   // Vaughan, 2011-03-25: This was done previously in RustacityProject::OpenFiles()
+   //    and RustacityApp::MRUOpen(), but if you open an aup file by double-clicking it
    //    from, e.g., Win Explorer, it would bypass those, get to here with no check,
    //    then open a NEW project from the same data with no warning.
    //    This was reported in http://bugzilla.audacityteam.org/show_bug.cgi?id=137#c17,
@@ -1247,7 +1247,7 @@ void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory
    // So we always refuse to open such files.
    if (fileName.Lower().EndsWith(wxT(".aup.bak")))
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO(
 "You are trying to open an automatically created backup file.\nDoing this may result in severe data loss.\n\nPlease open the actual Audacity project file instead."),
          XO("Warning - Backup File Detected"),
@@ -1257,7 +1257,7 @@ void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory
    }
 
    if (!::wxFileExists(fileName)) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not open file: %s").Format( fileName ),
          XO("Error Opening File"),
          wxOK | wxCENTRE,
@@ -1274,7 +1274,7 @@ void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory
    {
       wxFFile ff(fileName, wxT("rb"));
       if (!ff.IsOpened()) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("Could not open file: %s").Format( fileName ),
             XO("Error opening file"),
             wxOK | wxCENTRE,
@@ -1283,7 +1283,7 @@ void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory
       }
       int numRead = ff.Read(buf, 15);
       if (numRead != 15) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("File may be invalid or corrupted: \n%s").Format( fileName ),
             XO("Error Opening File or Project"),
             wxOK | wxCENTRE,
@@ -1296,7 +1296,7 @@ void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory
 
    wxString temp = LAT1CTOWX(buf);
 
-   if (temp == wxT("AudacityProject")) {
+   if (temp == wxT("RustacityProject")) {
       // It's an Audacity 1.0 (or earlier) project file.
       // If they bail out, return and do no more.
       if( !projectFileIO.WarnOfLegacyFile() )
@@ -1304,7 +1304,7 @@ void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory
       // Convert to the NEW format.
       bool success = ConvertLegacyProjectFile(wxFileName{ fileName });
       if (!success) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO(
 "Audacity was unable to convert an Audacity 1.0 project to the new project format."),
             XO("Error Opening Project"),
@@ -1424,7 +1424,7 @@ void ProjectFileManager::OpenFile(const FilePath &fileNameArg, bool addtohistory
          history.PushState(XO("Project was recovered"), XO("Recover"));
 
          if (!wxRemoveFile(fileName))
-            AudacityMessageBox(
+            RustacityMessageBox(
                XO("Could not remove old auto save file"),
                XO("Error"),
                wxICON_STOP,

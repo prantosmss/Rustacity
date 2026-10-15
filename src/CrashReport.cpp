@@ -1,19 +1,19 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  CrashReport.cpp
  
  *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "CrashReport.h"
 #include "Experimental.h"
 
 #if defined(EXPERIMENTAL_CRASH_REPORT)
 
 #include "wxFileNameWrapper.h"
-#include "AudacityLogger.h"
+#include "RustacityLogger.h"
 #include "AudioIOBase.h"
 #include "FileNames.h"
 #include "Internat.h"
@@ -45,7 +45,7 @@ void Generate(wxDebugReport::Context ctx)
 #endif
    }
    
-   auto logger = AudacityLogger::Get();
+   auto logger = RustacityLogger::Get();
    if (logger)
    {
       rpt.AddText(wxT("log.txt"), logger->GetLog(), _TS("Audacity Log"));
@@ -59,7 +59,7 @@ void Generate(wxDebugReport::Context ctx)
    
    if (ok && rpt.Process())
    {
-      AudacityTextEntryDialog dlg(nullptr,
+      RustacityTextEntryDialog dlg(nullptr,
          XO("Report generated to:"),
          XO("Audacity Support Data"),
          rpt.GetCompressedFileName(),

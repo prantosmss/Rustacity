@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2012 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -9,7 +9,7 @@
 
 ******************************************************************/
 
-#include "../Audacity.h"   // needed before FFmpeg.h // for USE_* macros
+#include "../Rustacity.h"   // needed before FFmpeg.h // for USE_* macros
 #include "../blockfile/ODDecodeBlockFile.h" // base class
 #include "ODDecodeFFmpegTask.h"
 

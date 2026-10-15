@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   WaveClip.h
 
@@ -9,10 +9,10 @@
 
 *******************************************************************/
 
-#ifndef __AUDACITY_WAVECLIP__
-#define __AUDACITY_WAVECLIP__
+#ifndef __RUSTACITY_WAVECLIP__
+#define __RUSTACITY_WAVECLIP__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include "SampleFormat.h"
 #include "ondemand/ODTaskThread.h"
@@ -170,7 +170,7 @@ public:
    }
 };
 
-class AUDACITY_DLL_API WaveClip final : public XMLTagHandler
+class RUSTACITY_DLL_API WaveClip final : public XMLTagHandler
 {
 private:
    // It is an error to copy a WaveClip without specifying the DirManager.

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
 
    EffectEqualization.cpp
 
@@ -13,7 +13,7 @@
 
 *//****************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "Equalization48x.h"
 
 #include "../Experimental.h"

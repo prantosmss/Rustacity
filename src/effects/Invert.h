@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Invert.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_INVERT__
-#define __AUDACITY_EFFECT_INVERT__
+#ifndef __RUSTACITY_EFFECT_INVERT__
+#define __RUSTACITY_EFFECT_INVERT__
 
 #include "Effect.h"
 

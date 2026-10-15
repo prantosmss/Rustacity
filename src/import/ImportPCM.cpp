@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportPCM.cpp
 
@@ -19,7 +19,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #include "Import.h"
 #include "../Tags.h"
@@ -88,7 +88,7 @@ public:
    wxString GetPluginStringID() override { return wxT("libsndfile"); }
    TranslatableString GetPluginFormatDescription() override;
    std::unique_ptr<ImportFileHandle> Open(
-      const FilePath &Filename, AudacityProject*) override;
+      const FilePath &Filename, RustacityProject*) override;
 };
 
 
@@ -126,7 +126,7 @@ TranslatableString PCMImportPlugin::GetPluginFormatDescription()
 }
 
 std::unique_ptr<ImportFileHandle> PCMImportPlugin::Open(
-   const FilePath &filename, AudacityProject*)
+   const FilePath &filename, RustacityProject*)
 {
    SF_INFO info;
    wxFile f;   // will be closed when it goes out of scope

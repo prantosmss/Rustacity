@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Prefs.h
 
@@ -26,10 +26,10 @@
   track of...
 
 **********************************************************************/
-#ifndef __AUDACITY_PREFS__
-#define __AUDACITY_PREFS__
+#ifndef __RUSTACITY_PREFS__
+#define __RUSTACITY_PREFS__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include "../include/audacity/ComponentInterface.h"
 #include "MemoryX.h" // for wxArrayStringEx
@@ -45,20 +45,20 @@ bool CheckWritablePreferences();
 TranslatableString UnwritablePreferencesErrorMessage( const wxFileName &configFileName );
 void FinishPreferences();
 
-class AudacityPrefs;
+class RustacityPrefs;
 
 
-extern AUDACITY_DLL_API AudacityPrefs *gPrefs;
+extern RUSTACITY_DLL_API RustacityPrefs *gPrefs;
 extern int gMenusDirty;
 
 
 /// \brief Our own specialisation of wxFileConfig.  It is essentially a renaming,
 /// though it does provide one new access function.  Most of the prefs work
 /// is actually done by the InitPreferences() function.
-class  AUDACITY_DLL_API AudacityPrefs : public wxFileConfig 
+class  RUSTACITY_DLL_API RustacityPrefs : public wxFileConfig 
 {
 public:
-   AudacityPrefs(const wxString& appName = {},
+   RustacityPrefs(const wxString& appName = {},
                const wxString& vendorName = {},
                const wxString& localFilename = {},
                const wxString& globalFilename = {},
@@ -246,7 +246,7 @@ public:
 wxDECLARE_EVENT(EVT_PREFS_UPDATE, wxCommandEvent);
 
 // Invoke UpdatePrefs() when Preference dialog commits changes.
-class AUDACITY_DLL_API PrefsListener
+class RUSTACITY_DLL_API PrefsListener
 {
 public:
    PrefsListener();

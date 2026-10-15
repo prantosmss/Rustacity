@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Export.cpp
 
@@ -28,7 +28,7 @@
 
 *//********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "Export.h"
 
 #include <wx/dcclient.h>
@@ -64,7 +64,7 @@
 #include "../Tags.h"
 #include "../TimeTrack.h"
 #include "../WaveTrack.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/Warning.h"
 #include "../widgets/HelpSystem.h"
 #include "../AColor.h"
@@ -273,12 +273,12 @@ void ExportPlugin::InitProgress(std::unique_ptr<ProgressDialog> &pDialog,
 //----------------------------------------------------------------------------
 
 
-wxDEFINE_EVENT(AUDACITY_FILE_SUFFIX_EVENT, wxCommandEvent);
+wxDEFINE_EVENT(RUSTACITY_FILE_SUFFIX_EVENT, wxCommandEvent);
 
 BEGIN_EVENT_TABLE(Exporter, wxEvtHandler)
    EVT_FILECTRL_FILTERCHANGED(wxID_ANY, Exporter::OnFilterChanged)
    EVT_BUTTON(wxID_HELP, Exporter::OnHelp)
-   EVT_COMMAND(wxID_ANY, AUDACITY_FILE_SUFFIX_EVENT, Exporter::OnExtensionChanged)
+   EVT_COMMAND(wxID_ANY, RUSTACITY_FILE_SUFFIX_EVENT, Exporter::OnExtensionChanged)
 END_EVENT_TABLE()
 
 namespace {
@@ -318,7 +318,7 @@ Exporter::RegisteredExportPlugin::RegisteredExportPlugin(
          std::make_unique< ExporterItem >( id, factory ) );
 }
 
-Exporter::Exporter( AudacityProject &project )
+Exporter::Exporter( RustacityProject &project )
 : mProject{ &project }
 {
    using namespace Registry;
@@ -397,7 +397,7 @@ const ExportPluginArray &Exporter::GetPlugins()
    return mPlugins;
 }
 
-bool Exporter::DoEditMetadata(AudacityProject &project,
+bool Exporter::DoEditMetadata(RustacityProject &project,
    const TranslatableString &title,
    const TranslatableString &shortUndoDescription, bool force)
 {
@@ -566,7 +566,7 @@ bool Exporter::ExamineTracks()
          message = XO("All selected audio is muted.");
       else
          message = XO("All audio is muted.");
-      AudacityMessageBox(
+      RustacityMessageBox(
          message,
          XO("Unable to export"),
          wxOK | wxICON_INFORMATION);
@@ -709,7 +709,7 @@ bool Exporter::GetFilename()
                XO("Are you sure you want to export the file as \"%s\"?\n")
                   .Format( mFilename.GetFullName() );
 
-            int action = AudacityMessageBox(
+            int action = RustacityMessageBox(
                prompt,
                XO("Warning"),
                wxYES_NO | wxICON_EXCLAMATION);
@@ -731,7 +731,7 @@ bool Exporter::GetFilename()
                        mFilename.GetFullName(),
                        defext);
 
-         int action = AudacityMessageBox(
+         int action = RustacityMessageBox(
             prompt,
             XO("Warning"),
             wxYES_NO | wxICON_EXCLAMATION);
@@ -741,7 +741,7 @@ bool Exporter::GetFilename()
       }
 
       if (mFilename.GetFullPath().length() >= 256) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO( "Sorry, pathnames longer than 256 characters not supported.") );
          continue;
       }
@@ -759,7 +759,7 @@ bool Exporter::GetFilename()
             if (mFilename.GetFullPath() == aliasedFile.mFileName.GetFullPath() &&
                 !mFilename.FileExists()) {
                // Warn and return to the dialog
-               AudacityMessageBox(XO(
+               RustacityMessageBox(XO(
 "You are attempting to overwrite an aliased file that is missing.\n\
 The file cannot be written because the path is needed to restore the original audio to the project.\n\
 Choose Help > Diagnostics > Check Dependencies to view the locations of all missing files.\n\
@@ -777,7 +777,7 @@ If you still wish to export, please choose a different filename or folder."));
          auto prompt = XO("A file named \"%s\" already exists. Replace?")
             .Format( mFilename.GetFullPath() );
 
-         int action = AudacityMessageBox(
+         int action = RustacityMessageBox(
             prompt,
             XO("Warning"),
             wxYES_NO | wxICON_EXCLAMATION);

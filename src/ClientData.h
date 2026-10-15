@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ClientData.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_CLIENT_DATA__
-#define __AUDACITY_CLIENT_DATA__
+#ifndef __RUSTACITY_CLIENT_DATA__
+#define __RUSTACITY_CLIENT_DATA__
 
 #include "ClientDataHelpers.h"
 
@@ -22,7 +22,7 @@ Paul Licameli
 namespace ClientData {
 
 // A convenient default parameter for class template Site below
-struct AUDACITY_DLL_API Base
+struct RUSTACITY_DLL_API Base
 {
    virtual ~Base() {}
 };

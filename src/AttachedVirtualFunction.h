@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 AttachedVirtualFunction.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_ATTACHED_VIRTUAL_FUNCTION__
-#define __AUDACITY_ATTACHED_VIRTUAL_FUNCTION__
+#ifndef __RUSTACITY_ATTACHED_VIRTUAL_FUNCTION__
+#define __RUSTACITY_ATTACHED_VIRTUAL_FUNCTION__
 
 /* \brief Define a "virtual" function with multiple bodies chosen by type-switch
 on the runtime class of the first argument, leaving the set of functions

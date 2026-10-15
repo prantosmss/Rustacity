@@ -1,4 +1,4 @@
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include "../commands/CommandManager.h"
 
@@ -33,7 +33,7 @@
 // private helper classes and functions
 namespace {
 
-void DoMacMinimize(AudacityProject *project)
+void DoMacMinimize(RustacityProject *project)
 {
    if (project) {
       auto window = &GetProjectFrame( *project );
@@ -174,9 +174,9 @@ void OnMacMinimizeAll(const CommandContext &)
 
 } // namespace
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static WindowActions::Handler instance;
    return instance;
 };
@@ -215,7 +215,7 @@ BaseItemSharedPtr WindowMenu()
 
       Section( "",
          Special( wxT("PopulateWindowsStep"),
-         [](AudacityProject &, wxMenu &theMenu)
+         [](RustacityProject &, wxMenu &theMenu)
          {
             // Should something be done here???
          } )

@@ -86,7 +86,7 @@ Improvements
  * New Noise Gate effect.
  * New Spectral Delete effect.
 
-See also: https://wiki.audacityteam.org/wiki/New_features_in_Audacity_2.4.0
+See also: https://wiki.audacityteam.org/wiki/New_features_in_Rustacity_2.4.0
 
 
 Bug Fixes

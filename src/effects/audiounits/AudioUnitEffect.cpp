@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AudioUnitEffect.cpp
 
@@ -14,7 +14,7 @@
 
 *//*******************************************************************/
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 
 #if USE_AUDIO_UNITS
 #include "AudioUnitEffect.h"
@@ -42,7 +42,7 @@
 #include <wx/tokenzr.h>
 
 #include "../../ShuttleGui.h"
-#include "../../widgets/AudacityMessageBox.h"
+#include "../../widgets/RustacityMessageBox.h"
 #include "../../widgets/valnum.h"
 #include "../../widgets/wxPanelWrapper.h"
 
@@ -224,7 +224,7 @@ public:
 // When the module is builtin to Audacity, we use the same function, but it is
 // declared static so as not to clash with other builtin modules.
 // ============================================================================
-DECLARE_MODULE_ENTRY(AudacityModule)
+DECLARE_MODULE_ENTRY(RustacityModule)
 {
    // Create and register the importer
    // Trust the module manager not to leak this
@@ -810,7 +810,7 @@ void AudioUnitEffectImportDialog::OnOk(wxCommandEvent & evt)
 
       if (!msg.IsEmpty())
       {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("Could not import \"%s\" preset\n\n%s").Format( name, msg ),
             XO("Import Audio Unit Presets"),
             wxOK | wxCENTRE,
@@ -1854,7 +1854,7 @@ void AudioUnitEffect::ExportPresets()
    wxString msg = Export(path);
    if (!msg.IsEmpty())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not export \"%s\" preset\n\n%s").Format( path, msg ),
          XO("Export Audio Unit Presets"),
          wxOK | wxCENTRE,
@@ -1896,7 +1896,7 @@ void AudioUnitEffect::ImportPresets()
    wxString msg = Import(path);
    if (!msg.IsEmpty())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not import \"%s\" preset\n\n%s").Format( path, msg ),
          XO("Import Audio Unit Presets"),
          wxOK | wxCENTRE,

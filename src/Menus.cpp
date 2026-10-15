@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Menus.cpp
 
@@ -25,7 +25,7 @@
 
 *//*******************************************************************/
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "Menus.h"
 
 #include "Experimental.h"
@@ -38,7 +38,7 @@
 #include "UndoManager.h"
 #include "commands/CommandManager.h"
 #include "toolbars/ToolManager.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/ErrorDialog.h"
 
 #include <unordered_set>
@@ -54,22 +54,22 @@ MenuCreator::~MenuCreator()
 {
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-  []( AudacityProject &project ){
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+  []( RustacityProject &project ){
      return std::make_shared< MenuManager >( project ); }
 };
 
-MenuManager &MenuManager::Get( AudacityProject &project )
+MenuManager &MenuManager::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< MenuManager >( key );
 }
 
-const MenuManager &MenuManager::Get( const AudacityProject &project )
+const MenuManager &MenuManager::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-MenuManager::MenuManager( AudacityProject &project )
+MenuManager::MenuManager( RustacityProject &project )
    : mProject{ project }
 {
    UpdatePrefs();
@@ -246,7 +246,7 @@ MenuSection::~MenuSection() {}
 WholeMenu::~WholeMenu() {}
 
 CommandHandlerFinder FinderScope::sFinder =
-   [](AudacityProject &project) -> CommandHandlerObject & {
+   [](RustacityProject &project) -> CommandHandlerObject & {
       // If this default finder function is reached, then FinderScope should
       // have been used somewhere, or an explicit CommandHandlerFinder passed
       // to menu item constructors
@@ -488,7 +488,7 @@ using Path = std::vector< Identifier >;
         wxLogDebug( msg.Translation() );
 #ifdef IS_ALPHA
         // user-visible message
-        AudacityMessageBox( msg );
+        RustacityMessageBox( msg );
 #endif
      }
    }
@@ -1070,7 +1070,7 @@ using namespace MenuTable;
 
 struct MenuItemVisitor : ToolbarMenuVisitor
 {
-   MenuItemVisitor( AudacityProject &proj, CommandManager &man )
+   MenuItemVisitor( RustacityProject &proj, CommandManager &man )
       : ToolbarMenuVisitor(proj), manager( man ) {}
 
    void DoBeginGroup( GroupItem &item, const Path& ) override
@@ -1170,7 +1170,7 @@ struct MenuItemVisitor : ToolbarMenuVisitor
 };
 }
 
-void MenuCreator::CreateMenusAndCommands(AudacityProject &project)
+void MenuCreator::CreateMenusAndCommands(RustacityProject &project)
 {
    // Once only, cause initial population of preferences for the ordering
    // of some menu items that used to be given in tables but are now separately
@@ -1232,7 +1232,7 @@ void MenuManager::Visit( ToolbarMenuVisitor &visitor )
 }
 
 // TODO: This surely belongs in CommandManager?
-void MenuManager::ModifyUndoMenuItems(AudacityProject &project)
+void MenuManager::ModifyUndoMenuItems(RustacityProject &project)
 {
    TranslatableString desc;
    auto &undoManager = UndoManager::Get( project );
@@ -1272,7 +1272,7 @@ public:
    using wxFrame::DetachMenuBar;
 };
 
-void MenuCreator::RebuildMenuBar(AudacityProject &project)
+void MenuCreator::RebuildMenuBar(RustacityProject &project)
 {
    // On OSX, we can't rebuild the menus while a modal dialog is being shown
    // since the enabled state for menus like Quit and Preference gets out of
@@ -1378,7 +1378,7 @@ void MenuManager::ModifyAllProjectToolbarMenus()
    }
 }
 
-void MenuManager::ModifyToolbarMenus(AudacityProject &project)
+void MenuManager::ModifyToolbarMenus(RustacityProject &project)
 {
    // Refreshes can occur during shutdown and the toolmanager may already
    // be deleted, so protect against it.

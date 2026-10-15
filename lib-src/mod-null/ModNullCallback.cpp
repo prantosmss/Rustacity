@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ModNullCallback.cpp
 
@@ -27,7 +27,7 @@ click from the menu into the actaul function to be called.
 
 #include <wx/wx.h>
 #include "ModNullCallback.h"
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "ModuleManager.h"
 #include "ShuttleGui.h"
 #include "Project.h"
@@ -117,7 +117,7 @@ ModNullCallback * pModNullCallback=NULL;
 
 extern "C" {
 
-static CommandHandlerObject &ident(AudacityProject&project)
+static CommandHandlerObject &ident(RustacityProject&project)
 {
 // no specific command handler object ...  use the project.
 return project;
@@ -133,7 +133,7 @@ const wxChar * GetVersionString()
    // of Audacity it is built with. 
    // For now, the versions must match exactly for Audacity to 
    // agree to load the module.
-   return AUDACITY_VERSION_STRING;
+   return RUSTACITY_VERSION_STRING;
 }
 
 namespace {

@@ -69,15 +69,15 @@ list( APPEND SOURCES
       AdornedRulerPanel.h
       AllThemeResources.h
       AttachedVirtualFunction.h
-      Audacity.h
-      AudacityApp.cpp
-      AudacityApp.h
-      AudacityException.cpp
-      AudacityException.h
-      AudacityHeaders.cpp
-      AudacityHeaders.h
-      AudacityLogger.cpp
-      AudacityLogger.h
+      Rustacity.h
+      RustacityApp.cpp
+      RustacityApp.h
+      RustacityException.cpp
+      RustacityException.h
+      RustacityHeaders.cpp
+      RustacityHeaders.h
+      RustacityLogger.cpp
+      RustacityLogger.h
       AudioIO.cpp
       AudioIO.h
       AudioIOBase.cpp
@@ -350,8 +350,8 @@ list( APPEND SOURCES
 
       commands/AppCommandEvent.cpp
       commands/AppCommandEvent.h
-      commands/AudacityCommand.cpp
-      commands/AudacityCommand.h
+      commands/RustacityCommand.cpp
+      commands/RustacityCommand.h
       commands/BatchEvalCommand.cpp
       commands/BatchEvalCommand.h
       commands/Command.cpp
@@ -916,8 +916,8 @@ list( APPEND SOURCES
       widgets/ASlider.h
       widgets/AttachableScrollBar.cpp
       widgets/AttachableScrollBar.h
-      widgets/AudacityMessageBox.cpp
-      widgets/AudacityMessageBox.h
+      widgets/RustacityMessageBox.cpp
+      widgets/RustacityMessageBox.h
       widgets/BackedPanel.cpp
       widgets/BackedPanel.h
       widgets/ErrorDialog.cpp
@@ -981,14 +981,14 @@ list( APPEND SOURCES
 #
 #
 list( APPEND HEADERS
-   ../include/audacity/EffectInterface.h
-   ../include/audacity/Types.h
-   ../include/audacity/ConfigInterface.h
-   ../include/audacity/ModuleInterface.h
-   ../include/audacity/PluginInterface.h
-   ../include/audacity/ComponentInterface.h
-   ../include/audacity/EffectAutomationParameters.h
-   ../include/audacity/ImporterInterface.h
+   ../include/rustacity/EffectInterface.h
+   ../include/rustacity/Types.h
+   ../include/rustacity/ConfigInterface.h
+   ../include/rustacity/ModuleInterface.h
+   ../include/rustacity/PluginInterface.h
+   ../include/rustacity/ComponentInterface.h
+   ../include/rustacity/EffectAutomationParameters.h
+   ../include/rustacity/ImporterInterface.h
 )
 
 #
@@ -1014,7 +1014,7 @@ list( APPEND RESOURCES
 #
 list( APPEND DEFINES
    PRIVATE
-      BUILDING_AUDACITY
+      BUILDING_RUSTACITY
       WXINTL_NO_GETTEXT_MACRO
       WXUSINGDLL
       CMAKE
@@ -1067,7 +1067,7 @@ list( APPEND LIBRARIES
       $<$<BOOL:${USE_LIBID3TAG}>:libid3tag>
 
       # This flac mess can be resolved by removing the Windows pragmas
-      # in AudacityApp.cpp.
+      # in RustacityApp.cpp.
       $<$<BOOL:${USE_LIBFLAC}>:flac>
       $<$<BOOL:${USE_LIBFLAC}>:flac++>
       $<$<BOOL:${USE_LIBFLAC}>:libflac>
@@ -1098,10 +1098,10 @@ list( APPEND LIBRARIES
 # only use them if ccache is not available
 #
 if( CMAKE_VERSION VERSION_GREATER_EQUAL "3.16" AND NOT CCACHE_PROGRAM )
-   set( PRECOMP AudacityHeaders.h )
+   set( PRECOMP RustacityHeaders.h )
 endif()
 
-set( BUILDING_AUDACITY YES )
+set( BUILDING_RUSTACITY YES )
 set( INSTALL_PREFIX "${_PREFIX}" )
 set( PKGLIBDIR "${_LIBDIR}" )
 set( LIBDIR "${_LIBDIR}" )
@@ -1130,11 +1130,11 @@ if( CMAKE_SYSTEM_NAME MATCHES "Windows" )
 
    # Define the Windows specific resources
    list( APPEND WIN_RESOURCES
-      ../win/audacity.rc
+      ../win/rustacity.rc
    )
 
    # Create the config file
-   configure_file( audacity_config.h.in private/configwin.h )
+   configure_file( rustacity_config.h.in private/configwin.h )
 
    # Copy over the wxWidgets DLLs
    if( ${_OPT}use_wxwidgets STREQUAL "system" )
@@ -1174,7 +1174,7 @@ if( CMAKE_SYSTEM_NAME MATCHES "Windows" )
       TARGET
          ${TARGET}
       COMMAND
-         ${_INTDIR}/copy_libs.bat ${exedir} ${AUDACITY_NAME}.exe
+         ${_INTDIR}/copy_libs.bat ${exedir} ${RUSTACITY_NAME}.exe
       POST_BUILD
    )
 
@@ -1206,13 +1206,13 @@ elseif( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
 
    # Define Mac specific resources
    list( APPEND MAC_RESOURCES
-      ../mac/Resources/Audacity.icns
-      ../mac/Resources/AudacityAIFF.icns
-      ../mac/Resources/AudacityAU.icns
-      ../mac/Resources/AudacityMP3.icns
-      ../mac/Resources/AudacityOGG.icns
-      ../mac/Resources/AudacityProject.icns
-      ../mac/Resources/AudacityWAV.icns
+      ../mac/Resources/Rustacity.icns
+      ../mac/Resources/RustacityAIFF.icns
+      ../mac/Resources/RustacityAU.icns
+      ../mac/Resources/RustacityMP3.icns
+      ../mac/Resources/RustacityOGG.icns
+      ../mac/Resources/RustacityProject.icns
+      ../mac/Resources/RustacityWAV.icns
    )
 
    set_target_properties(
@@ -1253,7 +1253,7 @@ elseif( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
 
    # Create the config file
    set( HAVE_VISIBILITY 1 )
-   configure_file( audacity_config.h.in private/configmac.h )
+   configure_file( rustacity_config.h.in private/configmac.h )
 
    # Copy the wxWidgets libraries into the bundle
    if( "${CMAKE_GENERATOR}" MATCHES "Xcode" )
@@ -1261,7 +1261,7 @@ elseif( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
          TARGET
             ${TARGET}
          COMMAND
-            sh -c "TARGET_BUILD_DIR=${_DEST} EXECUTABLE_PATH=MacOS/${AUDACITY_NAME} FRAMEWORKS_FOLDER_PATH=Frameworks ${topdir}/mac/scripts/install_wxlibs.sh"
+            sh -c "TARGET_BUILD_DIR=${_DEST} EXECUTABLE_PATH=MacOS/${RUSTACITY_NAME} FRAMEWORKS_FOLDER_PATH=Frameworks ${topdir}/mac/scripts/install_wxlibs.sh"
          POST_BUILD
       )
    endif()
@@ -1281,7 +1281,7 @@ else()
 
    # Create the config file
    set( HAVE_VISIBILITY 1 )
-   configure_file( audacity_config.h.in private/configunix.h )
+   configure_file( rustacity_config.h.in private/configunix.h )
 
    # Build the list of mimetypes
    #
@@ -1322,12 +1322,12 @@ else()
    endif()
 
    # Create the desktop file
-   configure_file( audacity.desktop.in ${_INTDIR}/audacity.desktop )
+   configure_file( rustacity.desktop.in ${_INTDIR}/rustacity.desktop )
 
    # Create the script to copy required wxWidgets libraries
    if( ${_OPT}use_wxwidgets STREQUAL "local" )
       file( WRITE "${_INTDIR}/copy_libs.sh"
-         "for lib in \$(ldd ${_EXEDIR}/${AUDACITY_NAME} | awk '/libwx/{print \$1}')
+         "for lib in \$(ldd ${_EXEDIR}/${RUSTACITY_NAME} | awk '/libwx/{print \$1}')
           do
              echo \${lib}
              ldd ${WXWIN}/lib/\${lib} | awk '/libwx/{print \$1}'
@@ -1348,7 +1348,7 @@ else()
    endif()
 endif()
 
-set_target_property_all( ${TARGET} RUNTIME_OUTPUT_NAME ${AUDACITY_NAME} )
+set_target_property_all( ${TARGET} RUNTIME_OUTPUT_NAME ${RUSTACITY_NAME} )
 
 organize_source( "${TARGET_ROOT}/.." "include" "${HEADERS}" )
 organize_source( "${TARGET_ROOT}/../presets" "presets" "${RESOURCES}" )
@@ -1384,20 +1384,20 @@ if( NOT "${CMAKE_GENERATOR}" MATCHES "Xcode|Visual Studio*" )
    if( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
       install( FILES "${_DEST}/Info.plist"
                DESTINATION "${CMAKE_INSTALL_BINDIR}/Rustacity.app/Contents" )
-      install( PROGRAMS "${_EXEDIR}/${AUDACITY_NAME}" "${_EXEDIR}/Wrapper"
+      install( PROGRAMS "${_EXEDIR}/${RUSTACITY_NAME}" "${_EXEDIR}/Wrapper"
                DESTINATION "${CMAKE_INSTALL_BINDIR}/Rustacity.app/Contents/MacOS" )
    else()
-      install( PROGRAMS "${_EXEDIR}/${AUDACITY_NAME}"
+      install( PROGRAMS "${_EXEDIR}/${RUSTACITY_NAME}"
                TYPE BIN )
       install( DIRECTORY "${_DESTDIR}/${_LIBDIR}/"
                DESTINATION "${_LIBDIR}"
                USE_SOURCE_PERMISSIONS
                FILES_MATCHING PATTERN "*.so" )
-      install( FILES "${_INTDIR}/audacity.desktop"
+      install( FILES "${_INTDIR}/rustacity.desktop"
                DESTINATION "${_DATADIR}/applications" )
       install( FILES "${topdir}/LICENSE.txt" "${topdir}/README.txt"
-               DESTINATION "${_DATADIR}/doc/${AUDACITY_NAME}" )
-      install( FILES "${_SRCDIR}/audacity.xml"
+               DESTINATION "${_DATADIR}/doc/${RUSTACITY_NAME}" )
+      install( FILES "${_SRCDIR}/rustacity.xml"
                DESTINATION "${_DATADIR}/mime/packages" )
       install( FILES "${topdir}/presets/EQDefaultCurves.xml"
                DESTINATION "${_PKGDATA}" )

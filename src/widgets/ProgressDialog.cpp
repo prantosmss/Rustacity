@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ProgressDialog.cpp
 
@@ -26,7 +26,7 @@
 
 *//**********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ProgressDialog.h"
 
 #include <algorithm>
@@ -1631,7 +1631,7 @@ bool ProgressDialog::ConfirmAction(const TranslatableString & sPrompt,
       return true;
    }
 
-   AudacityMessageDialog dlgMessage(
+   RustacityMessageDialog dlgMessage(
       this,
       sPrompt,
       sTitle,

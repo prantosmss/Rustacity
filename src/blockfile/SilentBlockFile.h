@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2010 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SILENT_BLOCKFILE__
-#define __AUDACITY_SILENT_BLOCKFILE__
+#ifndef __RUSTACITY_SILENT_BLOCKFILE__
+#define __RUSTACITY_SILENT_BLOCKFILE__
 
 #include "../BlockFile.h"
 

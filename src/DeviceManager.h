@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   DeviceManager.h
 
@@ -15,8 +15,8 @@
 
 *//*******************************************************************/
 
-#ifndef __AUDACITY_DEVICEMANAGER__
-#define __AUDACITY_DEVICEMANAGER__
+#ifndef __RUSTACITY_DEVICEMANAGER__
+#define __RUSTACITY_DEVICEMANAGER__
 
 #include "Experimental.h"
 
@@ -31,7 +31,7 @@
 #endif
 
 // Event sent to the application
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_RESCANNED_DEVICES, wxCommandEvent);
 
 typedef struct DeviceSourceMap {

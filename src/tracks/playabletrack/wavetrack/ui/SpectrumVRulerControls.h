@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 SpectrumVRulerControls.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from WaveTrackVRulerControls.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SPECTRUM_VRULER_CONTROLS__
-#define __AUDACITY_SPECTRUM_VRULER_CONTROLS__
+#ifndef __RUSTACITY_SPECTRUM_VRULER_CONTROLS__
+#define __RUSTACITY_SPECTRUM_VRULER_CONTROLS__
 
 #include "../../../ui/TrackVRulerControls.h" // to inherit
 
@@ -29,13 +29,13 @@ public:
 
    std::vector<UIHandlePtr> HitTest(
       const TrackPanelMouseState &state,
-      const AudacityProject *) override;
+      const RustacityProject *) override;
 
    unsigned HandleWheelRotation(
       const TrackPanelMouseEvent &event,
-      AudacityProject *pProject) override;
+      RustacityProject *pProject) override;
    static unsigned DoHandleWheelRotation(
-      const TrackPanelMouseEvent &evt, AudacityProject *pProject,
+      const TrackPanelMouseEvent &evt, RustacityProject *pProject,
       WaveTrack *wt);
 
 private:

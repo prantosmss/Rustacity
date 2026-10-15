@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ModulePrefs.cpp
 
@@ -15,7 +15,7 @@ with names like mnod-script-pipe that add NEW features.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ModulePrefs.h"
 
 #include "Experimental.h"
@@ -192,7 +192,7 @@ void ModulePrefs::SetModuleStatus(const FilePath &fname, int iStatus){
 #ifdef EXPERIMENTAL_MODULE_PREFS
 namespace{
 PrefsPanel::Registration sAttachment{ "Module",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew ModulePrefs(parent, winid);

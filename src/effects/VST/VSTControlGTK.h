@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   VSTControlGTK.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef AUDACITY_VSTCONTROLGTK_H
-#define AUDACITY_VSTCONTROLGTK_H
+#ifndef RUSTACITY_VSTCONTROLGTK_H
+#define RUSTACITY_VSTCONTROLGTK_H
 
 // Must include after ours since we have a lot of name collisions
 #define Region XRegion     // Conflicts with Audacity's Region structure

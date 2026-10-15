@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WaveformView.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from WaveTrackView.cpp
 
 **********************************************************************/
 
-#include "../../../../Audacity.h"
+#include "../../../../Rustacity.h"
 #include "WaveformView.h"
 
 #include "../../../../Experimental.h"
@@ -47,7 +47,7 @@ WaveformView::~WaveformView() = default;
 
 std::vector<UIHandlePtr> WaveformView::DetailedHitTest(
    const TrackPanelMouseState &st,
-   const AudacityProject *pProject, int currentTool, bool bMultiTool )
+   const RustacityProject *pProject, int currentTool, bool bMultiTool )
 {
    auto &view = *this;
    const auto pTrack =
@@ -1146,7 +1146,7 @@ void WaveColorMenuTable::OnWaveColorChange(wxCommandEvent & event)
 
    int newWaveColor = id - OnInstrument1ID;
 
-   AudacityProject *const project = &mpData->project;
+   RustacityProject *const project = &mpData->project;
 
    for (auto channel : TrackList::Channels(pTrack))
       channel->SetWaveColorIndex(newWaveColor);

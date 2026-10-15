@@ -6,21 +6,21 @@ icons32dir = $(iconsdatadir)/32x32/apps
 icons48dir = $(iconsdatadir)/48x48/apps
 iconsscalabledir = $(iconsdatadir)/scalable/apps
 
-dist_icons16_DATA = icons/16x16/audacity.png
-dist_icons22_DATA = icons/22x22/audacity.png
-dist_icons24_DATA = icons/24x24/audacity.png
-dist_icons32_DATA = icons/32x32/audacity.png
-dist_icons48_DATA = icons/48x48/audacity.png
-dist_iconsscalable_DATA = audacity.svg
+dist_icons16_DATA = icons/16x16/rustacity.png
+dist_icons22_DATA = icons/22x22/rustacity.png
+dist_icons24_DATA = icons/24x24/rustacity.png
+dist_icons32_DATA = icons/32x32/rustacity.png
+dist_icons48_DATA = icons/48x48/rustacity.png
+dist_iconsscalable_DATA = rustacity.svg
 
 pixmapdir = $(datarootdir)/pixmaps
 dist_pixmap_DATA = \
    gnome-mime-application-x-audacity-project.xpm \
-   icons/16x16/audacity16.xpm \
-   icons/32x32/audacity32.xpm \
+   icons/16x16/rustacity16.xpm \
+   icons/32x32/rustacity32.xpm \
    $(NULL)
 
-pixmap_DATA = icons/48x48/audacity.xpm
+pixmap_DATA = icons/48x48/rustacity.xpm
 
 EXTRA_DIST = \
 	Cursors16/DisabledCursor.xpm \
@@ -70,9 +70,9 @@ EXTRA_DIST = \
 	MusicalInstruments/vibraphone_vibes.xpm \
 	MusicalInstruments/vocal_vox.xpm \
 	Arrow.xpm \
-	AudacityLogo48x48.xpm \
-	AudacityLogoAlpha.xpm \
-	AudacityLogoWithName.xpm \
+	RustacityLogo48x48.xpm \
+	RustacityLogoAlpha.xpm \
+	RustacityLogoWithName.xpm \
 	Cursors.h \
 	MusicalInstruments.h \
 	SliderThumbAlpha.xpm \

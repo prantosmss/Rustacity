@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   KeyConfigPrefs.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_KEY_CONFIG_PREFS__
-#define __AUDACITY_KEY_CONFIG_PREFS__
+#ifndef __RUSTACITY_KEY_CONFIG_PREFS__
+#define __RUSTACITY_KEY_CONFIG_PREFS__
 
 class CommandManager;
 class ShuttleGui;
@@ -33,7 +33,7 @@ class KeyConfigPrefs final : public PrefsPanel
 {
 public:
    KeyConfigPrefs(wxWindow * parent, wxWindowID winid,
-      AudacityProject *pProject,
+      RustacityProject *pProject,
       const CommandID &name);
    ComponentInterfaceSymbol GetSymbol() override;
    TranslatableString GetDescription() override;
@@ -92,7 +92,7 @@ private:
    wxRadioButton *mViewByName;
    wxRadioButton *mViewByKey;
 
-   AudacityProject *mProject{};
+   RustacityProject *mProject{};
 
    CommandManager *mManager;
    int mCommandSelected;

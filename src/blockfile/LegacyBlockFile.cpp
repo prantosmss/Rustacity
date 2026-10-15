@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LegacyBlockFile.cpp
 
@@ -11,14 +11,14 @@
 \class LegacyBlockFile
 \brief Audacity 1.1.0 block file format:
 
-  - Header tag: 20 bytes "AudacityBlockFile110"
+  - Header tag: 20 bytes "RustacityBlockFile110"
   - 64K summaries (min, max, RMS, each a 4-byte float)
   - 256 summaries (min, max, RMS, each a 4-byte float)
 
 *//******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "LegacyBlockFile.h"
 
 #include <float.h>

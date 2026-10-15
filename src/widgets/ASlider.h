@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ASlider.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SLIDER__
-#define __AUDACITY_SLIDER__
+#ifndef __RUSTACITY_SLIDER__
+#define __RUSTACITY_SLIDER__
 
 #include <wx/setup.h> // for wxUSE_* macros
 #include <wx/defs.h>

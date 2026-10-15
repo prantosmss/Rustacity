@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackPanelResizeHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "TrackPanelResizerCell.h"
 
 #include "AColor.h"
@@ -32,7 +32,7 @@ TrackPanelResizerCell::TrackPanelResizerCell(
 {}
 
 std::vector<UIHandlePtr> TrackPanelResizerCell::HitTest
-(const TrackPanelMouseState &st, const AudacityProject *pProject)
+(const TrackPanelMouseState &st, const RustacityProject *pProject)
 {
    (void)pProject;// Compiler food
    std::vector<UIHandlePtr> results;

@@ -1,6 +1,6 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  KeyboardCapture.cpp
  
@@ -24,7 +24,7 @@
 #include <wx/weakref.h>
 #include <wx/window.h>
 
-#include "AudacityException.h"
+#include "RustacityException.h"
 
 ////////////////////////////////////////////////////////////
 /// Custom events

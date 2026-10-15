@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SelectionBarListener.h
 
@@ -8,14 +8,14 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SELECTION_BAR_LISTENER__
-#define __AUDACITY_SELECTION_BAR_LISTENER__
+#ifndef __RUSTACITY_SELECTION_BAR_LISTENER__
+#define __RUSTACITY_SELECTION_BAR_LISTENER__
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class SelectedRegion;
 
-class AUDACITY_DLL_API SelectionBarListener /* not final */ {
+class RUSTACITY_DLL_API SelectionBarListener /* not final */ {
 
  public:
 
@@ -31,7 +31,7 @@ class AUDACITY_DLL_API SelectionBarListener /* not final */ {
    virtual void AS_ModifySelection(double &start, double &end, bool done) = 0;
 };
 
-class AUDACITY_DLL_API TimerToolBarListener /* not final */ {
+class RUSTACITY_DLL_API TimerToolBarListener /* not final */ {
 
  public:
 

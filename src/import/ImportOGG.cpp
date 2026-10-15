@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportOGG.cpp
 
@@ -28,7 +28,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -90,7 +90,7 @@ public:
    wxString GetPluginStringID() override { return wxT("liboggvorbis"); }
    TranslatableString GetPluginFormatDescription() override;
    std::unique_ptr<ImportFileHandle> Open(
-      const FilePath &Filename, AudacityProject*) override;
+      const FilePath &Filename, RustacityProject*) override;
 };
 
 
@@ -167,7 +167,7 @@ TranslatableString OggImportPlugin::GetPluginFormatDescription()
 }
 
 std::unique_ptr<ImportFileHandle> OggImportPlugin::Open(
-   const FilePath &filename, AudacityProject*)
+   const FilePath &filename, RustacityProject*)
 {
    // Suppress some compiler warnings about unused global variables in the library header
    wxUnusedVar(OV_CALLBACKS_DEFAULT);

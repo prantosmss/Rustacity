@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 BackgroundCell.h
 
@@ -8,13 +8,13 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_BACKGROUND_CELL__
-#define __AUDACITY_BACKGROUND_CELL__
+#ifndef __RUSTACITY_BACKGROUND_CELL__
+#define __RUSTACITY_BACKGROUND_CELL__
 
 #include "../../ClientData.h"
 #include "CommonTrackPanelCell.h"
 
-class AudacityProject;
+class RustacityProject;
 
 class BackgroundHandle;
 class ZoomHandle;
@@ -27,11 +27,11 @@ class BackgroundCell final
    , public ClientData::Base
 {
 public:
-   static BackgroundCell &Get( AudacityProject &project );
-   static const BackgroundCell &Get( const AudacityProject &project );
+   static BackgroundCell &Get( RustacityProject &project );
+   static const BackgroundCell &Get( const RustacityProject &project );
 
    explicit
-   BackgroundCell(AudacityProject *pProject)
+   BackgroundCell(RustacityProject *pProject)
       : mpProject(pProject)
    {}
 
@@ -40,7 +40,7 @@ public:
 protected:
    std::vector<UIHandlePtr> HitTest
       (const TrackPanelMouseState &state,
-       const AudacityProject *) override;
+       const RustacityProject *) override;
 
    std::shared_ptr<Track> DoFindTrack() override;
 
@@ -54,7 +54,7 @@ private:
       TrackPanelDrawingContext &,
       const wxRect &rect, const wxRect &panelRect, unsigned iPass ) override;
    
-   AudacityProject *mpProject;
+   RustacityProject *mpProject;
 
    std::weak_ptr<BackgroundHandle> mHandle;
 

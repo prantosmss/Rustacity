@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODDecodeTask.h
 
@@ -25,8 +25,8 @@ robust enough to allow all the user changes such as copy/paste, DELETE, and so o
 
 
 
-#ifndef __AUDACITY_ODDecodeTask__
-#define __AUDACITY_ODDecodeTask__
+#ifndef __RUSTACITY_ODDecodeTask__
+#define __RUSTACITY_ODDecodeTask__
 
 #include <vector>
 #include "ODTask.h"

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   CommandManagerWindowClasses.h
 
@@ -8,15 +8,15 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_COMMAND_MANAGER_WINDOW_CLASSES__
-#define __AUDACITY_COMMAND_MANAGER_WINDOW_CLASSES__
+#ifndef __RUSTACITY_COMMAND_MANAGER_WINDOW_CLASSES__
+#define __RUSTACITY_COMMAND_MANAGER_WINDOW_CLASSES__
 
 /*
  \brief By default, windows when focused override the association of the digits
  and certain navigation keys with commands, but certain windows do not, and
  those inherit this class.
  */
-struct AUDACITY_DLL_API NonKeystrokeInterceptingWindow
+struct RUSTACITY_DLL_API NonKeystrokeInterceptingWindow
 {
    virtual ~NonKeystrokeInterceptingWindow();
 };

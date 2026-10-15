@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   PlatformCompatibility.h
 
@@ -17,10 +17,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_COMPATIBILITY__
-#define __AUDACITY_COMPATIBILITY__
+#ifndef __RUSTACITY_COMPATIBILITY__
+#define __RUSTACITY_COMPATIBILITY__
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class PlatformCompatibility
 {

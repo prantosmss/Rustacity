@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODPCMAliasBlockFile.cpp
 
@@ -33,8 +33,8 @@ Some of these methods have been overridden only because they used the unsafe wxL
 
 
 
-#ifndef __AUDACITY_ODPCMALIASBLOCKFILE__
-#define __AUDACITY_ODPCMALIASBLOCKFILE__
+#ifndef __RUSTACITY_ODPCMALIASBLOCKFILE__
+#define __RUSTACITY_ODPCMALIASBLOCKFILE__
 
 #include "PCMAliasBlockFile.h"
 

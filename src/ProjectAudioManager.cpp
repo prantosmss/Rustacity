@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectAudioManager.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from ProjectManager.cpp
 
 **********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "ProjectAudioManager.h"
 
 #include "Experimental.h"
@@ -39,29 +39,29 @@ Paul Licameli split from ProjectManager.cpp
 #include "widgets/ErrorDialog.h"
 #include "widgets/MeterPanelBase.h"
 #include "widgets/Warning.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 
 
-static AudacityProject::AttachedObjects::RegisteredFactory
+static RustacityProject::AttachedObjects::RegisteredFactory
 sProjectAudioManagerKey {
-   []( AudacityProject &project ) {
+   []( RustacityProject &project ) {
       return std::make_shared< ProjectAudioManager >( project );
    }
 };
 
-ProjectAudioManager &ProjectAudioManager::Get( AudacityProject &project )
+ProjectAudioManager &ProjectAudioManager::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< ProjectAudioManager >(
       sProjectAudioManagerKey );
 }
 
 const ProjectAudioManager &ProjectAudioManager::Get(
-   const AudacityProject &project )
+   const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-ProjectAudioManager::ProjectAudioManager( AudacityProject &project )
+ProjectAudioManager::ProjectAudioManager( RustacityProject &project )
    : mProject{ project }
 {
    static ProjectStatus::RegisteredStatusWidthFunction
@@ -81,7 +81,7 @@ static TranslatableString FormatRate( int rate )
 }
 
 auto ProjectAudioManager::StatusWidthFunction(
-   const AudacityProject &project, StatusBarField field )
+   const RustacityProject &project, StatusBarField field )
    -> ProjectStatus::StatusWidthResult
 {
    if ( field == rateStatusBarField ) {
@@ -139,7 +139,7 @@ int ProjectAudioManager::PlayPlayRegion(const SelectedRegion &selectedRegion,
    if (cutpreview && t0==t1)
       return -1; /* msmeyer: makes no sense */
 
-   AudacityProject *p = &mProject;
+   RustacityProject *p = &mProject;
 
    auto &tracks = TrackList::Get( *p );
 
@@ -285,7 +285,7 @@ void ProjectAudioManager::PlayCurrentRegion(bool looped /* = false */,
    if ( !canStop )
       return;
 
-   AudacityProject *p = &mProject;
+   RustacityProject *p = &mProject;
 
    {
 
@@ -307,7 +307,7 @@ void ProjectAudioManager::PlayCurrentRegion(bool looped /* = false */,
 
 void ProjectAudioManager::Stop(bool stopStream /* = true*/)
 {
-   AudacityProject *project = &mProject;
+   RustacityProject *project = &mProject;
    auto &projectAudioManager = *this;
    bool canStop = projectAudioManager.CanStopAudioStream();
 
@@ -384,7 +384,7 @@ void ProjectAudioManager::Pause()
 }
 
 WaveTrackArray ProjectAudioManager::ChooseExistingRecordingTracks(
-   AudacityProject &proj, bool selectedOnly, double targetRate)
+   RustacityProject &proj, bool selectedOnly, double targetRate)
 {
    auto p = &proj;
    size_t recordingChannels =
@@ -467,7 +467,7 @@ void ProjectAudioManager::OnRecord(bool altAppearance)
    const bool appendRecord = (altAppearance == bPreferNewTrack);
 
    // Code from CommandHandler start...
-   AudacityProject *p = &mProject;
+   RustacityProject *p = &mProject;
 
    if (p) {
       const auto &selectedRegion = ViewInfo::Get( *p ).selectedRegion;
@@ -488,7 +488,7 @@ void ProjectAudioManager::OnRecord(bool altAppearance)
       const bool allSameRate{ selectedTracks.allSameRate };
 
       if (!allSameRate) {
-         AudacityMessageBox(XO("The tracks selected "
+         RustacityMessageBox(XO("The tracks selected "
             "for recording must all have the same sampling rate"),
             XO("Mismatched Sampling Rates"),
             wxICON_ERROR | wxCENTRE);
@@ -508,7 +508,7 @@ void ProjectAudioManager::OnRecord(bool altAppearance)
          }
          else {
             if (numberOfSelected > 0 && rateOfSelected != options.rate) {
-               AudacityMessageBox(XO(
+               RustacityMessageBox(XO(
                   "Too few tracks are selected for recording at this sample rate.\n"
                   "(Audacity requires two channels at the same sample rate for\n"
                   "each stereo track)"),
@@ -570,7 +570,7 @@ bool ProjectAudioManager::UseDuplex()
    return duplex;
 }
 
-bool ProjectAudioManager::DoRecord(AudacityProject &project,
+bool ProjectAudioManager::DoRecord(RustacityProject &project,
    const TransportTracks &tracks,
    double t0, double t1,
    bool altAppearance,
@@ -808,7 +808,7 @@ void ProjectAudioManager::SetupCutPreviewTracks(double WXUNUSED(playStart), doub
 // STRONG-GUARANTEE (for state of mCutPreviewTracks)
 {
    ClearCutPreviewTracks();
-   AudacityProject *p = &mProject;
+   RustacityProject *p = &mProject;
    {
       auto trackRange = TrackList::Get( *p ).Selected< const PlayableTrack >();
       if( !trackRange.empty() ) {
@@ -986,7 +986,7 @@ bool ProjectAudioManager::CanStopAudioStream() const
 
 const ReservedCommandFlag&
    CanStopAudioStreamFlag(){ static ReservedCommandFlag flag{
-      [](const AudacityProject &project){
+      [](const RustacityProject &project){
          auto &projectAudioManager = ProjectAudioManager::Get( project );
          bool canStop = projectAudioManager.CanStopAudioStream();
          return canStop;
@@ -994,7 +994,7 @@ const ReservedCommandFlag&
    }; return flag; }
 
 AudioIOStartStreamOptions
-DefaultPlayOptions( AudacityProject &project )
+DefaultPlayOptions( RustacityProject &project )
 {
    auto &projectAudioIO = ProjectAudioIO::Get( project );
    AudioIOStartStreamOptions options { &project,
@@ -1008,7 +1008,7 @@ DefaultPlayOptions( AudacityProject &project )
 }
 
 AudioIOStartStreamOptions
-DefaultSpeedPlayOptions( AudacityProject &project )
+DefaultSpeedPlayOptions( RustacityProject &project )
 {
    auto &projectAudioIO = ProjectAudioIO::Get( project );
    auto gAudioIO = AudioIO::Get();
@@ -1136,9 +1136,9 @@ void ProjectAudioManager::DoPlayStopSelect()
 static RegisteredMenuItemEnabler stopIfPaused{{
    []{ return PausedFlag(); },
    []{ return AudioIONotBusyFlag(); },
-   []( const AudacityProject &project ){
+   []( const RustacityProject &project ){
       return MenuManager::Get( project ).mStopIfWasPaused; },
-   []( AudacityProject &project, CommandFlag ){
+   []( RustacityProject &project, CommandFlag ){
       if ( MenuManager::Get( project ).mStopIfWasPaused )
          ProjectAudioManager::Get( project ).StopIfPaused();
    }
@@ -1147,7 +1147,7 @@ static RegisteredMenuItemEnabler stopIfPaused{{
 // GetSelectedProperties collects information about 
 // currently selected audio tracks
 PropertiesOfSelected
-GetPropertiesOfSelected(const AudacityProject &proj)
+GetPropertiesOfSelected(const RustacityProject &proj)
 {
    double rateOfSelection{ RATE_NOT_SELECTED };
 

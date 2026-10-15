@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Tags.cpp
 
@@ -30,7 +30,7 @@
 
 *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Tags.h"
 
 // For compilers that support precompilation, includes "wx/wx.h".
@@ -49,7 +49,7 @@
 #include "ProjectFileIORegistry.h"
 #include "ShuttleGui.h"
 #include "widgets/Grid.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/HelpSystem.h"
 #include "xml/XMLFileReader.h"
 
@@ -227,24 +227,24 @@ static const wxChar *DefaultGenres[] =
 
 static ProjectFileIORegistry::Entry registerFactory{
    wxT( "tags" ),
-   []( AudacityProject &project ){ return &Tags::Get( project ); }
+   []( RustacityProject &project ){ return &Tags::Get( project ); }
 };
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-  [](AudacityProject &){ return std::make_shared< Tags >(); }
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+  [](RustacityProject &){ return std::make_shared< Tags >(); }
 };
 
-Tags &Tags::Get( AudacityProject &project )
+Tags &Tags::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< Tags >( key );
 }
 
-const Tags &Tags::Get( const AudacityProject &project )
+const Tags &Tags::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-Tags &Tags::Set( AudacityProject &project, const std::shared_ptr< Tags > &tags )
+Tags &Tags::Set( RustacityProject &project, const std::shared_ptr< Tags > &tags )
 {
    auto &result = *tags;
    project.AttachedObjects::Assign( key, tags );
@@ -1164,7 +1164,7 @@ void TagsEditorDialog::OnEdit(wxCommandEvent & WXUNUSED(event))
    wxFileName fn(FileNames::DataDir(), wxT("genres.txt"));
    wxFile f(fn.GetFullPath(), wxFile::write);
    if (!f.IsOpened() || !f.Write(tc->GetValue())) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to save genre file."),
          XO("Reset Genres") );
       return;
@@ -1177,7 +1177,7 @@ void TagsEditorDialog::OnEdit(wxCommandEvent & WXUNUSED(event))
 
 void TagsEditorDialog::OnReset(wxCommandEvent & WXUNUSED(event))
 {
-   int id = AudacityMessageBox(
+   int id = RustacityMessageBox(
       XO("Are you sure you want to reset the genre list to defaults?"),
       XO("Reset Genres"),
       wxYES_NO);
@@ -1194,7 +1194,7 @@ void TagsEditorDialog::OnReset(wxCommandEvent & WXUNUSED(event))
                (!tf.Exists() && tf.Create());
 
    if (!open) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to open genre file."),
          XO("Reset Genres") );
       mLocal.LoadGenres();
@@ -1208,7 +1208,7 @@ void TagsEditorDialog::OnReset(wxCommandEvent & WXUNUSED(event))
    }
 
    if (!tf.Write()) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to save genre file."),
          XO("Reset Genres") );
       mLocal.LoadGenres();
@@ -1257,7 +1257,7 @@ void TagsEditorDialog::OnLoad(wxCommandEvent & WXUNUSED(event))
    XMLFileReader reader;
    if (!reader.Parse(&mLocal, fn)) {
       // Inform user of load failure
-      AudacityMessageBox(
+      RustacityMessageBox(
          reader.GetErrorStr(),
          XO("Error Loading Metadata"),
          wxOK | wxCENTRE,

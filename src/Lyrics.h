@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Lyrics.h
 
@@ -9,17 +9,17 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_LYRICS__
-#define __AUDACITY_LYRICS__
+#ifndef __RUSTACITY_LYRICS__
+#define __RUSTACITY_LYRICS__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include <vector>
 #include <wx/textctrl.h> // to inherit
 #include "commands/CommandManagerWindowClasses.h"
 #include "widgets/wxPanelWrapper.h" // to inherit
 
-class AudacityProject;
+class RustacityProject;
 class LabelTrack;
 
 
@@ -86,7 +86,7 @@ class LyricsPanel final
 
  public:
    LyricsPanel(wxWindow* parent, wxWindowID id,
-          AudacityProject *project,
+          RustacityProject *project,
           const wxPoint& pos = wxDefaultPosition,
           const wxSize& size = wxDefaultSize);
    virtual ~LyricsPanel();
@@ -156,10 +156,10 @@ private:
    int            mTextHeight; // only for drawn text
    bool           mMeasurementsDone; // only for drawn text
 
-   wxWeakRef<AudacityProject> mProject;
+   wxWeakRef<RustacityProject> mProject;
    bool           mDelayedUpdate{ false };
 
    DECLARE_EVENT_TABLE()
 };
 
-#endif // __AUDACITY_LYRICS__
+#endif // __RUSTACITY_LYRICS__

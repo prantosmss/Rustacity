@@ -1,15 +1,15 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectFileManager.h
 
-Paul Licameli split from AudacityProject.h
+Paul Licameli split from RustacityProject.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_FILE_MANAGER__
-#define __AUDACITY_PROJECT_FILE_MANAGER__
+#ifndef __RUSTACITY_PROJECT_FILE_MANAGER__
+#define __RUSTACITY_PROJECT_FILE_MANAGER__
 
 #include <memory>
 #include <vector>
@@ -20,7 +20,7 @@ Paul Licameli split from AudacityProject.h
 
 class wxString;
 class wxFileName;
-class AudacityProject;
+class RustacityProject;
 class ImportXMLTagHandler;
 class RecordingRecoveryHandler;
 class Track;
@@ -35,10 +35,10 @@ class ProjectFileManager final
    : public ClientData::Base
 {
 public:
-   static ProjectFileManager &Get( AudacityProject &project );
-   static const ProjectFileManager &Get( const AudacityProject &project );
+   static ProjectFileManager &Get( RustacityProject &project );
+   static const ProjectFileManager &Get( const RustacityProject &project );
 
-   explicit ProjectFileManager( AudacityProject &project );
+   explicit ProjectFileManager( RustacityProject &project );
    ProjectFileManager( const ProjectFileManager & ) PROHIBITED;
    ProjectFileManager &operator=( const ProjectFileManager & ) PROHIBITED;
    ~ProjectFileManager();
@@ -116,12 +116,12 @@ private:
    bool DoSave(bool fromSaveAs, bool bWantSaveCopy, bool bLossless = false);
 
    // Declared in this class so that they can have access to private members
-   static XMLTagHandler *RecordingRecoveryFactory( AudacityProject &project );
+   static XMLTagHandler *RecordingRecoveryFactory( RustacityProject &project );
    static ProjectFileIORegistry::Entry sRecoveryFactory;
-   static XMLTagHandler *ImportHandlerFactory( AudacityProject &project );
+   static XMLTagHandler *ImportHandlerFactory( RustacityProject &project );
    static ProjectFileIORegistry::Entry sImportHandlerFactory;
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    std::shared_ptr<TrackList> mLastSavedTracks;
    

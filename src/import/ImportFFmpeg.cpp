@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ImportFFmpeg.cpp
 
@@ -20,7 +20,7 @@ Licensed under the GNU General Public License v2 or later
 
 *//*******************************************************************/
 
-#include "../Audacity.h"    // needed before FFmpeg.h // for USE_* macros
+#include "../Rustacity.h"    // needed before FFmpeg.h // for USE_* macros
 
 #include "../Experimental.h"
 
@@ -184,7 +184,7 @@ public:
 
    ///! Probes the file and opens it if appropriate
    std::unique_ptr<ImportFileHandle> Open(
-      const FilePath &Filename, AudacityProject*) override;
+      const FilePath &Filename, RustacityProject*) override;
 };
 
 ///! Does actual import, returned by FFmpegImportPlugin::Open
@@ -291,7 +291,7 @@ TranslatableString FFmpegImportPlugin::GetPluginFormatDescription()
 }
 
 std::unique_ptr<ImportFileHandle> FFmpegImportPlugin::Open(
-   const FilePath &filename, AudacityProject*)
+   const FilePath &filename, RustacityProject*)
 {
    auto handle = std::make_unique<FFmpegImportFileHandle>(filename);
 
@@ -303,7 +303,7 @@ std::unique_ptr<ImportFileHandle> FFmpegImportPlugin::Open(
       //officially supported by this plugin.
       //If we don't have FFmpeg configured - tell the user about it.
       //Since this will be happening often, use disableable "FFmpeg not found" dialog
-      //insdead of usual AudacityMessageBox()
+      //insdead of usual RustacityMessageBox()
       bool newsession = false;
       gPrefs->Read(wxT("/NewImportingSession"), &newsession);
       if (!FFmpegLibsInst()->ValidLibsLoaded())

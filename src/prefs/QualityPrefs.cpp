@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   QualityPrefs.cpp
 
@@ -15,7 +15,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "QualityPrefs.h"
 
 #include <wx/choice.h>
@@ -235,7 +235,7 @@ bool QualityPrefs::Commit()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "Quality",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew QualityPrefs(parent, winid);

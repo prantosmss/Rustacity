@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Internat.h
 
@@ -9,21 +9,21 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_INTERNAT__
-#define __AUDACITY_INTERNAT__
+#ifndef __RUSTACITY_INTERNAT__
+#define __RUSTACITY_INTERNAT__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include <wx/longlong.h>
 
 #ifndef IN_RC
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class wxArrayString;
 class wxArrayStringEx;
 
-extern AUDACITY_DLL_API const wxString& GetCustomTranslation(const wxString& str1 );
-extern AUDACITY_DLL_API const wxString& GetCustomSubstitution(const wxString& str1 );
+extern RUSTACITY_DLL_API const wxString& GetCustomTranslation(const wxString& str1 );
+extern RUSTACITY_DLL_API const wxString& GetCustomSubstitution(const wxString& str1 );
 
 // Marks string for substitution only.
 #define _TS( s ) GetCustomSubstitution( s )

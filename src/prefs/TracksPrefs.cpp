@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TracksPrefs.cpp
 
@@ -17,7 +17,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "TracksPrefs.h"
 
 #include "../Experimental.h"
@@ -449,7 +449,7 @@ bool TracksPrefs::Commit()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "Tracks",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew TracksPrefs(parent, winid);

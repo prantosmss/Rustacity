@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Screenshot.h
 
@@ -16,16 +16,16 @@
 
 *//*******************************************************************/
 
-#ifndef __AUDACITY_SCREENSHOT__
-#define __AUDACITY_SCREENSHOT__
+#ifndef __RUSTACITY_SCREENSHOT__
+#define __RUSTACITY_SCREENSHOT__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include <wx/defs.h>
 
-class AudacityProject;
+class RustacityProject;
 
-void OpenScreenshotTools( AudacityProject &project );
+void OpenScreenshotTools( RustacityProject &project );
 void CloseScreenshotTools();
 
-#endif // __AUDACITY_SCREENSHOT__
+#endif // __RUSTACITY_SCREENSHOT__

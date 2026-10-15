@@ -26,7 +26,7 @@ channel.
 class wxMenuBar;
 class wxPoint;
 
-class GetInfoCommand : public AudacityCommand
+class GetInfoCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -37,7 +37,7 @@ public:
    bool DefineParams( ShuttleParams & S ) override;
    void PopulateOrExchange(ShuttleGui & S) override;
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_II#get_info");};
    bool Apply(const CommandContext &context) override;
    bool ApplyInner(const CommandContext &context);

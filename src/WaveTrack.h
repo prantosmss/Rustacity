@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   WaveTrack.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WAVETRACK__
-#define __AUDACITY_WAVETRACK__
+#ifndef __RUSTACITY_WAVETRACK__
+#define __RUSTACITY_WAVETRACK__
 
 #include "Track.h"
 
@@ -61,7 +61,7 @@ using Regions = std::vector < Region >;
 
 class Envelope;
 
-class AUDACITY_DLL_API WaveTrack final : public PlayableTrack {
+class RUSTACITY_DLL_API WaveTrack final : public PlayableTrack {
 public:
 
    //
@@ -659,4 +659,4 @@ private:
    int mNValidBuffers;
 };
 
-#endif // __AUDACITY_WAVETRACK__
+#endif // __RUSTACITY_WAVETRACK__

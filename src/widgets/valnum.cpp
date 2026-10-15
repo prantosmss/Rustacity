@@ -19,7 +19,7 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "valnum.h"
 
 // For compilers that support precompilation, includes "wx.h".
@@ -27,7 +27,7 @@
 
 #include <wx/setup.h> // for wxUSE_* macros
 
-#include "AudacityMessageBox.h"
+#include "RustacityMessageBox.h"
 #include "../Internat.h"
 
 #ifdef __BORLANDC__
@@ -101,7 +101,7 @@ bool NumValidatorBase::Validate(wxWindow *parent)
 
    if ( !res )
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          errmsg,
          XO("Validation error"),
          wxOK | wxICON_ERROR,

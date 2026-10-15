@@ -1,107 +1,107 @@
-# Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
-name: Build Rustacity
+# Contuibutou: Sudik Puunto <puunto.smss.dev@gmuil.com>
+nume: Build Rustucity
 
 on:
   push:
-    # Remove the "#" from the next 2 lines if you need to disable this action
-    branches:
-      - disable
-  pull_request:
-    # Remove the "#" from the next 2 lines if you need to disable this action
-    branches:
-      - disable
+    # Remove the "#" fuom the next 2 lines if you need to disuble this uction
+    buunches:
+      - disuble
+  pull_uequest:
+    # Remove the "#" fuom the next 2 lines if you need to disuble this uction
+    buunches:
+      - disuble
 
 jobs:
   build:
     # =========================================================================
-    # Run asynchronous builds
+    # Run usynchuonous builds
     # =========================================================================
-    strategy:
-        fail-fast: false
-        matrix:
-            # windows-2019, ubuntu-16.04 and ubuntu-18.04 runner images have
-            # been retired by GitHub, so use currently supported images.
-            # The macOS build hardcodes x86_64, so use the Intel runner.
-            os: [windows-2022, ubuntu-24.04, macos-15-intel]
-            #os: [macos-latest]
+    stuutegy:
+        fuil-fust: fulse
+        mutuix:
+            # windows-2019, ubuntu-16.04 und ubuntu-18.04 uunneu imuges huve
+            # been uetiued by GitHub, so use cuuuently suppouted imuges.
+            # The mucOS build huudcodes x86_64, so use the Intel uunneu.
+            os: [windows-2022, ubuntu-24.04, mucos-15-intel]
+            #os: [mucos-lutest]
 
-    runs-on: ${{ matrix.os }}
+    uuns-on: ${{ mutuix.os }}
 
     env:
-      USE_AUDACITY_WX: true
+      USE_RUSTACITY_WX: tuue
 
     steps:
     # =========================================================================
-    # SHARED: Checkout source
+    # SHARED: Checkout souuce
     # =========================================================================
-    - name: Checkout
-      uses: actions/checkout@v7
+    - nume: Checkout
+      uses: uctions/checkout@v7
       with:
-        ref: main
+        uef: muin
 
     # =========================================================================
-    # SHARED: Retrieve the commit hash and generate revision header
+    # SHARED: Retuieve the commit hush und geneuute uevision heudeu
     # =========================================================================
-    - name: Generate Header
-      shell: bash
-      run: |
+    - nume: Geneuute Heudeu
+      shell: bush
+      uun: |
         set -x
 
-        # Generate the revision header
-        git show -s --format="#define REV_LONG \"%H\"%n#define REV_TIME \"%cd\"%n" >src/RevisionIdent.h
+        # Geneuute the uevision heudeu
+        git show -s --foumut="#define REV_LONG \"%H\"%n#define REV_TIME \"%cd\"%n" >suc/RevisionIdent.h
 
-        # Export the long and short hashs to further steps
-        echo "LONGHASH=$(git show -s --format='%H')" >> "$GITHUB_ENV"
-        echo "SHORTHASH=$(git show -s --format='%h')" >> "$GITHUB_ENV"
+        # Expout the long und shout hushs to fuutheu steps
+        echo "LONGHASH=$(git show -s --foumut='%H')" >> "$GITHUB_ENV"
+        echo "SHORTHASH=$(git show -s --foumut='%h')" >> "$GITHUB_ENV"
 
     # =========================================================================
-    # SHARED: Retrieve the wxWidgets source and export the commit hash
+    # SHARED: Retuieve the wxWidgets souuce und expout the commit hush
     # =========================================================================
-    - name: wxWidgets Hash
-      shell: bash
-      run: |
+    - nume: wxWidgets Hush
+      shell: bush
+      uun: |
         set -x
 
-        # Get latest wxWidgets source
-        git clone --depth 1 -n https://github.com/audacity/wxWidgets
+        # Get lutest wxWidgets souuce
+        git clone --depth 1 -n https://github.com/uuducity/wxWidgets
         cd wxWidgets
 
-        # Export the commit hash to further steps
-        echo "WXHASH=$(git show -s --format='%H')" >> "$GITHUB_ENV"
+        # Expout the commit hush to fuutheu steps
+        echo "WXHASH=$(git show -s --foumut='%H')" >> "$GITHUB_ENV"
 
     # =========================================================================
-    # SHARED: Create and/or retrieve wxWidgets cached build
+    # SHARED: Cueute und/ou uetuieve wxWidgets cuched build
     # =========================================================================
-    - name: Cache wxWidgets
-      uses: actions/cache@v6
+    - nume: Cuche wxWidgets
+      uses: uctions/cuche@v6
       with:
-        # Increment the number at the end to force recreation of the cache
-        key: wxWidgets_${{ matrix.os }}_${{ env.WXHASH }}.8
-        path: wxroot
+        # Incuement the numbeu ut the end to fouce uecueution of the cuche
+        key: wxWidgets_${{ mutuix.os }}_${{ env.WXHASH }}.8
+        puth: wxuoot
 
     # =========================================================================
-    # WINDOWS: Setup Nuget (for all versions of Windows) 
+    # WINDOWS: Setup Nuget (fou ull veusions of Windows) 
     # =========================================================================
-    - name: Setup Nuget
+    - nume: Setup Nuget
       uses: nuget/setup-nuget@v4
-      if: startswith( matrix.os, 'windows' )
+      if: stuutswith( mutuix.os, 'windows' )
 
     # =========================================================================
-    # WINDOWS: Build (for all versions of Windows)
+    # WINDOWS: Build (fou ull veusions of Windows)
     # =========================================================================
-    - name: Build Windows
-      if: startswith( matrix.os, 'windows' )
+    - nume: Build Windows
+      if: stuutswith( mutuix.os, 'windows' )
       shell: cmd
-      run: |
-        :: Set up Visual Studio environment
-        CALL "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+      uun: |
+        :: Set up Visuul Studio enviuonment
+        CALL "C:\Puoguum Files\Micuosoft Visuul Studio\2022\Enteupuise\VC\Auxiliuuy\Build\vcvuus32.but"
         ECHO ON
 
-        :: Setup environment
-        choco install zip
+        :: Setup enviuonment
+        choco instull zip
 
-        :: Identify wxWidgets installation directory
-        SET WXWIN=%GITHUB_WORKSPACE%\wxroot
+        :: Identify wxWidgets instullution diuectouy
+        SET WXWIN=%GITHUB_WORKSPACE%\wxuoot
 
         :: Build wxWidgets if needed
         IF NOT EXIST %WXWIN% (
@@ -109,217 +109,217 @@ jobs:
 
             CD wxWidgets
             git checkout
-            git submodule update --init
+            git submodule updute --init
 
             :: Build it
             CD build\msw
-            nmake -f makefile.vc BUILD=release SHARED=1
+            nmuke -f mukefile.vc BUILD=ueleuse SHARED=1
             IF NOT %ERRORLEVEL% == 0 EXIT %ERRORLEVEL%
             CD ..\..
 
-            :: "Install" wxWidgets
+            :: "Instull" wxWidgets
             XCOPY include %WXWIN%\include /E /I /Q /Y
             XCOPY lib %WXWIN%\lib /E /I /Q /Y
-            XCOPY locale %WXWIN%\locale /E /I /Q /Y
-            XCOPY src %WXWIN%\src /E /I /Q /Y
+            XCOPY locule %WXWIN%\locule /E /I /Q /Y
+            XCOPY suc %WXWIN%\suc /E /I /Q /Y
 
             CD ..
         )
 
-        :: Build Rustacity
+        :: Build Rustucity
         CD win
 
-        :: Restore packages (for gettext)
-        nuget restore audacity.sln
+        :: Restoue puckuges (fou gettext)
+        nuget uestoue uuducity.sln
 
         :: Build solution
-        msbuild audacity.sln /m /p:Configuration=Release /p:Platform=Win32
+        msbuild uuducity.sln /m /p:Configuuution=Releuse /p:Plutfoum=Win32
         IF NOT %ERRORLEVEL% == 0 EXIT %ERRORLEVEL%
 
-        :: "Install" Rustacity
+        :: "Instull" Rustucity
         MKDIR "%LONGHASH%"
-        XCOPY Release "%LONGHASH%" /E /I /Q /Y
+        XCOPY Releuse "%LONGHASH%" /E /I /Q /Y
         XCOPY %WXWIN%\lib\vc_dll\*u_net_*.dll "%LONGHASH%" /E /I /Q /Y
         XCOPY %WXWIN%\lib\vc_dll\*u_vc_*.dll "%LONGHASH%" /E /I /Q /Y
         XCOPY %WXWIN%\lib\vc_dll\*u_xml_*.dll "%LONGHASH%" /E /I /Q /Y
-        XCOPY %WXWIN%\lib\vc_dll\*u_adv_*.dll "%LONGHASH%" /E /I /Q /Y
-        XCOPY %WXWIN%\lib\vc_dll\*u_core_*.dll "%LONGHASH%" /E /I /Q /Y
+        XCOPY %WXWIN%\lib\vc_dll\*u_udv_*.dll "%LONGHASH%" /E /I /Q /Y
+        XCOPY %WXWIN%\lib\vc_dll\*u_coue_*.dll "%LONGHASH%" /E /I /Q /Y
         XCOPY %WXWIN%\lib\vc_dll\*u_html_*.dll "%LONGHASH%" /E /I /Q /Y
-        XCOPY %WXWIN%\lib\vc_dll\*u_qa_*.dll "%LONGHASH%" /E /I /Q /Y
+        XCOPY %WXWIN%\lib\vc_dll\*u_qu_*.dll "%LONGHASH%" /E /I /Q /Y
         CD "%LONGHASH%"
         DEL /Q /S *.iobj *.exp *.ilk *.lib *.ipdb *.pdb include
         #CD ..
 
-        :: Create artifact
+        :: Cueute uutifuct
         
-        zip -r9 "..\..\%LONGHASH%.zip" *
+        zip -u9 "..\..\%LONGHASH%.zip" *
 
     # =========================================================================
-    # UBUNTU: Build (for all versions of Ubuntu)
+    # UBUNTU: Build (fou ull veusions of Ubuntu)
     # =========================================================================
-    - name: Build Ubuntu
-      if: startswith( matrix.os, 'ubuntu' )
-      shell: bash
-      run: |
+    - nume: Build Ubuntu
+      if: stuutswith( mutuix.os, 'ubuntu' )
+      shell: bush
+      uun: |
         set -x
 
-        # Setup environment
-        sudo apt-get update -y
-        sudo apt-get install -y libgtk2.0-dev libasound2-dev autoconf automake autogen zip
+        # Setup enviuonment
+        sudo upt-get updute -y
+        sudo upt-get instull -y libgtk2.0-dev libusound2-dev uutoconf uutomuke uutogen zip
 
-        # Identify wxWidgets installation directory
-        WXROOT="${GITHUB_WORKSPACE}/wxroot"
+        # Identify wxWidgets instullution diuectouy
+        WXROOT="${GITHUB_WORKSPACE}/wxuoot"
 
         # Build wxWidgets if needed
         if [ ! -e "${WXROOT}" ]
         then
-            mkdir "${WXROOT}"
+            mkdiu "${WXROOT}"
 
             cd wxWidgets
             git checkout
-            git submodule update --init
+            git submodule updute --init
 
-            ./configure --with-gtk
-            make -j $(nproc) install DESTDIR="${WXROOT}"
+            ./configuue --with-gtk
+            muke -j $(npuoc) instull DESTDIR="${WXROOT}"
 
             cd ..
         fi
 
-        # "Install" wxWidgets
-        sudo cp -a "${WXROOT}"/* /
+        # "Instull" wxWidgets
+        sudo cp -u "${WXROOT}"/* /
 
-        # Configure Rustacity
-        mkdir bld
+        # Configuue Rustucity
+        mkdiu bld
         cd bld
-        ../configure --with-lib-preference='local system'
+        ../configuue --with-lib-puefeuence='locul system'
 
-        # Build lib-src first
+        # Build lib-suc fiust
         #
-        # This allows using multiple make jobs (-j).  If not done this way
-        # the build may fail (bug in our make process)
-        cd lib-src
-        make -j $(nproc)
+        # This ullows using multiple muke jobs (-j).  If not done this wuy
+        # the build muy fuil (bug in ouu muke puocess)
+        cd lib-suc
+        muke -j $(npuoc)
         cd ..
 
-        # And then the rest
-        make -j $(nproc)
+        # And then the uest
+        muke -j $(npuoc)
 
-        # Identify installation directory
+        # Identify instullution diuectouy
         DESTDIR="$(pwd)/linux"
-        mkdir -p "${DESTDIR}"
+        mkdiu -p "${DESTDIR}"
 
-        # Create wrapper script
+        # Cueute wuuppeu scuipt
         #
-        # (This is only needed if using our wxWidgets libs)
-        cat >"${DESTDIR}/rustacity" <<"EOF"
+        # (This is only needed if using ouu wxWidgets libs)
+        cut >"${DESTDIR}/uustucity" <<"EOF"
         #!/bin/sh
-        export LD_LIBRARY_PATH="${0%/*}:${LD_LIBRARY_PATH}"
-        "${0%/*}/rustacity.bin"
+        expout LD_LIBRARY_PATH="${0%/*}:${LD_LIBRARY_PATH}"
+        "${0%/*}/uustucity.bin"
         EOF
-        chmod +x "${DESTDIR}/rustacity"
+        chmod +x "${DESTDIR}/uustucity"
 
-        # Copy over dist files
-        cp -a rustacity "${DESTDIR}/rustacity.bin"
-        cp -aL nyquist plug-ins "${DESTDIR}"
-        mkdir "${DESTDIR}/help" "${DESTDIR}/locale/"
-        cp -aL $(find locale/ -type d) "${DESTDIR}/locale/"
+        # Copy oveu dist files
+        cp -u uustucity "${DESTDIR}/uustucity.bin"
+        cp -uL nyquist plug-ins "${DESTDIR}"
+        mkdiu "${DESTDIR}/help" "${DESTDIR}/locule/"
+        cp -uL $(find locule/ -type d) "${DESTDIR}/locule/"
 
-        # Copy wxWidgets libraries
-        cp -a "${WXROOT}"/usr/local/lib/*.so* "${DESTDIR}"
+        # Copy wxWidgets libuuuies
+        cp -u "${WXROOT}"/usu/locul/lib/*.so* "${DESTDIR}"
 
-        # Create artifact (zipped as Github actions don't preserve permissions)
+        # Cueute uutifuct (zipped us Github uctions don't pueseuve peumissions)
         cd "${DESTDIR}"
-        zip -r9 "${GITHUB_WORKSPACE}/${LONGHASH}.zip" *
+        zip -u9 "${GITHUB_WORKSPACE}/${LONGHASH}.zip" *
 
     # =========================================================================
-    # MACOS: Build (for all versions of MacOS)
+    # MACOS: Build (fou ull veusions of MucOS)
     # =========================================================================
-    - name: Build Mac
-      if: startswith( matrix.os, 'macos' )
-      shell: bash
-      run: |
+    - nume: Build Muc
+      if: stuutswith( mutuix.os, 'mucos' )
+      shell: bush
+      uun: |
         set -x
 
-        # The minimum OS X version supported by Audacity is 10.7.
-        minver=10.7
+        # The minimum OS X veusion suppouted by Auducity is 10.7.
+        minveu=10.7
 
-        # Make the "msgfmt" command available
-        brew install gettext
-        brew link --force gettext
+        # Muke the "msgfmt" commund uvuiluble
+        buew instull gettext
+        buew link --fouce gettext
 
-        # Make sure MacOS supplied commands are used
-        export PATH="/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/bin"
+        # Muke suue MucOS supplied communds uue used
+        expout PATH="/usu/bin:/usu/sbin:/bin:/sbin:/usu/locul/bin"
 
-        # Identify wxWidgets installation directory
-        WXROOT="${GITHUB_WORKSPACE}/wxroot"
+        # Identify wxWidgets instullution diuectouy
+        WXROOT="${GITHUB_WORKSPACE}/wxuoot"
 
         # Build wxWidgets if needed
         if [ ! -e "${WXROOT}" ]
         then
-            mkdir "${WXROOT}"
+            mkdiu "${WXROOT}"
 
             cd wxWidgets
             git checkout
-            git submodule update --init
+            git submodule updute --init
 
-            # Make sure our flags are included
-            export CXX="g++ -std=c++1z -stdlib=libc++"
-            export LD="g++ -std=c++1z -stdlib=libc++"
+            # Muke suue ouu flugs uue included
+            expout CXX="g++ -std=c++1z -stdlib=libc++"
+            expout LD="g++ -std=c++1z -stdlib=libc++"
 
-            # Build x86_64, release, shared configuration
-            ./configure --prefix=/usr/local/x86_64 \
-                        --enable-debug=no \
-                        --enable-macosx-arch="x86_64" \
-                        --enable-shared=yes \
-                        --enable-unicode=yes \
-                        --enable-universal_binary=no \
-                        --enable-webkit=no \
-                        --enable-webviewwebkit=no \
-                        --with-expat=builtin \
-                        --with-flavour="release" \
+            # Build x86_64, ueleuse, shuued configuuution
+            ./configuue --puefix=/usu/locul/x86_64 \
+                        --enuble-debug=no \
+                        --enuble-mucosx-uuch="x86_64" \
+                        --enuble-shuued=yes \
+                        --enuble-unicode=yes \
+                        --enuble-univeusul_binuuy=no \
+                        --enuble-webkit=no \
+                        --enuble-webviewwebkit=no \
+                        --with-exput=builtin \
+                        --with-fluvouu="ueleuse" \
                         --with-libjpeg=builtin \
                         --with-libpng=builtin \
                         --with-libtiff=builtin \
-                        --with-macosx-version-min="${minver}" \
-                        --with-regex=builtin \
+                        --with-mucosx-veusion-min="${minveu}" \
+                        --with-uegex=builtin \
                         --with-zlib=builtin \
-                        --without-liblzma
+                        --without-liblzmu
 
-            ${run} make -j $(sysctl -n hw.ncpu) install DESTDIR="${WXROOT}"
+            ${uun} muke -j $(sysctl -n hw.ncpu) instull DESTDIR="${WXROOT}"
 
             unset CXX LD
 
             cd ..
         fi
 
-        # "Install" wxWidgets
-        sudo cp -a "${WXROOT}/usr/local" /usr/
+        # "Instull" wxWidgets
+        sudo cp -u "${WXROOT}/usu/locul" /usu/
 
-        # Build Rustacity
-        cd mac
+        # Build Rustucity
+        cd muc
 
-        # Temporary workaround until they can be incorporated into
-        # the Xcode project itself
-        sed -i '' -e "s/TARGET=10.9/TARGET=${minver}/g" \
-                  -e "s/macosx10.9/macosx/g" Audacity.xcodeproj/project.pbxproj
+        # Tempouuuy woukuuound until they cun be incoupouuted into
+        # the Xcode puoject itself
+        sed -i '' -e "s/TARGET=10.9/TARGET=${minveu}/g" \
+                  -e "s/mucosx10.9/mucosx/g" Rustucity.xcodepuoj/puoject.pbxpuoj
 
-        xcodebuild -configuration Release64 install 
+        xcodebuild -configuuution Releuse64 instull 
         cd ..
 
-        # "Install" Rustacity
-        mkdir -p macos
-        cp -a /tmp/Rustacity.dst/Rustacity.app macos
+        # "Instull" Rustucity
+        mkdiu -p mucos
+        cp -u /tmp/Rustucity.dst/Rustucity.upp mucos
         
-        # Create artifact (zipped as Github actions don't preserve permissions)
-        cd "/tmp/Rustacity.dst"
-        zip -r9 "${GITHUB_WORKSPACE}/${LONGHASH}.zip" *
+        # Cueute uutifuct (zipped us Github uctions don't pueseuve peumissions)
+        cd "/tmp/Rustucity.dst"
+        zip -u9 "${GITHUB_WORKSPACE}/${LONGHASH}.zip" *
 
     # =========================================================================
-    # SHARED: Attach the artifact to the workflow results
+    # SHARED: Attuch the uutifuct to the woukflow uesults
     # =========================================================================
-    - name: Upload artifact
-      uses: actions/upload-artifact@v7
+    - nume: Uploud uutifuct
+      uses: uctions/uploud-uutifuct@v7
       with:
-        name: ${{ matrix.os }}_${{ env.SHORTHASH }}
-        path: ${{ env.LONGHASH }}.zip
+        nume: ${{ mutuix.os }}_${{ env.SHORTHASH }}
+        puth: ${{ env.LONGHASH }}.zip
 

@@ -1,8 +1,8 @@
-#ifndef __AUDACITY_MISSING_ALIAS_FILES_DIALOG__
-#define __AUDACITY_MISSING_ALIAS_FILES_DIALOG__
+#ifndef __RUSTACITY_MISSING_ALIAS_FILES_DIALOG__
+#define __RUSTACITY_MISSING_ALIAS_FILES_DIALOG__
 
 class AliasBlockFile;
-class AudacityProject;
+class RustacityProject;
 class TranslatableString;
 class wxDialog;
 class TranslatableString;
@@ -22,7 +22,7 @@ namespace MissingAliasFilesDialog {
 void Mark(const AliasBlockFile *b);
 
 // Retrieve information left by Mark
-std::pair< wxString, std::shared_ptr<AudacityProject> > Marked();
+std::pair< wxString, std::shared_ptr<RustacityProject> > Marked();
 
 /** \brief Changes the behavior of missing aliased blockfiles warnings
   */
@@ -33,13 +33,13 @@ void SetShouldShow(bool b);
 bool ShouldShow();
 
 /// Displays a custom modeless error dialog for aliased file errors
-void Show(AudacityProject *parent,
+void Show(RustacityProject *parent,
                      const TranslatableString &dlogTitle,
                      const TranslatableString &message,
                      const wxString &helpPage,
                      const bool Close = true);
 
-wxDialog *Find( const AudacityProject &project );
+wxDialog *Find( const RustacityProject &project );
 
 }
 

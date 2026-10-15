@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SelectedRegion.h
 
@@ -22,10 +22,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SELECTEDREGION__
-#define __AUDACITY_SELECTEDREGION__
+#ifndef __RUSTACITY_SELECTEDREGION__
+#define __RUSTACITY_SELECTEDREGION__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include "Experimental.h"
 
@@ -35,7 +35,7 @@
 
 class XMLWriter;
 
-class AUDACITY_DLL_API SelectedRegion {
+class RUSTACITY_DLL_API SelectedRegion {
 
    // Maintains the invariant:  t1() >= t0()
 

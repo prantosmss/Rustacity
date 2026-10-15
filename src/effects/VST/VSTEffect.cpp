@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   VSTEffect.cpp
 
@@ -24,11 +24,11 @@
 // WARNING:  This is NOT 64-bit safe
 // *******************************************************************
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 #include "VSTEffect.h"
 
 #if 0
-#if defined(BUILDING_AUDACITY)
+#if defined(BUILDING_RUSTACITY)
 #include "../../PlatformCompatibility.h"
 
 // Make the main function private
@@ -85,7 +85,7 @@
 #include "../../ShuttleGui.h"
 #include "../../effects/Effect.h"
 #include "../../widgets/valnum.h"
-#include "../../widgets/AudacityMessageBox.h"
+#include "../../widgets/RustacityMessageBox.h"
 #include "../../widgets/NumericTextCtrl.h"
 #include "../../xml/XMLFileReader.h"
 
@@ -93,7 +93,7 @@
 #include "../../widgets/WindowAccessible.h"
 #endif
 
-#include "audacity/ConfigInterface.h"
+#include "rustacity/ConfigInterface.h"
 
 #include <cstring>
 
@@ -138,7 +138,7 @@ static uint32_t reinterpretAsUint32(float f)
 // declared static so as not to clash with other builtin modules.
 //
 // ============================================================================
-DECLARE_MODULE_ENTRY(AudacityModule)
+DECLARE_MODULE_ENTRY(RustacityModule)
 {
    // Create our effects module and register
    // Trust the module manager not to leak this
@@ -342,7 +342,7 @@ VendorSymbol VSTEffectsModule::GetVendor()
 wxString VSTEffectsModule::GetVersion()
 {
    // This "may" be different if this were to be maintained as a separate DLL
-   return AUDACITY_VERSION_STRING;
+   return RUSTACITY_VERSION_STRING;
 }
 
 TranslatableString VSTEffectsModule::GetDescription()
@@ -975,10 +975,10 @@ intptr_t VSTEffect::AudioMaster(AEffect * effect,
          return 1;
 
       case audioMasterGetVendorVersion:
-         return (intptr_t) (AUDACITY_VERSION << 24 |
-                            AUDACITY_RELEASE << 16 |
-                            AUDACITY_REVISION << 8 |
-                            AUDACITY_MODLEVEL);
+         return (intptr_t) (RUSTACITY_VERSION << 24 |
+                            RUSTACITY_RELEASE << 16 |
+                            RUSTACITY_REVISION << 8 |
+                            RUSTACITY_MODLEVEL);
 
       // Some (older) effects depend on an effIdle call when requested.  An
       // example is the Antress Modern plugins which uses the call to update
@@ -1900,7 +1900,7 @@ void VSTEffect::ExportPresets()
    else
    {
       // This shouldn't happen, but complain anyway
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unrecognized file extension."),
          XO("Error Saving VST Presets"),
          wxOK | wxCENTRE,
@@ -1957,7 +1957,7 @@ void VSTEffect::ImportPresets()
    else
    {
       // This shouldn't happen, but complain anyway
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unrecognized file extension."),
          XO("Error Loading VST Presets"),
          wxOK | wxCENTRE,
@@ -1968,7 +1968,7 @@ void VSTEffect::ImportPresets()
 
    if (!success)
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to load presets file."),
          XO("Error Loading VST Presets"),
          wxOK | wxCENTRE,
@@ -3072,7 +3072,7 @@ bool VSTEffect::LoadFXB(const wxFileName & fn)
    ArrayOf<unsigned char> data{ size_t(f.Length()) };
    if (!data)
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to allocate memory when loading presets file."),
          XO("Error Loading VST Presets"),
          wxOK | wxCENTRE,
@@ -3087,7 +3087,7 @@ bool VSTEffect::LoadFXB(const wxFileName & fn)
       ssize_t len = f.Read((void *) bptr, f.Length());
       if (f.Error())
       {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("Unable to read presets file."),
             XO("Error Loading VST Presets"),
             wxOK | wxCENTRE,
@@ -3245,7 +3245,7 @@ bool VSTEffect::LoadFXP(const wxFileName & fn)
    ArrayOf<unsigned char> data{ size_t(f.Length()) };
    if (!data)
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Unable to allocate memory when loading presets file."),
          XO("Error Loading VST Presets"),
          wxOK | wxCENTRE,
@@ -3260,7 +3260,7 @@ bool VSTEffect::LoadFXP(const wxFileName & fn)
       ssize_t len = f.Read((void *) bptr, f.Length());
       if (f.Error())
       {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("Unable to read presets file."),
             XO("Error Loading VST Presets"),
             wxOK | wxCENTRE,
@@ -3457,7 +3457,7 @@ bool VSTEffect::LoadXML(const wxFileName & fn)
    if (!ok)
    {
       // Inform user of load failure
-      AudacityMessageBox(
+      RustacityMessageBox(
          reader.GetErrorStr(),
          XO("Error Loading VST Presets"),
          wxOK | wxCENTRE,
@@ -3475,7 +3475,7 @@ void VSTEffect::SaveFXB(const wxFileName & fn)
    wxFFile f(fullPath, wxT("wb"));
    if (!f.IsOpened())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not open file: \"%s\"").Format( fullPath ),
          XO("Error Saving VST Presets"),
          wxOK | wxCENTRE,
@@ -3543,7 +3543,7 @@ void VSTEffect::SaveFXB(const wxFileName & fn)
 
    if (f.Error())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Error writing to file: \"%s\"").Format( fullPath ),
          XO("Error Saving VST Presets"),
          wxOK | wxCENTRE,
@@ -3562,7 +3562,7 @@ void VSTEffect::SaveFXP(const wxFileName & fn)
    wxFFile f(fullPath, wxT("wb"));
    if (!f.IsOpened())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not open file: \"%s\"").Format( fullPath ),
          XO("Error Saving VST Presets"),
          wxOK | wxCENTRE,
@@ -3578,7 +3578,7 @@ void VSTEffect::SaveFXP(const wxFileName & fn)
    f.Write(buf.GetData(), buf.GetDataLen());
    if (f.Error())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Error writing to file: \"%s\"").Format( fullPath ),
          XO("Error Saving VST Presets"),
          wxOK | wxCENTRE,
@@ -3775,7 +3775,7 @@ bool VSTEffect::HandleXMLTag(const wxChar *tag, const wxChar **attrs)
             {
                auto msg = XO("This parameter file was saved from %s. Continue?")
                   .Format( value );
-               int result = AudacityMessageBox(
+               int result = RustacityMessageBox(
                   msg,
                   XO("Confirm"),
                   wxYES_NO,

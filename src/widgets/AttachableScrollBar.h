@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AttachableScrollBar.h
 
@@ -14,14 +14,14 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_ATTACHABLE_SCROLL_BAR__
-#define __AUDACITY_ATTACHABLE_SCROLL_BAR__
+#ifndef __RUSTACITY_ATTACHABLE_SCROLL_BAR__
+#define __RUSTACITY_ATTACHABLE_SCROLL_BAR__
 
 #include <wx/scrolbar.h> // to inherit
 
 class ViewInfo;
 
-class AUDACITY_DLL_API AttachableScrollBar final :
+class RUSTACITY_DLL_API AttachableScrollBar final :
    public wxScrollBar
 {
 public:
@@ -43,4 +43,4 @@ public:
    DECLARE_EVENT_TABLE()
 };
 
-#endif // __AUDACITY_ATTACHABLE_SCROLL_BAR__
+#endif // __RUSTACITY_ATTACHABLE_SCROLL_BAR__

@@ -1,13 +1,13 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ScoreAlignDialog.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SCORE_ALIGN_DIALOG__
-#define __AUDACITY_SCORE_ALIGN_DIALOG__
+#ifndef __RUSTACITY_SCORE_ALIGN_DIALOG__
+#define __RUSTACITY_SCORE_ALIGN_DIALOG__
 
 #include "../Experimental.h"
 

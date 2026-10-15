@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ErrorDialog.h
 
@@ -9,10 +9,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_ERRORDIALOG__
-#define __AUDACITY_ERRORDIALOG__
+#ifndef __RUSTACITY_ERRORDIALOG__
+#define __RUSTACITY_ERRORDIALOG__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include <wx/defs.h>
 #include <wx/msgdlg.h> // to inherit
@@ -20,7 +20,7 @@
 
 class AliasBlockFile;
 
-class AudacityProject;
+class RustacityProject;
 
 class ErrorDialog /* not final */ : public wxDialogWrapper
 {
@@ -61,13 +61,13 @@ void ShowModelessErrorDialog(wxWindow *parent,
 #include <wx/textdlg.h> // to inherit
 
 /**************************************************************************//**
-\class AudacityTextEntryDialog
+\class RustacityTextEntryDialog
 \brief Wrap wxTextEntryDialog so that caption IS translatable.
 ********************************************************************************/
-class AudacityTextEntryDialog : public wxTabTraversalWrapper< wxTextEntryDialog >
+class RustacityTextEntryDialog : public wxTabTraversalWrapper< wxTextEntryDialog >
 {
 public:
-    AudacityTextEntryDialog(
+    RustacityTextEntryDialog(
          wxWindow *parent,
          const TranslatableString& message,
          const TranslatableString& caption, // don't use = wxGetTextFromUserPromptStr,
@@ -86,4 +86,4 @@ private:
    bool mSetInsertionPointEnd{};
 };
 
-#endif // __AUDACITY_ERRORDIALOG__
+#endif // __RUSTACITY_ERRORDIALOG__

@@ -50,7 +50,7 @@ preferences.
 
 *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Shuttle.h"
 
 #include <wx/defs.h>

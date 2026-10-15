@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 EditCursorOverlay.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "EditCursorOverlay.h"
 
 #include "TrackView.h"
@@ -30,15 +30,15 @@ namespace {
    }
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory sOverlayKey{
-  []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory sOverlayKey{
+  []( RustacityProject &parent ){
      auto result = std::make_shared< EditCursorOverlay >( &parent );
      TrackPanel::Get( parent ).AddOverlay( result );
      return result;
    }
 };
 
-EditCursorOverlay::EditCursorOverlay(AudacityProject *project, bool isMaster)
+EditCursorOverlay::EditCursorOverlay(RustacityProject *project, bool isMaster)
    : mProject(project)
    , mIsMaster(isMaster)
    , mLastCursorX(-1)

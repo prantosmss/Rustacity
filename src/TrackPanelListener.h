@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TrackPanelListener.h
 
@@ -8,19 +8,19 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_PANEL_LISTENER__
-#define __AUDACITY_TRACK_PANEL_LISTENER__
+#ifndef __RUSTACITY_TRACK_PANEL_LISTENER__
+#define __RUSTACITY_TRACK_PANEL_LISTENER__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 enum class UndoPush : unsigned char;
 
 /*
 \brief A now badly named abstract class which was a failed attempt to let
-TrackPanel code pretend it doesn't completely know what an AudacityProject is
+TrackPanel code pretend it doesn't completely know what an RustacityProject is
 and use only a limited number of its services.
 */
-class AUDACITY_DLL_API TrackPanelListener /* not final */ {
+class RUSTACITY_DLL_API TrackPanelListener /* not final */ {
 
  public:
    TrackPanelListener(){};

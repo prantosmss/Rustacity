@@ -57,14 +57,14 @@ namespace MissingAliasFilesDialog {
    
    namespace{
       bool                 m_missingAliasFilesWarningShouldShow{ true };
-      std::weak_ptr< AudacityProject > m_LastMissingBlockFileProject;
+      std::weak_ptr< RustacityProject > m_LastMissingBlockFileProject;
       wxString             m_LastMissingBlockFilePath;
       std::mutex m_LastMissingBlockFileLock;
    }
    
    using Lock = std::unique_lock< std::mutex >;
    
-   void Show(AudacityProject *project,
+   void Show(RustacityProject *project,
              const TranslatableString &dlogTitle,
              const TranslatableString &message,
              const wxString &helpPage,
@@ -93,7 +93,7 @@ namespace MissingAliasFilesDialog {
       // but in practice Destroy() in OnOK does that
    }
    
-   wxDialog *Find( const AudacityProject &project )
+   wxDialog *Find( const RustacityProject &project )
    {
       auto &window = GetProjectFrame( project );
       auto begin = sDialogs.begin(), end = sDialogs.end(),
@@ -126,7 +126,7 @@ namespace MissingAliasFilesDialog {
          m_LastMissingBlockFilePath = wxString{};
    }
    
-   std::pair< wxString, std::shared_ptr<AudacityProject> > Marked()
+   std::pair< wxString, std::shared_ptr<RustacityProject> > Marked()
    {
       Lock lock{ m_LastMissingBlockFileLock };
       return { m_LastMissingBlockFilePath, m_LastMissingBlockFileProject.lock() };

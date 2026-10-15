@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2018 Audacity Team.
    File License: wxwidgets
 
@@ -21,7 +21,7 @@
 #include "Command.h"
 #include "CommandType.h"
 
-class OpenProjectCommand : public AudacityCommand
+class OpenProjectCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -33,7 +33,7 @@ public:
    void PopulateOrExchange(ShuttleGui & S) override;
    bool Apply(const CommandContext & context) override;
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_II#open_project");};
 public:
    wxString mFileName;
@@ -41,7 +41,7 @@ public:
    bool bHasAddToHistory;
 };
 
-class SaveProjectCommand : public AudacityCommand
+class SaveProjectCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -53,7 +53,7 @@ public:
    void PopulateOrExchange(ShuttleGui & S) override;
    bool Apply(const CommandContext & context) override;
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_II#save_project");};
 public:
    wxString mFileName;

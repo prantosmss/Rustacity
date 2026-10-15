@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ModuleManager.cpp
 
@@ -18,7 +18,7 @@ i.e. an alternative to the usual interface, for Audacity.
 
 *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "ModuleManager.h"
 
 #include "Experimental.h"
@@ -33,7 +33,7 @@ i.e. an alternative to the usual interface, for Audacity.
 
 #include "commands/ScriptCommandRelay.h"
 
-#include "audacity/PluginInterface.h"
+#include "rustacity/PluginInterface.h"
 
 #ifdef EXPERIMENTAL_MODULE_PREFS
 #include "Prefs.h"
@@ -42,7 +42,7 @@ i.e. an alternative to the usual interface, for Audacity.
 
 #include "widgets/MultiDialog.h"
 
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 
 #define initFnName      "ExtensionModuleInit"
 #define versionFnName   "GetVersionString"
@@ -110,7 +110,7 @@ bool Module::Load()
 
    if (!mLib->Load(mName, wxDL_LAZY | wxDL_QUIET)) {
       auto Error = wxString(wxSysErrorMsg());
-      AudacityMessageBox(XO("Unable to load the \"%s\" module.\n\nError: %s").Format(ShortName, Error),
+      RustacityMessageBox(XO("Unable to load the \"%s\" module.\n\nError: %s").Format(ShortName, Error),
                          XO("Module Unsuitable"));
       wxLogMessage(_("Unable to load the module \"%s\". Error: %s").Format(mName, Error));
       return false;
@@ -119,7 +119,7 @@ bool Module::Load()
    // Check version string matches.  (For now, they must match exactly)
    tVersionFn versionFn = (tVersionFn)(mLib->GetSymbol(wxT(versionFnName)));
    if (versionFn == NULL){
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("The module \"%s\" does not provide a version string.\n\nIt will not be loaded.")
             .Format( ShortName),
          XO("Module Unsuitable"));
@@ -129,8 +129,8 @@ bool Module::Load()
    }
 
    wxString moduleVersion = versionFn();
-   if( moduleVersion != AUDACITY_VERSION_STRING) {
-      AudacityMessageBox(
+   if( moduleVersion != RUSTACITY_VERSION_STRING) {
+      RustacityMessageBox(
          XO("The module \"%s\" is matched with Audacity version \"%s\".\n\nIt will not be loaded.")
             .Format(ShortName, moduleVersion),
          XO("Module Unsuitable"));
@@ -156,7 +156,7 @@ bool Module::Load()
 
    mDispatch = NULL;
 
-   AudacityMessageBox(
+   RustacityMessageBox(
       XO("The module \"%s\" failed to initialize.\n\nIt will not be loaded.").Format(ShortName),
       XO("Module Unsuitable"));
    wxLogMessage(wxString::Format(_("The module \"%s\" failed to initialize.\nIt will not be loaded."), mName));
@@ -233,14 +233,14 @@ ModuleManager::~ModuleManager()
 // static 
 void ModuleManager::Initialize(CommandHandler &cmdHandler)
 {
-   const auto &audacityPathList = FileNames::AudacityPathList();
+   const auto &audacityPathList = FileNames::RustacityPathList();
    FilePaths pathList;
    FilePaths files;
    wxString pathVar;
    size_t i;
 
    // Code from LoadLadspa that might be useful in load modules.
-   pathVar = wxGetenv(wxT("AUDACITY_MODULES_PATH"));
+   pathVar = wxGetenv(wxT("RUSTACITY_MODULES_PATH"));
    if (!pathVar.empty())
       FileNames::AddMultiPathsToPathList(pathVar, pathList);
 
@@ -339,7 +339,7 @@ void ModuleManager::Initialize(CommandHandler &cmdHandler)
          if (!module->HasDispatch() && !scriptFn && !pPanelHijack)
          {
             auto ShortName = wxFileName(files[i]).GetName();
-            AudacityMessageBox(
+            RustacityMessageBox(
                XO("The module \"%s\" does not provide any of the required functions.\n\nIt will not be loaded.").Format(ShortName),
                XO("Module Unsuitable"));
             wxLogMessage(wxString::Format(_("The module \"%s\" does not provide any of the required functions. It will not be loaded."), files[i]));
@@ -401,7 +401,7 @@ bool ModuleManager::DiscoverProviders()
    FilePaths pathList;
 
    // Code from LoadLadspa that might be useful in load modules.
-   wxString pathVar = wxString::FromUTF8(getenv("AUDACITY_MODULES_PATH"));
+   wxString pathVar = wxString::FromUTF8(getenv("RUSTACITY_MODULES_PATH"));
 
    if (!pathVar.empty())
    {

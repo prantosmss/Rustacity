@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   EffectsPrefs.cpp
 
@@ -17,7 +17,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "EffectsPrefs.h"
 
 #include "../Experimental.h"
@@ -252,7 +252,7 @@ bool EffectsPrefs::Commit()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "Effects",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew EffectsPrefs(parent, winid);

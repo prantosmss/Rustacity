@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ControlToolBar.cpp
 
@@ -30,7 +30,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "ControlToolBar.h"
 
 #include "../Experimental.h"
@@ -109,7 +109,7 @@ static const TranslatableString
 // Note that we use the legacy "Control" string as the section because this
 // gets written to prefs and cannot be changed in prefs to maintain backwards
 // compatibility
-ControlToolBar::ControlToolBar( AudacityProject &project )
+ControlToolBar::ControlToolBar( RustacityProject &project )
 : ToolBar(project, TransportBarID, XO("Transport"), wxT("Control"))
 {
    gPrefs->Read(wxT("/GUI/ErgonomicTransportButtons"), &mErgonomicTransportButtons, true);
@@ -123,23 +123,23 @@ ControlToolBar::~ControlToolBar()
 }
 
 
-ControlToolBar *ControlToolBar::Find( AudacityProject &project )
+ControlToolBar *ControlToolBar::Find( RustacityProject &project )
 {
    auto &toolManager = ToolManager::Get( project );
    return static_cast<ControlToolBar*>(
       toolManager.GetToolBar(TransportBarID) );
 }
 
-ControlToolBar &ControlToolBar::Get( AudacityProject &project )
+ControlToolBar &ControlToolBar::Get( RustacityProject &project )
 {
    auto &toolManager = ToolManager::Get( project );
    return *static_cast<ControlToolBar*>(
       toolManager.GetToolBar(TransportBarID) );
 }
 
-const ControlToolBar &ControlToolBar::Get( const AudacityProject &project )
+const ControlToolBar &ControlToolBar::Get( const RustacityProject &project )
 {
-   return Get( const_cast<AudacityProject&>( project )) ;
+   return Get( const_cast<RustacityProject&>( project )) ;
 }
 
 void ControlToolBar::Create(wxWindow * parent)
@@ -472,7 +472,7 @@ void ControlToolBar::Repaint( wxDC *dc )
 
 void ControlToolBar::EnableDisableButtons()
 {
-   AudacityProject *p = &mProject;
+   RustacityProject *p = &mProject;
    auto &projectAudioManager = ProjectAudioManager::Get( mProject );
    bool canStop = projectAudioManager.CanStopAudioStream();
 
@@ -662,7 +662,7 @@ void ControlToolBar::OnRewind(wxCommandEvent & WXUNUSED(evt))
    mRewind->PushDown();
    mRewind->PopUp();
 
-   AudacityProject *p = &mProject;
+   RustacityProject *p = &mProject;
    {
       ProjectAudioManager::Get( *p ).StopIfPaused();
       ProjectWindow::Get( *p ).Rewind(mRewind->WasShiftDown());
@@ -674,7 +674,7 @@ void ControlToolBar::OnFF(wxCommandEvent & WXUNUSED(evt))
    mFF->PushDown();
    mFF->PopUp();
 
-   AudacityProject *p = &mProject;
+   RustacityProject *p = &mProject;
 
    {
       ProjectAudioManager::Get( *p ).StopIfPaused();
@@ -685,7 +685,7 @@ void ControlToolBar::OnFF(wxCommandEvent & WXUNUSED(evt))
 // works out the width of the field in the status bar needed for the state (eg play, record pause)
 static ProjectStatus::RegisteredStatusWidthFunction
 registeredStatusWidthFunction{
-   []( const AudacityProject &, StatusBarField field )
+   []( const RustacityProject &, StatusBarField field )
       -> ProjectStatus::StatusWidthResult
    {
       if ( field == stateStatusBarField ) {
@@ -801,7 +801,7 @@ void ControlToolBar::StopScrolling()
 }
 
 static RegisteredToolbarFactory factory{ TransportBarID,
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       return ToolBar::Holder{ safenew ControlToolBar{ project } }; }
 };
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   FileFormatPrefs.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_FILE_FORMAT_PREFS__
-#define __AUDACITY_FILE_FORMAT_PREFS__
+#ifndef __RUSTACITY_FILE_FORMAT_PREFS__
+#define __RUSTACITY_FILE_FORMAT_PREFS__
 
 #include <wx/defs.h>
 

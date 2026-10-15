@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackSelectHandle.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_SELECT_HANDLE__
-#define __AUDACITY_TRACK_SELECT_HANDLE__
+#ifndef __RUSTACITY_TRACK_SELECT_HANDLE__
+#define __RUSTACITY_TRACK_SELECT_HANDLE__
 
 #include "../../UIHandle.h"
 
@@ -32,20 +32,20 @@ public:
    virtual ~TrackSelectHandle();
 
    Result Click
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    Result Drag
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    HitTestPreview Preview
-      (const TrackPanelMouseState &state, AudacityProject *pProject)
+      (const TrackPanelMouseState &state, RustacityProject *pProject)
       override;
 
    Result Release
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject,
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject,
        wxWindow *pParent) override;
 
-   Result Cancel(AudacityProject *) override;
+   Result Cancel(RustacityProject *) override;
 
    bool StopsOnKeystroke() override { return true; }
 
@@ -60,7 +60,7 @@ private:
    int mRearrangeCount {};
 
    void CalculateRearrangingThresholds(
-      const wxMouseEvent & event, AudacityProject *project);
+      const wxMouseEvent & event, RustacityProject *project);
 };
 
 #endif

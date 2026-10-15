@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WaveTrackVZoomHandle.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WAVE_TRACK_VZOOM_HANDLE__
-#define __AUDACITY_WAVE_TRACK_VZOOM_HANDLE__
+#ifndef __RUSTACITY_WAVE_TRACK_VZOOM_HANDLE__
+#define __RUSTACITY_WAVE_TRACK_VZOOM_HANDLE__
 
 class wxMouseState;
 class PopupMenuTable;
@@ -27,18 +27,18 @@ namespace WaveTrackVZoomHandle
 
    bool IsDragZooming(int zoomStart, int zoomEnd);
 
-   using DoZoomFunction = void (*)( AudacityProject *pProject,
+   using DoZoomFunction = void (*)( RustacityProject *pProject,
        WaveTrack *pTrack,
        WaveTrackViewConstants::ZoomActions ZoomKind,
        const wxRect &rect, int zoomStart, int zoomEnd,
        bool fixedMousePoint);
 
    Result DoDrag(
-      const TrackPanelMouseEvent &event, AudacityProject *pProject,
+      const TrackPanelMouseEvent &event, RustacityProject *pProject,
       int zoomStart, int &zoomEnd );
 
    Result DoRelease(
-      const TrackPanelMouseEvent &event, AudacityProject *pProject,
+      const TrackPanelMouseEvent &event, RustacityProject *pProject,
       wxWindow *pParent, WaveTrack *pTrack, const wxRect &mRect,
       DoZoomFunction doZoom, PopupMenuTable &table,
       int zoomStart, int zoomEnd );
@@ -59,7 +59,7 @@ public:
    struct InitMenuData
    {
    public:
-      AudacityProject &project;
+      RustacityProject &project;
       WaveTrack *pTrack;
       wxRect rect;
       unsigned result;

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectHistory.cpp
 
@@ -20,20 +20,20 @@ Paul Licameli split from ProjectManager.cpp
 #include "ondemand/ODComputeSummaryTask.h"
 #include "ondemand/ODManager.h"
 
-static AudacityProject::AttachedObjects::RegisteredFactory sProjectHistoryKey {
-   []( AudacityProject &project ) {
+static RustacityProject::AttachedObjects::RegisteredFactory sProjectHistoryKey {
+   []( RustacityProject &project ) {
       return std::make_shared< ProjectHistory >( project );
    }
 };
 
-ProjectHistory &ProjectHistory::Get( AudacityProject &project )
+ProjectHistory &ProjectHistory::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< ProjectHistory >( sProjectHistoryKey );
 }
 
-const ProjectHistory &ProjectHistory::Get( const AudacityProject &project )
+const ProjectHistory &ProjectHistory::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
 ProjectHistory::~ProjectHistory() = default;

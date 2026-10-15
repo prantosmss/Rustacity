@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   BlockFile.cpp
 
@@ -39,7 +39,7 @@ out.
 
 *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "BlockFile.h"
 
 #include <float.h>
@@ -66,7 +66,7 @@ out.
 #endif
 
 static const int headerTagLen = 20;
-static char headerTag[headerTagLen + 1] = "AudacityBlockFile112";
+static char headerTag[headerTagLen + 1] = "RustacityBlockFile112";
 
 SummaryInfo::SummaryInfo(size_t samples)
 {

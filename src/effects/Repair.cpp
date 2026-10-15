@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Repair.cpp
 
@@ -21,7 +21,7 @@ the audio, rather than actually finding the clicks.
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Repair.h"
 
 #include <math.h>
@@ -30,7 +30,7 @@ the audio, rather than actually finding the clicks.
 
 #include "../InterpolateAudio.h"
 #include "../WaveTrack.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 #include "LoadEffects.h"
 

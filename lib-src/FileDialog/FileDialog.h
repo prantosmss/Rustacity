@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   FileDialog.h
 
@@ -19,11 +19,11 @@ custom controls.
 
 #include <wx/filedlg.h> // to inherit
 
-#ifndef AUDACITY_DLL_API
-#define AUDACITY_DLL_API
+#ifndef RUSTACITY_DLL_API
+#define RUSTACITY_DLL_API
 #endif
 
-class AUDACITY_DLL_API FileDialogBase : public wxFileDialogBase
+class RUSTACITY_DLL_API FileDialogBase : public wxFileDialogBase
 {
 public:
    FileDialogBase();

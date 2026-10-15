@@ -29,8 +29,8 @@
   you need to use doubles.
 
 **********************************************************************/
-#ifndef __AUDACITY_FFT_H__
-#define __AUDACITY_FFT_H__
+#ifndef __RUSTACITY_FFT_H__
+#define __RUSTACITY_FFT_H__
 
 #include <wx/defs.h>
 

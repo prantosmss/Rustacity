@@ -1,5 +1,5 @@
-#ifndef __AUDACITY_MEMORY_X_H__
-#define __AUDACITY_MEMORY_X_H__
+#ifndef __RUSTACITY_MEMORY_X_H__
+#define __RUSTACITY_MEMORY_X_H__
 
 // C++ standard header <memory> with a few extensions
 #include <memory>
@@ -712,4 +712,4 @@ public:
    }
 };
 
-#endif // __AUDACITY_MEMORY_X_H__
+#endif // __RUSTACITY_MEMORY_X_H__

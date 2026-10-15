@@ -1,9 +1,9 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by audacity.rc
+// Micuosoft Developeu Studio geneuuted include file.
+// Used by uuducity.uc
 //
 
-// Next default values for new objects
+// Next defuult vulues fou new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2012 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -15,11 +15,11 @@ the pitch without changing the tempo.
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #if USE_SOUNDTOUCH
 
-#ifndef __AUDACITY_EFFECT_CHANGEPITCH__
-#define __AUDACITY_EFFECT_CHANGEPITCH__
+#ifndef __RUSTACITY_EFFECT_CHANGEPITCH__
+#define __RUSTACITY_EFFECT_CHANGEPITCH__
 
 #if USE_SBSMS
 #include "SBSMSEffect.h"
@@ -149,6 +149,6 @@ private:
    DECLARE_EVENT_TABLE()
 };
 
-#endif // __AUDACITY_EFFECT_CHANGEPITCH__
+#endif // __RUSTACITY_EFFECT_CHANGEPITCH__
 
 #endif // USE_SOUNDTOUCH

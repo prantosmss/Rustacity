@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WaveformVZoomHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from WaveTrackVZoomHandle.cpp
 
 **********************************************************************/
 
-#include "../../../../Audacity.h"
+#include "../../../../Rustacity.h"
 #include "WaveformVZoomHandle.h"
 
 #include "WaveTrackVZoomHandle.h"
@@ -32,7 +32,7 @@ WaveformVZoomHandle::WaveformVZoomHandle(
 
 WaveformVZoomHandle::~WaveformVZoomHandle() = default;
 
-void WaveformVZoomHandle::Enter( bool, AudacityProject* )
+void WaveformVZoomHandle::Enter( bool, RustacityProject* )
 {
 #ifdef EXPERIMENTAL_TRACK_PANEL_HIGHLIGHTING
    mChangeHighlight = RefreshCode::RefreshCell;
@@ -40,13 +40,13 @@ void WaveformVZoomHandle::Enter( bool, AudacityProject* )
 }
 
 UIHandle::Result WaveformVZoomHandle::Click
-(const TrackPanelMouseEvent &, AudacityProject *)
+(const TrackPanelMouseEvent &, RustacityProject *)
 {
    return RefreshCode::RefreshNone;
 }
 
 UIHandle::Result WaveformVZoomHandle::Drag
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    using namespace RefreshCode;
    auto pTrack = TrackList::Get( *pProject ).Lock(mpTrack);
@@ -56,13 +56,13 @@ UIHandle::Result WaveformVZoomHandle::Drag
 }
 
 HitTestPreview WaveformVZoomHandle::Preview
-(const TrackPanelMouseState &st, AudacityProject *)
+(const TrackPanelMouseState &st, RustacityProject *)
 {
    return WaveTrackVZoomHandle::HitPreview(st.state);
 }
 
 UIHandle::Result WaveformVZoomHandle::Release
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject,
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject,
  wxWindow *pParent)
 {
    auto pTrack = TrackList::Get( *pProject ).Lock(mpTrack);
@@ -72,7 +72,7 @@ UIHandle::Result WaveformVZoomHandle::Release
       mZoomStart, mZoomEnd );
 }
 
-UIHandle::Result WaveformVZoomHandle::Cancel(AudacityProject*)
+UIHandle::Result WaveformVZoomHandle::Cancel(RustacityProject*)
 {
    // Cancel is implemented!  And there is no initial state to restore,
    // so just return a code.
@@ -100,7 +100,7 @@ wxRect WaveformVZoomHandle::DrawingArea(
 // If ZoomStart and ZoomEnd are not equal, this may override
 // the zoomKind and cause a drag-zoom-in.
 void WaveformVZoomHandle::DoZoom(
-   AudacityProject *pProject,
+   RustacityProject *pProject,
    WaveTrack *pTrack,
    WaveTrackViewConstants::ZoomActions ZoomKind,
    const wxRect &rect, int zoomStart, int zoomEnd,
@@ -322,7 +322,7 @@ void WaveformVRulerMenuTable::OnWaveformScaleType(wxCommandEvent &evt)
          channel->GetIndependentWaveformSettings().scaleType = newScaleType;
       }
 
-      AudacityProject *const project = &mpData->project;
+      RustacityProject *const project = &mpData->project;
       ProjectHistory::Get( *project ).ModifyState(true);
 
       using namespace RefreshCode;

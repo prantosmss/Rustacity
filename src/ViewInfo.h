@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ViewInfo.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_VIEWINFO__
-#define __AUDACITY_VIEWINFO__
+#ifndef __RUSTACITY_VIEWINFO__
+#define __RUSTACITY_VIEWINFO__
 
 #include <utility>
 #include <vector>
@@ -33,7 +33,7 @@ struct SelectedRegionEvent : public wxEvent
 };
 
 // To do:  distinguish time changes from frequency changes perhaps?
-wxDECLARE_EXPORTED_EVENT( AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT( RUSTACITY_DLL_API,
                           EVT_SELECTED_REGION_CHANGE, SelectedRegionEvent );
 
 // This heavyweight wrapper of the SelectedRegion structure emits events
@@ -167,12 +167,12 @@ private:
    bool mLocked{ false };
 };
 
-class AUDACITY_DLL_API ViewInfo final
+class RUSTACITY_DLL_API ViewInfo final
    : public wxEvtHandler, public ZoomInfo
 {
 public:
-   static ViewInfo &Get( AudacityProject &project );
-   static const ViewInfo &Get( const AudacityProject &project );
+   static ViewInfo &Get( RustacityProject &project );
+   static const ViewInfo &Get( const RustacityProject &project );
 
    ViewInfo(double start, double screenDuration, double pixelsPerSecond);
    ViewInfo( const ViewInfo & ) PROHIBITED;

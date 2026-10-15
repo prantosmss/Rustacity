@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WavelTrackSliderHandles.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WAVE_TRACK_SLIDER_HANDLES__
-#define __AUDACITY_WAVE_TRACK_SLIDER_HANDLES__
+#ifndef __RUSTACITY_WAVE_TRACK_SLIDER_HANDLES__
+#define __RUSTACITY_WAVE_TRACK_SLIDER_HANDLES__
 
 #include "../../../ui/SliderHandle.h"
 
@@ -34,12 +34,12 @@ public:
 protected:
    float GetValue() override;
    Result SetValue
-      (AudacityProject *pProject, float newValue) override;
+      (RustacityProject *pProject, float newValue) override;
    Result CommitChanges
-      (const wxMouseEvent &event, AudacityProject *pProject) override;
+      (const wxMouseEvent &event, RustacityProject *pProject) override;
 
    TranslatableString Tip(
-      const wxMouseState &state, AudacityProject &) const override;
+      const wxMouseState &state, RustacityProject &) const override;
 
    bool StopsOnKeystroke () override { return true; }
 
@@ -69,12 +69,12 @@ public:
 
 protected:
    float GetValue() override;
-   Result SetValue(AudacityProject *pProject, float newValue) override;
+   Result SetValue(RustacityProject *pProject, float newValue) override;
    Result CommitChanges
-      (const wxMouseEvent &event, AudacityProject *pProject) override;
+      (const wxMouseEvent &event, RustacityProject *pProject) override;
 
    TranslatableString Tip(
-      const wxMouseState &state, AudacityProject &) const override;
+      const wxMouseState &state, RustacityProject &) const override;
 
    bool StopsOnKeystroke () override { return true; }
 

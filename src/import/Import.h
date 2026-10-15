@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Import.h
 
@@ -13,7 +13,7 @@
 
 #include "ImportRaw.h" // defines TrackHolders
 #include "ImportForwards.h"
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 #include <vector>
 #include <wx/tokenzr.h> // for enum wxStringTokenizerMode
 
@@ -24,7 +24,7 @@
 
 class wxArrayString;
 class wxListBox;
-class AudacityProject;
+class RustacityProject;
 class Tags;
 class TrackFactory;
 class Track;
@@ -164,7 +164,7 @@ public:
     std::unique_ptr<ExtImportItem> CreateDefaultImportItem();
 
    // if false, the import failed and errorMessage will be set.
-   bool Import( AudacityProject &project,
+   bool Import( RustacityProject &project,
               const FilePath &fName,
               TrackFactory *trackFactory,
               TrackHolders &tracks,

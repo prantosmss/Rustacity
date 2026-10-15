@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   VSTControlOSX.mm
 
@@ -21,7 +21,7 @@
       
 **********************************************************************/
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "VSTControlOSX.h"
 
 #include "../../MemoryX.h"

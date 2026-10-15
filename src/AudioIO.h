@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AudioIO.h
 
@@ -10,10 +10,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_AUDIO_IO__
-#define __AUDACITY_AUDIO_IO__
+#ifndef __RUSTACITY_AUDIO_IO__
+#define __RUSTACITY_AUDIO_IO__
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 
 #include "AudioIOBase.h" // to inherit
 
@@ -54,7 +54,7 @@ class Resample;
 class AudioThread;
 class SelectedRegion;
 
-class AudacityProject;
+class RustacityProject;
 
 class WaveTrack;
 using WaveTrackArray = std::vector < std::shared_ptr < WaveTrack > >;
@@ -65,11 +65,11 @@ bool ValidateDeviceNames();
 #define MAX_MIDI_BUFFER_SIZE 5000
 #define DEFAULT_SYNTH_LATENCY 5
 
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_AUDIOIO_PLAYBACK, wxCommandEvent);
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_AUDIOIO_CAPTURE, wxCommandEvent);
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_AUDIOIO_MONITOR, wxCommandEvent);
 
 // PRL:
@@ -228,7 +228,7 @@ void MessageBuffer<Data>::Write( Data &&data )
    mSlots[idx].mBusy.store( false, std::memory_order_release );
 }
 
-class AUDACITY_DLL_API AudioIoCallback /* not final */
+class RUSTACITY_DLL_API AudioIoCallback /* not final */
    : public AudioIOBase
 {
 public:
@@ -545,7 +545,7 @@ protected:
 
 };
 
-class AUDACITY_DLL_API AudioIO final
+class RUSTACITY_DLL_API AudioIO final
    : public AudioIoCallback
 {
 
@@ -607,7 +607,7 @@ public:
    wxString LastPaErrorString();
 
    wxLongLong GetLastPlaybackTime() const { return mLastPlaybackTimeMillis; }
-   AudacityProject *GetOwningProject() const { return mOwningProject; }
+   RustacityProject *GetOwningProject() const { return mOwningProject; }
 
 #ifdef EXPERIMENTAL_MIDI_OUT
    /** \brief Compute the current PortMidi timestamp time.
@@ -691,7 +691,7 @@ public:
       double AILAGetLastDecisionTime();
    #endif
 
-   bool IsAvailable(AudacityProject *projecT) const;
+   bool IsAvailable(RustacityProject *projecT) const;
 
    /** \brief Return a valid sample rate that is supported by the current I/O
    * device(s).

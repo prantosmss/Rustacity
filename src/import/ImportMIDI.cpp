@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportMIDI.cpp
 
@@ -8,7 +8,7 @@
 
 **********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "ImportMIDI.h"
 
 #include <wx/defs.h>
@@ -27,11 +27,11 @@
 #include "../ProjectHistory.h"
 #include "../ProjectWindow.h"
 #include "../SelectUtilities.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/FileHistory.h"
 
 // Given an existing project, try to import into it, return true on success
-bool DoImportMIDI( AudacityProject &project, const FilePath &fileName )
+bool DoImportMIDI( RustacityProject &project, const FilePath &fileName )
 {
    auto &tracks = TrackList::Get( project );
    auto newTrack = TrackFactory::Get( project ).NewNoteTrack();
@@ -59,7 +59,7 @@ bool DoImportMIDI( AudacityProject &project, const FilePath &fileName )
 bool ImportMIDI(const FilePath &fName, NoteTrack * dest)
 {
    if (fName.length() <= 4){
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not open file %s: Filename too short.").Format( fName ) );
       return false;
    }
@@ -68,14 +68,14 @@ bool ImportMIDI(const FilePath &fName, NoteTrack * dest)
    if (fName.Right(4).CmpNoCase(wxT(".mid")) == 0 || fName.Right(5).CmpNoCase(wxT(".midi")) == 0)
       is_midi = true;
    else if(fName.Right(4).CmpNoCase(wxT(".gro")) != 0) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not open file %s: Incorrect filetype.").Format( fName ) );
       return false;
    }
 
    wxFFile mf(fName, wxT("rb"));
    if (!mf.IsOpened()) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not open file %s.").Format( fName ) );
       return false;
    }
@@ -85,7 +85,7 @@ bool ImportMIDI(const FilePath &fName, NoteTrack * dest)
 
    //Should we also check if(seq->tracks() == 0) ?
    if(new_seq->get_read_error() == alg_error_open){
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not open file %s.").Format( fName ) );
       mf.Close();
       return false;

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Prefs.cpp
 
@@ -50,7 +50,7 @@
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Prefs.h"
 
 #include <wx/defs.h>
@@ -63,9 +63,9 @@
 #include "Internat.h"
 #include "MemoryX.h"
 
-std::unique_ptr<AudacityPrefs> ugPrefs {};
+std::unique_ptr<RustacityPrefs> ugPrefs {};
 
-AudacityPrefs *gPrefs = NULL;
+RustacityPrefs *gPrefs = NULL;
 int gMenusDirty = 0;
 
 wxDEFINE_EVENT(EVT_PREFS_UPDATE, wxCommandEvent);
@@ -172,7 +172,7 @@ static void CopyEntriesRecursive(wxString path, wxConfigBase *src, wxConfigBase 
 }
 #endif
 
-AudacityPrefs::AudacityPrefs(const wxString& appName,
+RustacityPrefs::RustacityPrefs(const wxString& appName,
                const wxString& vendorName,
                const wxString& localFilename,
                const wxString& globalFilename,
@@ -193,7 +193,7 @@ void InitPreferences( const wxFileName &configFileName )
 {
    wxString appName = wxTheApp->GetAppName();
 
-   ugPrefs = std::make_unique<AudacityPrefs>
+   ugPrefs = std::make_unique<RustacityPrefs>
       (appName, wxEmptyString,
        configFileName.GetFullPath(),
        wxEmptyString, wxCONFIG_USE_LOCAL_FILE);

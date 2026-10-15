@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LangChoice.h
 
@@ -12,11 +12,11 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_LANG_CHOICE__
-#define __AUDACITY_LANG_CHOICE__
+#ifndef __RUSTACITY_LANG_CHOICE__
+#define __RUSTACITY_LANG_CHOICE__
 
 class wxString;
 
 wxString ChooseLanguage(wxWindow *parent);
 
-#endif // __AUDACITY_LANG_CHOICE__
+#endif // __RUSTACITY_LANG_CHOICE__

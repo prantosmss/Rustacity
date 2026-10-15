@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Benchmark.cpp
 
@@ -15,7 +15,7 @@ of the BlockFile system.
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Benchmark.h"
 
 #include <wx/app.h>
@@ -45,7 +45,7 @@ of the BlockFile system.
 #include "ViewInfo.h"
 
 #include "FileNames.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/wxPanelWrapper.h"
 
 class BenchmarkDialog final : public wxDialogWrapper
@@ -89,7 +89,7 @@ private:
 void RunBenchmark( wxWindow *parent, const ProjectSettings &settings )
 {
    /*
-   int action = AudacityMessageBox(
+   int action = RustacityMessageBox(
 XO("This will close all project windows (without saving)\nand open the Audacity Benchmark dialog.\n\nAre you sure you want to do this?"),
       XO("Benchmark"),
       wxYES_NO | wxICON_EXCLAMATION,
@@ -330,19 +330,19 @@ void BenchmarkDialog::OnRun( wxCommandEvent & WXUNUSED(event))
    mRandSeedStr.ToLong(&randSeed);
 
    if (blockSize < 1 || blockSize > 1024) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Block size should be in the range 1 - 1024 KB.") );
       return;
    }
 
    if (numEdits < 1 || numEdits > 10000) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Number of edits should be in the range 1 - 10000.") );
       return;
    }
 
    if (dataSize < 1 || dataSize > 2000) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Test data size should be in the range 1 - 2000 MB.") );
       return;
    }
@@ -454,7 +454,7 @@ void BenchmarkDialog::OnRun( wxCommandEvent & WXUNUSED(event))
       try {
          tmp = t->Cut(double (x0 * chunkSize), double ((x0 + xlen) * chunkSize));
       }
-      catch (const AudacityException&) {
+      catch (const RustacityException&) {
          Printf( XO("Trial %d\n").Format( z ) );
          Printf( XO("Cut (%ld, %ld) failed.\n")
             .Format( (x0 * chunkSize), (x0 + xlen) * chunkSize) );
@@ -476,7 +476,7 @@ void BenchmarkDialog::OnRun( wxCommandEvent & WXUNUSED(event))
       try {
          t->Paste((double)(y0 * chunkSize), tmp.get());
       }
-      catch (const AudacityException&) {
+      catch (const RustacityException&) {
          Printf( XO("Trial %d\nFailed on Paste.\n").Format( z ) );
          goto fail;
       }
@@ -514,7 +514,7 @@ void BenchmarkDialog::OnRun( wxCommandEvent & WXUNUSED(event))
    Printf( XO("Checking file pointer leaks:\n") );
    Printf( XO("Track # blocks: %ld\n").Format( t->GetBlockArray()->size() ) );
    Printf( XO("Disk # blocks: \n") );
-   system("ls .audacity_temp/* | wc --lines");
+   system("ls .rustacity_temp/* | wc --lines");
 #endif
 
    Printf( XO("Doing correctness check...\n") );

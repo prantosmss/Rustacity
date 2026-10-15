@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TimeShiftHandle.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TIMESHIFT_HANDLE__
-#define __AUDACITY_TIMESHIFT_HANDLE__
+#ifndef __RUSTACITY_TIMESHIFT_HANDLE__
+#define __RUSTACITY_TIMESHIFT_HANDLE__
 
 #include "../../UIHandle.h"
 
@@ -46,7 +46,7 @@ class TimeShiftHandle final : public UIHandle
 {
    TimeShiftHandle(const TimeShiftHandle&) = delete;
    static HitTestPreview HitPreview
-      (const AudacityProject *pProject, bool unsafe);
+      (const RustacityProject *pProject, bool unsafe);
 
 public:
    explicit TimeShiftHandle
@@ -84,23 +84,23 @@ public:
 
    virtual ~TimeShiftHandle();
 
-   void Enter(bool forward, AudacityProject *) override;
+   void Enter(bool forward, RustacityProject *) override;
 
    Result Click
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    Result Drag
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    HitTestPreview Preview
-      (const TrackPanelMouseState &state, AudacityProject *pProject)
+      (const TrackPanelMouseState &state, RustacityProject *pProject)
       override;
 
    Result Release
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject,
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject,
        wxWindow *pParent) override;
 
-   Result Cancel(AudacityProject *pProject) override;
+   Result Cancel(RustacityProject *pProject) override;
 
    bool StopsOnKeystroke() override { return true; }
 

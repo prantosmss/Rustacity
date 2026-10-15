@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AButton.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_BUTTON__
-#define __AUDACITY_BUTTON__
+#ifndef __RUSTACITY_BUTTON__
+#define __RUSTACITY_BUTTON__
 
 #include <vector>
 

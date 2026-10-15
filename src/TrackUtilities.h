@@ -1,6 +1,6 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  TrackUtilities.h
  
@@ -8,10 +8,10 @@
  
  **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_UTILITIES__
-#define __AUDACITY_TRACK_UTILITIES__
+#ifndef __RUSTACITY_TRACK_UTILITIES__
+#define __RUSTACITY_TRACK_UTILITIES__
 
-class AudacityProject;
+class RustacityProject;
 class Track;
 
 namespace TrackUtilities {
@@ -20,14 +20,14 @@ namespace TrackUtilities {
       OnMoveUpID, OnMoveDownID, OnMoveTopID, OnMoveBottomID
    };
    /// Move a track up, down, to top or to bottom.
-   void DoMoveTrack( AudacityProject &project, Track* target, MoveChoice choice );
+   void DoMoveTrack( RustacityProject &project, Track* target, MoveChoice choice );
    // "exclusive" mute means mute the chosen track and unmute all others.
-   void DoTrackMute( AudacityProject &project, Track *pTrack, bool exclusive );
+   void DoTrackMute( RustacityProject &project, Track *pTrack, bool exclusive );
    // Type of solo (standard or simple) follows the set preference, unless
    // exclusive == true, which causes the opposite behavior.
-   void DoTrackSolo( AudacityProject &project, Track *pTrack, bool exclusive );
-   void DoRemoveTrack( AudacityProject &project, Track * toRemove );
-   void DoRemoveTracks( AudacityProject & );
+   void DoTrackSolo( RustacityProject &project, Track *pTrack, bool exclusive );
+   void DoRemoveTrack( RustacityProject &project, Track * toRemove );
+   void DoRemoveTracks( RustacityProject & );
 
 }
 

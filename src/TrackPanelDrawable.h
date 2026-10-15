@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackPanelDrawable.h
 
@@ -8,14 +8,14 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_PANEL_DRAWABLE__
-#define __AUDACITY_TRACK_PANEL_DRAWABLE__
+#ifndef __RUSTACITY_TRACK_PANEL_DRAWABLE__
+#define __RUSTACITY_TRACK_PANEL_DRAWABLE__
 
 struct TrackPanelDrawingContext;
 class wxRect;
 
 /// \brief Drawing interface common to cells, groups of cells, and temporary handles in CellularPanel
-class AUDACITY_DLL_API TrackPanelDrawable {
+class RUSTACITY_DLL_API TrackPanelDrawable {
 public:
    virtual ~TrackPanelDrawable() = 0;
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ModTrackPanelCallback.cpp
 
@@ -27,7 +27,7 @@ click from the menu into the actual function to be called.
 
 #include <wx/wx.h>
 #include "ModTrackPanelCallback.h"
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "ShuttleGui.h"
 #include "Project.h"
 #include "ModuleManager.h"
@@ -120,7 +120,7 @@ void ModTrackPanelCallback::OnFuncReplaceTrackPanel()
    // Upgrade the factory.  Now all TrackPanels will be created as TrackPanel 2's
 
 #if 0
-   AudacityProject *p = GetActiveProject();
+   RustacityProject *p = GetActiveProject();
    wxASSERT( p!= NULL );
    // Change it's type (No new storage allocated).
    TrackPanel2::Upgrade( &p->mTrackPanel );
@@ -149,7 +149,7 @@ MOD_TRACK_PANEL_DLL_API wxChar * GetVersionString()
    // of Audacity it is built with. 
    // For now, the versions must match exactly for Audacity to 
    // agree to load the module.
-   return AUDACITY_VERSION_STRING;
+   return RUSTACITY_VERSION_STRING;
 }
 
 // This is the function that connects us to Audacity.
@@ -168,7 +168,7 @@ MOD_TRACK_PANEL_DLL_API int ModuleDispatch(ModuleDispatchTypes type)
    case ProjectInitialized:
    case MenusRebuilt:
       {
-         AudacityProject *p = GetActiveProject();
+         RustacityProject *p = GetActiveProject();
          if( p== NULL )
             return 0;
 

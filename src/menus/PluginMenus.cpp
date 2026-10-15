@@ -1,4 +1,4 @@
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "../Experimental.h"
 
 #include "../AudioIO.h"
@@ -23,8 +23,8 @@
 // private helper classes and functions
 namespace {
 
-AudacityProject::AttachedWindows::RegisteredFactory sMacrosWindowKey{
-   []( AudacityProject &parent ) -> wxWeakRef< wxWindow > {
+RustacityProject::AttachedWindows::RegisteredFactory sMacrosWindowKey{
+   []( RustacityProject &parent ) -> wxWeakRef< wxWindow > {
       auto &window = ProjectWindow::Get( parent );
       return safenew MacrosWindow(
          &window, parent, true
@@ -32,7 +32,7 @@ AudacityProject::AttachedWindows::RegisteredFactory sMacrosWindowKey{
    }
 };
 
-void DoManagePluginsMenu(AudacityProject &project, EffectType type)
+void DoManagePluginsMenu(RustacityProject &project, EffectType type)
 {
    auto &window = GetProjectFrame( project );
    if (PluginManager::Get().ShowManager(&window, type))
@@ -535,9 +535,9 @@ void OnAudacityCommand(const CommandContext & ctx)
 
 } // namespace
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static PluginActions::Handler instance;
    return instance;
 };
@@ -721,7 +721,7 @@ BaseItemSharedPtr GenerateMenu()
 
       Section( "Generators",
          // Delayed evaluation:
-         [](AudacityProject &)
+         [](RustacityProject &)
          { return Items( wxEmptyString, PopulateEffectsMenu(
             EffectTypeGenerate,
             AudioIONotBusyFlag(),
@@ -734,7 +734,7 @@ BaseItemSharedPtr GenerateMenu()
 
 static const ReservedCommandFlag
 &IsRealtimeNotActiveFlag() { static ReservedCommandFlag flag{
-   [](const AudacityProject &){
+   [](const RustacityProject &){
       return !RealtimeEffectManager::Get().RealtimeIsActive();
    }
 }; return flag; }  //lll
@@ -761,7 +761,7 @@ BaseItemSharedPtr EffectMenu()
 
       Section( "RepeatLast",
          // Delayed evaluation:
-         [](AudacityProject &project)
+         [](RustacityProject &project)
          {
             const auto &lastEffect = MenuManager::Get(project).mLastEffect;
             TranslatableString buildMenuLabel;
@@ -781,7 +781,7 @@ BaseItemSharedPtr EffectMenu()
 
       Section( "Effects",
          // Delayed evaluation:
-         [](AudacityProject &)
+         [](RustacityProject &)
          { return Items( wxEmptyString, PopulateEffectsMenu(
             EffectTypeProcess,
             AudioIONotBusyFlag() | TimeSelectedFlag() | WaveTracksSelectedFlag(),
@@ -816,7 +816,7 @@ BaseItemSharedPtr AnalyzeMenu()
          Items( "Windows" ),
 
          // Delayed evaluation:
-         [](AudacityProject&)
+         [](RustacityProject&)
          { return Items( wxEmptyString, PopulateEffectsMenu(
             EffectTypeAnalyze,
             AudioIONotBusyFlag() | TimeSelectedFlag() | WaveTracksSelectedFlag(),
@@ -861,7 +861,7 @@ BaseItemSharedPtr ToolsMenu()
 
             Section( "",
                // Delayed evaluation:
-               [](AudacityProject&)
+               [](RustacityProject&)
                { return Items( wxEmptyString, PopulateMacrosMenu( AudioIONotBusyFlag() ) ); }
             )
          )
@@ -883,7 +883,7 @@ BaseItemSharedPtr ToolsMenu()
 
       Section( "Tools",
          // Delayed evaluation:
-         [](AudacityProject&)
+         [](RustacityProject&)
          { return Items( wxEmptyString, PopulateEffectsMenu(
             EffectTypeTool,
             AudioIONotBusyFlag(),
@@ -899,14 +899,14 @@ BaseItemSharedPtr ToolsMenu()
             FN(OnSimulateRecordingErrors),
             AudioIONotBusyFlag(),
             Options{}.CheckTest(
-               [](AudacityProject&){
+               [](RustacityProject&){
                   return AudioIO::Get()->mSimulateRecordingErrors; } ) ),
          Command( wxT("DetectUpstreamDropouts"),
             XXO("Detect Upstream Dropouts"),
             FN(OnDetectUpstreamDropouts),
             AudioIONotBusyFlag(),
             Options{}.CheckTest(
-               [](AudacityProject&){
+               [](RustacityProject&){
                   return AudioIO::Get()->mDetectUpstreamDropouts; } ) )
       )
 #endif

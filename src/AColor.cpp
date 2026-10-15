@@ -1,7 +1,7 @@
 
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AColor.cpp
 
@@ -17,7 +17,7 @@ It is also a place to document colour usage policy in Audacity
 
 *//********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "AColor.h"
 
 #include "Experimental.h"

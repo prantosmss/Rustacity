@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 NoteTrackView.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from class NoteTrack
 
 **********************************************************************/
 
-#ifndef __AUDACITY_NOTE_TRACK_VIEW__
-#define __AUDACITY_NOTE_TRACK_VIEW__
+#ifndef __RUSTACITY_NOTE_TRACK_VIEW__
+#define __RUSTACITY_NOTE_TRACK_VIEW__
 
 #include "../../../ui/CommonTrackView.h"
 
@@ -28,7 +28,7 @@ public:
 private:
    std::vector<UIHandlePtr> DetailedHitTest
       (const TrackPanelMouseState &state,
-       const AudacityProject *pProject, int currentTool, bool bMultiTool)
+       const RustacityProject *pProject, int currentTool, bool bMultiTool)
       override;
 
    // TrackPanelDrawable implementation

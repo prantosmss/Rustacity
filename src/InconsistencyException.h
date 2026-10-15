@@ -10,10 +10,10 @@
 //  are supposed to be deducible statically as never happening.
 //
 
-#ifndef __AUDACITY_INCONSISTENCY_EXCEPTION__
-#define __AUDACITY_INCONSISTENCY_EXCEPTION__
+#ifndef __RUSTACITY_INCONSISTENCY_EXCEPTION__
+#define __RUSTACITY_INCONSISTENCY_EXCEPTION__
 
-#include "AudacityException.h"
+#include "RustacityException.h"
 
 class InconsistencyException final : public MessageBoxException
 {

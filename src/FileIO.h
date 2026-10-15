@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   FileIO.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_FILEIO__
-#define __AUDACITY_FILEIO__
+#ifndef __RUSTACITY_FILEIO__
+#define __RUSTACITY_FILEIO__
 
 #include "MemoryX.h"
 

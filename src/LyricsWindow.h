@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LyricsWindow.h
 
@@ -9,18 +9,18 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_LYRICS_WINDOW__
-#define __AUDACITY_LYRICS_WINDOW__
+#ifndef __RUSTACITY_LYRICS_WINDOW__
+#define __RUSTACITY_LYRICS_WINDOW__
 
 #include <wx/frame.h> // to inherit
 
-class AudacityProject;
+class RustacityProject;
 class LyricsPanel;
 
 class LyricsWindow final : public wxFrame {
 
  public:
-   LyricsWindow(AudacityProject* parent);
+   LyricsWindow(RustacityProject* parent);
 
    LyricsPanel *GetLyricsPanel() { return mLyricsPanel; };
 
@@ -31,7 +31,7 @@ class LyricsWindow final : public wxFrame {
    void OnStyle_Highlight(wxCommandEvent &evt);
    void OnTimer(wxCommandEvent &event);
 
-   AudacityProject *mProject;
+   RustacityProject *mProject;
    LyricsPanel *mLyricsPanel;
 
  public:

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SkewedRuler.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SKEWED_RULER__
-#define __AUDACITY_SKEWED_RULER__
+#ifndef __RUSTACITY_SKEWED_RULER__
+#define __RUSTACITY_SKEWED_RULER__
 
 
 

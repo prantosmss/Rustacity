@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LegacyBlockFile.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_LEGACY_BLOCKFILE__
-#define __AUDACITY_LEGACY_BLOCKFILE__
+#ifndef __RUSTACITY_LEGACY_BLOCKFILE__
+#define __RUSTACITY_LEGACY_BLOCKFILE__
 
 #include "../BlockFile.h"
 
@@ -67,4 +67,4 @@ class LegacyBlockFile final : public BlockFile {
    sampleFormat mFormat;
 };
 
-#endif // __AUDACITY_LEGACY_BLOCKFILE__
+#endif // __RUSTACITY_LEGACY_BLOCKFILE__

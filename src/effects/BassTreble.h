@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2016 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_BASS_TREBLE__
-#define __AUDACITY_EFFECT_BASS_TREBLE__
+#ifndef __RUSTACITY_EFFECT_BASS_TREBLE__
+#define __RUSTACITY_EFFECT_BASS_TREBLE__
 
 #include "Effect.h"
 

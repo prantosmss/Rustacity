@@ -1,6 +1,6 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  ScrubUI.h
  
@@ -8,8 +8,8 @@
  
  **********************************************************************/
 
-#ifndef __AUDACITY_SCRUB_UI__
-#define __AUDACITY_SCRUB_UI__
+#ifndef __RUSTACITY_SCRUB_UI__
+#define __RUSTACITY_SCRUB_UI__
 
 
 

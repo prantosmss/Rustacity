@@ -1,6 +1,6 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  ScrubUI.cpp
  
@@ -33,7 +33,7 @@ class ScrubbingOverlay final
 {
 public:
    explicit
-   ScrubbingOverlay(AudacityProject *project);
+   ScrubbingOverlay(RustacityProject *project);
 
 private:
    unsigned SequenceNumber() const override;
@@ -45,13 +45,13 @@ private:
    const Scrubber &GetScrubber() const;
    Scrubber &GetScrubber();
 
-   AudacityProject *mProject;
+   RustacityProject *mProject;
 
    wxRect mLastScrubRect, mNextScrubRect;
    wxString mLastScrubSpeedText, mNextScrubSpeedText;
 };
 
-ScrubbingOverlay::ScrubbingOverlay(AudacityProject *project)
+ScrubbingOverlay::ScrubbingOverlay(RustacityProject *project)
    : mProject(project)
    , mLastScrubRect()
    , mNextScrubRect()
@@ -202,8 +202,8 @@ Scrubber &ScrubbingOverlay::GetScrubber()
    return Scrubber::Get( *mProject );
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory sOverlayKey{
-  []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory sOverlayKey{
+  []( RustacityProject &parent ){
      auto result = std::make_shared< ScrubbingOverlay >( &parent );
      TrackPanel::Get( parent ).AddOverlay( result );
      return result;
@@ -219,7 +219,7 @@ struct ScrubForwarder
     : public wxEvtHandler
     , public ClientData::Base
 {
-   ScrubForwarder( AudacityProject &project )
+   ScrubForwarder( RustacityProject &project )
       : mProject{ project }
    {
       mWindow = &ProjectWindow::Get( project );
@@ -233,7 +233,7 @@ struct ScrubForwarder
          mWindow->PopEventHandler();
    }
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
    wxWindowPtr<wxWindow> mWindow;
 
    void OnMouse(wxMouseEvent &event);
@@ -281,8 +281,8 @@ BEGIN_EVENT_TABLE(ScrubForwarder, wxEvtHandler)
    EVT_MOUSE_EVENTS(ScrubForwarder::OnMouse)
 END_EVENT_TABLE()
 
-static const AudacityProject::AttachedObjects::RegisteredFactory sForwarderKey{
-   []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory sForwarderKey{
+   []( RustacityProject &parent ){
       return std::make_shared< ScrubForwarder >( parent );
    }
 };

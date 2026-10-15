@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Envelope.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_ENVELOPE__
-#define __AUDACITY_ENVELOPE__
+#ifndef __RUSTACITY_ENVELOPE__
+#define __RUSTACITY_ENVELOPE__
 
 #include <stdlib.h>
 #include <algorithm>

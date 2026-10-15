@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2010 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -18,7 +18,7 @@ text or binary format to a file.
 
 *//********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "AutoRecovery.h"
 #include "DirManager.h"
 #include "blockfile/SimpleBlockFile.h"
@@ -36,7 +36,7 @@ text or binary format to a file.
 ////////////////////////////////////////////////////////////////////////////
 /// Recording recovery handler
 
-RecordingRecoveryHandler::RecordingRecoveryHandler(AudacityProject* proj)
+RecordingRecoveryHandler::RecordingRecoveryHandler(RustacityProject* proj)
 {
    mProject = proj;
    mChannel = -1;

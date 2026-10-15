@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportMIDI.h
 
@@ -18,16 +18,16 @@ into a NoteTrack.
 #ifndef _IMPORT_MIDI_
 #define _IMPORT_MIDI_
 
-#include "../Audacity.h" // for USE_* macros
-#include "audacity/Types.h"
+#include "../Rustacity.h" // for USE_* macros
+#include "rustacity/Types.h"
 
 #if defined(USE_MIDI)
 
 class wxString;
-class AudacityProject;
+class RustacityProject;
 class NoteTrack;
 
-bool DoImportMIDI( AudacityProject &project, const FilePath &fileName );
+bool DoImportMIDI( RustacityProject &project, const FilePath &fileName );
 
 bool ImportMIDI(const FilePath &fName, NoteTrack * dest);
 

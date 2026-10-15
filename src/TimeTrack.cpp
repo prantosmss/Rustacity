@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TimeTrack.cpp
 
@@ -13,7 +13,7 @@
 
 *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "TimeTrack.h"
 
 #include "Experimental.h"
@@ -43,7 +43,7 @@ std::shared_ptr<TimeTrack> TrackFactory::NewTimeTrack()
 
 static ProjectFileIORegistry::Entry registerFactory{
    wxT( "timetrack" ),
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       auto &trackFactory = TrackFactory::Get( project );
       auto &tracks = TrackList::Get( project );
       auto result = tracks.Add(trackFactory.NewTimeTrack());

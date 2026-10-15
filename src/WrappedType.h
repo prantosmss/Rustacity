@@ -12,7 +12,7 @@
 #ifndef __WRAPPED_TYPE__
 #define __WRAPPED_TYPE__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 enum teWrappedType
 {
@@ -27,7 +27,7 @@ enum teWrappedType
 class wxString;
 class ShuttlePrefs;
 
-class AUDACITY_DLL_API WrappedType
+class RUSTACITY_DLL_API WrappedType
 {
 public:
 

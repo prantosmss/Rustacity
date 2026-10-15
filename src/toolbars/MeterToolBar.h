@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MeterToolbar.h
 
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_METER_TOOLBAR__
-#define __AUDACITY_METER_TOOLBAR__
+#ifndef __RUSTACITY_METER_TOOLBAR__
+#define __RUSTACITY_METER_TOOLBAR__
 
 #include "ToolBar.h"
 
@@ -21,7 +21,7 @@ class wxGridBagSizer;
 class wxSizeEvent;
 class wxWindow;
 
-class AudacityProject;
+class RustacityProject;
 class MeterPanel;
 
 
@@ -33,7 +33,7 @@ class MeterToolBar final : public ToolBar {
 
  public:
 
-   MeterToolBar(AudacityProject &project, int type);
+   MeterToolBar(RustacityProject &project, int type);
    virtual ~MeterToolBar();
 
    void Create(wxWindow *parent) override;

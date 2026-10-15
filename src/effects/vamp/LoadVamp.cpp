@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LoadVamp.cpp
 
@@ -8,7 +8,7 @@
 
 **********************************************************************/
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 
 #if defined(USE_VAMP)
 #include "LoadVamp.h"
@@ -33,7 +33,7 @@ using namespace Vamp::HostExt;
 // When the module is builtin to Audacity, we use the same function, but it is
 // declared static so as not to clash with other builtin modules.
 // ============================================================================
-DECLARE_MODULE_ENTRY(AudacityModule)
+DECLARE_MODULE_ENTRY(RustacityModule)
 {
    // Create and register the importer
    // Trust the module manager not to leak this

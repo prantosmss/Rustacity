@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Keyboard.h
 
@@ -9,10 +9,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_KEYBOARD__
-#define __AUDACITY_KEYBOARD__
+#ifndef __RUSTACITY_KEYBOARD__
+#define __RUSTACITY_KEYBOARD__
 
-#include <audacity/Types.h>
+#include <rustacity/Types.h>
 #include <wx/defs.h>
 
 class wxKeyEvent;

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 LabelTrackControls.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../../Audacity.h"
+#include "../../../Rustacity.h"
 #include "LabelTrackControls.h"
 
 #include "LabelTrackView.h"
@@ -30,7 +30,7 @@ LabelTrackControls::~LabelTrackControls()
 
 std::vector<UIHandlePtr> LabelTrackControls::HitTest
 (const TrackPanelMouseState & state,
- const AudacityProject *pProject)
+ const RustacityProject *pProject)
 {
    return CommonTrackControls::HitTest(state, pProject);
 }

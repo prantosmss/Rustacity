@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 AudioIOBase.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from AudioIO.cpp
 
 **********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "AudioIOBase.h"
 
 #include "Experimental.h"
@@ -309,7 +309,7 @@ void AudioIOBase::HandleDeviceChange()
 #endif   // USE_PORTMIXER
 }
 
-void AudioIOBase::SetCaptureMeter(AudacityProject *project, MeterPanelBase *meter)
+void AudioIOBase::SetCaptureMeter(RustacityProject *project, MeterPanelBase *meter)
 {
    if (( mOwningProject ) && ( mOwningProject != project))
       return;
@@ -323,7 +323,7 @@ void AudioIOBase::SetCaptureMeter(AudacityProject *project, MeterPanelBase *mete
       mInputMeter.Release();
 }
 
-void AudioIOBase::SetPlaybackMeter(AudacityProject *project, MeterPanelBase *meter)
+void AudioIOBase::SetPlaybackMeter(RustacityProject *project, MeterPanelBase *meter)
 {
    if (( mOwningProject ) && ( mOwningProject != project))
       return;

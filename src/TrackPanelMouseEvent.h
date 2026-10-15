@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackPanelMouseEvent.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_PANEL_MOUSE_EVENT__
-#define __AUDACITY_TRACK_PANEL_MOUSE_EVENT__
+#ifndef __RUSTACITY_TRACK_PANEL_MOUSE_EVENT__
+#define __RUSTACITY_TRACK_PANEL_MOUSE_EVENT__
 
 class wxMouseEvent;
 class wxMouseState;

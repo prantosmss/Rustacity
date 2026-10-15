@@ -1,8 +1,8 @@
 <Project>
   <PropertyGroup>
-    <AudacityWxDir>$(MSBuildThisFileDirectory)lib-src\wxWidgets\</AudacityWxDir>
-    <AudacityWxDir Condition="'$(WXWIN)'!='' And Exists('$(WXWIN)')">$(WXWIN)</AudacityWxDir>
-    <WXWIN>$(AudacityWxDir)</WXWIN>
+    <RustacityWxDir>$(MSBuildThisFileDirectory)lib-src\wxWidgets\</RustacityWxDir>
+    <RustacityWxDir Condition="'$(WXWIN)'!='' And Exists('$(WXWIN)')">$(WXWIN)</RustacityWxDir>
+    <WXWIN>$(RustacityWxDir)</WXWIN>
   </PropertyGroup>
   <PropertyGroup>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>

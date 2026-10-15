@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MousePrefs.cpp
 
@@ -32,7 +32,7 @@
 
 *//********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "MousePrefs.h"
 
 #include "../Experimental.h"
@@ -240,7 +240,7 @@ bool MousePrefs::Commit()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "Mouse",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew MousePrefs(parent, winid);

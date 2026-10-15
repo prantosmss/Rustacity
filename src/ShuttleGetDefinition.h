@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ShuttleGetDefinition.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SHUTTLE_GET_DEFINITION__
-#define __AUDACITY_SHUTTLE_GET_DEFINITION__
+#ifndef __RUSTACITY_SHUTTLE_GET_DEFINITION__
+#define __RUSTACITY_SHUTTLE_GET_DEFINITION__
 
 #include "Shuttle.h" // to inherit
 #include "commands/CommandTargets.h" // to inherit

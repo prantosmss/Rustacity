@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ToneGen.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_TONEGEN__
-#define __AUDACITY_EFFECT_TONEGEN__
+#ifndef __RUSTACITY_EFFECT_TONEGEN__
+#define __RUSTACITY_EFFECT_TONEGEN__
 
 #include "Effect.h"
 

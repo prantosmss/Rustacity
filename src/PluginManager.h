@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   PluginManager.h
 
@@ -8,18 +8,18 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PLUGINMANAGER_H__
-#define __AUDACITY_PLUGINMANAGER_H__
+#ifndef __RUSTACITY_PLUGINMANAGER_H__
+#define __RUSTACITY_PLUGINMANAGER_H__
 
 #include <wx/defs.h>
 
 #include "MemoryX.h"
 #include <map>
 
-#include "audacity/EffectInterface.h"
-#include "audacity/ImporterInterface.h"
-#include "audacity/ModuleInterface.h"
-#include "audacity/PluginInterface.h"
+#include "rustacity/EffectInterface.h"
+#include "rustacity/ImporterInterface.h"
+#include "rustacity/ModuleInterface.h"
+#include "rustacity/PluginInterface.h"
 
 class wxArrayString;
 
@@ -324,4 +324,4 @@ private:
    friend class PluginRegistrationDialog;
 };
 
-#endif /* __AUDACITY_PLUGINMANAGER_H__ */
+#endif /* __RUSTACITY_PLUGINMANAGER_H__ */

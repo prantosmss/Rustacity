@@ -29,7 +29,7 @@ explicitly code all three.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "SelectCommand.h"
 
 #include <wx/string.h>
@@ -104,7 +104,7 @@ bool SelectTimeCommand::Apply(const CommandContext & context){
    if( !bHasRelativeSpec )
       mRelativeTo = 0;
 
-   AudacityProject * p = &context.project;
+   RustacityProject * p = &context.project;
    double end = TrackList::Get( *p ).GetEndTime();
    double t0;
    double t1;

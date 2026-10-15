@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackVRulerControls.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "TrackVRulerControls.h"
 
 #include "TrackView.h"
@@ -52,7 +52,7 @@ std::shared_ptr<Track> TrackVRulerControls::DoFindTrack()
 }
 
 std::vector<UIHandlePtr> TrackVRulerControls::HitTest
-(const TrackPanelMouseState &, const AudacityProject *)
+(const TrackPanelMouseState &, const RustacityProject *)
 {
    return std::vector<UIHandlePtr>{};
 }

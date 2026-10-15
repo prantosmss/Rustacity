@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 BackgroundCell.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 #include "BackgroundCell.h"
 
 #include "../../AColor.h"
@@ -47,7 +47,7 @@ public:
    {}
 
    Result Click
-      (const TrackPanelMouseEvent &evt, AudacityProject *pProject) override
+      (const TrackPanelMouseEvent &evt, RustacityProject *pProject) override
    {
       using namespace RefreshCode;
       const wxMouseEvent &event = evt.event;
@@ -66,38 +66,38 @@ public:
    }
 
    Result Drag
-      (const TrackPanelMouseEvent &, AudacityProject *) override
+      (const TrackPanelMouseEvent &, RustacityProject *) override
    { return RefreshCode::RefreshNone; }
 
    HitTestPreview Preview
-      (const TrackPanelMouseState &, AudacityProject *) override
+      (const TrackPanelMouseState &, RustacityProject *) override
    { return HitPreview(); }
 
    Result Release
-      (const TrackPanelMouseEvent &, AudacityProject *,
+      (const TrackPanelMouseEvent &, RustacityProject *,
        wxWindow *) override
    { return RefreshCode::RefreshNone; }
 
-   Result Cancel(AudacityProject *) override
+   Result Cancel(RustacityProject *) override
    { return RefreshCode::RefreshNone; }
 };
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-  []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+  []( RustacityProject &parent ){
      auto result = std::make_shared< BackgroundCell >( &parent );
      TrackPanel::Get( parent ).SetBackgroundCell( result );
      return result;
    }
 };
 
-BackgroundCell &BackgroundCell::Get( AudacityProject &project )
+BackgroundCell &BackgroundCell::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< BackgroundCell >( key );
 }
 
-const BackgroundCell &BackgroundCell::Get( const AudacityProject &project )
+const BackgroundCell &BackgroundCell::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
 BackgroundCell::~BackgroundCell()
@@ -106,7 +106,7 @@ BackgroundCell::~BackgroundCell()
 
 std::vector<UIHandlePtr> BackgroundCell::HitTest
 (const TrackPanelMouseState &,
- const AudacityProject *)
+ const RustacityProject *)
 {
    std::vector<UIHandlePtr> results;
    auto result = mHandle.lock();

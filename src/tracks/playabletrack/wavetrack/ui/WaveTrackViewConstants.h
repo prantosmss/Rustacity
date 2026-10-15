@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WaveTrackViewConstants.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from class WaveTrack
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WAVE_TRACK_VIEW_CONSTANTS__
-#define __AUDACITY_WAVE_TRACK_VIEW_CONSTANTS__
+#ifndef __RUSTACITY_WAVE_TRACK_VIEW_CONSTANTS__
+#define __RUSTACITY_WAVE_TRACK_VIEW_CONSTANTS__
 
 namespace WaveTrackViewConstants
 {
@@ -80,7 +80,7 @@ namespace WaveTrackViewConstants
 }
 
 #include <vector>
-#include "audacity/ComponentInterface.h" // for EnumValueSymbol
+#include "rustacity/ComponentInterface.h" // for EnumValueSymbol
 
 struct WaveTrackSubViewType {
    using Display = WaveTrackViewConstants::Display;

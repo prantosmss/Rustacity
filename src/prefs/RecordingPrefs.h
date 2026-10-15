@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   RecordingPrefs.h
 
@@ -9,10 +9,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_RECORDING_PREFS__
-#define __AUDACITY_RECORDING_PREFS__
+#ifndef __RUSTACITY_RECORDING_PREFS__
+#define __RUSTACITY_RECORDING_PREFS__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "../Experimental.h"
 
 #include <wx/defs.h>

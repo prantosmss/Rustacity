@@ -14,7 +14,7 @@ endif()
 set( host "alphamanual.audacityteam.org" )
 set( src "https://${host}/man" )
 set( dst "${_DEST}/help/manual" )
-set( script_dir "${topdir}/scripts/mw2html_audacity" )
+set( script_dir "${topdir}/scripts/mw2html_rustacity" )
 set( script "mw2html.py" )
 set( out_dir "${_INTDIR}" )
 set( out "${out_dir}/${host}/index.html" )
@@ -37,9 +37,9 @@ add_custom_target( ${TARGET} DEPENDS "${out}" )
 if( NOT "${CMAKE_GENERATOR}" MATCHES "Xcode|Visual Studio*" )
    install( DIRECTORY "${dst}" OPTIONAL
             DESTINATION "${_DATADIR}/rustacity/help" )
-   install( FILES "${_SRCDIR}/audacity.1"
+   install( FILES "${_SRCDIR}/rustacity.1"
             DESTINATION "${_MANDIR}/man1" )
-   install( FILES "${_SRCDIR}/audacity.appdata.xml"
+   install( FILES "${_SRCDIR}/rustacity.appdata.xml"
             DESTINATION "${_DATADIR}/appdata" )
 endif()
 

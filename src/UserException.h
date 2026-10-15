@@ -8,21 +8,21 @@
 //  with a progress dialog.  Its delayed handler action does nothing.
 //
 
-#ifndef __AUDACITY_USER_EXCEPTION__
-#define __AUDACITY_USER_EXCEPTION__
+#ifndef __RUSTACITY_USER_EXCEPTION__
+#define __RUSTACITY_USER_EXCEPTION__
 
-#include "AudacityException.h"
+#include "RustacityException.h"
 
 // This class does not inherit from MessageBoxException, and it does nothing
 // in its delayed handler.  It might be thrown after the user clicks a
 // cancel button, as on a progress dialog.
-class UserException final : public AudacityException
+class UserException final : public RustacityException
 {
 public:
    UserException() {}
 
    UserException(UserException &&that)
-      : AudacityException{ std::move( that ) }
+      : RustacityException{ std::move( that ) }
    {}
 
    UserException& operator= (UserException&&) PROHIBITED;

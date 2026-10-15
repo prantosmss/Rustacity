@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ModuleManager.h
 
@@ -9,14 +9,14 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_MODULEMANAGER_H__
-#define __AUDACITY_MODULEMANAGER_H__
+#ifndef __RUSTACITY_MODULEMANAGER_H__
+#define __RUSTACITY_MODULEMANAGER_H__
 
 #include "MemoryX.h"
 #include <map>
 #include <vector>
 
-#include "audacity/ModuleInterface.h"
+#include "rustacity/ModuleInterface.h"
 
 class wxArrayString;
 class wxDynamicLibrary;
@@ -139,4 +139,4 @@ private:
    std::vector<std::unique_ptr<Module>> mModules;
 };
 
-#endif /* __AUDACITY_MODULEMANAGER_H__ */
+#endif /* __RUSTACITY_MODULEMANAGER_H__ */

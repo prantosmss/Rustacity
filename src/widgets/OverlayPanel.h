@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef __AUDACITY_OVERLAY_PANEL__
-#define __AUDACITY_OVERLAY_PANEL__
+#ifndef __RUSTACITY_OVERLAY_PANEL__
+#define __RUSTACITY_OVERLAY_PANEL__
 
 #include <memory>
 #include <vector>
@@ -15,7 +15,7 @@
 
 class Overlay;
 
-class AUDACITY_DLL_API OverlayPanel /* not final */ : public BackedPanel {
+class RUSTACITY_DLL_API OverlayPanel /* not final */ : public BackedPanel {
 public:
    OverlayPanel(wxWindow * parent, wxWindowID id,
                 const wxPoint & pos,

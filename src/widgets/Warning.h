@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Warning.h
 
@@ -8,10 +8,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WARNING__
-#define __AUDACITY_WARNING__
+#ifndef __RUSTACITY_WARNING__
+#define __RUSTACITY_WARNING__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include <wx/defs.h>
 class wxString;
@@ -31,4 +31,4 @@ int ShowWarningDialog(wxWindow *parent,
                       // This message appears by the checkbox:
                       const TranslatableString &footer = DefaultWarningFooter());
 
-#endif // __AUDACITY_WARNING__
+#endif // __RUSTACITY_WARNING__

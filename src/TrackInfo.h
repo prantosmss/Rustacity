@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackInfo.h
 
@@ -8,10 +8,10 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_INFO__
-#define __AUDACITY_TRACK_INFO__
+#ifndef __RUSTACITY_TRACK_INFO__
+#define __RUSTACITY_TRACK_INFO__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Experimental.h"
 
 #include <vector>

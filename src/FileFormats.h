@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   FileFormats.h
 
@@ -8,12 +8,12 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_FILE_FORMATS__
-#define __AUDACITY_FILE_FORMATS__
+#ifndef __RUSTACITY_FILE_FORMATS__
+#define __RUSTACITY_FILE_FORMATS__
 
-#include "Audacity.h" // for __UNIX__
+#include "Rustacity.h" // for __UNIX__
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 #include "sndfile.h"
 

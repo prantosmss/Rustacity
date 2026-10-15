@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   EffectManager.cpp
 
@@ -18,7 +18,7 @@ effects.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "EffectManager.h"
 
 #include "Effect.h"
@@ -26,7 +26,7 @@ effects.
 #include <algorithm>
 #include <wx/tokenzr.h>
 
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 #include "../ShuttleGetDefinition.h"
 #include "../commands/CommandContext.h"
@@ -81,7 +81,7 @@ bool EffectManager::DoAudacityCommand(const PluginID & ID,
 
 {
    this->SetSkipStateFlag(false);
-   AudacityCommand *command = GetAudacityCommand(ID);
+   RustacityCommand *command = GetAudacityCommand(ID);
    
    if (!command)
    {
@@ -140,7 +140,7 @@ wxString EffectManager::GetCommandUrl(const PluginID & ID)
    Effect* pEff = GetEffect(ID);
    if( pEff )
       return pEff->ManualPage();
-   AudacityCommand * pCom = GetAudacityCommand(ID);
+   RustacityCommand * pCom = GetAudacityCommand(ID);
    if( pCom )
       return pCom->ManualPage();
 
@@ -152,7 +152,7 @@ wxString EffectManager::GetCommandTip(const PluginID & ID)
    Effect* pEff = GetEffect(ID);
    if( pEff )
       return pEff->GetDescription().Translation();
-   AudacityCommand * pCom = GetAudacityCommand(ID);
+   RustacityCommand * pCom = GetAudacityCommand(ID);
    if( pCom )
       return pCom->GetDescription().Translation();
 
@@ -251,7 +251,7 @@ wxString EffectManager::GetEffectParameters(const PluginID & ID)
       return parms;
    }
 
-   AudacityCommand *command = GetAudacityCommand(ID);
+   RustacityCommand *command = GetAudacityCommand(ID);
    
    if (command)
    {
@@ -286,7 +286,7 @@ bool EffectManager::SetEffectParameters(const PluginID & ID, const wxString & pa
 
       return effect->SetAutomationParameters(params);
    }
-   AudacityCommand *command = GetAudacityCommand(ID);
+   RustacityCommand *command = GetAudacityCommand(ID);
    
    if (command)
    {
@@ -318,7 +318,7 @@ bool EffectManager::PromptUser(
       return result;
    }
 
-   AudacityCommand *command = GetAudacityCommand(ID);
+   RustacityCommand *command = GetAudacityCommand(ID);
 
    if (command)
    {
@@ -694,7 +694,7 @@ void EffectManager::SetBatchProcessing(const PluginID & ID, bool start)
       return;
    }
 
-   AudacityCommand *command = GetAudacityCommand(ID);
+   RustacityCommand *command = GetAudacityCommand(ID);
    if (command)
    {
       command->SetBatchProcessing(start);
@@ -743,9 +743,9 @@ Effect *EffectManager::GetEffect(const PluginID & ID)
          }
       }
 
-      auto command = dynamic_cast<AudacityCommand *>(PluginManager::Get().GetInstance(ID));
+      auto command = dynamic_cast<RustacityCommand *>(PluginManager::Get().GetInstance(ID));
       if( !command )
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO(
 "Attempting to initialize the following effect failed:\n\n%s\n\nMore information may be available in 'Help > Diagnostics > Show Log'")
                .Format( GetCommandName(ID) ),
@@ -757,7 +757,7 @@ Effect *EffectManager::GetEffect(const PluginID & ID)
    return mEffects[ID];
 }
 
-AudacityCommand *EffectManager::GetAudacityCommand(const PluginID & ID)
+RustacityCommand *EffectManager::GetAudacityCommand(const PluginID & ID)
 {
    // Must have a "valid" ID
    if (ID.empty())
@@ -770,7 +770,7 @@ AudacityCommand *EffectManager::GetAudacityCommand(const PluginID & ID)
    {
 
       // This will instantiate the effect client if it hasn't already been done
-      auto command = dynamic_cast<AudacityCommand *>(PluginManager::Get().GetInstance(ID));
+      auto command = dynamic_cast<RustacityCommand *>(PluginManager::Get().GetInstance(ID));
       if (command )//&& command->Startup(NULL))
       {
          command->Init();
@@ -781,7 +781,7 @@ AudacityCommand *EffectManager::GetAudacityCommand(const PluginID & ID)
          /*
       if (ident && ident->IsLegacy())
       {
-         auto command = dynamic_cast<AudacityCommand *>(ident);
+         auto command = dynamic_cast<RustacityCommand *>(ident);
          if (commandt && command->Startup(NULL))
          {
             mCommands[ID] = command;
@@ -790,10 +790,10 @@ AudacityCommand *EffectManager::GetAudacityCommand(const PluginID & ID)
       }
 
 
-      auto command = std::make_shared<AudacityCommand>(); // TODO: use make_unique and store in std::unordered_map
+      auto command = std::make_shared<RustacityCommand>(); // TODO: use make_unique and store in std::unordered_map
       if (command)
       {
-         AudacityCommand *client = dynamic_cast<AudacityCommand *>(ident);
+         RustacityCommand *client = dynamic_cast<RustacityCommand *>(ident);
          if (client && command->Startup(client))
          {
             auto pCommand = command.get();
@@ -803,7 +803,7 @@ AudacityCommand *EffectManager::GetAudacityCommand(const PluginID & ID)
          }
       }
 */
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO(
 "Attempting to initialize the following command failed:\n\n%s\n\nMore information may be available in 'Help > Diagnostics > Show Log'")
             .Format( GetCommandName(ID) ),

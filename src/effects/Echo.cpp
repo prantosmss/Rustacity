@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Echo.cpp
 
@@ -19,7 +19,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Echo.h"
 #include "LoadEffects.h"
 
@@ -29,7 +29,7 @@
 
 #include "../ShuttleGui.h"
 #include "../Shuttle.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/valnum.h"
 
 // Define keys, defaults, minimums, and maximums for the effect parameters

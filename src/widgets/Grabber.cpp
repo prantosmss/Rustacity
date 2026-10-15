@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Grabber.cpp
 
@@ -20,7 +20,7 @@ around to NEW positions.
 
 *//**********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Grabber.h"
 
 #include <wx/defs.h>

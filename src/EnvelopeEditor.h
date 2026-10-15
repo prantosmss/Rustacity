@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   EnvelopeEditor.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_ENVELOPE_EDITOR__
-#define __AUDACITY_ENVELOPE_EDITOR__
+#ifndef __RUSTACITY_ENVELOPE_EDITOR__
+#define __RUSTACITY_ENVELOPE_EDITOR__
 
 class wxMouseEvent;
 class wxRect;

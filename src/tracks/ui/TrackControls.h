@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackControls.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_CONTROLS__
-#define __AUDACITY_TRACK_CONTROLS__
+#ifndef __RUSTACITY_TRACK_CONTROLS__
+#define __RUSTACITY_TRACK_CONTROLS__
 
 #include "CommonTrackPanelCell.h"
 

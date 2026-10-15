@@ -20,7 +20,7 @@
 #include "Command.h"
 #include "CommandType.h"
 
-class SetProjectCommand : public AudacityCommand
+class SetProjectCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -32,7 +32,7 @@ public:
    bool DefineParams( ShuttleParams & S ) override;
    void PopulateOrExchange(ShuttleGui & S) override;
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_I#set_project");};
 
    bool Apply(const CommandContext & context) override;

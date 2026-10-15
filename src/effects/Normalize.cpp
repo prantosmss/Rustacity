@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Normalize.cpp
 
@@ -15,7 +15,7 @@
 *//*******************************************************************/
 
 
-#include "../Audacity.h" // for rint from configwin.h
+#include "../Rustacity.h" // for rint from configwin.h
 #include "Normalize.h"
 #include "LoadEffects.h"
 

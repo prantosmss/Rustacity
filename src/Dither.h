@@ -1,16 +1,16 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Steve Harris
   Markus Meyer
 
 **********************************************************************/
 
-#ifndef __AUDACITY_DITHER_H__
-#define __AUDACITY_DITHER_H__
+#ifndef __RUSTACITY_DITHER_H__
+#define __RUSTACITY_DITHER_H__
 
-#include "audacity/Types.h" // for samplePtr
+#include "rustacity/Types.h" // for samplePtr
 
 template< typename Enum > class EnumSetting;
 
@@ -62,4 +62,4 @@ private:
     float mBuffer[8 /* = BUF_SIZE */];
 };
 
-#endif /* __AUDACITY_DITHER_H__ */
+#endif /* __RUSTACITY_DITHER_H__ */

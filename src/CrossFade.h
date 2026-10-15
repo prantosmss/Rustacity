@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   CrossFade.h
 
@@ -8,8 +8,8 @@
   Licensed under the GPL version 2.0
 
 **********************************************************************/
-#ifndef __AUDACITY_CROSSFADE__
-#define __AUDACITY_CROSSFADE__
+#ifndef __RUSTACITY_CROSSFADE__
+#define __RUSTACITY_CROSSFADE__
 
 /// This defines a crossfader class that
 /// accepts a list of WaveClips and can do a mini-mixing

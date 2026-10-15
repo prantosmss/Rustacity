@@ -201,7 +201,7 @@ public:
    void Update(const wxString &) override {}
 };
 
-/// Displays messages from a command in an AudacityMessageBox
+/// Displays messages from a command in an RustacityMessageBox
 class MessageBoxTarget final : public CommandMessageTarget
 {
 public:

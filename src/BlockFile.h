@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   BlockFile.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_BLOCKFILE__
-#define __AUDACITY_BLOCKFILE__
+#ifndef __RUSTACITY_BLOCKFILE__
+#define __RUSTACITY_BLOCKFILE__
 
 #include "SampleFormat.h"
 

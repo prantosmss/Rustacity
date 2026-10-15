@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SimpleBlockFile.cpp
 
@@ -57,7 +57,7 @@ to get its definition, rather than rolling our own.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "SimpleBlockFile.h"
 
 #include <wx/wx.h>

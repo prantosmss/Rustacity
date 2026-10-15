@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Diags.h
 
@@ -12,8 +12,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_DIAGS__
-#define __AUDACITY_DIAGS__
+#ifndef __RUSTACITY_DIAGS__
+#define __RUSTACITY_DIAGS__
 
 typedef long t_diag_timer;
 

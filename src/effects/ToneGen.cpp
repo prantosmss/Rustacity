@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ToneGen.cpp
 
@@ -18,7 +18,7 @@ frequency changes smoothly during the tone.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ToneGen.h"
 #include "LoadEffects.h"
 

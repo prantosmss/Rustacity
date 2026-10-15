@@ -505,7 +505,7 @@
 ;; when true, top-level return statement is legal and compiled into MAIN
 (setf *audacity-top-level-return-flag* nil)
 
-;; SAL-COMPILE-AUDACITY -- special treatment of RETURN
+;; SAL-COMPILE-RUSTACITY -- special treatment of RETURN
 ;;
 ;; This works like SAL-COMPILE, but if there is a top-level
 ;; return statement (not normally legal), it is compiled into

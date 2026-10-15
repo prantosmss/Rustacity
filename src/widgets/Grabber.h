@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Grabber.cpp
 
@@ -26,10 +26,10 @@ flicker-free use.
 
 *//**********************************************************************/
 
-#ifndef __AUDACITY_WIDGETS_GRABBER__
-#define __AUDACITY_WIDGETS_GRABBER__
+#ifndef __RUSTACITY_WIDGETS_GRABBER__
+#define __RUSTACITY_WIDGETS_GRABBER__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include <wx/defs.h>
 #include <wx/statbmp.h> // to inherit
@@ -42,7 +42,7 @@ class TranslatableString;
 
 // Custom events
 
-DECLARE_EXPORTED_EVENT_TYPE(AUDACITY_DLL_API, EVT_GRABBER_CLICKED, -1)
+DECLARE_EXPORTED_EVENT_TYPE(RUSTACITY_DLL_API, EVT_GRABBER_CLICKED, -1)
 
 class GrabberEvent final : public wxCommandEvent
 {

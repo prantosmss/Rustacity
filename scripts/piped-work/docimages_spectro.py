@@ -60,7 +60,7 @@ def spectro_imagesB():
 
 def spectro_imagesC():
     # A chirp and the word 'Audacity'
-    loadExample( 'AudacitySpectral.wav' )
+    loadExample( 'RustacitySpectral.wav' )
     do( 'Select: Start=0 End=0' );
     capture( 'Spectral005.png', 'AllTracks' )
     do( 'SetTrack: Scale=dB')

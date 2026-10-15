@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   XMLWriter.cpp
 
@@ -24,7 +24,7 @@ the general functionality for creating XML in UTF8 encoding.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "XMLWriter.h"
 
 #include <wx/defs.h>

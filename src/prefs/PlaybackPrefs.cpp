@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   PlaybackPrefs.cpp
 
@@ -18,7 +18,7 @@
 
 *//********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "PlaybackPrefs.h"
 
 #include <wx/defs.h>
@@ -184,7 +184,7 @@ bool PlaybackPrefs::Commit()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "Playback",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew PlaybackPrefs(parent, winid);

@@ -24,7 +24,7 @@
 #include "CommandType.h"
 #include "Command.h"
 
-class MessageCommand : public AudacityCommand
+class MessageCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -36,7 +36,7 @@ public:
    void PopulateOrExchange(ShuttleGui & S) override;
    bool Apply(const CommandContext & context) override;
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_II#message");};
 public:
    wxString mMessage;

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Mix.h
 
@@ -17,8 +17,8 @@
 
 *//********************************************************************/
 
-#ifndef __AUDACITY_MIX__
-#define __AUDACITY_MIX__
+#ifndef __RUSTACITY_MIX__
+#define __RUSTACITY_MIX__
 
 #include "SampleFormat.h"
 #include <vector>
@@ -54,7 +54,7 @@ void MixBuffers(unsigned numChannels, int *channelFlags, float *gains,
                 samplePtr src,
                 samplePtr *dests, int len, bool interleaved);
 
-class AUDACITY_DLL_API MixerSpec
+class RUSTACITY_DLL_API MixerSpec
 {
    unsigned mNumTracks, mNumChannels, mMaxNumChannels;
 
@@ -76,7 +76,7 @@ public:
    MixerSpec& operator=( const MixerSpec &mixerSpec );
 };
 
-class AUDACITY_DLL_API Mixer {
+class RUSTACITY_DLL_API Mixer {
  public:
 
     // An argument to Mixer's constructor

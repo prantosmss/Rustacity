@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AttachableScrollBar.cpp
 
@@ -27,7 +27,7 @@ internally, not ints, allowing for (external) control of zooming.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "AttachableScrollBar.h"
 
 #include <wx/wxprec.h>

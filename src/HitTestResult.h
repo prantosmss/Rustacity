@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 HitTestResult.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_HIT_TEST_RESULT__
-#define __AUDACITY_HIT_TEST_RESULT__
+#ifndef __RUSTACITY_HIT_TEST_RESULT__
+#define __RUSTACITY_HIT_TEST_RESULT__
 
 #include "MemoryX.h"
 #include "Internat.h" // for TranslatableString

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ClickRemoval.cpp
 
@@ -24,7 +24,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ClickRemoval.h"
 #include "LoadEffects.h"
 
@@ -37,7 +37,7 @@
 #include "../Prefs.h"
 #include "../Shuttle.h"
 #include "../ShuttleGui.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/valnum.h"
 
 #include "../WaveTrack.h"

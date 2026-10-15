@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 LabelTextHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../../Audacity.h"
+#include "../../../Rustacity.h"
 #include "LabelTextHandle.h"
 
 #include "LabelTrackView.h"
@@ -33,7 +33,7 @@ LabelTextHandle::LabelTextHandle
 {
 }
 
-void LabelTextHandle::Enter(bool, AudacityProject *)
+void LabelTextHandle::Enter(bool, RustacityProject *)
 {
 #ifdef EXPERIMENTAL_TRACK_PANEL_HIGHLIGHTING
    mChangeHighlight = RefreshCode::RefreshCell;
@@ -71,7 +71,7 @@ LabelTextHandle::~LabelTextHandle()
 {
 }
 
-void LabelTextHandle::HandleTextClick(AudacityProject &
+void LabelTextHandle::HandleTextClick(RustacityProject &
 #if defined(__WXGTK__) && (HAVE_GTK)
                                                        project
 #endif
@@ -151,7 +151,7 @@ void LabelTextHandle::HandleTextClick(AudacityProject &
 }
 
 UIHandle::Result LabelTextHandle::Click
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    auto pLT = mpLT.lock();
    if (!pLT)
@@ -199,7 +199,7 @@ UIHandle::Result LabelTextHandle::Click
 }
 
 void LabelTextHandle::HandleTextDragRelease(
-   AudacityProject &project, const wxMouseEvent & evt)
+   RustacityProject &project, const wxMouseEvent & evt)
 {
    auto pTrack = mpLT.lock();
    if (!pTrack)
@@ -252,7 +252,7 @@ void LabelTextHandle::HandleTextDragRelease(
 }
 
 UIHandle::Result LabelTextHandle::Drag
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    auto &project = *pProject;
    using namespace RefreshCode;
@@ -288,13 +288,13 @@ UIHandle::Result LabelTextHandle::Drag
 }
 
 HitTestPreview LabelTextHandle::Preview
-(const TrackPanelMouseState &, AudacityProject *)
+(const TrackPanelMouseState &, RustacityProject *)
 {
    return HitPreview();
 }
 
 UIHandle::Result LabelTextHandle::Release
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject,
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject,
  wxWindow *pParent)
 {
    auto result = LabelDefaultClickHandle::Release( evt, pProject, pParent );
@@ -319,7 +319,7 @@ UIHandle::Result LabelTextHandle::Release
    return result | RefreshCode::RefreshNone;
 }
 
-UIHandle::Result LabelTextHandle::Cancel( AudacityProject *pProject )
+UIHandle::Result LabelTextHandle::Cancel( RustacityProject *pProject )
 {
    // Restore the selection states of tracks
    // Note that we are also relying on LabelDefaultClickHandle::Cancel

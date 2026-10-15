@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MacroCommands.cpp
 
@@ -16,7 +16,7 @@ processing.  See also MacrosWindow and ApplyMacroDialog.
 *//*******************************************************************/
 
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "BatchCommands.h"
 
 #include <wx/defs.h>
@@ -43,7 +43,7 @@ processing.  See also MacrosWindow and ApplyMacroDialog.
 
 #include "AllThemeResources.h"
 
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 
 #include "commands/CommandContext.h"
 
@@ -87,7 +87,7 @@ static const std::pair<TranslatableString, CommandID> SpecialCommands[] = {
 };
 // end CLEANSPEECH remnant
 
-MacroCommands::MacroCommands( AudacityProject &project )
+MacroCommands::MacroCommands( RustacityProject &project )
 : mProject{ project }
 , mExporter{ project }
 {
@@ -288,7 +288,7 @@ bool MacroCommands::RenameMacro(const wxString & oldmacro, const wxString & newm
 }
 
 // Gets all commands that are valid for this mode.
-MacroCommandsCatalog::MacroCommandsCatalog( const AudacityProject *project )
+MacroCommandsCatalog::MacroCommandsCatalog( const RustacityProject *project )
 {
    if (!project)
       return;
@@ -493,10 +493,10 @@ wxString MacroCommands::PromptForPresetFor(const CommandID & command, const wxSt
 
 double MacroCommands::GetEndTime()
 {
-   AudacityProject *project = &mProject;
+   RustacityProject *project = &mProject;
    if( project == NULL )
    {
-      //AudacityMessageBox( XO("No project to process!") );
+      //RustacityMessageBox( XO("No project to process!") );
       return -1.0;
    }
    auto &tracks = TrackList::Get( *project );
@@ -505,11 +505,11 @@ double MacroCommands::GetEndTime()
    return endTime;
 }
 
-bool MacroCommands::IsMono( AudacityProject *project )
+bool MacroCommands::IsMono( RustacityProject *project )
 {
    if( project == NULL )
    {
-      //AudacityMessageBox( XO("No project and no Audio to process!") );
+      //RustacityMessageBox( XO("No project and no Audio to process!") );
       return false;
    }
 
@@ -546,7 +546,7 @@ wxString MacroCommands::BuildCleanFileName(const FilePath &fileName,
 //      double startTime = 0.0;
       //OnSelectAll();
       pathName = FileNames::FindDefaultPath(FileNames::Operation::Export);
-      ::AudacityMessageBox(
+      ::RustacityMessageBox(
          XO("Export recording to %s\n/%s/%s.%s")
             .Format(pathName, cleanedString, justName, extension),
          XO("Export recording"),
@@ -557,7 +557,7 @@ wxString MacroCommands::BuildCleanFileName(const FilePath &fileName,
    cleanedName += cleanedString;
    bool flag  = ::wxFileName::FileExists(cleanedName);
    if (flag == true) {
-      ::AudacityMessageBox(
+      ::RustacityMessageBox(
          XO(
 "Cannot create directory '%s'. \nFile already exists that is not a directory"),
          Verbatim( cleanedName ) );
@@ -631,7 +631,7 @@ bool MacroCommands::ApplySpecialCommand(
    if (ReportAndSkip(friendlyCommand, params))
       return true;
 
-   AudacityProject *project = &mProject;
+   RustacityProject *project = &mProject;
 
    unsigned numChannels = 1;    //used to switch between mono and stereo export
    if (IsMono( &mProject )) {
@@ -698,7 +698,7 @@ bool MacroCommands::ApplySpecialCommand(
       }
       return mExporter.Process(numChannels, wxT("OGG"), filename, false, 0.0, endTime);
 #else
-      AudacityMessageBox( XO(
+      RustacityMessageBox( XO(
 "Ogg Vorbis support is not included in this build of Audacity"));
       return false;
 #endif
@@ -711,12 +711,12 @@ bool MacroCommands::ApplySpecialCommand(
       }
       return mExporter.Process(numChannels, wxT("FLAC"), filename, false, 0.0, endTime);
 #else
-      AudacityMessageBox(XO(
+      RustacityMessageBox(XO(
 "FLAC support is not included in this build of Audacity"));
       return false;
 #endif
    }
-   AudacityMessageBox(
+   RustacityMessageBox(
       XO("Command %s not implemented yet").Format( friendlyCommand ) );
    return false;
 }
@@ -780,7 +780,7 @@ bool MacroCommands::ApplyEffectCommand(
    if (!plug)
       return false;
 
-   AudacityProject *project = &mProject;
+   RustacityProject *project = &mProject;
 
    // FIXME: for later versions may want to not select-all in batch mode.
    // IF nothing selected, THEN select everything
@@ -875,7 +875,7 @@ bool MacroCommands::ApplyCommand( const TranslatableString &friendlyCommand,
          ID, friendlyCommand, command, params, context);
    }
 
-   AudacityProject *project = &mProject;
+   RustacityProject *project = &mProject;
    auto &manager = CommandManager::Get( *project );
    if( pContext ){
       if( HandleTextualCommand(
@@ -893,7 +893,7 @@ bool MacroCommands::ApplyCommand( const TranslatableString &friendlyCommand,
          return true;
    }
 
-   AudacityMessageBox(
+   RustacityMessageBox(
       XO("Your batch command of %s was not recognized.")
          .Format( friendlyCommand ) );
 
@@ -905,7 +905,7 @@ bool MacroCommands::ApplyCommandInBatchMode(
    const CommandID & command, const wxString &params,
    CommandContext const * pContext)
 {
-   AudacityProject *project = &mProject;
+   RustacityProject *project = &mProject;
    auto &settings = ProjectSettings::Get( *project );
    // Recalc flags and enable items that may have become enabled.
    MenuManager::Get(*project).UpdateMenus(false);
@@ -939,7 +939,7 @@ bool MacroCommands::ApplyMacro(
    auto cleanup1 = valueRestorer(MacroReentryCount);
    MacroReentryCount++;
 
-   AudacityProject *proj = &mProject;
+   RustacityProject *proj = &mProject;
    bool res = false;
 
    // Only perform this group on initial entry.  They should not be done
@@ -1058,14 +1058,14 @@ bool MacroCommands::ReportAndSkip(
    //TODO: Add a cancel button to these, and add the logic so that we can abort.
    if( !params.empty() )
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Apply %s with parameter(s)\n\n%s")
             .Format( friendlyCommand, params ),
          XO("Test Mode"));
    }
    else
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Apply %s").Format( friendlyCommand ),
          XO("Test Mode"));
    }

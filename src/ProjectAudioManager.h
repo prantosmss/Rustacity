@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectAudioManager.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from ProjectManager.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_AUDIO_MANAGER__
-#define __AUDACITY_PROJECT_AUDIO_MANAGER__
+#ifndef __RUSTACITY_PROJECT_AUDIO_MANAGER__
+#define __RUSTACITY_PROJECT_AUDIO_MANAGER__
 
 #include <memory>
 #include <vector>
@@ -19,7 +19,7 @@ Paul Licameli split from ProjectManager.h
 
 constexpr int RATE_NOT_SELECTED{ -1 };
 
-class AudacityProject;
+class RustacityProject;
 struct AudioIOStartStreamOptions;
 class TrackList;
 class SelectedRegion;
@@ -44,12 +44,12 @@ class ProjectAudioManager final
    , public std::enable_shared_from_this< ProjectAudioManager >
 {
 public:
-   static ProjectAudioManager &Get( AudacityProject &project );
-   static const ProjectAudioManager &Get( const AudacityProject &project );
+   static ProjectAudioManager &Get( RustacityProject &project );
+   static const ProjectAudioManager &Get( const RustacityProject &project );
 
    // Find suitable tracks to record into, or return an empty array.
    static WaveTrackArray ChooseExistingRecordingTracks(
-      AudacityProject &proj, bool selectedOnly,
+      RustacityProject &proj, bool selectedOnly,
       double targetRate = RATE_NOT_SELECTED);
 
    static bool UseDuplex();
@@ -57,7 +57,7 @@ public:
    static TransportTracks GetAllPlaybackTracks(
       TrackList &trackList, bool selectedOnly, bool useMidi = false);
 
-   explicit ProjectAudioManager( AudacityProject &project );
+   explicit ProjectAudioManager( RustacityProject &project );
    ProjectAudioManager( const ProjectAudioManager & ) PROHIBITED;
    ProjectAudioManager &operator=( const ProjectAudioManager & ) PROHIBITED;
    ~ProjectAudioManager() override;
@@ -86,7 +86,7 @@ public:
 
    void OnRecord(bool altAppearance);
 
-   bool DoRecord(AudacityProject &project,
+   bool DoRecord(RustacityProject &project,
       const TransportTracks &transportTracks, // If captureTracks is empty, then tracks are created
       double t0, double t1,
       bool altAppearance,
@@ -140,7 +140,7 @@ private:
    void OnCommitRecording() override;
    void OnSoundActivationThreshold() override;
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    std::shared_ptr<TrackList> mCutPreviewTracks;
 
@@ -158,11 +158,11 @@ private:
    int mDisplayedRate{ 0 };
    static std::pair< TranslatableStrings, unsigned >
       StatusWidthFunction(
-         const AudacityProject &project, StatusBarField field);
+         const RustacityProject &project, StatusBarField field);
 };
 
-AudioIOStartStreamOptions DefaultPlayOptions( AudacityProject &project );
-AudioIOStartStreamOptions DefaultSpeedPlayOptions( AudacityProject &project );
+AudioIOStartStreamOptions DefaultPlayOptions( RustacityProject &project );
+AudioIOStartStreamOptions DefaultSpeedPlayOptions( RustacityProject &project );
 
 struct PropertiesOfSelected
 {
@@ -171,7 +171,7 @@ struct PropertiesOfSelected
    int numberOfSelected{ 0 };
 };
 
-PropertiesOfSelected GetPropertiesOfSelected(const AudacityProject &proj);
+PropertiesOfSelected GetPropertiesOfSelected(const RustacityProject &proj);
 
 #include "commands/CommandFlag.h"
 

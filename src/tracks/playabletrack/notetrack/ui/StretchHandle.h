@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 StretchHandle.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_STRETCH_HANDLE__
-#define __AUDACITY_STRETCH_HANDLE__
+#ifndef __RUSTACITY_STRETCH_HANDLE__
+#define __RUSTACITY_STRETCH_HANDLE__
 
 #include "../../../../UIHandle.h"
 
@@ -63,26 +63,26 @@ public:
 
    static UIHandlePtr HitTest
       (std::weak_ptr<StretchHandle> &holder,
-       const TrackPanelMouseState &state, const AudacityProject *pProject,
+       const TrackPanelMouseState &state, const RustacityProject *pProject,
        const std::shared_ptr<NoteTrack> &pTrack );
 
    virtual ~StretchHandle();
 
    Result Click
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    Result Drag
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    HitTestPreview Preview
-      (const TrackPanelMouseState &state, AudacityProject *pProject)
+      (const TrackPanelMouseState &state, RustacityProject *pProject)
       override;
 
    Result Release
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject,
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject,
       wxWindow *pParent) override;
 
-   Result Cancel(AudacityProject *pProject) override;
+   Result Cancel(RustacityProject *pProject) override;
 
    bool StopsOnKeystroke() override { return true; }
 
@@ -91,7 +91,7 @@ private:
    static double GetT1(const Track &track, const ViewInfo &viewInfo);
 
    void Stretch
-      (AudacityProject *pProject, int mouseXCoordinate, int trackLeftEdge, Track *pTrack);
+      (RustacityProject *pProject, int mouseXCoordinate, int trackLeftEdge, Track *pTrack);
 
    std::shared_ptr<NoteTrack> mpTrack{};
    int mLeftEdge{ -1 };

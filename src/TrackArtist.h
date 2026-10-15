@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TrackArtist.h
 
@@ -15,10 +15,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACKARTIST__
-#define __AUDACITY_TRACKARTIST__
+#ifndef __RUSTACITY_TRACKARTIST__
+#define __RUSTACITY_TRACKARTIST__
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "Experimental.h"
 
 #include <wx/brush.h> // member variable
@@ -52,7 +52,7 @@ namespace TrackArt {
                                        const wxRect & rect );
 }
 
-class AUDACITY_DLL_API TrackArtist final : private PrefsListener {
+class RUSTACITY_DLL_API TrackArtist final : private PrefsListener {
 
 public:
 
@@ -144,4 +144,4 @@ extern float FromDB(float value, double dBRange);
 extern float ValueOfPixel(int yy, int height, bool offset,
                           bool dB, double dBRange, float zoomMin, float zoomMax);
 
-#endif                          // define __AUDACITY_TRACKARTIST__
+#endif                          // define __RUSTACITY_TRACKARTIST__

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TimerRecordDialog.h
 
@@ -13,8 +13,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TIMERRECORD_DIALOG__
-#define __AUDACITY_TIMERRECORD_DIALOG__
+#ifndef __RUSTACITY_TIMERRECORD_DIALOG__
+#define __RUSTACITY_TIMERRECORD_DIALOG__
 
 #include <wx/textctrl.h> // to inherit
 #include <wx/timer.h> // member variable
@@ -38,7 +38,7 @@ enum TimerRecordCompletedActions {
    TR_ACTION_EXPORTED = 0x00000002
 };
 
-class AudacityProject;
+class RustacityProject;
 
 class TimerRecordPathCtrl final : public wxTextCtrl
 {
@@ -67,7 +67,7 @@ class TimerRecordDialog final : public wxDialogWrapper
 {
 public:
    TimerRecordDialog(
-      wxWindow* parent, AudacityProject &project, bool bAlreadySaved);
+      wxWindow* parent, RustacityProject &project, bool bAlreadySaved);
    ~TimerRecordDialog();
 
    void OnTimer(wxTimerEvent& event);
@@ -117,7 +117,7 @@ private:
    ProgressResult PreActionDelay(int iActionIndex, TimerRecordCompletedActions eCompletedActions);
 
 private:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    wxDateTime m_DateTime_Start;
    wxDateTime m_DateTime_End;

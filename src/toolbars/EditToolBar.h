@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
 
   EditToolbar.h
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EDIT_TOOLBAR__
-#define __AUDACITY_EDIT_TOOLBAR__
+#ifndef __RUSTACITY_EDIT_TOOLBAR__
+#define __RUSTACITY_EDIT_TOOLBAR__
 
 #include "../Experimental.h"
 
@@ -74,7 +74,7 @@ class EditToolBar final : public ToolBar {
 
  public:
 
-   EditToolBar( AudacityProject &project );
+   EditToolBar( RustacityProject &project );
    virtual ~EditToolBar();
 
    void Create(wxWindow *parent) override;

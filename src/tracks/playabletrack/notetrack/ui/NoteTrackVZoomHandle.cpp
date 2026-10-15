@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 NoteTrackVZoomHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../../../Audacity.h" // for USE_* macros
+#include "../../../../Rustacity.h" // for USE_* macros
 #ifdef USE_MIDI
 #include "NoteTrackVZoomHandle.h"
 
@@ -35,7 +35,7 @@ namespace
    struct InitMenuData
    {
    public:
-      AudacityProject &project;
+      RustacityProject &project;
       NoteTrack *pTrack;
       wxRect rect;
       unsigned result;
@@ -60,7 +60,7 @@ NoteTrackVZoomHandle::NoteTrackVZoomHandle
 {
 }
 
-void NoteTrackVZoomHandle::Enter(bool, AudacityProject *)
+void NoteTrackVZoomHandle::Enter(bool, RustacityProject *)
 {
 #ifdef EXPERIMENTAL_TRACK_PANEL_HIGHLIGHTING
    mChangeHighlight = RefreshCode::RefreshCell;
@@ -108,7 +108,7 @@ NoteTrackVZoomHandle::~NoteTrackVZoomHandle()
 }
 
 UIHandle::Result NoteTrackVZoomHandle::Click
-(const TrackPanelMouseEvent &, AudacityProject *)
+(const TrackPanelMouseEvent &, RustacityProject *)
 {
    // change note track to zoom like audio track
    //          mpTrack->StartVScroll();
@@ -117,7 +117,7 @@ UIHandle::Result NoteTrackVZoomHandle::Click
 }
 
 UIHandle::Result NoteTrackVZoomHandle::Drag
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    using namespace RefreshCode;
    auto pTrack = TrackList::Get( *pProject ).Lock(mpTrack);
@@ -135,7 +135,7 @@ UIHandle::Result NoteTrackVZoomHandle::Drag
 }
 
 HitTestPreview NoteTrackVZoomHandle::Preview
-(const TrackPanelMouseState &st, AudacityProject *)
+(const TrackPanelMouseState &st, RustacityProject *)
 {
    return HitPreview(st.state);
 }
@@ -239,7 +239,7 @@ void NoteTrackVRulerMenuTable::OnZoom( int iZoomCode ){
       mpData->pTrack->ShiftNoteRange(-12);
       break;
    }
-   AudacityProject *const project = &mpData->project;
+   RustacityProject *const project = &mpData->project;
    ProjectHistory::Get( *project ).ModifyState(false);
    using namespace RefreshCode;
    mpData->result = UpdateVRuler | RefreshAll;
@@ -272,7 +272,7 @@ END_POPUP_MENU()
 
 
 UIHandle::Result NoteTrackVZoomHandle::Release
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject,
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject,
  wxWindow *pParent)
 {
    using namespace RefreshCode;
@@ -353,7 +353,7 @@ UIHandle::Result NoteTrackVZoomHandle::Release
    return RefreshAll;
 }
 
-UIHandle::Result NoteTrackVZoomHandle::Cancel(AudacityProject *WXUNUSED(pProject))
+UIHandle::Result NoteTrackVZoomHandle::Cancel(RustacityProject *WXUNUSED(pProject))
 {
    // Cancel is implemented!  And there is no initial state to restore,
    // so just return a code.

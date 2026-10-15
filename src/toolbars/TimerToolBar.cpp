@@ -1,6 +1,6 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  TimeToolBar.cpp
  
@@ -11,7 +11,7 @@
  
  *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -39,7 +39,7 @@ BEGIN_EVENT_TABLE(TimerToolBar, ToolBar)
    EVT_IDLE(TimerToolBar::OnIdle)
 END_EVENT_TABLE()
 
-TimerToolBar::TimerToolBar(AudacityProject &project)
+TimerToolBar::TimerToolBar(RustacityProject &project)
 :  ToolBar(project, TimeBarID, XO("Time"), wxT("Time"), true),
    mListener(NULL),
    mAudioTime(NULL)
@@ -50,15 +50,15 @@ TimerToolBar::~TimerToolBar()
 {
 }
 
-TimerToolBar &TimerToolBar::Get(AudacityProject &project)
+TimerToolBar &TimerToolBar::Get(RustacityProject &project)
 {
    auto &toolManager = ToolManager::Get(project);
    return *static_cast<TimerToolBar*>(toolManager.GetToolBar(TimeBarID));
 }
 
-const TimerToolBar &TimerToolBar::Get(const AudacityProject &project)
+const TimerToolBar &TimerToolBar::Get(const RustacityProject &project)
 {
-   return Get(const_cast<AudacityProject&>(project)) ;
+   return Get(const_cast<RustacityProject&>(project)) ;
 }
 
 void TimerToolBar::Populate()
@@ -353,7 +353,7 @@ void TimerToolBar::OnIdle(wxIdleEvent &evt)
 static RegisteredToolbarFactory factory
 {
    TimeBarID,
-   []( AudacityProject &project )
+   []( RustacityProject &project )
    {
       return ToolBar::Holder{ safenew TimerToolBar{ project } };
    }

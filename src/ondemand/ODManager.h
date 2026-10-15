@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODManager.h
 
@@ -16,8 +16,8 @@ number of threads.
 
 *//*******************************************************************/
 
-#ifndef __AUDACITY_ODMANAGER__
-#define __AUDACITY_ODMANAGER__
+#ifndef __RUSTACITY_ODMANAGER__
+#define __RUSTACITY_ODMANAGER__
 
 #include <vector>
 #include "ODTaskThread.h"
@@ -31,7 +31,7 @@ number of threads.
 #endif //__WXMAC__
 
 // This event is posted to the application
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_ODTASK_UPDATE, wxCommandEvent);
 
 ///wxstring compare function for sorting case, which is needed to load correctly.

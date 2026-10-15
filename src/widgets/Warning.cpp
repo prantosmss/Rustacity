@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Warning.cpp
 
@@ -16,7 +16,7 @@ the ability to not see similar warnings again for this session.
 
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Warning.h"
 
 #include "../Prefs.h"

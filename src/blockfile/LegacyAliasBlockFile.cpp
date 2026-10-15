@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LegacyAliasBlockFile.cpp
 
@@ -8,7 +8,7 @@
 
 **********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "LegacyAliasBlockFile.h"
 
 #include <wx/utils.h>

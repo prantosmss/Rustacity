@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   FindClipping.cpp
 
@@ -19,7 +19,7 @@
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "FindClipping.h"
 #include "LoadEffects.h"
 
@@ -30,7 +30,7 @@
 #include "../Shuttle.h"
 #include "../ShuttleGui.h"
 #include "../widgets/valnum.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 #include "../LabelTrack.h"
 #include "../WaveTrack.h"

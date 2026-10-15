@@ -1,18 +1,18 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  CrashReport.h
  
  Paul Licameli
- split from AudacityApp.h
+ split from RustacityApp.h
  
  **********************************************************************/
 
-#ifndef __AUDACITY_CRASH_REPORT__
-#define __AUDACITY_CRASH_REPORT__
+#ifndef __RUSTACITY_CRASH_REPORT__
+#define __RUSTACITY_CRASH_REPORT__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Experimental.h"
 
 #if defined(EXPERIMENTAL_CRASH_REPORT)

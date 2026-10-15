@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SelectionBar.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SELECTION_BAR__
-#define __AUDACITY_SELECTION_BAR__
+#ifndef __RUSTACITY_SELECTION_BAR__
+#define __RUSTACITY_SELECTION_BAR__
 
 #include <wx/defs.h>
 
@@ -38,18 +38,18 @@ class wxDC;
 class wxSizeEvent;
 class wxStaticText;
 
-class AudacityProject;
+class RustacityProject;
 class SelectionBarListener;
 class NumericTextCtrl;
 
 class SelectionBar final : public ToolBar {
 
  public:
-   SelectionBar( AudacityProject &project );
+   SelectionBar( RustacityProject &project );
    virtual ~SelectionBar();
 
-   static SelectionBar &Get( AudacityProject &project );
-   static const SelectionBar &Get( const AudacityProject &project );
+   static SelectionBar &Get( RustacityProject &project );
+   static const SelectionBar &Get( const RustacityProject &project );
 
    void Create(wxWindow *parent) override;
 

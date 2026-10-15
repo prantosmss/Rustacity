@@ -1,10 +1,10 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectFileIO.cpp
 
-Paul Licameli split from AudacityProject.cpp
+Paul Licameli split from RustacityProject.cpp
 
 **********************************************************************/
 
@@ -21,7 +21,7 @@ Paul Licameli split from AudacityProject.cpp
 #include "Tags.h"
 #include "ViewInfo.h"
 #include "WaveTrack.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/NumericTextCtrl.h"
 
 #if defined(__WXMAC__)
@@ -39,7 +39,7 @@ static void RefreshAllTitles(bool bShowProjectNumbers )
 }
 
 TitleRestorer::TitleRestorer(
-   wxTopLevelWindow &window, AudacityProject &project )
+   wxTopLevelWindow &window, RustacityProject &project )
 {
    if( window.IsIconized() )
       window.Restore();
@@ -70,27 +70,27 @@ TitleRestorer::~TitleRestorer() {
       RefreshAllTitles( false );
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory sFileIOKey{
-   []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory sFileIOKey{
+   []( RustacityProject &parent ){
       auto result = std::make_shared< ProjectFileIO >( parent );
       return result;
    }
 };
 
-ProjectFileIO &ProjectFileIO::Get( AudacityProject &project )
+ProjectFileIO &ProjectFileIO::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< ProjectFileIO >( sFileIOKey );
 }
 
-const ProjectFileIO &ProjectFileIO::Get( const AudacityProject &project )
+const ProjectFileIO &ProjectFileIO::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
 // PRL: I preserve this handler function for an event that was never sent, but
 // I don't know the intention.
 
-ProjectFileIO::ProjectFileIO( AudacityProject &project )
+ProjectFileIO::ProjectFileIO( RustacityProject &project )
    : mProject{ project }
 {
    UpdatePrefs();
@@ -163,7 +163,7 @@ bool ProjectFileIO::WarnOfLegacyFile( )
 
    // Stop icon, and choose 'NO' by default.
    int action =
-      AudacityMessageBox(
+      RustacityMessageBox(
          msg,
          XO("Warning - Opening Old Project File"),
          wxYES_NO | wxICON_STOP | wxNO_DEFAULT | wxCENTRE,
@@ -287,7 +287,7 @@ bool ProjectFileIO::HandleXMLTag(const wxChar *tag, const wxChar **attrs)
             {
                projName = project.GetProjectName() + wxT("_data");
                if (!dirManager.SetProject(projPath, projName, false)) {
-                  AudacityMessageBox(
+                  RustacityMessageBox(
                      XO("Couldn't find the project data folder: \"%s\"")
                         .Format( projName ),
                      XO("Error Opening Project"),
@@ -346,13 +346,13 @@ bool ProjectFileIO::HandleXMLTag(const wxChar *tag, const wxChar **attrs)
          // JKC: I commented out next line.  IsGoodInt is not for
          // checking dotted numbers.
          //!XMLValueChecker::IsGoodInt(fileVersion) ||
-         (fileVersion > wxT(AUDACITY_FILE_FORMAT_VERSION)))
+         (fileVersion > wxT(RUSTACITY_FILE_FORMAT_VERSION)))
    {
       /* i18n-hint: %s will be replaced by the version number.*/
       auto msg = XO("This file was saved using Audacity %s.\nYou are using Audacity %s. You may need to upgrade to a newer version to open this file.")
          .Format(audacityVersion,
-                 AUDACITY_VERSION_STRING);
-      AudacityMessageBox(
+                 RUSTACITY_VERSION_STRING);
+      RustacityMessageBox(
          msg,
          XO("Can't open project file"),
          wxOK | wxICON_EXCLAMATION | wxCENTRE,
@@ -370,10 +370,10 @@ bool ProjectFileIO::HandleXMLTag(const wxChar *tag, const wxChar **attrs)
    // supported file version was five chars long.
    fileVersion = audacityVersion.Mid(0,5);
 
-   bool bIsOld = fileVersion < wxT(AUDACITY_FILE_FORMAT_VERSION);
+   bool bIsOld = fileVersion < wxT(RUSTACITY_FILE_FORMAT_VERSION);
    bool bIsVeryOld = fileVersion < wxT("1.1.9" );
    // Very old file versions could even have the file version starting
-   // with text: 'AudacityProject Version 0.95'
+   // with text: 'RustacityProject Version 0.95'
    // Atoi return zero in this case.
    bIsVeryOld |= wxAtoi( fileVersion )==0;
    // Specifically detect older versions of Audacity
@@ -384,7 +384,7 @@ bool ProjectFileIO::HandleXMLTag(const wxChar *tag, const wxChar **attrs)
       if( bIsVeryOld )
          // Stop icon, and choose 'NO' by default.
          icon_choice = wxICON_STOP | wxNO_DEFAULT;
-      int action = AudacityMessageBox(
+      int action = RustacityMessageBox(
          msg,
          XO("Warning - Opening Old Project File"),
          wxYES_NO | icon_choice | wxCENTRE,
@@ -446,7 +446,7 @@ void ProjectFileIO::WriteXML(
 
    bool bWantSaveCopy = (strOtherNamesArray != nullptr);
 
-   //TIMER_START( "AudacityProject::WriteXML", xml_writer_timer );
+   //TIMER_START( "RustacityProject::WriteXML", xml_writer_timer );
    // Warning: This block of code is duplicated in Save, for now...
    wxFileName project { proj.GetFileName() };
    if (project.GetExt() == wxT("aup"))
@@ -476,8 +476,8 @@ void ProjectFileIO::WriteXML(
    }
 
    xmlFile.WriteAttr(wxT("projname"), projName);
-   xmlFile.WriteAttr(wxT("version"), wxT(AUDACITY_FILE_FORMAT_VERSION));
-   xmlFile.WriteAttr(wxT("audacityversion"), AUDACITY_VERSION_STRING);
+   xmlFile.WriteAttr(wxT("version"), wxT(RUSTACITY_FILE_FORMAT_VERSION));
+   xmlFile.WriteAttr(wxT("audacityversion"), RUSTACITY_VERSION_STRING);
 
    viewInfo.WriteXMLAttributes(xmlFile);
    xmlFile.WriteAttr(wxT("rate"), settings.GetRate());
@@ -621,7 +621,7 @@ void ProjectFileIO::AutoSave()
 
    if (!wxRenameFile(fn + wxT(".tmp"), fn + wxT(".autosave")))
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not create autosave file: %s")
             .Format( fn + wxT(".autosave") ),
          XO("Error"),
@@ -646,7 +646,7 @@ void ProjectFileIO::DeleteCurrentAutoSaveFile()
       {
          if (!wxRemoveFile(mAutoSaveFileName))
          {
-            AudacityMessageBox(
+            RustacityMessageBox(
                XO("Could not remove old autosave file: %s")
                   .Format( mAutoSaveFileName ),
                XO("Error"),

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SplashDialog.cpp
 
@@ -20,7 +20,7 @@ most commonly asked questions about Audacity.
 *//********************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "SplashDialog.h"
 
 #include "Experimental.h"
@@ -38,7 +38,7 @@ most commonly asked questions about Audacity.
 #include "FileNames.h"
 #include "Project.h"
 #include "ShuttleGui.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/HelpSystem.h"
 
 #include "AllThemeResources.h"
@@ -49,7 +49,7 @@ most commonly asked questions about Audacity.
 #ifdef EXPERIMENTAL_DA
 #include "../images/DarkAudacityLogoWithName.xpm"
 #else
-#include "../images/AudacityLogoWithName.xpm"
+#include "../images/RustacityLogoWithName.xpm"
 #endif
 
 SplashDialog * SplashDialog::pSelf=NULL;
@@ -66,7 +66,7 @@ END_EVENT_TABLE()
 
 IMPLEMENT_CLASS(SplashDialog, wxDialogWrapper)
 
-void SplashDialog::DoHelpWelcome( AudacityProject &project )
+void SplashDialog::DoHelpWelcome( RustacityProject &project )
 {
    Show2( &GetProjectFrame( project ) );
 }
@@ -99,8 +99,8 @@ void SplashDialog::Populate( ShuttleGui & S )
    gPrefs->Read(wxT("/GUI/ShowSplashScreen"), &bShow, true );
    S.StartVerticalLay(1);
 
-   //v For now, change to AudacityLogoWithName via old-fashioned ways, not Theme.
-   m_pLogo = std::make_unique<wxBitmap>((const char **) AudacityLogoWithName_xpm); //v
+   //v For now, change to RustacityLogoWithName via old-fashioned ways, not Theme.
+   m_pLogo = std::make_unique<wxBitmap>((const char **) RustacityLogoWithName_xpm); //v
 
 
    // JKC: Resize to 50% of size.  Later we may use a smaller xpm as

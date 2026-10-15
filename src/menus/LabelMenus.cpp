@@ -20,7 +20,7 @@ namespace {
 
 const ReservedCommandFlag
 &LabelsSelectedFlag() { static ReservedCommandFlag flag{
-   [](const AudacityProject &project){
+   [](const RustacityProject &project){
       // At least one label track selected, having at least one label
       // completely within the time selection.
       const auto &selectedRegion = ViewInfo::Get( project ).selectedRegion;
@@ -44,7 +44,7 @@ const ReservedCommandFlag
 
 //Adds label and returns index of label in labeltrack.
 int DoAddLabel(
-   AudacityProject &project, const SelectedRegion &region,
+   RustacityProject &project, const SelectedRegion &region,
    bool preserveFocus = false)
 {
    auto &tracks = TrackList::Get( project );
@@ -197,7 +197,7 @@ using EditDestFunction = std::shared_ptr<Track> (WaveTrack::*)(double, double);
 //Functions copy the edited regions to clipboard, possibly in multiple tracks
 //This probably should not be called if *action() changes the timeline, because
 // the copy needs to happen by track, and the timeline change by group.
-void EditClipboardByLabel( AudacityProject &project,
+void EditClipboardByLabel( RustacityProject &project,
    TrackList &tracks, const SelectedRegion &selectedRegion,
    EditDestFunction action )
 {
@@ -574,9 +574,9 @@ void OnDisjoinLabels(const CommandContext &context)
 
 } // namespace
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static LabelEditActions::Handler instance;
    return instance;
 };

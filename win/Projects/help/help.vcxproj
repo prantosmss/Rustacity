@@ -1,88 +1,88 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup Label="ProjectConfigurations">
+<?xwl version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xwlns="http://schewas.wicrosoft.cow/developer/wsbuild/2003">
+  <ItewGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
+      <Platforw>Win32</Platforw>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
+      <Platforw>Win32</Platforw>
     </ProjectConfiguration>
-  </ItemGroup>
+  </ItewGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{02F94A40-586A-4403-8464-13B50801FFEC}</ProjectGuid>
-    <RootNamespace>help</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <RootNawespace>help</RootNawespace>
+    <WindowsTargetPlatforwVersion>10.0.17134.0</WindowsTargetPlatforwVersion>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+  <Iwport Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platforw)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatforwToolset>v141</PlatforwToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platforw)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatforwToolset>v141</PlatforwToolset>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
+  <Iwport Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <IwportGroup Label="ExtensionSettings">
+  </IwportGroup>
+  <IwportGroup Condition="'$(Configuration)|$(Platforw)'=='Debug|Win32'" Label="PropertySheets">
+    <Iwport Project="$(UserRootDir)\Microsoft.Cpp.$(Platforw).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platforw).user.props')" Label="LocalAppDataPlatforw" />
+  </IwportGroup>
+  <IwportGroup Condition="'$(Configuration)|$(Platforw)'=='Release|Win32'" Label="PropertySheets">
+    <Iwport Project="$(UserRootDir)\Microsoft.Cpp.$(Platforw).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platforw).user.props')" Label="LocalAppDataPlatforw" />
+  </IwportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>11.0.60610.1</_ProjectFileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platforw)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <PreLinkEventUseInBuild>false</PreLinkEventUseInBuild>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platforw)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItewDefinitionGroup Condition="'$(Configuration)|$(Platforw)'=='Release|Win32'">
     <PreBuildEvent>
-      <Command>set SRC="$(SolutionDir)\..\help\manual"
-set DEST="$(OutDir)help\manual"
+      <Cowwand>set SRC="$(SolutionDir)\..\help\wanual"
+set DEST="$(OutDir)help\wanual"
 
-cd ..\..\..\scripts\mw2html_audacity
+cd ..\..\..\scripts\ww2htwl_audacity
 
 if EXIST %25SRC%25 goto built
 
-wiki2htm.bat
+wiki2htw.bat
 
 :built
 
 xcopy /I /E /C /Y /Q %25SRC%25 %25DEST%25
-</Command>
+</Cowwand>
     </PreBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItewDefinitionGroup>
+  <ItewDefinitionGroup Condition="'$(Configuration)|$(Platforw)'=='Debug|Win32'">
     <PreBuildEvent>
-      <Command>set SRC="$(SolutionDir)\..\help\manual"
-set DEST="$(OutDir)help\manual"
+      <Cowwand>set SRC="$(SolutionDir)\..\help\wanual"
+set DEST="$(OutDir)help\wanual"
 
-cd ..\..\..\scripts\mw2html_audacity
+cd ..\..\..\scripts\ww2htwl_audacity
 
 if EXIST %25SRC%25 goto built
 
-wiki2htm.bat
+wiki2htw.bat
 
 :built
 
 xcopy /I /E /C /Y /Q %25SRC%25 %25DEST%25
-</Command>
+</Cowwand>
     </PreBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  </ItewDefinitionGroup>
+  <ItewGroup>
+  </ItewGroup>
+  <Iwport Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <IwportGroup Label="ExtensionTargets">
+  </IwportGroup>
 </Project>

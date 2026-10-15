@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ClickRemoval.h
 
@@ -13,8 +13,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_CLICK_REMOVAL__
-#define __AUDACITY_EFFECT_CLICK_REMOVAL__
+#ifndef __RUSTACITY_EFFECT_CLICK_REMOVAL__
+#define __RUSTACITY_EFFECT_CLICK_REMOVAL__
 
 #include "Effect.h"
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   CommandContext.h
 
@@ -8,29 +8,29 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_COMMAND_CONTEXT__
-#define __AUDACITY_COMMAND_CONTEXT__
+#ifndef __RUSTACITY_COMMAND_CONTEXT__
+#define __RUSTACITY_COMMAND_CONTEXT__
 
 #include <memory>
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
-class AudacityProject;
-class AudacityApp;
+class RustacityProject;
+class RustacityApp;
 class wxEvent;
 class CommandOutputTargets;
 using CommandParameter = CommandID;
 
-class AUDACITY_DLL_API CommandContext {
+class RUSTACITY_DLL_API CommandContext {
 public:
    CommandContext(
-      AudacityProject &p
+      RustacityProject &p
       , const wxEvent *e = nullptr
       , int ii = 0
       , const CommandParameter &param = CommandParameter{}
    );
 
    CommandContext(
-      AudacityProject &p,
+      RustacityProject &p,
       std::unique_ptr<CommandOutputTargets> target);
 
    ~CommandContext();
@@ -50,11 +50,11 @@ public:
    void AddBool(const bool value      , const wxString &name = {} ) const;
    void AddItem(const double value    , const wxString &name = {} ) const;
 
-   AudacityProject &project;
+   RustacityProject &project;
    std::unique_ptr<CommandOutputTargets> pOutput;
    const wxEvent *pEvt;
    int index;
    CommandParameter parameter;
-   AudacityApp *GetApp() const;
+   RustacityApp *GetApp() const;
 };
 #endif

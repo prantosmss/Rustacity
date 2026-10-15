@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Import.cpp
 
@@ -35,7 +35,7 @@ and ImportLOF.cpp.
 
 
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "Import.h"
 
 #include "ImportPlugin.h"
@@ -444,14 +444,14 @@ std::unique_ptr<ExtImportItem> Importer::CreateDefaultImportItem()
 }
 
 // returns number of tracks imported
-bool Importer::Import( AudacityProject &project,
+bool Importer::Import( RustacityProject &project,
                      const FilePath &fName,
                      TrackFactory *trackFactory,
                      TrackHolders &tracks,
                      Tags *tags,
                      TranslatableString &errorMessage)
 {
-   AudacityProject *pProj = &project;
+   RustacityProject *pProj = &project;
    auto cleanup = valueRestorer( pProj->mbBusyImporting, true );
 
    const FileExtension extension{ fName.AfterLast(wxT('.')) };

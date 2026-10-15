@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ModulePrefs.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_MODULE_PREFS__
-#define __AUDACITY_MODULE_PREFS__
+#ifndef __RUSTACITY_MODULE_PREFS__
+#define __RUSTACITY_MODULE_PREFS__
 
 #include <wx/defs.h>
 

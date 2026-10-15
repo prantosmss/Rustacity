@@ -1,4 +1,4 @@
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "../AdornedRulerPanel.h"
 #include "../Clipboard.h"
 #include "../CommonCommandFlags.h"
@@ -24,7 +24,7 @@
 #include "../export/Export.h"
 #include "../prefs/PrefsDialog.h"
 #include "../tracks/labeltrack/ui/LabelTrackView.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 // private helper classes and functions
 namespace {
@@ -38,7 +38,7 @@ void FinishCopy
 
 // Handle text paste (into active label), if any. Return true if did paste.
 // (This was formerly the first part of overly-long OnPaste.)
-bool DoPasteText(AudacityProject &project)
+bool DoPasteText(RustacityProject &project)
 {
    auto &tracks = TrackList::Get( project );
    auto &selectedRegion = ViewInfo::Get( project ).selectedRegion;
@@ -73,7 +73,7 @@ bool DoPasteText(AudacityProject &project)
 // Return true if nothing selected, regardless of paste result.
 // If nothing was selected, create and paste into NEW tracks.
 // (This was formerly the second part of overly-long OnPaste.)
-bool DoPasteNothingSelected(AudacityProject &project)
+bool DoPasteNothingSelected(RustacityProject &project)
 {
    auto &tracks = TrackList::Get( project );
    auto &dirManager = DirManager::Get( project );
@@ -179,7 +179,7 @@ void OnUndo(const CommandContext &context)
    auto &window = ProjectWindow::Get( project );
 
    if (!ProjectHistory::Get( project ).UndoAvailable()) {
-      AudacityMessageBox( XO("Nothing to undo") );
+      RustacityMessageBox( XO("Nothing to undo") );
       return;
    }
 
@@ -210,7 +210,7 @@ void OnRedo(const CommandContext &context)
    auto &window = ProjectWindow::Get( project );
 
    if (!ProjectHistory::Get( project ).RedoAvailable()) {
-      AudacityMessageBox( XO("Nothing to redo") );
+      RustacityMessageBox( XO("Nothing to redo") );
       return;
    }
    // Can't redo whilst dragging
@@ -970,11 +970,11 @@ void OnPasteOver(const CommandContext &context)
    auto &project = context.project;
    auto &selectedRegion = project.GetViewInfo().selectedRegion;
 
-   if((AudacityProject::msClipT1 - AudacityProject::msClipT0) > 0.0)
+   if((RustacityProject::msClipT1 - RustacityProject::msClipT0) > 0.0)
    {
       selectedRegion.setT1(
          selectedRegion.t0() +
-         (AudacityProject::msClipT1 - AudacityProject::msClipT0));
+         (RustacityProject::msClipT1 - RustacityProject::msClipT0));
          // MJS: pointless, given what we do in OnPaste?
    }
    OnPaste(context);
@@ -987,9 +987,9 @@ void OnPasteOver(const CommandContext &context)
 
 } // namespace
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static EditActions::Handler instance;
    return instance;
 };
@@ -1000,12 +1000,12 @@ static CommandHandlerObject &findCommandHandler(AudacityProject &) {
 
 static const ReservedCommandFlag
 &CutCopyAvailableFlag() { static ReservedCommandFlag flag{
-   [](const AudacityProject &project){
+   [](const RustacityProject &project){
       auto range = TrackList::Get( project ).Any<const LabelTrack>()
          + [&](const LabelTrack *pTrack){
             return LabelTrackView::Get( *pTrack ).IsTextSelected(
                // unhappy const_cast because track focus might be set
-               const_cast<AudacityProject&>(project)
+               const_cast<RustacityProject&>(project)
             );
          };
       if ( !range.empty() )
@@ -1062,7 +1062,7 @@ BaseItemSharedPtr EditMenu()
             AudioIONotBusyFlag() | RedoAvailableFlag(), redoKey ),
             
          Special( wxT("UndoItemsUpdateStep"),
-         [](AudacityProject &project, wxMenu&) {
+         [](RustacityProject &project, wxMenu&) {
             // Change names in the CommandManager as a side-effect
             MenuManager::ModifyUndoMenuItems(project);
          })
@@ -1184,9 +1184,9 @@ BaseItemSharedPtr ExtraEditMenu()
    return menu;
 }
 
-auto canSelectAll = [](const AudacityProject &project){
+auto canSelectAll = [](const RustacityProject &project){
    return MenuManager::Get( project ).mWhatIfNoSelection != 0; };
-auto selectAll = []( AudacityProject &project, CommandFlag flagsRqd ){
+auto selectAll = []( RustacityProject &project, CommandFlag flagsRqd ){
    if ( MenuManager::Get( project ).mWhatIfNoSelection == 1 &&
       (flagsRqd & NoAutoSelect()).none() )
       SelectUtilities::DoSelectAllAudio(project);

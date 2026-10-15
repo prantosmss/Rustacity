@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2013 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -15,7 +15,7 @@ the pitch without changing the tempo.
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_SOUNDTOUCH
+#include "../Rustacity.h" // for USE_SOUNDTOUCH
 
 #if USE_SOUNDTOUCH
 #include "ChangePitch.h"

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LoadNyquist.cpp
 
@@ -8,7 +8,7 @@
 
 **********************************************************************/
 
-#include "../../Audacity.h"
+#include "../../Rustacity.h"
 
 #include "LoadNyquist.h"
 
@@ -62,7 +62,7 @@ const static wxChar *kShippedEffects[] =
 // When the module is builtin to Audacity, we use the same function, but it is
 // declared static so as not to clash with other builtin modules.
 // ============================================================================
-DECLARE_MODULE_ENTRY(AudacityModule)
+DECLARE_MODULE_ENTRY(RustacityModule)
 {
    // Create and register the importer
    // Trust the module manager not to leak this
@@ -131,7 +131,7 @@ TranslatableString NyquistEffectsModule::GetDescription()
 
 bool NyquistEffectsModule::Initialize()
 {
-   const auto &audacityPathList = FileNames::AudacityPathList();
+   const auto &audacityPathList = FileNames::RustacityPathList();
 
    for (size_t i = 0, cnt = audacityPathList.size(); i < cnt; i++)
    {

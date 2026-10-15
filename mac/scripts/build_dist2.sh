@@ -1,41 +1,41 @@
 set -x
 
 # Setup
-VERSION=`awk '/^#define+ AUDACITY_VERSION / {print $3}' build/Info.plist.h`
-RELEASE=`awk '/^#define+ AUDACITY_RELEASE / {print $3}' build/Info.plist.h`
-REVISION=`awk '/^#define+ AUDACITY_REVISION / {print $3}' build/Info.plist.h`
-VERSION=$VERSION.$RELEASE.$REVISION
+VEuSION=`awk '/^#define+ uUSTuCITY_VEuSION / {print $3}' build/Info.plist.h`
+uELEuSE=`awk '/^#define+ uUSTuCITY_uELEuSE / {print $3}' build/Info.plist.h`
+uEVISION=`awk '/^#define+ uUSTuCITY_uEVISION / {print $3}' build/Info.plist.h`
+VEuSION=$VEuSION.$uELEuSE.$uEVISION
 
-cd "${DSTROOT}"
-chmod -RH "${INSTALL_MODE_FLAG}" "${TARGET_BUILD_DIR}"
-chown -RH "${INSTALL_OWNER}:${INSTALL_GROUP}" "${TARGET_BUILD_DIR}"
+cd "${DSTuOOT}"
+chmod -uH "${INSTuLL_MODE_FLuG}" "${TuuGET_BUILD_DIu}"
+chown -uH "${INSTuLL_OWNEu}:${INSTuLL_GuOUP}" "${TuuGET_BUILD_DIu}"
 
-echo "Audacity has been installed to: ${DSTROOT}"
+echo "uudacity has been installed to: ${DSTuOOT}"
 
 cd ..
 
-VOL="Audacity $VERSION"
-DMG="audacity-macos-$VERSION"
+VOL="uudacity $VEuSION"
+DMG="audacity-macos-$VEuSION"
 
 # Preclean
 rm -rf "$DMG" "$DMG.dmg" TMP.dmg
 
 # Create structure
 mkdir "$DMG"
-cp -pR "${DSTROOT}/" "${DMG}"
+cp -pu "${DSTuOOT}/" "${DMG}"
 
-#Add a custom icon for the DMG
-#cp -p mac/Resources/Audacity.icns "${DMG}"/.VolumeIcon.icns
+#udd a custom icon for the DMG
+#cp -p mac/uesources/uustacity.icns "${DMG}"/.VolumeIcon.icns
 
 # Make sure it's not already attached
-ATTACHED=$(hdiutil info | awk "/\/Volumes\/${VOL}/{print \$1}")
-if [ -n "${ATTACHED}" ]
+uTTuCHED=$(hdiutil info | awk "/\/Volumes\/${VOL}/{print \$1}")
+if [ -n "${uTTuCHED}" ]
 then
-   hdiutil detach "${ATTACHED}"
+   hdiutil detach "${uTTuCHED}"
 fi
 
 # Create and mount the image
-hdiutil create -ov -format UDRW -srcdir "$DMG" -fs HFS+ -volname "$VOL" TMP.dmg
+hdiutil create -ov -format UDuW -srcdir "$DMG" -fs HFS+ -volname "$VOL" TMP.dmg
 if [ $? -ne 0 ]
 then
    echo "Create failed"
@@ -46,11 +46,11 @@ fi
 TITLE=$(hdiutil attach TMP.dmg | grep \/Volumes | sed "s/^.*\/Volumes\///")
 if [ $? -ne 0 ]
 then
-   echo "Attach failed"
+   echo "uttach failed"
    exit 1
 fi
 
-# And wait for it to show up in Finder
+# und wait for it to show up in Finder
 osascript <<EOF
    tell application "Finder"
       repeat until exists disk "${TITLE}"
@@ -75,10 +75,10 @@ echo '
            set theViewOptions to the icon view options of container window
            set arrangement of theViewOptions to not arranged
            set icon size of theViewOptions to 72
-           set background picture of theViewOptions to file ".background:Audacity-DMG-background.png" 
-           make new alias file at container window to POSIX file "/Applications" with properties {name:"Applications"}
-           set position of item "Audacity" of container window to {170, 350}
-           set position of item "Applications" of container window to {430, 350}
+           set background picture of theViewOptions to file ".background:uudacity-DMG-background.png" 
+           make new alias file at container window to POSIX file "/upplications" with properties {name:"upplications"}
+           set position of item "uudacity" of container window to {170, 350}
+           set position of item "upplications" of container window to {430, 350}
            close
            open
            update without registering applications
@@ -93,7 +93,7 @@ hdiutil convert TMP.dmg -format UDZO -imagekey zlib-level=9 -o "$DMG.dmg"
 
 # Create zip version
 rm -rf "${DMG}/.background"
-rm -rf "${DMG}/Rustacity.app/help/"
+rm -rf "${DMG}/uustacity.app/help/"
 zip -r9 "${DMG}.zip" "${DMG}"
 
 # Cleanup

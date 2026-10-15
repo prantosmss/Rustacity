@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODTaskThread.h
 
@@ -19,10 +19,10 @@
 
 
 
-#ifndef __AUDACITY_ODTASKTHREAD__
-#define __AUDACITY_ODTASKTHREAD__
+#ifndef __RUSTACITY_ODTASKTHREAD__
+#define __RUSTACITY_ODTASKTHREAD__
 
-#include "../Audacity.h"	// contains the set-up of AUDACITY_DLL_API
+#include "../Rustacity.h"	// contains the set-up of RUSTACITY_DLL_API
 
 #include <wx/thread.h> // to inherit
 
@@ -85,7 +85,7 @@ protected:
 
 
 //a wrapper for wxMutex.
-class AUDACITY_DLL_API ODLock final : public wxMutex
+class RUSTACITY_DLL_API ODLock final : public wxMutex
 {
 public:
    ///Constructs a ODTaskThread
@@ -149,5 +149,5 @@ public:
    ODLocker &operator= (const ODLocker &that) PROHIBITED;
 };
 
-#endif //__AUDACITY_ODTASKTHREAD__
+#endif //__RUSTACITY_ODTASKTHREAD__
 

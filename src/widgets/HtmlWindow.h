@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   HtmlWindow.cpp
 
@@ -20,10 +20,10 @@ around to NEW positions.
 
 *//**********************************************************************/
 
-#ifndef __AUDACITY_WIDGETS_HtmlWindow__
-#define __AUDACITY_WIDGETS_HtmlWindow__
+#ifndef __RUSTACITY_WIDGETS_HtmlWindow__
+#define __RUSTACITY_WIDGETS_HtmlWindow__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include <wx/setup.h> // for wxUSE_* macros
 #include <wx/defs.h>
@@ -33,7 +33,7 @@ around to NEW positions.
 /// HtmlWindow Class
 ////////////////////////////////////////////////////////////
 
-class AUDACITY_DLL_API HtmlWindow /* not final */ : public wxHtmlWindow
+class RUSTACITY_DLL_API HtmlWindow /* not final */ : public wxHtmlWindow
 {
 public:
    HtmlWindow(wxWindow *parent,

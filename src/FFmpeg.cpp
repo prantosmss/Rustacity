@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 FFmpeg.cpp
 
@@ -17,12 +17,12 @@ License: GPL v2.  See License.txt.
 // Store function pointers here when including FFmpeg.h
 #define DEFINE_FFMPEG_POINTERS
 
-#include "Audacity.h"   // for config*.h // for USE_* macros
+#include "Rustacity.h"   // for config*.h // for USE_* macros
 #include "FFmpeg.h"
 
 #include "FileNames.h"
 #include "widgets/HelpSystem.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 
 #include <wx/checkbox.h>
 #include <wx/dynlib.h>
@@ -102,7 +102,7 @@ void FFmpegStartup()
    {
       if (enabled)
       {
-         AudacityMessageBox(XO(
+         RustacityMessageBox(XO(
 "FFmpeg was configured in Preferences and successfully loaded before, \
 \nbut this time Audacity failed to load it at startup. \
 \n\nYou may want to go back to Preferences > Libraries and re-configure it."),
@@ -755,7 +755,7 @@ bool FFmpegLibs::LoadLibs(wxWindow * WXUNUSED(parent), bool showerr)
    if (!ValidLibsLoaded()) {
       auto msg = XO("Failed to find compatible FFmpeg libraries.");
       if (showerr)
-         AudacityMessageBox( msg );
+         RustacityMessageBox( msg );
       wxLogError(msg.Debug());
       return false;
    }

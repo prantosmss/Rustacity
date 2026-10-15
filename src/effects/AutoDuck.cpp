@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AutoDuck.cpp
 
@@ -16,7 +16,7 @@
 
 *******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "AutoDuck.h"
 #include "LoadEffects.h"
 
@@ -35,7 +35,7 @@
 #include "../widgets/valnum.h"
 
 #include "../WaveTrack.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 // Define keys, defaults, minimums, and maximums for the effect parameters
 //

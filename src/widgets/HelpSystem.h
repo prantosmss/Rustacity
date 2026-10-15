@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   HelpSystem.h
 
@@ -18,15 +18,15 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_HELPSYSTEM__
-#define __AUDACITY_HELPSYSTEM__
+#ifndef __RUSTACITY_HELPSYSTEM__
+#define __RUSTACITY_HELPSYSTEM__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include <wx/defs.h>
 #include "wxPanelWrapper.h" // to inherit
 
-class AudacityProject;
+class RustacityProject;
 
 /** @brief Class which contains static methods and data needed for implementing
  * help buttons
@@ -121,7 +121,7 @@ void OpenInDefaultBrowser(const wxHtmlLinkInfo& link);
 /// \brief An HtmlWindow that handles linked clicked - usually the
 /// link will go to our own local copy of the manual, but it could
 /// launch a new browser window.
-class AUDACITY_DLL_API LinkingHtmlWindow final : public HtmlWindow
+class RUSTACITY_DLL_API LinkingHtmlWindow final : public HtmlWindow
 {
  public:
    LinkingHtmlWindow(wxWindow *parent, wxWindowID id = -1,
@@ -155,4 +155,4 @@ public:
    DECLARE_EVENT_TABLE()
 };
 
-#endif // __AUDACITY_HELPSYSTEM__
+#endif // __RUSTACITY_HELPSYSTEM__

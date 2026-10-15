@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   WaveTrack.cpp
 
@@ -69,7 +69,7 @@ using std::max;
 
 static ProjectFileIORegistry::Entry registerFactory{
    wxT( "wavetrack" ),
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       auto &trackFactory = TrackFactory::Get( project );
       auto &tracks = TrackList::Get( project );
       auto result = tracks.Add(trackFactory.NewWaveTrack());
@@ -721,7 +721,7 @@ void WaveTrack::ClearAndPaste(double t0, // Start of time to clear
                               const TimeWarper *effectWarper // How does time change
                               )
 // WEAK-GUARANTEE
-// this WaveTrack remains destructible in case of AudacityException.
+// this WaveTrack remains destructible in case of RustacityException.
 // But some of its cutline clips may have been destroyed.
 {
    double dur = std::min(t1 - t0, src->GetEndTime());
@@ -1730,7 +1730,7 @@ bool WaveTrack::Unlock() const
    return true;
 }
 
-AUDACITY_DLL_API sampleCount WaveTrack::TimeToLongSamples(double t0) const
+RUSTACITY_DLL_API sampleCount WaveTrack::TimeToLongSamples(double t0) const
 {
    return sampleCount( floor(t0 * mRate + 0.5) );
 }

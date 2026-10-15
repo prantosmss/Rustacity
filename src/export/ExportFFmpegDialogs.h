@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ExportFFmpegDialogs.h
 
@@ -11,17 +11,17 @@ LRN
 #if !defined(__EXPORT_FFMPEG_DIALOGS_H__)
 #define __EXPORT_FFMPEG_DIALOGS_H__
 
-#include "../Audacity.h"   // keep ffmpeg before wx because they interact // for USE_* macros
+#include "../Rustacity.h"   // keep ffmpeg before wx because they interact // for USE_* macros
 
 #if defined(USE_FFMPEG)
 
-#include "../FFmpeg.h"     // and Audacity.h before FFmpeg for config*.h
+#include "../FFmpeg.h"     // and Rustacity.h before FFmpeg for config*.h
 
 #include "../xml/XMLFileReader.h"
 #include "../FileNames.h"
 
 #include <unordered_map>
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class wxArrayStringEx;
 

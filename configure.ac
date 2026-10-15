@@ -1,5 +1,5 @@
 dnl
-dnl audacity configure.ac script
+dnl rustacity configure.ac script
 dnl
 dnl Joshua Haberman
 dnl Dominic Mazzoni
@@ -34,9 +34,9 @@ dnl Require autoconf >= 2.59
 AC_PREREQ([2.59])
 
 dnl Init autoconf
-AC_INIT([audacity], [2.4.0])
-dnl Check for existence of Audacity.h
-AC_CONFIG_SRCDIR([src/Audacity.h])
+AC_INIT([rustacity], [2.4.0])
+dnl Check for existence of Rustacity.h
+AC_CONFIG_SRCDIR([src/Rustacity.h])
 AC_CONFIG_AUX_DIR([autotools])
 dnl we have some extra macros in m4/
 AC_CONFIG_MACRO_DIR([m4])
@@ -68,7 +68,7 @@ AC_PROG_INSTALL
 dnl pkg-config is required for lots of things
 AC_CHECK_PROG(HAVE_PKG_CONFIG, pkg-config, yes, no)
 if test x$HAVE_PKG_CONFIG = xno ; then
-   AC_MSG_ERROR([pkg-config is required to compile audacity!])
+   AC_MSG_ERROR([pkg-config is required to compile rustacity!])
 fi
 
 dnl extra variables
@@ -86,12 +86,12 @@ AC_SUBST(BUILD_LDFLAGS)
 AC_SUBST(MIMETYPES)
 
 dnl allow the user to specify options to configure that change the
-dnl name "audacity" anywhere it appears in a pathname.   This allows
+dnl name "rustacity" anywhere it appears in a pathname.   This allows
 dnl multiple versions of Audacity to be installed concurrently
 dnl without collision
 
 AC_ARG_PROGRAM
-AC_SUBST(AUDACITY_NAME)
+AC_SUBST(RUSTACITY_NAME)
 
 dnl autoconf's program_transform_name is set to spit out a sed expression --
 dnl however it's "helpfully" already escaped for make.   Since we want to use
@@ -102,14 +102,14 @@ dnl I feign at this monstrosity, but no one depends on this particular
 dnl feature but me, as Debian package maintainer, so no one else should
 dnl need to worry about understanding it...
 program_transform_name=`echo $program_transform_name | sed 's/\\$\\$/$/'`
-AUDACITY_NAME=`echo rustacity | sed $program_transform_name`
+RUSTACITY_NAME=`echo rustacity | sed $program_transform_name`
 
-if [[ "$AUDACITY_NAME" = "rustacity" ]] ; then
-    AC_DEFINE(AUDACITY_NAME, "rustacity",
+if [[ "$RUSTACITY_NAME" = "rustacity" ]] ; then
+    AC_DEFINE(RUSTACITY_NAME, "rustacity",
         [define if Rustacity is being installed under a name other than "rustacity",
          so it can find the files it needs at runtime])
 else
-    AC_DEFINE_UNQUOTED(AUDACITY_NAME, "$AUDACITY_NAME")
+    AC_DEFINE_UNQUOTED(RUSTACITY_NAME, "$RUSTACITY_NAME")
 fi
 
 dnl
@@ -125,11 +125,11 @@ AC_DEFINE_UNQUOTED(INSTALL_PREFIX, "$prefix", [define as prefix where Audacity i
 
 ### Configuration of Audacity module support ###
 ################################################
-dnl Some code (headers) can be built either as part of audacity, or as part of
-dnl audacity plug-ins. In order to tell this code what is going on, we need to
-dnl define BUILDING_AUDACITY during the audacity build, and not during the
+dnl Some code (headers) can be built either as part of rustacity, or as part of
+dnl rustacity plug-ins. In order to tell this code what is going on, we need to
+dnl define BUILDING_RUSTACITY during the rustacity build, and not during the
 dnl plug-in build. This code puts the relevant content into configunix.h
-AC_DEFINE(BUILDING_AUDACITY, 1,
+AC_DEFINE(BUILDING_RUSTACITY, 1,
    [Define we are compiling Audacity itself, not an Audacity plug-in])
 # Add -rdynamic to linker flags so the right symbols are exported for
 # plug-ins. This might not work on all architectures / compilers, so we need
@@ -279,14 +279,14 @@ if test "x$cpp_does_wall" = "xyes" ; then
 fi
 
 dnl-------------------------------------------------------------------------
-dnl If the C++ compiler supports making symbols within audacity hidden then
+dnl If the C++ compiler supports making symbols within rustacity hidden then
 dnl we would like to do so. This means that only the required symbols for
 dnl plug-in functionality are exposed, rather than everything in the program.
 dnl-------------------------------------------------------------------------
 gl_VISIBILITY
 
 dnl-------------------------------------------------------------
-dnl Configure the libraries which are essential to audacity.
+dnl Configure the libraries which are essential to rustacity.
 dnl These are mostly only libraries for licensing flexibility, so
 dnl there isn't a way to turn them off.
 dnl-------------------------------------------------------------
@@ -359,26 +359,26 @@ LIBRARIES="EXPAT FFMPEG LAME LIBFLAC LIBID3TAG LIBMAD LIBNYQUIST LIBSBSMS LIBSND
 
 AC_MSG_NOTICE([Determining what libraries are available in this tree and on the system])
 
-AUDACITY_CHECKLIB_EXPAT
-AUDACITY_CHECKLIB_FFMPEG
-dnl AUDACITY_CHECKLIB_GSTREAMER  removed for 2.0.6 release
-AUDACITY_CHECKLIB_LAME
-AUDACITY_CHECKLIB_LIBFLAC
-AUDACITY_CHECKLIB_LIBID3TAG
-AUDACITY_CHECKLIB_LIBMAD
-AUDACITY_CHECKLIB_LIBNYQUIST
-AUDACITY_CHECKLIB_LIBSBSMS
-AUDACITY_CHECKLIB_LIBSNDFILE
-AUDACITY_CHECKLIB_LIBSOUNDTOUCH
-AUDACITY_CHECKLIB_LIBSOXR
-AUDACITY_CHECKLIB_LIBTWOLAME
-AUDACITY_CHECKLIB_LIBVAMP
-AUDACITY_CHECKLIB_LIBVORBIS
-AUDACITY_CHECKLIB_LV2
-AUDACITY_CHECKLIB_PORTAUDIO
-AUDACITY_CHECKLIB_PORTSMF
-AUDACITY_CHECKLIB_PORTMIDI
-AUDACITY_CHECKLIB_WIDGETEXTRA
+RUSTACITY_CHECKLIB_EXPAT
+RUSTACITY_CHECKLIB_FFMPEG
+dnl RUSTACITY_CHECKLIB_GSTREAMER  removed for 2.0.6 release
+RUSTACITY_CHECKLIB_LAME
+RUSTACITY_CHECKLIB_LIBFLAC
+RUSTACITY_CHECKLIB_LIBID3TAG
+RUSTACITY_CHECKLIB_LIBMAD
+RUSTACITY_CHECKLIB_LIBNYQUIST
+RUSTACITY_CHECKLIB_LIBSBSMS
+RUSTACITY_CHECKLIB_LIBSNDFILE
+RUSTACITY_CHECKLIB_LIBSOUNDTOUCH
+RUSTACITY_CHECKLIB_LIBSOXR
+RUSTACITY_CHECKLIB_LIBTWOLAME
+RUSTACITY_CHECKLIB_LIBVAMP
+RUSTACITY_CHECKLIB_LIBVORBIS
+RUSTACITY_CHECKLIB_LV2
+RUSTACITY_CHECKLIB_PORTAUDIO
+RUSTACITY_CHECKLIB_PORTSMF
+RUSTACITY_CHECKLIB_PORTMIDI
+RUSTACITY_CHECKLIB_WIDGETEXTRA
 
 dnl Decide what libraries to build with, and whether to use system or local libraries
 dnl Set variables based on choices.
@@ -488,26 +488,26 @@ done
 
 dnl " This is included purely to close an otherwise endless string in vim
 
-AUDACITY_CONFIG_EXPAT
-AUDACITY_CONFIG_FFMPEG
-AUDACITY_CONFIG_GSTREAMER
-AUDACITY_CONFIG_LAME
-AUDACITY_CONFIG_LIBFLAC
-AUDACITY_CONFIG_LIBID3TAG
-AUDACITY_CONFIG_LIBMAD
-AUDACITY_CONFIG_LIBNYQUIST
-AUDACITY_CONFIG_LIBSBSMS
-AUDACITY_CONFIG_LIBSNDFILE
-AUDACITY_CONFIG_LIBSOUNDTOUCH
-AUDACITY_CONFIG_LIBSOXR
-AUDACITY_CONFIG_LIBTWOLAME
-AUDACITY_CONFIG_LIBVAMP
-AUDACITY_CONFIG_LIBVORBIS
-AUDACITY_CONFIG_LV2
-AUDACITY_CONFIG_PORTAUDIO
-AUDACITY_CONFIG_PORTSMF
-AUDACITY_CONFIG_PORTMIDI
-AUDACITY_CONFIG_WIDGETEXTRA
+RUSTACITY_CONFIG_EXPAT
+RUSTACITY_CONFIG_FFMPEG
+RUSTACITY_CONFIG_GSTREAMER
+RUSTACITY_CONFIG_LAME
+RUSTACITY_CONFIG_LIBFLAC
+RUSTACITY_CONFIG_LIBID3TAG
+RUSTACITY_CONFIG_LIBMAD
+RUSTACITY_CONFIG_LIBNYQUIST
+RUSTACITY_CONFIG_LIBSBSMS
+RUSTACITY_CONFIG_LIBSNDFILE
+RUSTACITY_CONFIG_LIBSOUNDTOUCH
+RUSTACITY_CONFIG_LIBSOXR
+RUSTACITY_CONFIG_LIBTWOLAME
+RUSTACITY_CONFIG_LIBVAMP
+RUSTACITY_CONFIG_LIBVORBIS
+RUSTACITY_CONFIG_LV2
+RUSTACITY_CONFIG_PORTAUDIO
+RUSTACITY_CONFIG_PORTSMF
+RUSTACITY_CONFIG_PORTMIDI
+RUSTACITY_CONFIG_WIDGETEXTRA
 
 dnl--------------------------------------------------------------------------
 dnl Optional features (which don't use libraries - just compile-time on/off)
@@ -570,8 +570,8 @@ dnl OS-specific configuration
 case "${host_os}" in
    darwin* | rhapsody*)
       dnl Mac OS X configuration
-      CDEPEND="AudacityHeaders.h.gch"
-      PRECOMP_CFLAGS="-include AudacityHeaders.h"
+      CDEPEND="RustacityHeaders.h.gch"
+      PRECOMP_CFLAGS="-include RustacityHeaders.h"
       CONFIGHEADER="configunix.h"
       CXXFLAGS="-I\$(top_srcdir)/mac $CXXFLAGS"
       EXTRATARGETS="../Rustacity.app"
@@ -732,7 +732,7 @@ AC_CONFIG_FILES([
    lib-src/Makefile
    po/Makefile.in
    nyq-po/Makefile.in
-   src/audacity.desktop
+   src/rustacity.desktop
    src/Makefile
    tests/Makefile
 ])
@@ -761,7 +761,7 @@ then
    do
       mkdir -p "${lang}/LC_MESSAGES"
       pushd >/dev/null "${lang}/LC_MESSAGES"
-      ln -s "../../${lang}.gmo" "audacity.mo"
+      ln -s "../../${lang}.gmo" "rustacity.mo"
       popd >/dev/null
    done
    popd >/dev/null

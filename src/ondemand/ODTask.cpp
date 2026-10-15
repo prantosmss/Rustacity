@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODTask.cpp
 
@@ -145,7 +145,7 @@ void ODTask::DoSome(float amountWork)
    }
    else
    {
-      //for profiling, uncomment and look in audacity.app/exe's folder for AudacityProfile.txt
+      //for profiling, uncomment and look in audacity.app/exe's folder for RustacityProfile.txt
       //static int tempLog =0;
       //if(++tempLog % 5==0)
          //END_TASK_PROFILING("On Demand Drag and Drop 5 80 mb files into audacity, 5 wavs per task");
@@ -173,7 +173,7 @@ void ODTask::DoSome(float amountWork)
    mBlockUntilTerminateMutex.Unlock();
 }
 
-bool ODTask::IsTaskAssociatedWithProject(AudacityProject* proj)
+bool ODTask::IsTaskAssociatedWithProject(RustacityProject* proj)
 {
    for (auto tr : TrackList::Get( *proj ).Any<const WaveTrack>())
    {

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MacroCommands.h
 
@@ -9,20 +9,20 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_BATCH_COMMANDS_DIALOG__
-#define __AUDACITY_BATCH_COMMANDS_DIALOG__
+#ifndef __RUSTACITY_BATCH_COMMANDS_DIALOG__
+#define __RUSTACITY_BATCH_COMMANDS_DIALOG__
 
 #include <wx/defs.h>
 
 #include "export/Export.h"
 #include "commands/CommandFlag.h"
-#include "audacity/ComponentInterface.h" // for ComponentInterfaceSymbol
+#include "rustacity/ComponentInterface.h" // for ComponentInterfaceSymbol
 
 class wxArrayString;
 class Effect;
 class CommandContext;
 class CommandManager;
-class AudacityProject;
+class RustacityProject;
 class wxArrayStringEx;
 
 class MacroCommandsCatalog {
@@ -34,7 +34,7 @@ public:
    };
    using Entries = std::vector<Entry>;
 
-   MacroCommandsCatalog( const AudacityProject *project );
+   MacroCommandsCatalog( const RustacityProject *project );
 
    // binary search
    Entries::const_iterator ByFriendlyName( const TranslatableString &friendlyName ) const;
@@ -59,7 +59,7 @@ class MacroCommands final {
       const PluginID & ID, const CommandContext & context, unsigned flags );
 
    // constructors and destructors
-   MacroCommands( AudacityProject &project );
+   MacroCommands( RustacityProject &project );
  public:
    bool ApplyMacro( const MacroCommandsCatalog &catalog,
       const wxString & filename = {});
@@ -87,7 +87,7 @@ class MacroCommands final {
       const FileExtension &extension);
    bool WriteMp3File( const wxString & Name, int bitrate );
    double GetEndTime();
-   static bool IsMono( AudacityProject *project );
+   static bool IsMono( RustacityProject *project );
 
    // These commands do not depend on the command list.
    static void MigrateLegacyChains();
@@ -125,7 +125,7 @@ class MacroCommands final {
    wxString Join(const wxString & command, const wxString & param);
 
 private:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    CommandIDs mCommandMacro;
    wxArrayString mParamsMacro;

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Registrar.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_REGISTRAR__
-#define __AUDACITY_REGISTRAR__
+#ifndef __RUSTACITY_REGISTRAR__
+#define __RUSTACITY_REGISTRAR__
 
 typedef enum
 {

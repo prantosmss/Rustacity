@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   DirectoriesPrefs.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_DIRECTORIES_PREFS__
-#define __AUDACITY_DIRECTORIES_PREFS__
+#ifndef __RUSTACITY_DIRECTORIES_PREFS__
+#define __RUSTACITY_DIRECTORIES_PREFS__
 
 #include "PrefsPanel.h"
 

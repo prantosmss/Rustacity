@@ -92,26 +92,26 @@ subdir = images
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_c99_func_lrint.m4 \
 	$(top_srcdir)/m4/ac_c99_func_lrintf.m4 \
-	$(top_srcdir)/m4/audacity_checklib_ffmpeg.m4 \
-	$(top_srcdir)/m4/audacity_checklib_gstreamer.m4 \
-	$(top_srcdir)/m4/audacity_checklib_lame.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libexpat.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libflac.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libid3tag.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libmad.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libnyquist.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libsbsms.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libsndfile.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libsoundtouch.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libsoxr.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libtwolame.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libvamp.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libvorbis.m4 \
-	$(top_srcdir)/m4/audacity_checklib_lv2.m4 \
-	$(top_srcdir)/m4/audacity_checklib_portaudio.m4 \
-	$(top_srcdir)/m4/audacity_checklib_portmidi.m4 \
-	$(top_srcdir)/m4/audacity_checklib_portsmf.m4 \
-	$(top_srcdir)/m4/audacity_checklib_widgetextra.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_ffmpeg.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_gstreamer.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_lame.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libexpat.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libflac.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libid3tag.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libmad.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libnyquist.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libsbsms.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libsndfile.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libsoundtouch.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libsoxr.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libtwolame.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libvamp.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libvorbis.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_lv2.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_portaudio.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_portmidi.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_portsmf.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_widgetextra.m4 \
 	$(top_srcdir)/m4/ax_cflags_strict_prototypes.m4 \
 	$(top_srcdir)/m4/ax_cflags_warn_all.m4 \
 	$(top_srcdir)/m4/ax_check_compiler_flags.m4 \
@@ -200,7 +200,7 @@ ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AR = @AR@
-AUDACITY_NAME = @AUDACITY_NAME@
+RUSTACITY_NAME = @RUSTACITY_NAME@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
@@ -410,20 +410,20 @@ icons24dir = $(iconsdatadir)/24x24/apps
 icons32dir = $(iconsdatadir)/32x32/apps
 icons48dir = $(iconsdatadir)/48x48/apps
 iconsscalabledir = $(iconsdatadir)/scalable/apps
-dist_icons16_DATA = icons/16x16/audacity.png
-dist_icons22_DATA = icons/22x22/audacity.png
-dist_icons24_DATA = icons/24x24/audacity.png
-dist_icons32_DATA = icons/32x32/audacity.png
-dist_icons48_DATA = icons/48x48/audacity.png
-dist_iconsscalable_DATA = audacity.svg
+dist_icons16_DATA = icons/16x16/rustacity.png
+dist_icons22_DATA = icons/22x22/rustacity.png
+dist_icons24_DATA = icons/24x24/rustacity.png
+dist_icons32_DATA = icons/32x32/rustacity.png
+dist_icons48_DATA = icons/48x48/rustacity.png
+dist_iconsscalable_DATA = rustacity.svg
 pixmapdir = $(datarootdir)/pixmaps
 dist_pixmap_DATA = \
    gnome-mime-application-x-audacity-project.xpm \
-   icons/16x16/audacity16.xpm \
-   icons/32x32/audacity32.xpm \
+   icons/16x16/rustacity16.xpm \
+   icons/32x32/rustacity32.xpm \
    $(NULL)
 
-pixmap_DATA = icons/48x48/audacity.xpm
+pixmap_DATA = icons/48x48/rustacity.xpm
 EXTRA_DIST = \
 	Cursors16/DisabledCursor.xpm \
 	Cursors16/DrawCursor.xpm \
@@ -472,9 +472,9 @@ EXTRA_DIST = \
 	MusicalInstruments/vibraphone_vibes.xpm \
 	MusicalInstruments/vocal_vox.xpm \
 	Arrow.xpm \
-	AudacityLogo48x48.xpm \
-	AudacityLogoAlpha.xpm \
-	AudacityLogoWithName.xpm \
+	RustacityLogo48x48.xpm \
+	RustacityLogoAlpha.xpm \
+	RustacityLogoWithName.xpm \
 	Cursors.h \
 	MusicalInstruments.h \
 	SliderThumbAlpha.xpm \

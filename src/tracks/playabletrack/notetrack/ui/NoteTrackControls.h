@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 NoteTrackControls.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_NOTE_TRACK_CONTROLS__
-#define __AUDACITY_NOTE_TRACK_CONTROLS__
+#ifndef __RUSTACITY_NOTE_TRACK_CONTROLS__
+#define __RUSTACITY_NOTE_TRACK_CONTROLS__
 
 #include "../../ui/PlayableTrackControls.h" // to inherit
 class wxEvent;
@@ -20,7 +20,7 @@ class SoloButtonHandle;
 class NoteTrackButtonHandle;
 class VelocitySliderHandle;
 
-#include "../../../../Audacity.h"
+#include "../../../../Rustacity.h"
 #include "../../../../Experimental.h"
 
 using NoteTrackControlsBase =
@@ -50,7 +50,7 @@ public:
 
    std::vector<UIHandlePtr> HitTest
       (const TrackPanelMouseState &state,
-       const AudacityProject *pProject) override;
+       const RustacityProject *pProject) override;
 
    PopupMenuTable *GetMenuExtension(Track *pTrack) override;
 

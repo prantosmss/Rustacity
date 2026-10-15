@@ -1,16 +1,16 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   KeyView.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WIDGETS_KEYVIEW__
-#define __AUDACITY_WIDGETS_KEYVIEW__
+#ifndef __RUSTACITY_WIDGETS_KEYVIEW__
+#define __RUSTACITY_WIDGETS_KEYVIEW__
 
-#include "../Audacity.h"
-#include "audacity/Types.h"
+#include "../Rustacity.h"
+#include "rustacity/Types.h"
 
 #include <vector>
 #include <wx/setup.h> // for wxUSE_* macros

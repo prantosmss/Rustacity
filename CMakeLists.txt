@@ -81,7 +81,7 @@ endif()
 project( Rustacity )
 
 # Load our functions/macros
-include( AudacityFunctions )
+include( RustacityFunctions )
 
 # Pull all the modules we'll need
 include( CheckCXXCompilerFlag )
@@ -148,7 +148,7 @@ message( STATUS "  Current Commit: ${GIT_COMMIT_SHORT}" )
 message( STATUS )
 
 # Define option() prefix
-set( _OPT "audacity_" )
+set( _OPT "rustacity_" )
 
 # Organize subdirectories/targets into folders for the IDEs
 set_property( GLOBAL PROPERTY USE_FOLDERS ON )
@@ -378,17 +378,17 @@ endif()
 
 # Define Rustacity's name
 if( CMAKE_SYSTEM_NAME MATCHES "Darwin|Windows" )
-   set( AUDACITY_NAME "Rustacity" )
+   set( RUSTACITY_NAME "Rustacity" )
 else()
-   set( AUDACITY_NAME "rustacity" )
+   set( RUSTACITY_NAME "rustacity" )
 endif()
 
 # Extract the Audacity version information
 file(
    STRINGS
-      ${topdir}/src/Audacity.h output
+      ${topdir}/src/Rustacity.h output
    REGEX
-      "^#define +AUDACITY_(VERSION|RELEASE|REVISION|MODLEVEL|BUILD_LEVEL) +"
+      "^#define +RUSTACITY_(VERSION|RELEASE|REVISION|MODLEVEL|BUILD_LEVEL) +"
 )
 
 # And store as variables
@@ -400,17 +400,17 @@ foreach( line ${output} )
 endforeach()
 
 # Create short and full version strings
-set( AUDACITY_DIST_VERSION ${AUDACITY_VERSION}.${AUDACITY_RELEASE}.${AUDACITY_REVISION} )
-set( AUDACITY_INFO_VERSION ${AUDACITY_VERSION}.${AUDACITY_RELEASE}.${AUDACITY_REVISION}.${AUDACITY_MODLEVEL} )
+set( RUSTACITY_DIST_VERSION ${RUSTACITY_VERSION}.${RUSTACITY_RELEASE}.${RUSTACITY_REVISION} )
+set( RUSTACITY_INFO_VERSION ${RUSTACITY_VERSION}.${RUSTACITY_RELEASE}.${RUSTACITY_REVISION}.${RUSTACITY_MODLEVEL} )
 
-# Define the version suffix (duplicates what happens in src/Audacity.h)
+# Define the version suffix (duplicates what happens in src/Rustacity.h)
 string( TIMESTAMP __TDATE__ "%Y%m%d" )
-if( AUDACITY_BUILD_LEVEL EQUAL 0 )
-   set( AUDACITY_SUFFIX "-alpha-${__TDATE__}" )
-elseif(  AUDACITY_BUILD_LEVEL EQUAL 1 )
-   set( AUDACITY_SUFFIX "-beta-${__TDATE__}" )
+if( RUSTACITY_BUILD_LEVEL EQUAL 0 )
+   set( RUSTACITY_SUFFIX "-alpha-${__TDATE__}" )
+elseif(  RUSTACITY_BUILD_LEVEL EQUAL 1 )
+   set( RUSTACITY_SUFFIX "-beta-${__TDATE__}" )
 else()
-   set( AUDACITY_SUFFIX "" )
+   set( RUSTACITY_SUFFIX "" )
 endif()
 
 # Python is used for the manual and (possibly) message catalogs

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Normalize.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_NORMALIZE__
-#define __AUDACITY_EFFECT_NORMALIZE__
+#ifndef __RUSTACITY_EFFECT_NORMALIZE__
+#define __RUSTACITY_EFFECT_NORMALIZE__
 
 #include "../Experimental.h"
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Effect.h
 
@@ -9,10 +9,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT__
-#define __AUDACITY_EFFECT__
+#ifndef __RUSTACITY_EFFECT__
+#define __RUSTACITY_EFFECT__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include "../Experimental.h"
 
@@ -27,8 +27,8 @@ class wxChoice;
 class wxListBox;
 class wxWindow;
 
-#include "audacity/ConfigInterface.h"
-#include "audacity/EffectInterface.h"
+#include "rustacity/ConfigInterface.h"
+#include "rustacity/EffectInterface.h"
 
 #include "../SelectedRegion.h"
 
@@ -38,11 +38,11 @@ class wxWindow;
 
 class wxArrayString;
 class ShuttleGui;
-class AudacityCommand;
+class RustacityCommand;
 
 #define BUILTIN_EFFECT_PREFIX wxT("Built-in Effect: ")
 
-class AudacityProject;
+class RustacityProject;
 class LabelTrack;
 class NotifyingSelectedRegion;
 class ProgressDialog;
@@ -66,7 +66,7 @@ class WaveTrack;
 // TODO:  Much more cleanup of old methods and variables is needed, but
 // TODO:  can't be done until after all effects are using the NEW API.
 
-class AUDACITY_DLL_API Effect /* not final */ : public wxEvtHandler,
+class RUSTACITY_DLL_API Effect /* not final */ : public wxEvtHandler,
                                 public EffectClientInterface,
                                 public EffectUIClientInterface,
                                 public EffectHostInterface
@@ -460,7 +460,7 @@ protected:
    wxWeakRef<NotifyingSelectedRegion> mpSelectedRegion{};
    TrackFactory   *mFactory;
    const TrackList *inputTracks() const { return mTracks; }
-   const AudacityProject *FindProject() const;
+   const RustacityProject *FindProject() const;
    std::shared_ptr<TrackList> mOutputTracks; // used only if CopyInputTracks() is called.
    double         mT0;
    double         mT1;

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackView.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from class Track
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_VIEW__
-#define __AUDACITY_TRACK_VIEW__
+#ifndef __RUSTACITY_TRACK_VIEW__
+#define __RUSTACITY_TRACK_VIEW__
 
 #include <memory>
 #include "CommonTrackPanelCell.h" // to inherit

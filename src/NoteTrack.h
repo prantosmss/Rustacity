@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   NoteTrack.h
 
@@ -8,10 +8,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_NOTETRACK__
-#define __AUDACITY_NOTETRACK__
+#ifndef __RUSTACITY_NOTETRACK__
+#define __RUSTACITY_NOTETRACK__
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 
 #include "Experimental.h"
 
@@ -64,7 +64,7 @@ using QuantizedTimeAndBeat = std::pair< double, double >;
 
 class StretchHandle;
 
-class AUDACITY_DLL_API NoteTrack final
+class RUSTACITY_DLL_API NoteTrack final
    : public NoteTrackBase
 {
 public:

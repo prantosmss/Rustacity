@@ -17,8 +17,8 @@
 #define __COMMANDHANDLER__
 
 #include "../MemoryX.h"
-class AudacityApp;
-class AudacityProject;
+class RustacityApp;
+class RustacityProject;
 class AppCommandEvent;
 class CommandContext;
 

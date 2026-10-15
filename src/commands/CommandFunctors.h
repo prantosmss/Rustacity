@@ -6,13 +6,13 @@
 //
 //
 
-#ifndef __AUDACITY_COMMAND_FUNCTORS__
-#define __AUDACITY_COMMAND_FUNCTORS__
+#ifndef __RUSTACITY_COMMAND_FUNCTORS__
+#define __RUSTACITY_COMMAND_FUNCTORS__
 
 #include "Command.h"
 
-class AudacityProject;
-class AudacityApp;
+class RustacityProject;
+class RustacityApp;
 class wxEvtHandler;
 
 // Base class for objects, to whose member functions, the CommandManager will
@@ -29,9 +29,9 @@ class wxEvtHandler;
 using CommandHandlerObject = wxEvtHandler;
 
 // First of two functions registered with each command: an extractor
-// of the handler object from the AudacityProject
+// of the handler object from the RustacityProject
 using CommandHandlerFinder =
-   std::function< CommandHandlerObject&(AudacityProject &) >;
+   std::function< CommandHandlerObject&(RustacityProject &) >;
 
 // Second of two function pointers registered with each command: a pointer
 // to a member function of the handler object

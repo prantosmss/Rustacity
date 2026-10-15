@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LabelDialog.h
 
@@ -8,18 +8,18 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_LABELDIALOG__
-#define __AUDACITY_LABELDIALOG__
+#ifndef __RUSTACITY_LABELDIALOG__
+#define __RUSTACITY_LABELDIALOG__
 
 #include <vector>
 #include <wx/defs.h>
 
 #include "widgets/wxPanelWrapper.h" // to inherit
-#include "audacity/ComponentInterface.h" // member variable
+#include "rustacity/ComponentInterface.h" // member variable
 
 class wxArrayString;
 class wxGridEvent;
-class AudacityProject;
+class RustacityProject;
 class ChoiceEditor;
 class Grid;
 class NumericEditor;
@@ -38,7 +38,7 @@ class LabelDialog final : public wxDialogWrapper
  public:
 
    LabelDialog(wxWindow *parent,
-               AudacityProject &project,
+               RustacityProject &project,
                TrackFactory &factory,
                TrackList *tracks,
 
@@ -95,7 +95,7 @@ class LabelDialog final : public wxDialogWrapper
 
  private:
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    Grid *mGrid;
    ChoiceEditor *mChoiceEditor;

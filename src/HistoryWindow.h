@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   HistoryWindow.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_HISTORY_WINDOW__
-#define __AUDACITY_HISTORY_WINDOW__
+#ifndef __RUSTACITY_HISTORY_WINDOW__
+#define __RUSTACITY_HISTORY_WINDOW__
 
 #include "widgets/wxPanelWrapper.h" // to inherit
 
@@ -18,14 +18,14 @@ class wxListCtrl;
 class wxListEvent;
 class wxSpinCtrl;
 class wxTextCtrl;
-class AudacityProject;
+class RustacityProject;
 class ShuttleGui;
 class UndoManager;
 
 class HistoryDialog final : public wxDialogWrapper {
 
  public:
-   HistoryDialog(AudacityProject * parent, UndoManager *manager);
+   HistoryDialog(RustacityProject * parent, UndoManager *manager);
 
    void UpdateDisplay(wxEvent &e);
    
@@ -43,7 +43,7 @@ class HistoryDialog final : public wxDialogWrapper {
    void OnDiscard(wxCommandEvent & event);
    void OnDiscardClipboard(wxCommandEvent & event);
 
-   AudacityProject   *mProject;
+   RustacityProject   *mProject;
    UndoManager       *mManager;
    wxListCtrl        *mList;
    wxTextCtrl        *mTotal;

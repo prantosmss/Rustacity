@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackVRulerControls.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_VRULER_CONTROLS__
-#define __AUDACITY_TRACK_VRULER_CONTROLS__
+#ifndef __RUSTACITY_TRACK_VRULER_CONTROLS__
+#define __RUSTACITY_TRACK_VRULER_CONTROLS__
 
 #include "CommonTrackPanelCell.h"
 
@@ -34,7 +34,7 @@ public:
    // Define a default hit test method, just for message and cursor
    std::vector<UIHandlePtr> HitTest
       (const TrackPanelMouseState &state,
-       const AudacityProject *pProject) override;
+       const RustacityProject *pProject) override;
 
    // Helpers for handle classes' TrackPanelDrawable implementations
    static void DrawZooming

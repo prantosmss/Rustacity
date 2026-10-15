@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   GUIPrefs.cpp
 
@@ -17,7 +17,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "GUIPrefs.h"
 
 #include "../Experimental.h"
@@ -35,7 +35,7 @@
 
 #include "ThemePrefs.h"
 #include "../AColor.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 GUIPrefs::GUIPrefs(wxWindow * parent, wxWindowID winid)
 /* i18n-hint: refers to Audacity's user interface settings */
@@ -323,7 +323,7 @@ wxString GUIPrefs::SetLang( const wxString & lang )
    if (!lang.empty() && lang != wxT("System")) {
       info = wxLocale::FindLanguageInfo(lang);
       if (!info)
-         ::AudacityMessageBox(
+         ::RustacityMessageBox(
             XO("Language \"%s\" is unknown").Format( lang ) );
    }
    if (!info)
@@ -335,7 +335,7 @@ wxString GUIPrefs::SetLang( const wxString & lang )
    }
    sLocale = std::make_unique<wxLocale>(info->Language);
 
-   for( const auto &path : FileNames::AudacityPathList() )
+   for( const auto &path : FileNames::RustacityPathList() )
       sLocale->AddCatalogLookupPathPrefix( path );
 
    // LL:  Must add the wxWidgets catalog manually since the search
@@ -388,7 +388,7 @@ int ShowClippingPrefsID()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "GUI",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew GUIPrefs(parent, winid);

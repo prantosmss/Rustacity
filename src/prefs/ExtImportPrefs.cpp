@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ExtImportPrefs.cpp
 
@@ -14,7 +14,7 @@
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ExtImportPrefs.h"
 
 #include <wx/defs.h>
@@ -24,7 +24,7 @@
 #include "../Prefs.h"
 #include "../ShuttleGui.h"
 #include "../import/Import.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/Grid.h"
 
 #define EXTIMPORT_MIME_SUPPORT 0
@@ -539,7 +539,7 @@ void ExtImportPrefs::OnRuleTableEdit (wxGridEvent& event)
       {
          if (!askedAboutSpaces)
          {
-            fixSpaces = AudacityMessageBox(
+            fixSpaces = RustacityMessageBox(
                XO(
 "There are space characters (spaces, newlines, tabs or linefeeds) in one of \
 the items. They are likely to break the pattern matching. Unless you know \
@@ -632,7 +632,7 @@ void ExtImportPrefs::OnDelRule(wxCommandEvent& WXUNUSED(event))
       return;
    auto &items = Importer::Get().GetImportItems();
 
-   int msgres = AudacityMessageBox (
+   int msgres = RustacityMessageBox (
       XO("Do you really want to delete selected rule?"),
       XO("Rule deletion confirmation"),
       wxYES_NO,
@@ -843,7 +843,7 @@ void ExtImportPrefsDropTarget::OnLeave()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "ExtImport",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew ExtImportPrefs(parent, winid);

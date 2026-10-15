@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Repeat.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_REPEAT__
-#define __AUDACITY_EFFECT_REPEAT__
+#ifndef __RUSTACITY_EFFECT_REPEAT__
+#define __RUSTACITY_EFFECT_REPEAT__
 
 #include "Effect.h"
 

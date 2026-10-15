@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Distortion.cpp
 
@@ -16,7 +16,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Distortion.h"
 #include "LoadEffects.h"
 
@@ -214,7 +214,7 @@ EffectType EffectDistortion::GetType()
 
 bool EffectDistortion::SupportsRealtime()
 {
-#if defined(EXPERIMENTAL_REALTIME_AUDACITY_EFFECTS)
+#if defined(EXPERIMENTAL_REALTIME_RUSTACITY_EFFECTS)
    return true;
 #else
    return false;

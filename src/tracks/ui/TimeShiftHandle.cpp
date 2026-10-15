@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TimeShiftHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 #include "TimeShiftHandle.h"
 
 #include "../../Experimental.h"
@@ -37,7 +37,7 @@ TimeShiftHandle::TimeShiftHandle
 {
 }
 
-void TimeShiftHandle::Enter(bool, AudacityProject *)
+void TimeShiftHandle::Enter(bool, RustacityProject *)
 {
 #ifdef EXPERIMENTAL_TRACK_PANEL_HIGHLIGHTING
    mChangeHighlight = RefreshCode::RefreshCell;
@@ -45,7 +45,7 @@ void TimeShiftHandle::Enter(bool, AudacityProject *)
 }
 
 HitTestPreview TimeShiftHandle::HitPreview
-(const AudacityProject *WXUNUSED(pProject), bool unsafe)
+(const RustacityProject *WXUNUSED(pProject), bool unsafe)
 {
    static auto disabledCursor =
       ::MakeCursor(wxCURSOR_NO_ENTRY, DisabledCursorXpm, 16, 16);
@@ -351,7 +351,7 @@ void TimeShiftHandle::DoSlideHorizontal
 }
 
 UIHandle::Result TimeShiftHandle::Click
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    using namespace RefreshCode;
    const bool unsafe = ProjectAudioIO::Get( *pProject ).IsAudioActive();
@@ -670,7 +670,7 @@ bool TimeShiftHandle::DoSlideVertical
 }
 
 UIHandle::Result TimeShiftHandle::Drag
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject)
 {
    using namespace RefreshCode;
    const bool unsafe = ProjectAudioIO::Get( *pProject ).IsAudioActive();
@@ -775,7 +775,7 @@ UIHandle::Result TimeShiftHandle::Drag
 }
 
 HitTestPreview TimeShiftHandle::Preview
-(const TrackPanelMouseState &, AudacityProject *pProject)
+(const TrackPanelMouseState &, RustacityProject *pProject)
 {
    // After all that, it still may be unsafe to drag.
    // Even if so, make an informative cursor change from default to "banned."
@@ -784,7 +784,7 @@ HitTestPreview TimeShiftHandle::Preview
 }
 
 UIHandle::Result TimeShiftHandle::Release
-(const TrackPanelMouseEvent &, AudacityProject *pProject,
+(const TrackPanelMouseEvent &, RustacityProject *pProject,
  wxWindow *)
 {
    using namespace RefreshCode;
@@ -842,7 +842,7 @@ UIHandle::Result TimeShiftHandle::Release
    return result | FixScrollbars;
 }
 
-UIHandle::Result TimeShiftHandle::Cancel(AudacityProject *pProject)
+UIHandle::Result TimeShiftHandle::Cancel(RustacityProject *pProject)
 {
    ProjectHistory::Get( *pProject ).RollbackState();
    return RefreshCode::RefreshAll;

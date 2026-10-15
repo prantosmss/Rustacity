@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectWindowBase.h
 
@@ -8,12 +8,12 @@ Paul Licameli split from ProjectWindow.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_WINDOW_BASE__
-#define __AUDACITY_PROJECT_WINDOW_BASE__
+#ifndef __RUSTACITY_PROJECT_WINDOW_BASE__
+#define __RUSTACITY_PROJECT_WINDOW_BASE__
 
 #include <wx/frame.h> // to inherit
 
-class AudacityProject;
+class RustacityProject;
 
 ///\brief A top-level window associated with a project
 class ProjectWindowBase /* not final */ : public wxFrame
@@ -22,19 +22,19 @@ public:
    explicit ProjectWindowBase(
       wxWindow * parent, wxWindowID id,
       const wxPoint & pos, const wxSize &size,
-      AudacityProject &project );
+      RustacityProject &project );
 
    ~ProjectWindowBase() override;
 
-   AudacityProject &GetProject() { return mProject; }
-   const AudacityProject &GetProject() const { return mProject; }
+   RustacityProject &GetProject() { return mProject; }
+   const RustacityProject &GetProject() const { return mProject; }
 
 protected:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 };
 
-AudacityProject *FindProjectFromWindow( wxWindow *pWindow );
-const AudacityProject *FindProjectFromWindow( const wxWindow *pWindow );
+RustacityProject *FindProjectFromWindow( wxWindow *pWindow );
+const RustacityProject *FindProjectFromWindow( const wxWindow *pWindow );
 
 #endif
 

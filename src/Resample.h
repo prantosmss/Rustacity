@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2012 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -9,10 +9,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_RESAMPLE_H__
-#define __AUDACITY_RESAMPLE_H__
+#ifndef __RUSTACITY_RESAMPLE_H__
+#define __RUSTACITY_RESAMPLE_H__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include "SampleFormat.h"
 
@@ -83,4 +83,4 @@ class Resample final
    bool mbWantConstRateResampling;
 };
 
-#endif // __AUDACITY_RESAMPLE_H__
+#endif // __RUSTACITY_RESAMPLE_H__

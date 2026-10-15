@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Profiler.h
 
@@ -24,8 +24,8 @@ but it will probably work fine if you use it on a high level.
 
 
 
-#ifndef __AUDACITY_PROFILER__
-#define __AUDACITY_PROFILER__
+#ifndef __RUSTACITY_PROFILER__
+#define __RUSTACITY_PROFILER__
 #include <vector>
 #include <time.h>
 #include "ondemand/ODTaskThread.h"

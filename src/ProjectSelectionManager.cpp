@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectSelectionManager.cpp
 
@@ -24,27 +24,27 @@ Paul Licameli split from ProjectManager.cpp
 #include "toolbars/SpectralSelectionBar.h"
 #include "toolbars/TimerToolBar.h"
 
-static AudacityProject::AttachedObjects::RegisteredFactory
+static RustacityProject::AttachedObjects::RegisteredFactory
 sProjectSelectionManagerKey {
-   []( AudacityProject &project ) {
+   []( RustacityProject &project ) {
       return std::make_shared< ProjectSelectionManager >( project );
    }
 };
 
 ProjectSelectionManager &ProjectSelectionManager::Get(
-   AudacityProject &project )
+   RustacityProject &project )
 {
    return project.AttachedObjects::Get< ProjectSelectionManager >(
       sProjectSelectionManagerKey );
 }
 
 const ProjectSelectionManager &ProjectSelectionManager::Get(
-   const AudacityProject &project )
+   const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-ProjectSelectionManager::ProjectSelectionManager( AudacityProject &project )
+ProjectSelectionManager::ProjectSelectionManager( RustacityProject &project )
    : mProject{ project }
 {
 }

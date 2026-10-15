@@ -93,26 +93,26 @@ subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_c99_func_lrint.m4 \
 	$(top_srcdir)/m4/ac_c99_func_lrintf.m4 \
-	$(top_srcdir)/m4/audacity_checklib_ffmpeg.m4 \
-	$(top_srcdir)/m4/audacity_checklib_gstreamer.m4 \
-	$(top_srcdir)/m4/audacity_checklib_lame.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libexpat.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libflac.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libid3tag.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libmad.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libnyquist.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libsbsms.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libsndfile.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libsoundtouch.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libsoxr.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libtwolame.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libvamp.m4 \
-	$(top_srcdir)/m4/audacity_checklib_libvorbis.m4 \
-	$(top_srcdir)/m4/audacity_checklib_lv2.m4 \
-	$(top_srcdir)/m4/audacity_checklib_portaudio.m4 \
-	$(top_srcdir)/m4/audacity_checklib_portmidi.m4 \
-	$(top_srcdir)/m4/audacity_checklib_portsmf.m4 \
-	$(top_srcdir)/m4/audacity_checklib_widgetextra.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_ffmpeg.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_gstreamer.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_lame.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libexpat.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libflac.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libid3tag.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libmad.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libnyquist.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libsbsms.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libsndfile.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libsoundtouch.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libsoxr.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libtwolame.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libvamp.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_libvorbis.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_lv2.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_portaudio.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_portmidi.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_portsmf.m4 \
+	$(top_srcdir)/m4/rustacity_checklib_widgetextra.m4 \
 	$(top_srcdir)/m4/ax_cflags_strict_prototypes.m4 \
 	$(top_srcdir)/m4/ax_cflags_warn_all.m4 \
 	$(top_srcdir)/m4/ax_check_compiler_flags.m4 \
@@ -146,9 +146,9 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(docdir)" \
 	"$(DESTDIR)$(pkgdatadir)" "$(DESTDIR)$(pkgdatadir)" \
 	"$(DESTDIR)$(suillibdir)"
 PROGRAMS = $(bin_PROGRAMS)
-audacity_SOURCES = audacity.c
-audacity_OBJECTS = audacity.$(OBJEXT)
-audacity_LDADD = $(LDADD)
+rustacity_SOURCES = rustacity.c
+rustacity_OBJECTS = rustacity.$(OBJEXT)
+rustacity_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -187,8 +187,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = audacity.c
-DIST_SOURCES = audacity.c
+SOURCES = rustacity.c
+DIST_SOURCES = rustacity.c
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -318,7 +318,7 @@ ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AR = @AR@
-AUDACITY_NAME = @AUDACITY_NAME@
+RUSTACITY_NAME = @RUSTACITY_NAME@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
@@ -523,20 +523,20 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = help images lib-src po src tests
 ACLOCAL_AMFLAGS = -I m4
-bin_PROGRAMS = audacity$(EXEEXT)
+bin_PROGRAMS = rustacity$(EXEEXT)
 dist_doc_DATA = LICENSE.txt README.txt
 dist_pkgdata_DATA = presets/EQDefaultCurves.xml
 suillibdir = $(pkglibdir)
 suillib_DATA = $(shell [ -e lib-src/lv2/build ] && find lib-src/lv2/build -name \*.so)
 nobase_dist_pkgdata_DATA = \
-   include/audacity/ComponentInterface.h \
-   include/audacity/ConfigInterface.h \
-   include/audacity/EffectAutomationParameters.h \
-   include/audacity/EffectInterface.h \
-   include/audacity/ImporterInterface.h \
-   include/audacity/ModuleInterface.h \
-   include/audacity/PluginInterface.h \
-   include/audacity/Types.h \
+   include/rustacity/ComponentInterface.h \
+   include/rustacity/ConfigInterface.h \
+   include/rustacity/EffectAutomationParameters.h \
+   include/rustacity/EffectInterface.h \
+   include/rustacity/ImporterInterface.h \
+   include/rustacity/ModuleInterface.h \
+   include/rustacity/PluginInterface.h \
+   include/rustacity/Types.h \
 	nyquist/aud-do-support.lsp \
 	nyquist/dspprims.lsp \
 	nyquist/envelopes.lsp \
@@ -550,7 +550,7 @@ nobase_dist_pkgdata_DATA = \
 	nyquist/nyqmisc.lsp \
 	nyquist/nyquist-plot.txt
 
-CLEANFILES = audacity$(EXEEXT) plug-ins nyquist locale modules
+CLEANFILES = rustacity$(EXEEXT) plug-ins nyquist locale modules
 all: all-recursive
 
 .SUFFIXES:
@@ -644,7 +644,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/audacity.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rustacity.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -1266,9 +1266,9 @@ uninstall-am: uninstall-binPROGRAMS uninstall-dist_docDATA \
    plug-ins/vocoder.ny \
    $(NULL)
 
-audacity$(EXEEXT): src/audacity$(EXEEXT)
-	rm -f audacity$(EXEEXT)
-	cp src/audacity$(EXEEXT) audacity$(EXEEXT)
+rustacity$(EXEEXT): src/rustacity$(EXEEXT)
+	rm -f rustacity$(EXEEXT)
+	cp src/rustacity$(EXEEXT) rustacity$(EXEEXT)
 	[ -e plug-ins ] || ln -s $(srcdir)/plug-ins
 	[ -e nyquist ] || ln -s $(srcdir)/nyquist
 	[ -e locale ] || ln -s po locale

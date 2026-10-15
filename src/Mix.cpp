@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Mix.cpp
 
@@ -21,7 +21,7 @@
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Mix.h"
 
 #include <math.h>

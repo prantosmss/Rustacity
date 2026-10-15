@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LoadNyquist.h
 
@@ -8,9 +8,9 @@
 
 **********************************************************************/
 
-#include "audacity/ModuleInterface.h"
-#include "audacity/EffectInterface.h"
-#include "audacity/PluginInterface.h"
+#include "rustacity/ModuleInterface.h"
+#include "rustacity/EffectInterface.h"
+#include "rustacity/PluginInterface.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //

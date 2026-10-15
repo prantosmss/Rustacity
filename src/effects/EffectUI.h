@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   EffectUI.h
 
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECTUI_H__
-#define __AUDACITY_EFFECTUI_H__
+#ifndef __RUSTACITY_EFFECTUI_H__
+#define __RUSTACITY_EFFECTUI_H__
 
 #include "../Experimental.h"
 
@@ -28,7 +28,7 @@ class wxFlexGridSizer;
 class wxPanel;
 class wxStaticText;
 
-class AudacityProject;
+class RustacityProject;
 
 class Effect;
 using EffectArray = std::vector<Effect*>;
@@ -36,12 +36,12 @@ using EffectArray = std::vector<Effect*>;
 class EffectRack final : public wxFrame
 {
 public:
-   EffectRack( AudacityProject &project );
+   EffectRack( RustacityProject &project );
    virtual ~EffectRack();
 
    void Add(Effect *effect, bool active = false, bool favorite = false);
 
-   static EffectRack &Get( AudacityProject &project );
+   static EffectRack &Get( RustacityProject &project );
 
 private:
 
@@ -63,7 +63,7 @@ private:
    void OnRemove(wxCommandEvent & evt);
 
 private:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    wxStaticText *mLatency;
    int mLastLatency;
@@ -102,13 +102,13 @@ private:
 
 #endif
 
-#include "audacity/EffectInterface.h"
+#include "rustacity/EffectInterface.h"
 #include "../widgets/wxPanelWrapper.h" // to inherit
 
 #include "../SelectedRegion.h"
 
-class AudacityCommand;
-class AudacityProject;
+class RustacityCommand;
+class RustacityProject;
 class Effect;
 
 class wxCheckBox;
@@ -120,12 +120,12 @@ class EffectUIHost final : public wxDialogWrapper,
 public:
    // constructors and destructors
    EffectUIHost(wxWindow *parent,
-                AudacityProject &project,
+                RustacityProject &project,
                 Effect *effect,
                 EffectUIClientInterface *client);
    EffectUIHost(wxWindow *parent,
-                AudacityProject &project,
-                AudacityCommand *command,
+                RustacityProject &project,
+                RustacityCommand *command,
                 EffectUIClientInterface *client);
    virtual ~EffectUIHost();
 
@@ -173,10 +173,10 @@ private:
    void Resume();
 
 private:
-   AudacityProject *mProject;
+   RustacityProject *mProject;
    wxWindow *mParent;
    Effect *mEffect;
-   AudacityCommand * mCommand;
+   RustacityCommand * mCommand;
    EffectUIClientInterface *mClient;
 
    RegistryPaths mUserPresets;
@@ -235,7 +235,7 @@ namespace  EffectUI {
 class ShuttleGui;
 
 // Obsolescent dialog still used only in Noise Reduction/Removal
-class AUDACITY_DLL_API EffectDialog /* not final */ : public wxDialogWrapper
+class RUSTACITY_DLL_API EffectDialog /* not final */ : public wxDialogWrapper
 {
 public:
    // constructors and destructors
@@ -264,4 +264,4 @@ private:
    wxDECLARE_NO_COPY_CLASS(EffectDialog);
 };
 
-#endif // __AUDACITY_EFFECTUI_H__
+#endif // __RUSTACITY_EFFECTUI_H__

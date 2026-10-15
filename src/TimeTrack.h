@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TimeTrack.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TIMETRACK__
-#define __AUDACITY_TIMETRACK__
+#ifndef __RUSTACITY_TIMETRACK__
+#define __RUSTACITY_TIMETRACK__
 
 #include "Track.h"
 
@@ -116,5 +116,5 @@ private:
 };
 
 
-#endif // __AUDACITY_TIMETRACK__
+#endif // __RUSTACITY_TIMETRACK__
 

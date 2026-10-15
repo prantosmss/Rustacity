@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   HistoryWindow.cpp
 
@@ -16,7 +16,7 @@ undo memory so as to free up space.
 
 *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "HistoryWindow.h"
 
 #include <wx/app.h>
@@ -59,7 +59,7 @@ BEGIN_EVENT_TABLE(HistoryDialog, wxDialogWrapper)
    EVT_BUTTON(ID_DISCARD_CLIPBOARD, HistoryDialog::OnDiscardClipboard)
 END_EVENT_TABLE()
 
-HistoryDialog::HistoryDialog(AudacityProject *parent, UndoManager *manager):
+HistoryDialog::HistoryDialog(RustacityProject *parent, UndoManager *manager):
    wxDialogWrapper(FindProjectFrame( parent ), wxID_ANY, XO("History"),
       wxDefaultPosition, wxDefaultSize,
       wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER )
@@ -325,8 +325,8 @@ void HistoryDialog::OnSize(wxSizeEvent & WXUNUSED(event))
 namespace {
 
 // History window attached to each project is built on demand by:
-AudacityProject::AttachedWindows::RegisteredFactory sHistoryWindowKey{
-   []( AudacityProject &parent ) -> wxWeakRef< wxWindow > {
+RustacityProject::AttachedWindows::RegisteredFactory sHistoryWindowKey{
+   []( RustacityProject &parent ) -> wxWeakRef< wxWindow > {
       auto &undoManager = UndoManager::Get( parent );
       return safenew HistoryDialog( &parent, &undoManager );
    }
@@ -344,9 +344,9 @@ struct Handler : CommandHandlerObject {
    }
 };
 
-CommandHandlerObject &findCommandHandler(AudacityProject &) {
+CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static Handler instance;
    return instance;
 }
@@ -369,11 +369,11 @@ AttachedItem sAttachment{ wxT("View/Windows"),
    // would fail.
    // The only way to fix this in the current architecture
    // is to hack in special cases for RedoAvailableFlag
-   // in AudacityProject::UpdateMenus() (ugly)
+   // in RustacityProject::UpdateMenus() (ugly)
    // and CommandManager::HandleCommandEntry() (*really* ugly --
    // shouldn't know about particular command names and flags).
    // Here's the hack that would be necessary in
-   // AudacityProject::UpdateMenus(), if somebody decides to do it:
+   // RustacityProject::UpdateMenus(), if somebody decides to do it:
    //    // Because EnableUsingFlags requires all the flag bits match the
    //    // corresponding mask bits,
    //    // "UndoHistory" specifies only

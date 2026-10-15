@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Languages.cpp
 
@@ -30,7 +30,7 @@
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Languages.h"
 #include "MemoryX.h"
 
@@ -207,7 +207,7 @@ void GetLanguages(
       return localLanguageName;
    }();
 
-   auto audacityPathList = FileNames::AudacityPathList();
+   auto audacityPathList = FileNames::RustacityPathList();
 
 #if defined(__WXGTK__)
    FileNames::AddUniquePathToPathList(

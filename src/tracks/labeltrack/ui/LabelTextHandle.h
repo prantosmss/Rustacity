@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 LabelTextHandle.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_LABEL_TEXT_HANDLE__
-#define __AUDACITY_LABEL_TEXT_HANDLE__
+#ifndef __RUSTACITY_LABEL_TEXT_HANDLE__
+#define __RUSTACITY_LABEL_TEXT_HANDLE__
 
 #include "LabelDefaultClickHandle.h"
 #include "../../../SelectedRegion.h"
@@ -38,31 +38,31 @@ public:
    std::shared_ptr<LabelTrack> GetTrack() const { return mpLT.lock(); }
    int GetLabelNum() const { return mLabelNum; }
 
-   void Enter(bool forward, AudacityProject *) override;
+   void Enter(bool forward, RustacityProject *) override;
 
    Result Click
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    Result Drag
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject) override;
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject) override;
 
    HitTestPreview Preview
-      (const TrackPanelMouseState &state, AudacityProject *pProject)
+      (const TrackPanelMouseState &state, RustacityProject *pProject)
       override;
 
    Result Release
-      (const TrackPanelMouseEvent &event, AudacityProject *pProject,
+      (const TrackPanelMouseEvent &event, RustacityProject *pProject,
        wxWindow *pParent) override;
 
-   Result Cancel(AudacityProject *pProject) override;
+   Result Cancel(RustacityProject *pProject) override;
 
 private:
    void HandleTextClick
-      (AudacityProject &project,
+      (RustacityProject &project,
        const wxMouseEvent & evt, const wxRect & r, const ZoomInfo &zoomInfo,
        NotifyingSelectedRegion &newSel);
    void HandleTextDragRelease(
-      AudacityProject &project, const wxMouseEvent & evt);
+      RustacityProject &project, const wxMouseEvent & evt);
 
    std::weak_ptr<LabelTrack> mpLT {};
    int mLabelNum{ -1 };

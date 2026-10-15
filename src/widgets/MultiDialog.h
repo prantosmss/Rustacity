@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2010 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_MULTIDIALOG__
-#define __AUDACITY_MULTIDIALOG__
+#ifndef __RUSTACITY_MULTIDIALOG__
+#define __RUSTACITY_MULTIDIALOG__
 
 #include <wx/defs.h>
 
@@ -32,4 +32,4 @@ int ShowMultiDialog(const TranslatableString &message,
                        = DefaultMultiDialogMessage(),
                     bool log = true);
 
-#endif // __AUDACITY_MULTIDIALOG__
+#endif // __RUSTACITY_MULTIDIALOG__

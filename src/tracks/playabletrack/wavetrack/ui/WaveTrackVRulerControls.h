@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WaveTrackVRulerControls.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WAVE_TRACK_VRULER_CONTROLS__
-#define __AUDACITY_WAVE_TRACK_VRULER_CONTROLS__
+#ifndef __RUSTACITY_WAVE_TRACK_VRULER_CONTROLS__
+#define __RUSTACITY_WAVE_TRACK_VRULER_CONTROLS__
 
 #include "../../../ui/TrackVRulerControls.h"
 

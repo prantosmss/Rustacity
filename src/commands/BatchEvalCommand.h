@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2009 Audacity Team.
    File License: wxwidgets
 
@@ -26,21 +26,21 @@ to that system.
 #include "CommandType.h"
 #include "../BatchCommands.h"
 
-class AudacityProject;
+class RustacityProject;
 
 class BatchEvalCommandType final : public OldStyleCommandType
 {
 public:
    ComponentInterfaceSymbol BuildName() override;
    void BuildSignature(CommandSignature &signature) override;
-   OldStyleCommandPointer Create( AudacityProject *project,
+   OldStyleCommandPointer Create( RustacityProject *project,
       std::unique_ptr<CommandOutputTargets> &&target) override;
 };
 
 class BatchEvalCommand final : public CommandImplementation
 {
 public:
-   BatchEvalCommand(AudacityProject &project, OldStyleCommandType &type)
+   BatchEvalCommand(RustacityProject &project, OldStyleCommandType &type)
       : CommandImplementation(project, type)
    { }
 

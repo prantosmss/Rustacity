@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TrackPanel2.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACK_PANEL2__
-#define __AUDACITY_TRACK_PANEL2__
+#ifndef __RUSTACITY_TRACK_PANEL2__
+#define __RUSTACITY_TRACK_PANEL2__
 
 #include "TrackPanel.h"
 

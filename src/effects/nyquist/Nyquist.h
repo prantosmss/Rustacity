@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Nyquist.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_NYQUIST__
-#define __AUDACITY_EFFECT_NYQUIST__
+#ifndef __RUSTACITY_EFFECT_NYQUIST__
+#define __RUSTACITY_EFFECT_NYQUIST__
 
 #include "../Effect.h"
 
@@ -59,7 +59,7 @@ public:
 };
 
 
-class AUDACITY_DLL_API NyquistEffect final : public Effect
+class RUSTACITY_DLL_API NyquistEffect final : public Effect
 {
 public:
 

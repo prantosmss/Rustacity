@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Grid.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WIDGETS_GRID__
-#define __AUDACITY_WIDGETS_GRID__
+#ifndef __RUSTACITY_WIDGETS_GRID__
+#define __RUSTACITY_WIDGETS_GRID__
 
 #include <vector>
 #include <wx/setup.h> // for wxUSE_* macros

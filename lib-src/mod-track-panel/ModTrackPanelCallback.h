@@ -18,7 +18,7 @@
    #elif _DLL
       #define MOD_TRACK_PANEL_DLL_API _declspec(dllimport)
    #else
-      #define AUDACITY_DLL_API
+      #define RUSTACITY_DLL_API
    #endif
 #endif //_MSC_VER
 

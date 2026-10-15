@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   RawAudioGuess.cpp
 
@@ -13,10 +13,10 @@
 
 **********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "RawAudioGuess.h"
 
-#include "../AudacityException.h"
+#include "../RustacityException.h"
 
 #include <stdio.h>
 #include <stdlib.h>

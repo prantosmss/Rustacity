@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   EffectsPrefs.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECTS_PREFS__
-#define __AUDACITY_EFFECTS_PREFS__
+#ifndef __RUSTACITY_EFFECTS_PREFS__
+#define __RUSTACITY_EFFECTS_PREFS__
 
 #include <wx/defs.h>
 

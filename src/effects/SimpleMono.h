@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SimpleMono.h
 
@@ -14,8 +14,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_SIMPLE_MONO__
-#define __AUDACITY_EFFECT_SIMPLE_MONO__
+#ifndef __RUSTACITY_EFFECT_SIMPLE_MONO__
+#define __RUSTACITY_EFFECT_SIMPLE_MONO__
 
 #include "Effect.h"
 

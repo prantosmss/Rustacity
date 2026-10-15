@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   VSTControl.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef AUDACITY_VSTCONTROL_H
-#define AUDACITY_VSTCONTROL_H
+#ifndef RUSTACITY_VSTCONTROL_H
+#define RUSTACITY_VSTCONTROL_H
 
 #include <wx/control.h> // to inherit
 

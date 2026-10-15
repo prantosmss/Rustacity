@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 PlayIndicatorOverlay.h
 
@@ -8,15 +8,15 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PLAY_INDICATOR_OVERLAY__
-#define __AUDACITY_PLAY_INDICATOR_OVERLAY__
+#ifndef __RUSTACITY_PLAY_INDICATOR_OVERLAY__
+#define __RUSTACITY_PLAY_INDICATOR_OVERLAY__
 
 #include <wx/event.h> // to inherit
 #include "../../MemoryX.h"
 #include "../../ClientData.h"
 #include "../../widgets/Overlay.h" // to inherit
 
-class AudacityProject;
+class RustacityProject;
 
 
 // Common class for overlaying track panel or ruler
@@ -26,7 +26,7 @@ class PlayIndicatorOverlayBase
    , public ClientData::Base
 {
 public:
-   PlayIndicatorOverlayBase(AudacityProject *project, bool isMaster);
+   PlayIndicatorOverlayBase(RustacityProject *project, bool isMaster);
    virtual ~PlayIndicatorOverlayBase();
 
    void Update(int newIndicatorX) { mNewIndicatorX = newIndicatorX; }
@@ -38,7 +38,7 @@ private:
 
 protected:
 
-   AudacityProject *const mProject;
+   RustacityProject *const mProject;
    const bool mIsMaster;
    int mLastIndicatorX { -1 };
    int mNewIndicatorX { -1 };
@@ -51,7 +51,7 @@ class PlayIndicatorOverlay final : public PlayIndicatorOverlayBase
 {
 public:
    explicit
-   PlayIndicatorOverlay(AudacityProject *project);
+   PlayIndicatorOverlay(RustacityProject *project);
 
 private:
    void OnTimer(wxCommandEvent &event);

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ProjectFSCK.cpp
 
@@ -17,7 +17,7 @@
 
 #include "BlockFile.h"
 #include "DirManager.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "Internat.h"
 #include "MemoryX.h"
 #include "MissingAliasFileDialog.h"
@@ -155,7 +155,7 @@ XO("Project check of \"%s\" folder \
                   // error message for the user.
                   GuardedCall(
                      [&] { ab->Recover(); },
-                     [&] (AudacityException*) { action = 1; }
+                     [&] (RustacityException*) { action = 1; }
                   );
 
                   nResult = FSCKstatus_CHANGED | FSCKstatus_SAVE_AUP;
@@ -228,7 +228,7 @@ XO("Project check of \"%s\" folder \
                         b->Recover();
                         nResult |= FSCKstatus_CHANGED;
                      },
-                     [&] (AudacityException*) { action = 1; }
+                     [&] (RustacityException*) { action = 1; }
                   );
                }
 
@@ -306,7 +306,7 @@ XO("Project check of \"%s\" folder \
                         b->Recover();
                         nResult |= FSCKstatus_CHANGED;
                      },
-                     [&] (AudacityException*) { action = 1; }
+                     [&] (RustacityException*) { action = 1; }
                   );
                }
 
@@ -396,7 +396,7 @@ other projects. \
 
       // In auto-recover mode, we didn't do any ShowMultiDialog calls above, so put up an alert.
       if (bAutoRecoverMode)
-         ::AudacityMessageBox(
+         ::RustacityMessageBox(
             XO(
 "Project check found file inconsistencies during automatic recovery.\n\nSelect 'Help > Diagnostics > Show Log...' to see details."),
             XO("Warning: Problems in Automatic Recovery"),

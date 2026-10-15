@@ -25,7 +25,7 @@
 
 *//**********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "WrappedType.h"
 
 #include <wx/wxprec.h>

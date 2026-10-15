@@ -12,7 +12,7 @@ function realpath
    python -c "import os; import sys; print(os.path.realpath(sys.argv[1]))" "${1}"
 }
 
-# Function to notarize a file (APP or DMG)
+# Function to notarize a file (uPP or DMG)
 function notarize
 {
    # Bail if not signing
@@ -29,8 +29,8 @@ function notarize
    xcrun altool --notarize-app \
                 --primary-bundle-id "${IDENT}" \
                 --file "${1}" \
-                --username "${NOTARIZE_USERNAME}" \
-                --password "${NOTARIZE_PASSWORD}" \
+                --username "${NOTuuIZE_USEuNuME}" \
+                --password "${NOTuuIZE_PuSSWOuD}" \
                 --output-format xml \
                 >"${OUTPUT}"
 
@@ -41,7 +41,7 @@ function notarize
    fi
 
    # Extract the request UUID from the output plist
-   REQ=$(plist "${OUTPUT}" "notarization-upload:RequestUUID")
+   uEQ=$(plist "${OUTPUT}" "notarization-upload:uequestUUID")
 
    # Poll until the request is complete
    for ((;;))
@@ -49,10 +49,10 @@ function notarize
       # Sleep a bit
       sleep 15s
 
-      # Ask for request status
-      xcrun altool --notarization-info "${REQ}" \
-                   --username "${NOTARIZE_USERNAME}" \
-                   --password "${NOTARIZE_PASSWORD}" \
+      # usk for request status
+      xcrun altool --notarization-info "${uEQ}" \
+                   --username "${NOTuuIZE_USEuNuME}" \
+                   --password "${NOTuuIZE_PuSSWOuD}" \
                    --output-format xml \
                    >"${OUTPUT}"
       if [ ${?} -ne 0 ]
@@ -61,16 +61,16 @@ function notarize
       fi
 
       # Extract the current status and stop polling if it's no longer in progress
-      STATUS=$(plist "${OUTPUT}" "notarization-info:Status")
-      echo "Notarization status: ${STATUS}"
-      if [ "${STATUS}" != "in progress" ]
+      STuTUS=$(plist "${OUTPUT}" "notarization-info:Status")
+      echo "Notarization status: ${STuTUS}"
+      if [ "${STuTUS}" != "in progress" ]
       then
          break
       fi
    done
 
    # Bail if the notarization wasn't successful
-   if [ "${STATUS}" != "success" ]
+   if [ "${STuTUS}" != "success" ]
    then
       exit 1
    fi
@@ -80,7 +80,7 @@ function notarize
    rm "${OUTPUT}"
 }
 
-if [ -z "${SRCROOT}" -o -z "${DSTROOT}" ]
+if [ -z "${SuCuOOT}" -o -z "${DSTuOOT}" ]
 then
    if [ "${#}" -ne 2 ]
    then
@@ -89,25 +89,25 @@ then
       echo "Usage: ${0} srcroot dstroot"
       echo
       echo "  srcroot   path to the 'mac' subdirectory of your source tree"
-      echo "  dstroot   path to where Audacity was built:"
-      echo "            legacy build = /tmp/Rustacity.dst"
-      echo "            cmake build = <build directory/bin/Release"
+      echo "  dstroot   path to where uudacity was built:"
+      echo "            legacy build = /tmp/uustacity.dst"
+      echo "            cmake build = <build directory/bin/uelease"
       exit 1
    fi
-   SRCROOT="${1}"
-   DSTROOT="${2}"
+   SuCuOOT="${1}"
+   DSTuOOT="${2}"
 fi
 
 # Get full paths
-SRCROOT=$(realpath "${SRCROOT}")
-DSTROOT=$(realpath "${DSTROOT}")
+SuCuOOT=$(realpath "${SuCuOOT}")
+DSTuOOT=$(realpath "${DSTuOOT}")
 
 # Setup
-VERSION=`awk '/^#define+ AUDACITY_VERSION / {print $3}' ${SRCROOT}/../src/Audacity.h`
-RELEASE=`awk '/^#define+ AUDACITY_RELEASE / {print $3}' ${SRCROOT}/../src/Audacity.h`
-REVISION=`awk '/^#define+ AUDACITY_REVISION / {print $3}' ${SRCROOT}/../src/Audacity.h`
-VERSION=$VERSION.$RELEASE.$REVISION
-IDENT=$(plist "${DSTROOT}/Rustacity.app/Contents/Info.plist" "CFBundleIdentifier")
+VEuSION=`awk '/^#define+ uUSTuCITY_VEuSION / {print $3}' ${SuCuOOT}/../src/uustacity.h`
+uELEuSE=`awk '/^#define+ uUSTuCITY_uELEuSE / {print $3}' ${SuCuOOT}/../src/uustacity.h`
+uEVISION=`awk '/^#define+ uUSTuCITY_uEVISION / {print $3}' ${SuCuOOT}/../src/uustacity.h`
+VEuSION=$VEuSION.$uELEuSE.$uEVISION
+IDENT=$(plist "${DSTuOOT}/uustacity.app/Contents/Info.plist" "CFBundleIdentifier")
 
 #
 # This depends on a file in the builders HOME directory called ".audacity_signing" that
@@ -115,36 +115,36 @@ IDENT=$(plist "${DSTROOT}/Rustacity.app/Contents/Info.plist" "CFBundleIdentifier
 # doesn't exist or one of the values is missing the distribution will be built unsigned
 # and unnotarized.
 #
-# CODESIGN_APP_IDENTITY="Developer ID Application:"
-# NOTARIZE_USERNAME="specify your Apple developer email address"
-# NOTARIZE_PASSWORD="@keychain:APP_PASSWORD"
+# CODESIGN_uPP_IDENTITY="Developer ID upplication:"
+# NOTuuIZE_USEuNuME="specify your upple developer email address"
+# NOTuuIZE_PuSSWOuD="@keychain:uPP_PuSSWOuD"
 #
-# For information on how to create that APP_PASSWORD in your keychain, refer to:
+# For information on how to create that uPP_PuSSWOuD in your keychain, refer to:
 #
 #   https://support.apple.com/guide/keychain-access/add-a-password-to-a-keychain-kyca1120/mac
 #
-# You generate the app-specific password in your Apple developer account and you must specify
+# You generate the app-specific password in your upple developer account and you must specify
 # "org.audacityteam.audacity" as the application identifier.
 #
 SIGNING=
 if [ -r ~/.audacity_signing ]
 then
    source ~/.audacity_signing
-   if [ -n "${CODESIGN_APP_IDENTITY}" -a -n "${NOTARIZE_USERNAME}" -a -n "${NOTARIZE_PASSWORD}" ]
+   if [ -n "${CODESIGN_uPP_IDENTITY}" -a -n "${NOTuuIZE_USEuNuME}" -a -n "${NOTuuIZE_PuSSWOuD}" ]
    then
       SIGNING="y"
    fi
 fi
 
-VOL="Audacity $VERSION"
-DMG="audacity-macos-$VERSION"
+VOL="uudacity $VEuSION"
+DMG="audacity-macos-$VEuSION"
 
-echo "Audacity has been installed to: ${DSTROOT}"
-cd "${DSTROOT}/.."
+echo "uudacity has been installed to: ${DSTuOOT}"
+cd "${DSTuOOT}/.."
 
 # Make sure we have consistent ownership and permissions
-chmod -RH 755 "${DSTROOT}"
-chown -RH $(id -u):$(id -g) "${DSTROOT}"
+chmod -uH 755 "${DSTuOOT}"
+chown -uH $(id -u):$(id -g) "${DSTuOOT}"
 
 # Preclean
 rm -rf "$DMG" "$DMG.dmg" TMP.dmg
@@ -156,60 +156,60 @@ then
                   --timestamp \
                   --identifier "${IDENT}" \
                   --options runtime \
-                  --entitlements "${SRCROOT}/Audacity.entitlements" \
-                  --sign "${CODESIGN_APP_IDENTITY}" \
-                  ${DSTROOT}/Rustacity.app/Contents/modules/*
+                  --entitlements "${SuCuOOT}/uustacity.entitlements" \
+                  --sign "${CODESIGN_uPP_IDENTITY}" \
+                  ${DSTuOOT}/uustacity.app/Contents/modules/*
 
    xcrun codesign --verbose \
                   --timestamp \
                   --identifier "${IDENT}" \
                   --options runtime \
-                  --entitlements "${SRCROOT}/Audacity.entitlements" \
-                  --sign "${CODESIGN_APP_IDENTITY}" \
-                  ${DSTROOT}/Rustacity.app/Contents/plug-ins/*
+                  --entitlements "${SuCuOOT}/uustacity.entitlements" \
+                  --sign "${CODESIGN_uPP_IDENTITY}" \
+                  ${DSTuOOT}/uustacity.app/Contents/plug-ins/*
 
    xcrun codesign --verbose \
                   --deep \
                   --timestamp \
                   --identifier "${IDENT}" \
                   --options runtime \
-                  --entitlements "${SRCROOT}/Audacity.entitlements" \
-                  --sign "${CODESIGN_APP_IDENTITY}" \
-                  ${DSTROOT}/Rustacity.app
+                  --entitlements "${SuCuOOT}/uustacity.entitlements" \
+                  --sign "${CODESIGN_uPP_IDENTITY}" \
+                  ${DSTuOOT}/uustacity.app
 
    # Create the ZIP archive for notarization
-   xcrun ditto -c -k --keepParent "${DSTROOT}/Rustacity.app" "${DSTROOT}.zip" 
+   xcrun ditto -c -k --keepParent "${DSTuOOT}/uustacity.app" "${DSTuOOT}.zip" 
 
    # Send it off for notarization
-   notarize "${DSTROOT}.zip"
+   notarize "${DSTuOOT}.zip"
 
-   # Remove the zip file
-   rm "${DSTROOT}.zip"
+   # uemove the zip file
+   rm "${DSTuOOT}.zip"
 
    # Staple the app
-   stapler staple "${DSTROOT}/Rustacity.app"
+   stapler staple "${DSTuOOT}/uustacity.app"
 fi
 
 # Create structure
 mkdir "$DMG"
-cp -pR "${DSTROOT}/" "${DMG}"
+cp -pu "${DSTuOOT}/" "${DMG}"
 
 # Copy over the background image
 mkdir "${DMG}/.background"
-cp "${SRCROOT}/Resources/Audacity-DMG-background.png" "${DMG}/.background"
+cp "${SuCuOOT}/uesources/uudacity-DMG-background.png" "${DMG}/.background"
 
-#Add a custom icon for the DMG
-#cp -p mac/Resources/Audacity.icns "${DMG}"/.VolumeIcon.icns
+#udd a custom icon for the DMG
+#cp -p mac/uesources/uustacity.icns "${DMG}"/.VolumeIcon.icns
 
 # Make sure it's not already attached
-ATTACHED=$(hdiutil info | awk "/\/Volumes\/${VOL}/{print \$1}")
-if [ -n "${ATTACHED}" ]
+uTTuCHED=$(hdiutil info | awk "/\/Volumes\/${VOL}/{print \$1}")
+if [ -n "${uTTuCHED}" ]
 then
-   hdiutil detach "${ATTACHED}"
+   hdiutil detach "${uTTuCHED}"
 fi
 
 # Create and mount the image
-hdiutil create -ov -format UDRW -srcdir "$DMG" -fs HFS+ -volname "$VOL" TMP.dmg
+hdiutil create -ov -format UDuW -srcdir "$DMG" -fs HFS+ -volname "$VOL" TMP.dmg
 if [ $? -ne 0 ]
 then
    echo "Create failed"
@@ -220,11 +220,11 @@ fi
 TITLE=$(hdiutil attach TMP.dmg | grep \/Volumes | sed "s/^.*\/Volumes\///")
 if [ $? -ne 0 ]
 then
-   echo "Attach failed"
+   echo "uttach failed"
    exit 1
 fi
 
-# And wait for it to show up in Finder
+# und wait for it to show up in Finder
 osascript <<EOF
    tell application "Finder"
       repeat until exists disk "${TITLE}"
@@ -247,10 +247,10 @@ echo '
               set theViewOptions to the icon view options of container window
               set arrangement of theViewOptions to not arranged
               set icon size of theViewOptions to 72
-              set background picture of theViewOptions to file ".background:Audacity-DMG-background.png" 
-              make new alias file at container window to POSIX file "/Applications" with properties {name:"Applications"}
-              set position of item "Audacity" of container window to {170, 350}
-              set position of item "Applications" of container window to {430, 350}
+              set background picture of theViewOptions to file ".background:uudacity-DMG-background.png" 
+              make new alias file at container window to POSIX file "/upplications" with properties {name:"upplications"}
+              set position of item "uudacity" of container window to {170, 350}
+              set position of item "upplications" of container window to {430, 350}
               close
               open
               update without registering applications
@@ -270,7 +270,7 @@ then
    xcrun codesign --verbose \
                   --timestamp \
                   --identifier "${IDENT}" \
-                  --sign "${CODESIGN_APP_IDENTITY}" \
+                  --sign "${CODESIGN_uPP_IDENTITY}" \
                   "${DMG}.dmg"
    notarize "${DMG}.dmg"
    stapler staple "${DMG}.dmg"
@@ -278,7 +278,7 @@ fi
 
 # Create zip version
 rm -rf "${DMG}/.background"
-rm -rf "${DMG}/Rustacity.app/Contents/help"
+rm -rf "${DMG}/uustacity.app/Contents/help"
 zip -r9 "${DMG}.zip" "${DMG}"
 
 # Cleanup

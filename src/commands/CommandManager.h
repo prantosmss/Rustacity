@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   CommandManager.h
 
@@ -9,12 +9,12 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_COMMAND_MANAGER__
-#define __AUDACITY_COMMAND_MANAGER__
+#ifndef __RUSTACITY_COMMAND_MANAGER__
+#define __RUSTACITY_COMMAND_MANAGER__
 
 #include "../Experimental.h"
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 #include "../ClientData.h"
 #include "CommandFunctors.h"
@@ -25,7 +25,7 @@
 
 #include "../xml/XMLTagHandler.h"
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 #include <unordered_map>
 
@@ -71,7 +71,7 @@ struct CommandListEntry
    CommandParameter parameter;
 
    // type of a function that determines checkmark state
-   using CheckFn = std::function< bool(AudacityProject&) >;
+   using CheckFn = std::function< bool(RustacityProject&) >;
    CheckFn checkmarkFn;
 
    bool multi;
@@ -101,16 +101,16 @@ using CommandKeyHash = std::unordered_map<NormalizedKeyString, CommandListEntry*
 using CommandNameHash = std::unordered_map<CommandID, CommandListEntry*>;
 using CommandNumericIDHash = std::unordered_map<int, CommandListEntry*>;
 
-class AudacityProject;
+class RustacityProject;
 class CommandContext;
 
-class AUDACITY_DLL_API CommandManager final
+class RUSTACITY_DLL_API CommandManager final
    : public XMLTagHandler
    , public ClientData::Base
 {
  public:
-   static CommandManager &Get( AudacityProject &project );
-   static const CommandManager &Get( const AudacityProject &project );
+   static CommandManager &Get( RustacityProject &project );
+   static const CommandManager &Get( const RustacityProject &project );
 
    // Type of a function that can intercept menu item handling.
    // If it returns true, bypass the usual dipatch of commands.
@@ -201,7 +201,7 @@ class AUDACITY_DLL_API CommandManager final
                     CommandFlag flags,
                     bool bIsEffect = false);
 
-   void AddItem(AudacityProject &project,
+   void AddItem(RustacityProject &project,
                 const CommandID & name,
                 const TranslatableString &label_in,
                 CommandHandlerFinder finder,
@@ -241,8 +241,8 @@ class AUDACITY_DLL_API CommandManager final
 
    // "permit" allows filtering even if the active window isn't a child of the project.
    // Lyrics and MixerTrackCluster classes use it.
-   bool FilterKeyEvent(AudacityProject *project, const wxKeyEvent & evt, bool permit = false);
-   bool HandleMenuID(AudacityProject &project, int id, CommandFlag flags, bool alwaysEnabled);
+   bool FilterKeyEvent(RustacityProject *project, const wxKeyEvent & evt, bool permit = false);
+   bool HandleMenuID(RustacityProject &project, int id, CommandFlag flags, bool alwaysEnabled);
 
    enum TextualCommandResult {
       CommandFailure,
@@ -258,7 +258,7 @@ class AUDACITY_DLL_API CommandManager final
    // Accessing
    //
 
-   void GetCategories(wxArrayString &cats, AudacityProject *);
+   void GetCategories(wxArrayString &cats, RustacityProject *);
    void GetAllCommandNames(CommandIDs &names, bool includeMultis) const;
    void GetAllCommandLabels(
       TranslatableStrings &labels, std::vector<bool> &vExcludeFromMacros,
@@ -336,7 +336,7 @@ private:
    // Executing commands
    //
 
-   bool HandleCommandEntry(AudacityProject &project,
+   bool HandleCommandEntry(RustacityProject &project,
       const CommandListEntry * entry, CommandFlag flags,
       bool alwaysEnabled, const wxEvent * evt = NULL);
 
@@ -360,7 +360,7 @@ private:
 public:
    wxMenu * CurrentMenu() const;
 
-   void UpdateCheckmarks( AudacityProject &project );
+   void UpdateCheckmarks( RustacityProject &project );
 private:
    wxString FormatLabelForMenu(const CommandListEntry *entry) const;
    wxString FormatLabelWithDisabledAccel(const CommandListEntry *entry) const;
@@ -687,9 +687,9 @@ private:
 
 struct ToolbarMenuVisitor : MenuVisitor
 {
-   explicit ToolbarMenuVisitor( AudacityProject &p ) : project{ p } {}
-   operator AudacityProject & () const { return project; }
-   AudacityProject &project;
+   explicit ToolbarMenuVisitor( RustacityProject &p ) : project{ p } {}
+   operator RustacityProject & () const { return project; }
+   RustacityProject &project;
 };
 
 // Define items that populate tables that specifically describe menu trees
@@ -843,7 +843,7 @@ namespace MenuTable {
    // adding any number of items, not using the CommandManager
    struct SpecialItem final : SingleItem
    {
-      using Appender = std::function< void( AudacityProject&, wxMenu& ) >;
+      using Appender = std::function< void( RustacityProject&, wxMenu& ) >;
 
       explicit SpecialItem( const Identifier &internalName, const Appender &fn_ )
       : SingleItem{ internalName }

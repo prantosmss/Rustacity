@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ZoomInfo.cpp
 
@@ -8,7 +8,7 @@
 
 **********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "ZoomInfo.h"
 
 #include "Experimental.h"
@@ -96,7 +96,7 @@ void ZoomInfo::SetZoom(double pixelsPerSecond)
    // still quite close together.
    if( zoom > (gMaxZoom * 0.06  ))
    {
-      AudacityProject * project = GetActiveProject();
+      RustacityProject * project = GetActiveProject();
       if( project )
          project->OnSnapToOff();
    }

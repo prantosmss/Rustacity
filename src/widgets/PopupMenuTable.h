@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 PopupMenuTable.h
 
@@ -15,8 +15,8 @@ tables, and automatically attaches and detaches the event handlers.
 
 **********************************************************************/
 
-#ifndef __AUDACITY_POPUP_MENU_TABLE__
-#define __AUDACITY_POPUP_MENU_TABLE__
+#ifndef __RUSTACITY_POPUP_MENU_TABLE__
+#define __RUSTACITY_POPUP_MENU_TABLE__
 
 class wxCommandEvent;
 class wxString;

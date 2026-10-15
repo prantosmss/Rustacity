@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MixerBoard.cpp
 
@@ -9,7 +9,7 @@
 
 **********************************************************************/
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "MixerBoard.h"
 
 #include "Experimental.h"
@@ -54,9 +54,9 @@
 
 #include "../images/MusicalInstruments.h"
 #ifdef __WXMSW__
-   #include "../images/AudacityLogo.xpm"
+   #include "../images/RustacityLogo.xpm"
 #else
-   #include "../images/AudacityLogo48x48.xpm"
+   #include "../images/RustacityLogo48x48.xpm"
 #endif
 
 #include "commands/CommandManager.h"
@@ -165,7 +165,7 @@ BEGIN_EVENT_TABLE(MixerTrackCluster, wxPanelWrapper)
 END_EVENT_TABLE()
 
 MixerTrackCluster::MixerTrackCluster(wxWindow* parent,
-                                       MixerBoard* grandParent, AudacityProject* project,
+                                       MixerBoard* grandParent, RustacityProject* project,
                                        const std::shared_ptr<PlayableTrack> &pTrack,
                                        const wxPoint& pos /*= wxDefaultPosition*/,
                                        const wxSize& size /*= wxDefaultSize*/)
@@ -183,7 +183,7 @@ MixerTrackCluster::MixerTrackCluster(wxWindow* parent,
    // Not sure why, but sizers weren't getting offset vertically,
    // probably because not using wxDefaultPosition,
    // so positions are calculated explicitly below, and sizers code was removed.
-   // (Still available in Audacity_UmixIt branch off 1.2.6.)
+   // (Still available in Rustacity_UmixIt branch off 1.2.6.)
 
    // track name
    wxPoint ctrlPos(kDoubleInset, kDoubleInset);
@@ -304,7 +304,7 @@ MixerTrackCluster::MixerTrackCluster(wxWindow* parent,
    mMeter.Release();
    if (GetWave()) {
       mMeter =
-         safenew MeterPanel(mProject, // AudacityProject* project,
+         safenew MeterPanel(mProject, // RustacityProject* project,
                    this, -1, // wxWindow* parent, wxWindowID id,
                    false, // bool isInput
                    ctrlPos, ctrlSize, // const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
@@ -811,7 +811,7 @@ BEGIN_EVENT_TABLE(MixerBoardScrolledWindow, wxScrolledWindow)
    EVT_MOUSE_EVENTS(MixerBoardScrolledWindow::OnMouseEvent)
 END_EVENT_TABLE()
 
-MixerBoardScrolledWindow::MixerBoardScrolledWindow(AudacityProject* project,
+MixerBoardScrolledWindow::MixerBoardScrolledWindow(RustacityProject* project,
                                                    MixerBoard* parent, wxWindowID id /*= -1*/,
                                                    const wxPoint& pos /*= wxDefaultPosition*/,
                                                    const wxSize& size /*= wxDefaultSize*/,
@@ -853,7 +853,7 @@ BEGIN_EVENT_TABLE(MixerBoard, wxWindow)
    EVT_SIZE(MixerBoard::OnSize)
 END_EVENT_TABLE()
 
-MixerBoard::MixerBoard(AudacityProject* pProject,
+MixerBoard::MixerBoard(RustacityProject* pProject,
                         wxFrame* parent,
                         const wxPoint& pos /*= wxDefaultPosition*/,
                         const wxSize& size /*= wxDefaultSize*/)
@@ -882,7 +882,7 @@ MixerBoard::MixerBoard(AudacityProject* pProject,
    wxASSERT(pProject); // to justify safenew
    mScrolledWindow =
       safenew MixerBoardScrolledWindow(
-         pProject, // AudacityProject* project,
+         pProject, // RustacityProject* project,
          this, -1, // wxWindow* parent, wxWindowID id = -1,
          this->GetClientAreaOrigin(), // const wxPoint& pos = wxDefaultPosition,
          size, // const wxSize& size = wxDefaultSize,
@@ -1403,7 +1403,7 @@ END_EVENT_TABLE()
 const wxSize kDefaultSize =
    wxSize(MIXER_BOARD_MIN_WIDTH, MIXER_BOARD_MIN_HEIGHT);
 
-MixerBoardFrame::MixerBoardFrame(AudacityProject* parent)
+MixerBoardFrame::MixerBoardFrame(RustacityProject* parent)
 : wxFrame( &GetProjectFrame( *parent ), -1,
           wxString::Format(_("Audacity Mixer Board%s"),
                            ((parent->GetProjectName().empty()) ?
@@ -1428,9 +1428,9 @@ MixerBoardFrame::MixerBoardFrame(AudacityProject* parent)
 #if !defined(__WXMAC__) && !defined(__WXX11__)
    {
 #ifdef __WXMSW__
-      wxIcon ic{ wxICON(AudacityLogo) };
+      wxIcon ic{ wxICON(RustacityLogo) };
 #else
-      wxIcon ic{wxICON(AudacityLogo48x48)};
+      wxIcon ic{wxICON(RustacityLogo48x48)};
 #endif
       SetIcon(ic);
    }
@@ -1471,12 +1471,12 @@ void MixerBoardFrame::OnSize(wxSizeEvent & WXUNUSED(event))
 
 void MixerBoardFrame::OnKeyEvent(wxKeyEvent & event)
 {
-   AudacityProject *project = mMixerBoard->mProject;
+   RustacityProject *project = mMixerBoard->mProject;
    auto &commandManager = CommandManager::Get( *project );
    commandManager.FilterKeyEvent(project, event, true);
 }
 
-void MixerBoardFrame::Recreate( AudacityProject *pProject )
+void MixerBoardFrame::Recreate( RustacityProject *pProject )
 {
    wxPoint  pos = mMixerBoard->GetPosition();
    wxSize siz = mMixerBoard->GetSize();
@@ -1499,8 +1499,8 @@ void MixerBoardFrame::Recreate( AudacityProject *pProject )
 namespace {
 
 // Mixer board window attached to each project is built on demand by:
-AudacityProject::AttachedWindows::RegisteredFactory sMixerBoardKey{
-   []( AudacityProject &parent ) -> wxWeakRef< wxWindow > {
+RustacityProject::AttachedWindows::RegisteredFactory sMixerBoardKey{
+   []( RustacityProject &parent ) -> wxWeakRef< wxWindow > {
       return safenew MixerBoardFrame( &parent );
    }
 };
@@ -1518,9 +1518,9 @@ struct Handler : CommandHandlerObject {
    }
 };
 
-CommandHandlerObject &findCommandHandler(AudacityProject &) {
+CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static Handler instance;
    return instance;
 }

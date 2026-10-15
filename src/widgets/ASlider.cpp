@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ASlider.cpp
 
@@ -29,7 +29,7 @@ or ASlider.
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ASlider.h"
 
 #include "../Experimental.h"

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Export.h
 
@@ -8,13 +8,13 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EXPORT__
-#define __AUDACITY_EXPORT__
+#ifndef __RUSTACITY_EXPORT__
+#define __RUSTACITY_EXPORT__
 
 #include <functional>
 #include <vector>
 #include <wx/filename.h> // member variable
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 #include "../SampleFormat.h"
 #include "../widgets/wxPanelWrapper.h" // to inherit
 #include "../FileNames.h" // for FileTypes
@@ -27,7 +27,7 @@ class wxFileCtrlEvent;
 class wxMemoryDC;
 class wxSimplebook;
 class wxStaticText;
-class AudacityProject;
+class RustacityProject;
 class DirManager;
 class WaveTrack;
 class Tags;
@@ -40,7 +40,7 @@ using WaveTrackConstArray = std::vector < std::shared_ptr < const WaveTrack > >;
 enum class ProgressResult : unsigned;
 class wxFileNameWrapper;
 
-class AUDACITY_DLL_API FormatInfo
+class RUSTACITY_DLL_API FormatInfo
 {
    public:
       FormatInfo() {}
@@ -62,7 +62,7 @@ class AUDACITY_DLL_API FormatInfo
 //----------------------------------------------------------------------------
 // ExportPlugin
 //----------------------------------------------------------------------------
-class AUDACITY_DLL_API ExportPlugin /* not final */
+class RUSTACITY_DLL_API ExportPlugin /* not final */
 {
 public:
 
@@ -123,7 +123,7 @@ public:
     * responsible for alerting the user.  Otherwise ProgressResult::Success or
     * ProgressResult::Stopped
     */
-   virtual ProgressResult Export(AudacityProject *project,
+   virtual ProgressResult Export(RustacityProject *project,
                        std::unique_ptr<ProgressDialog> &pDialog,
                        unsigned channels,
                        const wxFileNameWrapper &fName,
@@ -159,9 +159,9 @@ using ExportPluginArray = std::vector < std::unique_ptr< ExportPlugin > > ;
 //----------------------------------------------------------------------------
 
 // For a file suffix change from the options.
-wxDECLARE_EVENT(AUDACITY_FILE_SUFFIX_EVENT, wxCommandEvent);
+wxDECLARE_EVENT(RUSTACITY_FILE_SUFFIX_EVENT, wxCommandEvent);
 
-class  AUDACITY_DLL_API Exporter final : public wxEvtHandler
+class  RUSTACITY_DLL_API Exporter final : public wxEvtHandler
 {
 public:
 
@@ -180,11 +180,11 @@ public:
          const Registry::Placement &placement = { wxEmptyString, {} } );
    };
 
-   static bool DoEditMetadata(AudacityProject &project,
+   static bool DoEditMetadata(RustacityProject &project,
       const TranslatableString &title,
       const TranslatableString &shortUndoDescription, bool force);
 
-   Exporter( AudacityProject &project );
+   Exporter( RustacityProject &project );
    virtual ~Exporter();
 
    void SetFileDialogTitle( const TranslatableString & DialogTitle );
@@ -232,7 +232,7 @@ private:
    FileExtension mFormatName;
    FileDialogWrapper *mDialog;
    TranslatableString mFileDialogTitle;
-   AudacityProject *mProject;
+   RustacityProject *mProject;
    std::unique_ptr<MixerSpec> mMixerSpec;
 
    ExportPluginArray mPlugins;

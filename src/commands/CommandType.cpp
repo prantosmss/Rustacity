@@ -17,7 +17,7 @@ Also acts as a factory.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "CommandType.h"
 
 #include <wx/string.h>

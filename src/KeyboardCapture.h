@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   KeyboardCapture.h
 
@@ -8,10 +8,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_KEYBOARD_CAPTURE__
-#define __AUDACITY_KEYBOARD_CAPTURE__
+#ifndef __RUSTACITY_KEYBOARD_CAPTURE__
+#define __RUSTACITY_KEYBOARD_CAPTURE__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include <functional>
 #include <wx/event.h>
@@ -27,7 +27,7 @@
 /// don't actually come from wxWidgets, but are simulated by Audacity, as
 /// translations of the EVT_CHAR_HOOK event); or, wxEVT_KEY_UP (really from
 /// wxWidgets).
-DECLARE_EXPORTED_EVENT_TYPE(AUDACITY_DLL_API, EVT_CAPTURE_KEY, -1);
+DECLARE_EXPORTED_EVENT_TYPE(RUSTACITY_DLL_API, EVT_CAPTURE_KEY, -1);
 
 namespace KeyboardCapture
 {

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ExportMP2.cpp
 
@@ -32,7 +32,7 @@
 
 */
 
-#include "../Audacity.h"// for USE_* macros
+#include "../Rustacity.h"// for USE_* macros
 
 #ifdef USE_LIBTWOLAME
 
@@ -53,7 +53,7 @@
 #include "../ShuttleGui.h"
 #include "../Tags.h"
 #include "../Track.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ProgressDialog.h"
 
 #define LIBTWOLAME_STATIC
@@ -210,7 +210,7 @@ public:
    // Required
 
    void OptionsCreate(ShuttleGui &S, int format) override;
-   ProgressResult Export(AudacityProject *project,
+   ProgressResult Export(RustacityProject *project,
                std::unique_ptr<ProgressDialog> &pDialog,
                unsigned channels,
                const wxFileNameWrapper &fName,
@@ -223,7 +223,7 @@ public:
 
 private:
 
-   int AddTags(AudacityProject *project, ArrayOf<char> &buffer, bool *endOfFile, const Tags *tags);
+   int AddTags(RustacityProject *project, ArrayOf<char> &buffer, bool *endOfFile, const Tags *tags);
 #ifdef USE_LIBID3TAG
    void AddFrame(struct id3_tag *tp, const wxString & n, const wxString & v, const char *name);
 #endif
@@ -241,7 +241,7 @@ ExportMP2::ExportMP2()
    SetDescription(XO("MP2 Files"),0);
 }
 
-ProgressResult ExportMP2::Export(AudacityProject *project,
+ProgressResult ExportMP2::Export(RustacityProject *project,
    std::unique_ptr<ProgressDialog> &pDialog,
    unsigned channels, const wxFileNameWrapper &fName,
    bool selectionOnly, double t0, double t1, MixerSpec *mixerSpec, const Tags *metadata,
@@ -266,7 +266,7 @@ ProgressResult ExportMP2::Export(AudacityProject *project,
 
    if (twolame_init_params(encodeOptions) != 0)
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Cannot export MP2 with this sample rate and bit rate"),
          XO("Error"),
          wxICON_STOP);
@@ -279,7 +279,7 @@ ProgressResult ExportMP2::Export(AudacityProject *project,
 
    FileIO outFile(fName, FileIO::Output);
    if (!outFile.IsOpened()) {
-      AudacityMessageBox( XO("Unable to open target file for writing") );
+      RustacityMessageBox( XO("Unable to open target file for writing") );
       return ProgressResult::Cancelled;
    }
 
@@ -290,7 +290,7 @@ ProgressResult ExportMP2::Export(AudacityProject *project,
    if (id3len && !endOfFile) {
       if ( outFile.Write(id3buffer.get(), id3len).GetLastError() ) {
          // TODO: more precise message
-         AudacityMessageBox( XO("Unable to export") );
+         RustacityMessageBox( XO("Unable to export") );
          return ProgressResult::Cancelled;
       }
    }
@@ -336,14 +336,14 @@ ProgressResult ExportMP2::Export(AudacityProject *project,
 
          if (mp2BufferNumBytes < 0) {
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             updateResult = ProgressResult::Cancelled;
             break;
          }
 
          if ( outFile.Write(mp2Buffer.get(), mp2BufferNumBytes).GetLastError() ) {
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             return ProgressResult::Cancelled;
          }
 
@@ -359,7 +359,7 @@ ProgressResult ExportMP2::Export(AudacityProject *project,
    if (mp2BufferNumBytes > 0)
       if ( outFile.Write(mp2Buffer.get(), mp2BufferNumBytes).GetLastError() ) {
          // TODO: more precise message
-         AudacityMessageBox( XO("Unable to export") );
+         RustacityMessageBox( XO("Unable to export") );
          return ProgressResult::Cancelled;
       }
 
@@ -368,13 +368,13 @@ ProgressResult ExportMP2::Export(AudacityProject *project,
    if (id3len && endOfFile)
       if ( outFile.Write(id3buffer.get(), id3len).GetLastError() ) {
          // TODO: more precise message
-         AudacityMessageBox( XO("Unable to export") );
+         RustacityMessageBox( XO("Unable to export") );
          return ProgressResult::Cancelled;
       }
 
    if ( !outFile.Close() ) {
       // TODO: more precise message
-      AudacityMessageBox( XO("Unable to export") );
+      RustacityMessageBox( XO("Unable to export") );
       return ProgressResult::Cancelled;
    }
 
@@ -396,7 +396,7 @@ using id3_tag_holder = std::unique_ptr<id3_tag, id3_tag_deleter>;
 
 // returns buffer len; caller frees
 int ExportMP2::AddTags(
-   AudacityProject * WXUNUSED(project), ArrayOf< char > &buffer,
+   RustacityProject * WXUNUSED(project), ArrayOf< char > &buffer,
    bool *endOfFile, const Tags *tags)
 {
 #ifdef USE_LIBID3TAG

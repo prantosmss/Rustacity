@@ -8,7 +8,7 @@ message( STATUS "========== Configuring ${name} ==========" )
 
 cmd_option( ${_OPT}use_wxwidgets
             "Use ${name} library [system (if available), local]"
-            "${audacity_lib_preference}"
+            "${${_OPT}lib_preference}"
             STRINGS "system" "local"
 )
 

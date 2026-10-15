@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 WaveTrackVZoomHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../../../Audacity.h"
+#include "../../../../Rustacity.h"
 #include "WaveTrackVZoomHandle.h"
 
 #include "../../../../Experimental.h"
@@ -76,7 +76,7 @@ HitTestPreview WaveTrackVZoomHandle::HitPreview(const wxMouseState &state)
 }
 
 UIHandle::Result WaveTrackVZoomHandle::DoDrag(
-   const TrackPanelMouseEvent &evt, AudacityProject *pProject,
+   const TrackPanelMouseEvent &evt, RustacityProject *pProject,
    const int zoomStart, int &zoomEnd)
 {
    using namespace RefreshCode;
@@ -91,7 +91,7 @@ UIHandle::Result WaveTrackVZoomHandle::DoDrag(
 }
 
 UIHandle::Result WaveTrackVZoomHandle::DoRelease(
-   const TrackPanelMouseEvent &evt, AudacityProject *pProject,
+   const TrackPanelMouseEvent &evt, RustacityProject *pProject,
    wxWindow *pParent, WaveTrack *pTrack, const wxRect &rect,
    DoZoomFunction doZoom, PopupMenuTable &table,
    int zoomStart, int zoomEnd )

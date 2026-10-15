@@ -1,6 +1,6 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  RealtimeEffectManager.cpp
  
@@ -8,12 +8,12 @@
  
  **********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "RealtimeEffectManager.h"
 
 #include "../Experimental.h"
 
-#include "audacity/EffectInterface.h"
+#include "rustacity/EffectInterface.h"
 #include "MemoryX.h"
 
 #include <atomic>

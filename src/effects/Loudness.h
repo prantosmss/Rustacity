@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Loudness.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_LOUDNESS__
-#define __AUDACITY_EFFECT_LOUDNESS__
+#ifndef __RUSTACITY_EFFECT_LOUDNESS__
+#define __RUSTACITY_EFFECT_LOUDNESS__
 
 #include <wx/checkbox.h>
 #include <wx/choice.h>

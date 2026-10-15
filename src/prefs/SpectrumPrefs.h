@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   SpectrumPrefs.h
 
@@ -18,8 +18,8 @@
 */
 
 
-#ifndef __AUDACITY_SPECTRUM_PREFS__
-#define __AUDACITY_SPECTRUM_PREFS__
+#ifndef __RUSTACITY_SPECTRUM_PREFS__
+#define __RUSTACITY_SPECTRUM_PREFS__
 
 #include "../Experimental.h"
 
@@ -47,7 +47,7 @@ class SpectrumPrefs final : public PrefsPanel
 {
  public:
    SpectrumPrefs(wxWindow * parent, wxWindowID winid,
-      AudacityProject *pProject, WaveTrack *wt);
+      RustacityProject *pProject, WaveTrack *wt);
    virtual ~SpectrumPrefs();
    ComponentInterfaceSymbol GetSymbol() override;
    TranslatableString GetDescription() override;
@@ -72,7 +72,7 @@ class SpectrumPrefs final : public PrefsPanel
 
    void EnableDisableSTFTOnlyControls();
 
-   AudacityProject *mProject{};
+   RustacityProject *mProject{};
 
    WaveTrack *const mWt;
    bool mDefaulted, mOrigDefaulted;

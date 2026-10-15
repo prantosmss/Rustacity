@@ -1,6 +1,6 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  SelectUtilities.cpp
  
@@ -28,7 +28,7 @@ namespace {
 // Temporal selection (not TimeTrack selection)
 // potentially for all wave tracks.
 void DoSelectTimeAndAudioTracks
-(AudacityProject &project, bool bAllTime, bool bAllTracks)
+(RustacityProject &project, bool bAllTime, bool bAllTracks)
 {
    auto &tracks = TrackList::Get( project );
    auto &selectedRegion = ViewInfo::Get( project ).selectedRegion;
@@ -52,7 +52,7 @@ void DoSelectTimeAndAudioTracks
 namespace SelectUtilities {
 
 void DoSelectTimeAndTracks
-(AudacityProject &project, bool bAllTime, bool bAllTracks)
+(RustacityProject &project, bool bAllTime, bool bAllTracks)
 {
    auto &tracks = TrackList::Get( project );
    auto &selectedRegion = ViewInfo::Get( project ).selectedRegion;
@@ -69,7 +69,7 @@ void DoSelectTimeAndTracks
    }
 }
 
-void SelectNone( AudacityProject &project )
+void SelectNone( RustacityProject &project )
 {
    auto &tracks = TrackList::Get( project );
    for (auto t : tracks.Any())
@@ -81,7 +81,7 @@ void SelectNone( AudacityProject &project )
 
 // Select the full time range, if no
 // time range is selected.
-void SelectAllIfNone( AudacityProject &project )
+void SelectAllIfNone( RustacityProject &project )
 {
    auto &viewInfo = ViewInfo::Get( project );
    auto flags = MenuManager::Get( project ).GetUpdateFlags();
@@ -91,7 +91,7 @@ void SelectAllIfNone( AudacityProject &project )
 }
 
 void DoListSelection
-(AudacityProject &project, Track *t, bool shift, bool ctrl, bool modifyState)
+(RustacityProject &project, Track *t, bool shift, bool ctrl, bool modifyState)
 {
    auto &tracks = TrackList::Get( project );
    auto &selectionState = SelectionState::Get( project );
@@ -112,12 +112,12 @@ void DoListSelection
       ProjectHistory::Get( project ).ModifyState(true);
 }
 
-void DoSelectAll(AudacityProject &project)
+void DoSelectAll(RustacityProject &project)
 {
    DoSelectTimeAndTracks( project, true, true );
 }
 
-void DoSelectAllAudio(AudacityProject &project)
+void DoSelectAllAudio(RustacityProject &project)
 {
    DoSelectTimeAndAudioTracks( project, true, true );
 }
@@ -127,7 +127,7 @@ void DoSelectAllAudio(AudacityProject &project)
 // There is an argument for making it just count wave tracks,
 // However you could then not select a label and cut it,
 // without this function selecting all tracks.
-void DoSelectSomething(AudacityProject &project)
+void DoSelectSomething(RustacityProject &project)
 {
    auto &tracks = TrackList::Get( project );
    auto &selectedRegion = ViewInfo::Get( project ).selectedRegion;

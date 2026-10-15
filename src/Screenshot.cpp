@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Screenshot.cpp
 
@@ -60,7 +60,7 @@ class ScreenshotBigDialog final : public wxFrame
  public:
    // constructors and destructors
    ScreenshotBigDialog(
-      wxWindow *parent, wxWindowID id, AudacityProject &project);
+      wxWindow *parent, wxWindowID id, RustacityProject &project);
    virtual ~ScreenshotBigDialog();
 
    bool ProcessEvent(wxEvent & event) override;
@@ -97,7 +97,7 @@ class ScreenshotBigDialog final : public wxFrame
    void OnMedTracks(wxCommandEvent & event);
    void OnTallTracks(wxCommandEvent & event);
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    std::unique_ptr<ScreenshotCommand> CreateCommand();
 
@@ -124,7 +124,7 @@ ScreenshotBigDialogPtr mFrame;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void OpenScreenshotTools( AudacityProject &project )
+void OpenScreenshotTools( RustacityProject &project )
 {
    if (!mFrame) {
       auto parent = wxTheApp->GetTopWindow();
@@ -278,7 +278,7 @@ std::unique_ptr<ScreenshotCommand> ScreenshotBigDialog::CreateCommand()
 }
 
 ScreenshotBigDialog::ScreenshotBigDialog(
-   wxWindow * parent, wxWindowID id, AudacityProject &project)
+   wxWindow * parent, wxWindowID id, RustacityProject &project)
 :  wxFrame(parent, id, _("Screen Capture Frame"),
            wxDefaultPosition, wxDefaultSize,
 

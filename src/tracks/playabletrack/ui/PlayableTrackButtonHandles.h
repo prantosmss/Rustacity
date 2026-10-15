@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 PlayableTrackButtonHandles.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PLAYABLE_TRACK_BUTTON_HANDLES__
-#define __AUDACITY_PLAYABLE_TRACK_BUTTON_HANDLES__
+#ifndef __RUSTACITY_PLAYABLE_TRACK_BUTTON_HANDLES__
+#define __RUSTACITY_PLAYABLE_TRACK_BUTTON_HANDLES__
 
 #include "../../ui/ButtonHandle.h"
 class wxMouseState;
@@ -28,11 +28,11 @@ public:
 
 protected:
    Result CommitChanges
-      (const wxMouseEvent &event, AudacityProject *pProject, wxWindow *pParent)
+      (const wxMouseEvent &event, RustacityProject *pProject, wxWindow *pParent)
       override;
 
    TranslatableString Tip(
-      const wxMouseState &state, AudacityProject &) const override;
+      const wxMouseState &state, RustacityProject &) const override;
 
    bool StopsOnKeystroke () override { return true; }
 
@@ -40,7 +40,7 @@ public:
    static UIHandlePtr HitTest
       (std::weak_ptr<MuteButtonHandle> &holder,
        const wxMouseState &state, const wxRect &rect,
-       const AudacityProject *pProject, const std::shared_ptr<Track> &pTrack);
+       const RustacityProject *pProject, const std::shared_ptr<Track> &pTrack);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,11 +59,11 @@ public:
 
 protected:
    Result CommitChanges
-      (const wxMouseEvent &event, AudacityProject *pProject, wxWindow *pParent)
+      (const wxMouseEvent &event, RustacityProject *pProject, wxWindow *pParent)
       override;
 
    TranslatableString Tip(
-      const wxMouseState &state, AudacityProject &) const override;
+      const wxMouseState &state, RustacityProject &) const override;
 
    bool StopsOnKeystroke () override { return true; }
 
@@ -71,7 +71,7 @@ public:
    static UIHandlePtr HitTest
       (std::weak_ptr<SoloButtonHandle> &holder,
        const wxMouseState &state, const wxRect &rect,
-       const AudacityProject *pProject, const std::shared_ptr<Track> &pTrack);
+       const RustacityProject *pProject, const std::shared_ptr<Track> &pTrack);
 };
 
 #endif

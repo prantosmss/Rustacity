@@ -66,7 +66,7 @@ Notes:
    - If you get errors about 'plist' at this stage, probably you skipped the step 
      of cleaning first.  
 
-   - If you use the Xcode application, don't make any changes to Audacity.xcodeproj
+   - If you use the Xcode application, don't make any changes to Rustacity.xcodeproj
      recommended by Xcode.  
 
    - Instructions on optional signing of DMGs, showing languages other than English,

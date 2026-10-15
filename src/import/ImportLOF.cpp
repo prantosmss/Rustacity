@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportLOF.h
 
@@ -69,7 +69,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #include <wx/string.h>
 #include <wx/utils.h>
@@ -91,7 +91,7 @@
 #include "../ProjectWindow.h"
 #include "../FileFormats.h"
 #include "../Prefs.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ProgressDialog.h"
 
 #define BINARY_FILE_CHECK_BUFFER_SIZE 1024
@@ -115,14 +115,14 @@ public:
    wxString GetPluginStringID() override { return wxT("lof"); }
    TranslatableString GetPluginFormatDescription() override;
    std::unique_ptr<ImportFileHandle> Open(
-      const FilePath &Filename, AudacityProject *pProject) override;
+      const FilePath &Filename, RustacityProject *pProject) override;
 };
 
 
 class LOFImportFileHandle final : public ImportFileHandle
 {
 public:
-   LOFImportFileHandle( AudacityProject *pProject,
+   LOFImportFileHandle( RustacityProject *pProject,
       const FilePath & name, std::unique_ptr<wxTextFile> &&file);
    ~LOFImportFileHandle();
 
@@ -150,7 +150,7 @@ private:
    std::unique_ptr<wxTextFile> mTextFile;
    wxFileName mLOFFileName;  /**< The name of the LOF file, which is used to
                                 interpret relative paths in it */
-   AudacityProject *mProject{};
+   RustacityProject *mProject{};
 
    // In order to know whether or not to create a NEW window
    bool              windowCalledOnce{ false };
@@ -164,7 +164,7 @@ private:
    double            scrollOffset{ 0 };
 };
 
-LOFImportFileHandle::LOFImportFileHandle( AudacityProject *pProject,
+LOFImportFileHandle::LOFImportFileHandle( RustacityProject *pProject,
    const FilePath & name, std::unique_ptr<wxTextFile> &&file)
 :  ImportFileHandle(name)
    , mTextFile(std::move(file))
@@ -179,7 +179,7 @@ TranslatableString LOFImportPlugin::GetPluginFormatDescription()
 }
 
 std::unique_ptr<ImportFileHandle> LOFImportPlugin::Open(
-   const FilePath &filename, AudacityProject *pProject)
+   const FilePath &filename, RustacityProject *pProject)
 {
    // Check if it is a binary file
    {
@@ -230,12 +230,12 @@ ProgressResult LOFImportFileHandle::Import(
 {
    // Unlike other ImportFileHandle subclasses, this one never gives any tracks
    // back to the caller.
-   // Instead, it recursively calls AudacityProject::Import for each file listed
+   // Instead, it recursively calls RustacityProject::Import for each file listed
    // in the .lof file.
    // Each importation creates a NEW undo state.
    // If there is an error or exception during one of them, only that one's
    // side effects are rolled back, and the rest of the import list is skipped.
-   // The file may have "window" directives that cause NEW AudacityProjects
+   // The file may have "window" directives that cause NEW RustacityProjects
    // to be created, and the undo states are pushed onto the latest project.
    // If a project is created but the first file import into it fails, destroy
    // the project.
@@ -277,10 +277,10 @@ static Importer::RegisteredImportPlugin registered{ "LOF",
 #ifdef USE_MIDI
 // return null on failure; if success, return the given project, or a NEW
 // one, if the given was null; create no NEW project if failure
-static AudacityProject *DoImportMIDIProject(
-   AudacityProject *pProject, const FilePath &fileName)
+static RustacityProject *DoImportMIDIProject(
+   RustacityProject *pProject, const FilePath &fileName)
 {
-   AudacityProject *pNewProject {};
+   RustacityProject *pNewProject {};
    if ( !pProject )
       pProject = pNewProject = ProjectManager::New();
    auto cleanup = finally( [&]
@@ -341,7 +341,7 @@ void LOFImportFileHandle::lofOpenFiles(wxString* ln)
             }
             else
             {
-               AudacityMessageBox(
+               RustacityMessageBox(
                   /* i18n-hint: You do not need to translate "LOF" */
                   XO("Invalid window offset in LOF file."),
                   /* i18n-hint: You do not need to translate "LOF" */
@@ -364,7 +364,7 @@ void LOFImportFileHandle::lofOpenFiles(wxString* ln)
             }
             else
             {
-               AudacityMessageBox(
+               RustacityMessageBox(
                   /* i18n-hint: You do not need to translate "LOF" */
                   XO("Invalid duration in LOF file."),
                   /* i18n-hint: You do not need to translate "LOF" */
@@ -459,7 +459,7 @@ void LOFImportFileHandle::lofOpenFiles(wxString* ln)
                if (targetfile.AfterLast(wxT('.')).IsSameAs(wxT("mid"), false) ||
                    targetfile.AfterLast(wxT('.')).IsSameAs(wxT("midi"), false))
                {
-                  AudacityMessageBox(
+                  RustacityMessageBox(
                      XO("MIDI tracks cannot be offset individually, only audio files can be."),
                      XO("LOF Error"),
                      wxOK | wxCENTRE);
@@ -476,7 +476,7 @@ void LOFImportFileHandle::lofOpenFiles(wxString* ln)
             } // end of converting "offset" argument
             else
             {
-               AudacityMessageBox(
+               RustacityMessageBox(
                   /* i18n-hint: You do not need to translate "LOF" */
                   XO("Invalid track offset in LOF file."),
                   /* i18n-hint: You do not need to translate "LOF" */

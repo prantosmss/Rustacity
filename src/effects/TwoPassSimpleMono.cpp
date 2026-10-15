@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TwoPassSimpleMono.cpp
 
@@ -18,7 +18,7 @@ doing the second pass over all selected tracks.
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "TwoPassSimpleMono.h"
 
 #include "../WaveTrack.h"

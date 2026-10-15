@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 Equalization48x.h
 
@@ -8,8 +8,8 @@ Intrinsics (SSE/AVX) and Threaded Equalization
 
 ***********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_EQUALIZATION48X__
-#define __AUDACITY_EFFECT_EQUALIZATION48X__
+#ifndef __RUSTACITY_EFFECT_EQUALIZATION48X__
+#define __RUSTACITY_EFFECT_EQUALIZATION48X__
 
 #include "../Experimental.h"
 
@@ -18,7 +18,7 @@ Intrinsics (SSE/AVX) and Threaded Equalization
 #include "../MemoryX.h"
 
 #include <wx/thread.h> // to inherit
-#include <audacity/Types.h>
+#include <rustacity/Types.h>
 class WaveTrack;
 using fft_type = float;
 

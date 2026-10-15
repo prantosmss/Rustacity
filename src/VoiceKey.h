@@ -8,15 +8,15 @@
    Distributed under the terms of the GPL Version 2 or later.
 
 ***************************************************************************/
-#ifndef __AUDACITY_VOICEKEY__
-#define __AUDACITY_VOICEKEY__
+#ifndef __RUSTACITY_VOICEKEY__
+#define __RUSTACITY_VOICEKEY__
 
 
 #ifndef M_PI
 #define	M_PI		3.14159265358979323846  /* pi */
 #endif
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class WaveTrack;
 

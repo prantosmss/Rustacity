@@ -23,7 +23,7 @@
 #include "CommandType.h"
 #include "Command.h"
 
-class HelpCommand : public AudacityCommand
+class HelpCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -37,7 +37,7 @@ public:
    bool Apply(const CommandContext & context) override;
    bool ApplyInner(const CommandContext & context);
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_II#help");};
 public:
    wxString mCommandName;

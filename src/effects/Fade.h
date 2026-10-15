@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Fade.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_FADE__
-#define __AUDACITY_EFFECT_FADE__
+#ifndef __RUSTACITY_EFFECT_FADE__
+#define __RUSTACITY_EFFECT_FADE__
 
 #include "Effect.h"
 

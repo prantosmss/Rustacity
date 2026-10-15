@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 AudioIOBase.h
 
@@ -8,10 +8,10 @@ Paul Licameli split from AudioIO.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_AUDIO_IO_BASE__
-#define __AUDACITY_AUDIO_IO_BASE__
+#ifndef __RUSTACITY_AUDIO_IO_BASE__
+#define __RUSTACITY_AUDIO_IO_BASE__
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "Experimental.h"
 
 #include <atomic>
@@ -29,7 +29,7 @@ Paul Licameli split from AudioIO.h
 
 class AudioIOBase;
 
-class AudacityProject;
+class RustacityProject;
 class AudioIOListener;
 class BoundedEnvelope;
 class MeterPanelBase;
@@ -73,7 +73,7 @@ struct ScrubbingOptions {
 struct AudioIOStartStreamOptions
 {
    explicit
-   AudioIOStartStreamOptions(AudacityProject *pProject_, double rate_)
+   AudioIOStartStreamOptions(RustacityProject *pProject_, double rate_)
       : pProject{ pProject_ }
       , envelope(nullptr)
       , rate(rate_)
@@ -84,7 +84,7 @@ struct AudioIOStartStreamOptions
       , preRoll(0.0)
    {}
 
-   AudacityProject *pProject{};
+   RustacityProject *pProject{};
    MeterPanelBase *captureMeter{}, *playbackMeter{};
    BoundedEnvelope *envelope; // for time warping
    std::shared_ptr< AudioIOListener > listener;
@@ -113,15 +113,15 @@ struct AudioIOStartStreamOptions
 
 ///\brief A singleton object supporting queries of the state of any active
 /// audio streams, and audio device capabilities
-class AUDACITY_DLL_API AudioIOBase /* not final */
+class RUSTACITY_DLL_API AudioIOBase /* not final */
 {
 public:
    static AudioIOBase *Get();
 
    virtual ~AudioIOBase();
 
-   void SetCaptureMeter(AudacityProject *project, MeterPanelBase *meter);
-   void SetPlaybackMeter(AudacityProject *project, MeterPanelBase *meter);
+   void SetCaptureMeter(RustacityProject *project, MeterPanelBase *meter);
+   void SetPlaybackMeter(RustacityProject *project, MeterPanelBase *meter);
 
    /** \brief update state after changing what audio devices are selected
     *
@@ -261,7 +261,7 @@ protected:
    static wxString DeviceName(const PaDeviceInfo* info);
    static wxString HostName(const PaDeviceInfo* info);
 
-   AudacityProject    *mOwningProject;
+   RustacityProject    *mOwningProject;
 
    /// True if audio playback is paused
    bool                mPaused;

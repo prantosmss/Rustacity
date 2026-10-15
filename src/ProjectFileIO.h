@@ -1,21 +1,21 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectFileIO.h
 
-Paul Licameli split from AudacityProject.h
+Paul Licameli split from RustacityProject.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_FILE_IO__
-#define __AUDACITY_PROJECT_FILE_IO__
+#ifndef __RUSTACITY_PROJECT_FILE_IO__
+#define __RUSTACITY_PROJECT_FILE_IO__
 
 #include "ClientData.h" // to inherit
 #include "Prefs.h" // to inherit
 #include "xml/XMLTagHandler.h" // to inherit
 
-class AudacityProject;
+class RustacityProject;
 
 ///\brief Object associated with a project that manages reading and writing
 /// of Audacity project file formats, and autosave
@@ -25,10 +25,10 @@ class ProjectFileIO final
    , private PrefsListener
 {
 public:
-   static ProjectFileIO &Get( AudacityProject &project );
-   static const ProjectFileIO &Get( const AudacityProject &project );
+   static ProjectFileIO &Get( RustacityProject &project );
+   static const ProjectFileIO &Get( const RustacityProject &project );
 
-   explicit ProjectFileIO( AudacityProject &project );
+   explicit ProjectFileIO( RustacityProject &project );
    ProjectFileIO( const ProjectFileIO & ) PROHIBITED;
    ProjectFileIO &operator=( const ProjectFileIO & ) PROHIBITED;
    ~ProjectFileIO();
@@ -70,7 +70,7 @@ private:
    void UpdatePrefs() override;
 
    // non-static data members
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    // Last auto-save file name and path (empty if none)
    FilePath mAutoSaveFileName;
@@ -89,7 +89,7 @@ class wxTopLevelWindow;
 // TitleRestorer restores project window titles to what they were, in its destructor.
 class TitleRestorer{
 public:
-   TitleRestorer( wxTopLevelWindow &window, AudacityProject &project );
+   TitleRestorer( wxTopLevelWindow &window, RustacityProject &project );
    ~TitleRestorer();
    wxString sProjNumber;
    wxString sProjName;

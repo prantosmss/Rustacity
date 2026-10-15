@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2013 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_REVERB__
-#define __AUDACITY_EFFECT_REVERB__
+#ifndef __RUSTACITY_EFFECT_REVERB__
+#define __RUSTACITY_EFFECT_REVERB__
 
 #include "Effect.h"
 

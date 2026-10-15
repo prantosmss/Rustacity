@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TracksBehaviorsPrefs.h
 
@@ -11,8 +11,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRACKSBEHAVIORS_PREFS__
-#define __AUDACITY_TRACKSBEHAVIORS_PREFS__
+#ifndef __RUSTACITY_TRACKSBEHAVIORS_PREFS__
+#define __RUSTACITY_TRACKSBEHAVIORS_PREFS__
 
 #include "PrefsPanel.h"
 

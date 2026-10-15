@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   NumericTextCtrl.cpp
 
@@ -165,10 +165,10 @@ different formats.
 **********************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "NumericTextCtrl.h"
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 #include "../AllThemeResources.h"
 #include "../AColor.h"
 #include "../KeyboardCapture.h"

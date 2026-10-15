@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImageManipulation.cpp
 
@@ -22,7 +22,7 @@ channel.  This collection of functions fills that gap.
 *//*********************************************************************/
 
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "ImageManipulation.h"
 
 #include <wx/image.h>

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2008 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -61,7 +61,7 @@
 *//*******************************************************************/
 
 
-#include "Audacity.h" // for __UNIX__
+#include "Rustacity.h" // for __UNIX__
 #include "DirManager.h"
 
 #include <time.h> // to use time() for srand()
@@ -91,7 +91,7 @@
 #include "Prefs.h"
 #include "Project.h"
 #include "widgets/Warning.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/ProgressDialog.h"
 
 #if defined(__WXMAC__)
@@ -362,28 +362,28 @@ std::shared_ptr<DirManager> DirManager::Create()
    return result;
 }
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-   [](AudacityProject&) { return DirManager::Create(); }
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+   [](RustacityProject&) { return DirManager::Create(); }
 };
 
-DirManager &DirManager::Get( AudacityProject &project )
+DirManager &DirManager::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< DirManager >( key );
 }
 
-const DirManager &DirManager::Get( const AudacityProject &project )
+const DirManager &DirManager::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-DirManager &DirManager::Reset( AudacityProject &project )
+DirManager &DirManager::Reset( RustacityProject &project )
 {
    auto dirManager = DirManager::Create();
    project.AttachedObjects::Assign( key, dirManager );
    return *dirManager;
 }
 
-void DirManager::Destroy( AudacityProject &project )
+void DirManager::Destroy( RustacityProject &project )
 {
    project.AttachedObjects::Assign( key, nullptr );
 }

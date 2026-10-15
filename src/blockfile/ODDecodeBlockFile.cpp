@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODDecodeBlockFile.cpp
 
@@ -16,7 +16,7 @@ The summary is eventually computed and written to a file in a background thread.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ODDecodeBlockFile.h"
 
 #include <float.h>
@@ -33,7 +33,7 @@ The summary is eventually computed and written to a file in a background thread.
 #include "NotYetAvailableException.h"
 
 const int bheaderTagLen = 20;
-char bheaderTag[bheaderTagLen + 1] = "AudacityBlockFile112";
+char bheaderTag[bheaderTagLen + 1] = "RustacityBlockFile112";
 
 
 

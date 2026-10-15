@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Meter.cpp
 
@@ -38,7 +38,7 @@
 
 *//******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "Meter.h"
 
 #include "../Experimental.h"
@@ -286,7 +286,7 @@ END_EVENT_TABLE()
 
 IMPLEMENT_CLASS(MeterPanel, wxPanelWrapper)
 
-MeterPanel::MeterPanel(AudacityProject *project,
+MeterPanel::MeterPanel(RustacityProject *project,
              wxWindow* parent, wxWindowID id,
              bool isInput,
              const wxPoint& pos /*= wxDefaultPosition*/,
@@ -1875,7 +1875,7 @@ void MeterPanel::StartMonitoring()
    } 
 
    if (start && !gAudioIO->IsBusy()){
-      AudacityProject *p = mProject;
+      RustacityProject *p = mProject;
       if (p){
          gAudioIO->StartMonitoring( DefaultPlayOptions( *p ) );
       }
@@ -1897,7 +1897,7 @@ void MeterPanel::StopMonitoring(){
 void MeterPanel::OnAudioIOStatus(wxCommandEvent &evt)
 {
    evt.Skip();
-   AudacityProject *p = (AudacityProject *) evt.GetEventObject();
+   RustacityProject *p = (RustacityProject *) evt.GetEventObject();
 
    mActive = (evt.GetInt() != 0) && (p == mProject);
 

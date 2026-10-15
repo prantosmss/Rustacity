@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2013 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -15,8 +15,8 @@
 *//*******************************************************************/
 
 
-#ifndef __AUDACITY_PITCHNAME__
-#define __AUDACITY_PITCHNAME__
+#ifndef __RUSTACITY_PITCHNAME__
+#define __RUSTACITY_PITCHNAME__
 
 class TranslatableString;
 
@@ -59,4 +59,4 @@ double PitchToMIDInote(const unsigned int nPitchIndex, const int nPitchOctave);
 
 double PitchToFreq(const unsigned int nPitchIndex, const int nPitchOctave);
 
-#endif	// __AUDACITY_PITCHNAME__
+#endif	// __RUSTACITY_PITCHNAME__

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ToolsToolBar.cpp
 
@@ -30,7 +30,7 @@
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ToolsToolBar.h"
 #include "ToolManager.h"
 
@@ -72,7 +72,7 @@ BEGIN_EVENT_TABLE(ToolsToolBar, ToolBar)
 END_EVENT_TABLE()
 
 //Standard constructor
-ToolsToolBar::ToolsToolBar( AudacityProject &project )
+ToolsToolBar::ToolsToolBar( RustacityProject &project )
 : ToolBar(project, ToolsBarID, XO("Tools"), wxT("Tools"))
 {
    using namespace ToolCodes;
@@ -100,15 +100,15 @@ ToolsToolBar::~ToolsToolBar()
       "mismatch in number of tools" );
 }
 
-ToolsToolBar &ToolsToolBar::Get( AudacityProject &project )
+ToolsToolBar &ToolsToolBar::Get( RustacityProject &project )
 {
    auto &toolManager = ToolManager::Get( project );
    return *static_cast<ToolsToolBar*>( toolManager.GetToolBar(ToolsBarID) );
 }
 
-const ToolsToolBar &ToolsToolBar::Get( const AudacityProject &project )
+const ToolsToolBar &ToolsToolBar::Get( const RustacityProject &project )
 {
-   return Get( const_cast<AudacityProject&>( project )) ;
+   return Get( const_cast<RustacityProject&>( project )) ;
 }
 
 void ToolsToolBar::RegenerateTooltips()
@@ -294,7 +294,7 @@ void ToolsToolBar::Create(wxWindow * parent)
 }
 
 static RegisteredToolbarFactory factory{ ToolsBarID,
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       return ToolBar::Holder{ safenew ToolsToolBar{ project } }; }
 };
 
@@ -314,7 +314,7 @@ AttachedToolBarMenuItem sAttachment{
 namespace {
 
 /// Called by handlers that set tools.
-void SetTool(AudacityProject &project, int tool)
+void SetTool(RustacityProject &project, int tool)
 {
    auto toolbar = &ToolsToolBar::Get( project );
    if (toolbar) {
@@ -396,9 +396,9 @@ void OnNextTool(const CommandContext &context)
 
 }; // struct Handler
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static ToolActions::Handler instance;
    return instance;
 };

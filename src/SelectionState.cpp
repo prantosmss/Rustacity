@@ -1,30 +1,30 @@
 /**********************************************************************
 
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
 
  SelectionState.h
 
  **********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "SelectionState.h"
 
 #include "ViewInfo.h"
 #include "Track.h"
 #include "Project.h"
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-  [](AudacityProject &){ return std::make_shared< SelectionState >(); }
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+  [](RustacityProject &){ return std::make_shared< SelectionState >(); }
 };
 
-SelectionState &SelectionState::Get( AudacityProject &project )
+SelectionState &SelectionState::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< SelectionState >( key );
 }
 
-const SelectionState &SelectionState::Get( const AudacityProject &project )
+const SelectionState &SelectionState::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
 // Set selection length to the length of a track -- but if sync-lock is turned

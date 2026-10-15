@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   WarningsPrefs.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_WARNINGS_PREFS__
-#define __AUDACITY_WARNINGS_PREFS__
+#ifndef __RUSTACITY_WARNINGS_PREFS__
+#define __RUSTACITY_WARNINGS_PREFS__
 
 #include <wx/defs.h>
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   DirManager.h
 
@@ -11,7 +11,7 @@
 #ifndef _DIRMANAGER_
 #define _DIRMANAGER_
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 #include "xml/XMLTagHandler.h"
 
 #include <functional>
@@ -21,7 +21,7 @@
 #include "ClientData.h"
 
 class wxFileNameWrapper;
-class AudacityProject;
+class RustacityProject;
 class BlockArray;
 class BlockFile;
 class ProgressDialog;
@@ -50,10 +50,10 @@ class PROFILE_DLL_API DirManager final
 {
  public:
 
-   static DirManager &Get( AudacityProject &project );
-   static const DirManager &Get( const AudacityProject &project );
-   static DirManager &Reset( AudacityProject &project );
-   static void Destroy( AudacityProject &project );
+   static DirManager &Get( RustacityProject &project );
+   static const DirManager &Get( const RustacityProject &project );
+   static DirManager &Reset( RustacityProject &project );
+   static void Destroy( RustacityProject &project );
 
    static int RecursivelyEnumerate(const FilePath &dirPath,
                                      FilePaths& filePathArray,  // output: all files in dirPath tree

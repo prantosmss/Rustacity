@@ -1,15 +1,15 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectSettings.h
 
-Paul Licameli split from AudacityProject.h
+Paul Licameli split from RustacityProject.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_SETTINGS__
-#define __AUDACITY_PROJECT_SETTINGS__
+#ifndef __RUSTACITY_PROJECT_SETTINGS__
+#define __RUSTACITY_PROJECT_SETTINGS__
 
 #include <atomic>
 #include <wx/event.h> // to declare custom event type
@@ -17,10 +17,10 @@ Paul Licameli split from AudacityProject.h
 #include "ClientData.h" // to inherit
 #include "Prefs.h" // to inherit
 
-class AudacityProject;
+class RustacityProject;
 
 // Sent to the project when certain settings change
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
    EVT_PROJECT_SETTINGS_CHANGE, wxCommandEvent);
 
 enum
@@ -52,15 +52,15 @@ class ProjectSettings final
    , private PrefsListener
 {
 public:
-   static ProjectSettings &Get( AudacityProject &project );
-   static const ProjectSettings &Get( const AudacityProject &project );
+   static ProjectSettings &Get( RustacityProject &project );
+   static const ProjectSettings &Get( const RustacityProject &project );
    
    // Values retrievable from GetInt() of the event for settings change
    enum EventCode : int {
       ChangedSyncLock,
    };
 
-   explicit ProjectSettings( AudacityProject &project );
+   explicit ProjectSettings( RustacityProject &project );
    ProjectSettings( const ProjectSettings & ) PROHIBITED;
    ProjectSettings &operator=( const ProjectSettings & ) PROHIBITED;
 
@@ -117,7 +117,7 @@ public:
 private:
    void UpdatePrefs() override;
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    NumericFormatSymbol mSelectionFormat;
    NumericFormatSymbol mFrequencySelectionFormatName;

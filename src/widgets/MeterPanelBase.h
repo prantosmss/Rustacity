@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 MeterPanelBase.h
 
@@ -8,8 +8,8 @@ Paul Licameli split from Meter.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_METER_PANEL_BASE__
-#define __AUDACITY_METER_PANEL_BASE__
+#ifndef __RUSTACITY_METER_PANEL_BASE__
+#define __RUSTACITY_METER_PANEL_BASE__
 
 #include "wxPanelWrapper.h"
 

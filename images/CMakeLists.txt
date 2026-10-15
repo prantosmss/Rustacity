@@ -10,13 +10,13 @@ def_vars()
 
 list( APPEND PIXMAPS
    ${_SRCDIR}/gnome-mime-application-x-audacity-project.xpm
-   ${_SRCDIR}/icons/16x16/audacity16.xpm
-   ${_SRCDIR}/icons/32x32/audacity32.xpm
-   ${_SRCDIR}/icons/48x48/audacity.xpm
+   ${_SRCDIR}/icons/16x16/rustacity16.xpm
+   ${_SRCDIR}/icons/32x32/rustacity32.xpm
+   ${_SRCDIR}/icons/48x48/rustacity.xpm
 )
 
 if( NOT "${CMAKE_GENERATOR}" MATCHES "Xcode|Visual Studio*" )
-   install( FILES "${_SRCDIR}/audacity.svg"
+   install( FILES "${_SRCDIR}/rustacity.svg"
             DESTINATION "${_DATADIR}/icons/hicolor/scalable/apps" )
    install( DIRECTORY "${_SRCDIR}/icons/"
             DESTINATION "${_DATADIR}/icons/hicolor"

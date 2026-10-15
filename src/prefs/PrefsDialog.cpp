@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   PrefsDialog.cpp
 
@@ -14,7 +14,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "PrefsDialog.h"
 
 #include <mutex> // for std::call_once
@@ -373,7 +373,7 @@ wxAccStatus TreeCtrlAx::Select(int childId, wxAccSelectionFlags selectFlags)
 // PrefsPanel might move out into its own file in due ocurse.
 PluginPath PrefsPanel::GetPath(){      return BUILTIN_PREFS_PANEL_PREFIX + GetSymbol().Internal(); }
 VendorSymbol PrefsPanel::GetVendor(){  return XO("Rustacity");}
-wxString PrefsPanel::GetVersion(){     return AUDACITY_VERSION_STRING;}
+wxString PrefsPanel::GetVersion(){     return RUSTACITY_VERSION_STRING;}
 
 
 
@@ -554,7 +554,7 @@ PrefsDialog::Factories
 
 
 PrefsDialog::PrefsDialog(
-   wxWindow * parent, AudacityProject *pProject,
+   wxWindow * parent, RustacityProject *pProject,
    const TranslatableString &titlePrefix, Factories &factories)
 :  wxDialogWrapper(parent, wxID_ANY, XO("Rustacity Preferences"),
             wxDefaultPosition,
@@ -848,7 +848,7 @@ void PrefsDialog::OnOK(wxCommandEvent & WXUNUSED(event))
    if (gAudioIO) {
       // We cannot have opened this dialog if gAudioIO->IsAudioTokenActive(),
       // per the setting of AudioIONotBusyFlag and AudioIOBusyFlag in
-      // AudacityProject::GetUpdateFlags().
+      // RustacityProject::GetUpdateFlags().
       // However, we can have an invalid audio token (so IsAudioTokenActive()
       // is false), but be monitoring.
       // If monitoring, have to stop the stream, so HandleDeviceChange() can work.
@@ -873,7 +873,7 @@ void PrefsDialog::OnOK(wxCommandEvent & WXUNUSED(event))
    //      handled instead by delayed event processing?
 
    // LL:  wxMac can't handle recreating the menus when this dialog is still active,
-   //      so AudacityProject::UpdatePrefs() or any of the routines it calls must
+   //      so RustacityProject::UpdatePrefs() or any of the routines it calls must
    //      not cause MenuCreator::RebuildMenuBar() to be executed.
 
    wxTheApp->AddPendingEvent(wxCommandEvent{ EVT_PREFS_UPDATE });
@@ -907,7 +907,7 @@ int PrefsDialog::GetSelectedPage() const
 }
 
 GlobalPrefsDialog::GlobalPrefsDialog(
-   wxWindow * parent, AudacityProject *pProject, Factories &factories)
+   wxWindow * parent, RustacityProject *pProject, Factories &factories)
    : PrefsDialog(parent, pProject, XO("Preferences:"), factories)
 {
 }
@@ -964,7 +964,7 @@ wxString PrefsPanel::HelpPageName()
 #include "../Menus.h"
 #include "../Project.h"
 
-void DoReloadPreferences( AudacityProject &project )
+void DoReloadPreferences( RustacityProject &project )
 {
    {
       GlobalPrefsDialog dialog(

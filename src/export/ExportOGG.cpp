@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ExportOGG.cpp
 
@@ -15,7 +15,7 @@
 
 **********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #ifdef USE_LIBVORBIS
 
@@ -34,7 +34,7 @@
 
 #include "../Tags.h"
 #include "../Track.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ProgressDialog.h"
 
 //----------------------------------------------------------------------------
@@ -132,7 +132,7 @@ public:
    // Required
    void OptionsCreate(ShuttleGui &S, int format) override;
 
-   ProgressResult Export(AudacityProject *project,
+   ProgressResult Export(RustacityProject *project,
                std::unique_ptr<ProgressDialog> &pDialog,
                unsigned channels,
                const wxFileNameWrapper &fName,
@@ -145,7 +145,7 @@ public:
 
 private:
 
-   bool FillComment(AudacityProject *project, vorbis_comment *comment, const Tags *metadata);
+   bool FillComment(RustacityProject *project, vorbis_comment *comment, const Tags *metadata);
 };
 
 ExportOGG::ExportOGG()
@@ -159,7 +159,7 @@ ExportOGG::ExportOGG()
    SetDescription(XO("Ogg Vorbis Files"),0);
 }
 
-ProgressResult ExportOGG::Export(AudacityProject *project,
+ProgressResult ExportOGG::Export(RustacityProject *project,
                        std::unique_ptr<ProgressDialog> &pDialog,
                        unsigned numChannels,
                        const wxFileNameWrapper &fName,
@@ -181,7 +181,7 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
    FileIO outFile(fName, FileIO::Output);
 
    if (!outFile.IsOpened()) {
-      AudacityMessageBox( XO("Unable to open target file for writing") );
+      RustacityMessageBox( XO("Unable to open target file for writing") );
       return ProgressResult::Cancelled;
    }
 
@@ -208,7 +208,7 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
    vorbis_info_init(&info);
    if (vorbis_encode_init_vbr(&info, numChannels, (int)(rate + 0.5), quality)) {
       // TODO: more precise message
-      AudacityMessageBox( XO("Unable to export - rate or quality problem") );
+      RustacityMessageBox( XO("Unable to export - rate or quality problem") );
       return ProgressResult::Cancelled;
    }
 
@@ -222,14 +222,14 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
 
    // Retrieve tags
    if (!FillComment(project, &comment, metadata)) {
-      AudacityMessageBox( XO("Unable to export - problem with metadata") );
+      RustacityMessageBox( XO("Unable to export - problem with metadata") );
       return ProgressResult::Cancelled;
    }
 
    // Set up analysis state and auxiliary encoding storage
    if (vorbis_analysis_init(&dsp, &info) ||
        vorbis_block_init(&dsp, &block)) {
-      AudacityMessageBox( XO("Unable to export - problem initialising") );
+      RustacityMessageBox( XO("Unable to export - problem initialising") );
       return ProgressResult::Cancelled;
    }
 
@@ -238,7 +238,7 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
    // chained streams with concatenation.
    srand(time(NULL));
    if (ogg_stream_init(&stream, rand())) {
-      AudacityMessageBox( XO("Unable to export - problem creating stream") );
+      RustacityMessageBox( XO("Unable to export - problem creating stream") );
       return ProgressResult::Cancelled;
    }
 
@@ -260,7 +260,7 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
       ogg_stream_packetin(&stream, &bitstream_header) ||
       ogg_stream_packetin(&stream, &comment_header) ||
       ogg_stream_packetin(&stream, &codebook_header)) {
-      AudacityMessageBox( XO("Unable to export - problem with packets") );
+      RustacityMessageBox( XO("Unable to export - problem with packets") );
       return ProgressResult::Cancelled;
    }
 
@@ -269,7 +269,7 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
    while (ogg_stream_flush(&stream, &page)) {
       if ( outFile.Write(page.header, page.header_len).GetLastError() ||
            outFile.Write(page.body, page.body_len).GetLastError()) {
-         AudacityMessageBox( XO("Unable to export - problem with file") );
+         RustacityMessageBox( XO("Unable to export - problem with file") );
          return ProgressResult::Cancelled;
       }
    }
@@ -337,7 +337,7 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
                   if ( outFile.Write(page.header, page.header_len).GetLastError() ||
                        outFile.Write(page.body, page.body_len).GetLastError()) {
                      // TODO: more precise message
-                     AudacityMessageBox( XO("Unable to export") );
+                     RustacityMessageBox( XO("Unable to export") );
                      return ProgressResult::Cancelled;
                   }
 
@@ -351,7 +351,7 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
          if (err) {
             updateResult = ProgressResult::Cancelled;
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             break;
          }
 
@@ -362,7 +362,7 @@ ProgressResult ExportOGG::Export(AudacityProject *project,
    if ( !outFile.Close() ) {
       updateResult = ProgressResult::Cancelled;
       // TODO: more precise message
-      AudacityMessageBox( XO("Unable to export") );
+      RustacityMessageBox( XO("Unable to export") );
    }
 
    return updateResult;
@@ -373,7 +373,7 @@ void ExportOGG::OptionsCreate(ShuttleGui &S, int format)
    S.AddWindow( safenew ExportOGGOptions{ S.GetParent(), format } );
 }
 
-bool ExportOGG::FillComment(AudacityProject *project, vorbis_comment *comment, const Tags *metadata)
+bool ExportOGG::FillComment(RustacityProject *project, vorbis_comment *comment, const Tags *metadata)
 {
    // Retrieve tags from project if not over-ridden
    if (metadata == NULL)

@@ -1,6 +1,6 @@
 /**********************************************************************
  
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
  
  SelectUtilities.h
  
@@ -8,25 +8,25 @@
  
  **********************************************************************/
 
-#ifndef __AUDACITY_SELECT_UTILITIES__
-#define __AUDACITY_SELECT_UTILITIES__
+#ifndef __RUSTACITY_SELECT_UTILITIES__
+#define __RUSTACITY_SELECT_UTILITIES__
 
-class AudacityProject;
+class RustacityProject;
 class Track;
 
 /// Namespace for functions for Select menu
 namespace SelectUtilities {
 
 void DoSelectTimeAndTracks(
-   AudacityProject &project, bool bAllTime, bool bAllTracks);
-void SelectAllIfNone( AudacityProject &project );
-void SelectNone( AudacityProject &project );
+   RustacityProject &project, bool bAllTime, bool bAllTracks);
+void SelectAllIfNone( RustacityProject &project );
+void SelectNone( RustacityProject &project );
 void DoListSelection(
-   AudacityProject &project, Track *t,
+   RustacityProject &project, Track *t,
    bool shift, bool ctrl, bool modifyState );
-void DoSelectAll( AudacityProject &project );
-void DoSelectAllAudio( AudacityProject &project );
-void DoSelectSomething( AudacityProject &project );
+void DoSelectAll( RustacityProject &project );
+void DoSelectAllAudio( RustacityProject &project );
+void DoSelectSomething( RustacityProject &project );
 
 }
 

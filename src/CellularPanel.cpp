@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   CellularPanel.cpp
 
@@ -27,7 +27,7 @@
 
 *//*****************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "CellularPanel.h"
 
 #include <wx/eventfilter.h>
@@ -560,7 +560,7 @@ void CellularPanel::OnKeyDown(wxKeyEvent & event)
       // This switch case is now redundant with the global filter
       if(HandleEscapeKey(true))
          // Don't skip the event, eat it so that
-         // AudacityApp does not also stop any playback.
+         // RustacityApp does not also stop any playback.
          return;
       else
          break;

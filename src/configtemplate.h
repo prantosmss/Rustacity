@@ -2,10 +2,10 @@
 
 /* define if Audacity is being installed under a name other than "audacity",
    so it can find the files it needs at runtime */
-#undef AUDACITY_NAME
+#undef RUSTACITY_NAME
 
 /* Define we are compiling Audacity itself, not an Audacity plug-in */
-#undef BUILDING_AUDACITY
+#undef BUILDING_RUSTACITY
 
 /* Use system FFmpeg library and disable dynamic loading of it. */
 #undef DISABLE_DYNAMIC_LOADING_FFMPEG

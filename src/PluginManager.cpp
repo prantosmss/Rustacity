@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   PluginManager.cpp
 
@@ -18,7 +18,7 @@ effects, generators, analysis-effects, commands.  It also has functions
 for shared and private configs - which need to move out.
 *****************************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "PluginManager.h"
 
 #include "Experimental.h"
@@ -39,7 +39,7 @@ for shared and private configs - which need to move out.
 #include <wx/wfstream.h>
 #include <wx/utils.h>
 
-#include "audacity/EffectInterface.h"
+#include "rustacity/EffectInterface.h"
 
 #include "FileNames.h"
 #include "ModuleManager.h"
@@ -47,7 +47,7 @@ for shared and private configs - which need to move out.
 #include "Prefs.h"
 #include "ShuttleGui.h"
 #include "wxFileNameWrapper.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/ProgressDialog.h"
 
 #include <unordered_map>
@@ -1038,7 +1038,7 @@ void PluginRegistrationDialog::OnOK(wxCommandEvent & WXUNUSED(evt))
                }
             }
             if (!errMsgs.empty())
-               AudacityMessageBox(
+               RustacityMessageBox(
                   XO("Effect or Command at %s failed to register:\n%s")
                      .Format( path, errMsgs ) );
          }
@@ -1389,7 +1389,7 @@ const PluginID &PluginManagerInterface::DefaultRegistrationCallback(
    return empty;
 }
 
-const PluginID &PluginManagerInterface::AudacityCommandRegistrationCallback(
+const PluginID &PluginManagerInterface::RustacityCommandRegistrationCallback(
    ModuleInterface *provider, ComponentInterface *pInterface )
 {
    ComponentInterface * pCInterface = dynamic_cast<ComponentInterface*>(pInterface);
@@ -1524,7 +1524,7 @@ void PluginManager::FindFilesInPathList(const wxString & pattern,
    // Add the "Audacity" plug-ins directory
    wxFileName ff = PlatformCompatibility::GetExecutablePath();
 #if defined(__WXMAC__)
-   // Path ends for example in "Audacity.app/Contents/MacOSX"
+   // Path ends for example in "Rustacity.app/Contents/MacOSX"
    //ff.RemoveLastDir();
    //ff.RemoveLastDir();
    // just remove the MacOSX part.
@@ -1838,7 +1838,7 @@ bool PluginManager::DropFile(const wxString &fileName)
             dst.SetFullName( src.GetFullName() );
             if ( dst.Exists() ) {
                // Query whether to overwrite
-               bool overwrite = (wxYES == ::AudacityMessageBox(
+               bool overwrite = (wxYES == ::RustacityMessageBox(
                   XO("Overwrite the plug-in file %s?")
                      .Format( dst.GetFullPath() ),
                   XO("Plug-in already exists"),
@@ -1862,7 +1862,7 @@ bool PluginManager::DropFile(const wxString &fileName)
             }
 
             if (!copied) {
-               ::AudacityMessageBox(
+               ::RustacityMessageBox(
                   XO("Plug-in file is in use. Failed to overwrite") );
                return true;
             }
@@ -1883,7 +1883,7 @@ bool PluginManager::DropFile(const wxString &fileName)
                });
             if ( ! nPlugIns ) {
                // Unlikely after the dry run succeeded
-               ::AudacityMessageBox(
+               ::RustacityMessageBox(
                   XO("Failed to register:\n%s").Format( errMsg ) );
                return true;
             }
@@ -1897,7 +1897,7 @@ bool PluginManager::DropFile(const wxString &fileName)
                )( nIds );
                for (const auto &name : names)
                   message.Join( Verbatim( name ), wxT("\n") );
-               bool enable = (wxYES == ::AudacityMessageBox(
+               bool enable = (wxYES == ::RustacityMessageBox(
                   message,
                   XO("Enable new plug-ins"),
                   wxYES_NO ) );

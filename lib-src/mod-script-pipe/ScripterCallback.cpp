@@ -15,7 +15,7 @@
 
 #include <wx/wx.h>
 #include "ScripterCallback.h"
-#include "../../src/Audacity.h"
+#include "../../src/Rustacity.h"
 
 #if defined(__WXMSW__)
 #include <wx/init.h>
@@ -102,7 +102,7 @@ DLL_API const wxChar * GetVersionString()
    // of Audacity it is built with. 
    // For now the versions must match exactly for Audacity to 
    // agree to load the module.
-   return AUDACITY_VERSION_STRING;
+   return RUSTACITY_VERSION_STRING;
 }
 
 extern int DLL_API  ModuleDispatch(ModuleDispatchTypes type);

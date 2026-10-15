@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AudioIOPrefs.h
 
@@ -17,8 +17,8 @@ class ShuttleGui;
 
 #ifdef EXPERIMENTAL_MIDI_OUT
 
-#ifndef __AUDACITY_MIDI_IO_PREFS__
-#define __AUDACITY_MIDI_IO_PREFS__
+#ifndef __RUSTACITY_MIDI_IO_PREFS__
+#define __RUSTACITY_MIDI_IO_PREFS__
 
 #include <wx/defs.h>
 

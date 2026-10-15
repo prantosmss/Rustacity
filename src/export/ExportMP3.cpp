@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ExportMP3.cpp
 
@@ -59,7 +59,7 @@
 
 *//********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "ExportMP3.h"
 
 #include <wx/app.h>
@@ -90,7 +90,7 @@
 #include "../Tags.h"
 #include "../Track.h"
 #include "../widgets/HelpSystem.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ProgressDialog.h"
 #include "../wxFileNameWrapper.h"
 
@@ -1026,7 +1026,7 @@ bool MP3Exporter::LoadLibrary(wxWindow *parent, AskUser askuser)
    if (!ValidLibraryLoaded()) {
 #if defined(__WXMSW__)
       if (askuser && !mBladeVersion.empty()) {
-         AudacityMessageBox( mBladeVersion );
+         RustacityMessageBox( mBladeVersion );
       }
 #endif
       wxLogMessage(wxT("Failed to locate LAME library"));
@@ -1222,9 +1222,9 @@ bool MP3Exporter::InitLibraryExternal(wxString libpath)
             .Format(
                v.byMajorVersion,
                v.byMinorVersion,
-               AUDACITY_VERSION,
-               AUDACITY_RELEASE,
-               AUDACITY_REVISION);
+               RUSTACITY_VERSION,
+               RUSTACITY_RELEASE,
+               RUSTACITY_REVISION);
       }
 #endif
 
@@ -1515,7 +1515,7 @@ wxString MP3Exporter::GetLibraryPath()
 {
    wxString path;
 
-   path = wxT("/Library/Application Support/audacity/libs");
+   path = wxT("/Library/Application Support/rustacity/libs");
    if (wxFileExists(path + wxT("/") + GetLibraryName()))
    {
         return path;
@@ -1527,7 +1527,7 @@ wxString MP3Exporter::GetLibraryPath()
         return path;
    }
     
-   return wxT("/Library/Application Support/audacity/libs");
+   return wxT("/Library/Application Support/rustacity/libs");
 }
 
 wxString MP3Exporter::GetLibraryName()
@@ -1681,7 +1681,7 @@ public:
    // Required
 
    void OptionsCreate(ShuttleGui &S, int format) override;
-   ProgressResult Export(AudacityProject *project,
+   ProgressResult Export(RustacityProject *project,
                std::unique_ptr<ProgressDialog> &pDialog,
                unsigned channels,
                const wxFileNameWrapper &fName,
@@ -1695,7 +1695,7 @@ public:
 private:
 
    int AskResample(int bitrate, int rate, int lowrate, int highrate);
-   unsigned long AddTags(AudacityProject *project, ArrayOf<char> &buffer, bool *endOfFile, const Tags *tags);
+   unsigned long AddTags(RustacityProject *project, ArrayOf<char> &buffer, bool *endOfFile, const Tags *tags);
 #ifdef USE_LIBID3TAG
    void AddFrame(struct id3_tag *tp, const wxString & n, const wxString & v, const char *name);
 #endif
@@ -1719,7 +1719,7 @@ bool ExportMP3::CheckFileName(wxFileName & WXUNUSED(filename), int WXUNUSED(form
    MP3Exporter exporter;
 
    if (!exporter.LoadLibrary(wxTheApp->GetTopWindow(), MP3Exporter::Maybe)) {
-      AudacityMessageBox( XO("Could not open MP3 encoding library!") );
+      RustacityMessageBox( XO("Could not open MP3 encoding library!") );
       gPrefs->Write(wxT("/MP3/MP3LibPath"), wxString(wxT("")));
       gPrefs->Flush();
 
@@ -1739,7 +1739,7 @@ int ExportMP3::SetNumExportChannels()
 }
 
 
-ProgressResult ExportMP3::Export(AudacityProject *project,
+ProgressResult ExportMP3::Export(RustacityProject *project,
                        std::unique_ptr<ProgressDialog> &pDialog,
                        unsigned channels,
                        const wxFileNameWrapper &fName,
@@ -1759,7 +1759,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
 
 #ifdef DISABLE_DYNAMIC_LOADING_LAME
    if (!exporter.InitLibrary(wxT(""))) {
-      AudacityMessageBox( XO("Could not initialize MP3 encoding library!") );
+      RustacityMessageBox( XO("Could not initialize MP3 encoding library!") );
       gPrefs->Write(wxT("/MP3/MP3LibPath"), wxString(wxT("")));
       gPrefs->Flush();
 
@@ -1767,7 +1767,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
    }
 #else
    if (!exporter.LoadLibrary(parent, MP3Exporter::Maybe)) {
-      AudacityMessageBox( XO("Could not open MP3 encoding library!") );
+      RustacityMessageBox( XO("Could not open MP3 encoding library!") );
       gPrefs->Write(wxT("/MP3/MP3LibPath"), wxString(wxT("")));
       gPrefs->Flush();
 
@@ -1775,7 +1775,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
    }
 
    if (!exporter.ValidLibraryLoaded()) {
-      AudacityMessageBox( XO("Not a valid or supported MP3 encoding library!") );
+      RustacityMessageBox( XO("Not a valid or supported MP3 encoding library!") );
       gPrefs->Write(wxT("/MP3/MP3LibPath"), wxString(wxT("")));
       gPrefs->Flush();
 
@@ -1859,7 +1859,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
 
    auto inSamples = exporter.InitializeStream(channels, rate);
    if (((int)inSamples) < 0) {
-      AudacityMessageBox( XO("Unable to initialize MP3 stream") );
+      RustacityMessageBox( XO("Unable to initialize MP3 stream") );
       return ProgressResult::Cancelled;
    }
 
@@ -1870,7 +1870,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
    // Open file for writing
    wxFFile outFile(fName.GetFullPath(), wxT("w+b"));
    if (!outFile.IsOpened()) {
-      AudacityMessageBox( XO("Unable to open target file for writing") );
+      RustacityMessageBox( XO("Unable to open target file for writing") );
       return ProgressResult::Cancelled;
    }
 
@@ -1880,7 +1880,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
    if (id3len && !endOfFile) {
       if (id3len > outFile.Write(id3buffer.get(), id3len)) {
          // TODO: more precise message
-         AudacityMessageBox( XO("Unable to export") );
+         RustacityMessageBox( XO("Unable to export") );
          return ProgressResult::Cancelled;
       }
    }
@@ -1892,7 +1892,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
    size_t bufferSize = std::max(0, exporter.GetOutBufferSize());
    if (bufferSize <= 0) {
       // TODO: more precise message
-      AudacityMessageBox( XO("Unable to export") );
+      RustacityMessageBox( XO("Unable to export") );
       return ProgressResult::Cancelled;
    }
 
@@ -1957,14 +1957,14 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
          if (bytes < 0) {
             auto msg = XO("Error %ld returned from MP3 encoder")
                .Format( bytes );
-            AudacityMessageBox( msg );
+            RustacityMessageBox( msg );
             updateResult = ProgressResult::Cancelled;
             break;
          }
 
          if (bytes > (int)outFile.Write(buffer.get(), bytes)) {
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             updateResult = ProgressResult::Cancelled;
             break;
          }
@@ -1979,14 +1979,14 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
 
       if (bytes < 0) {
          // TODO: more precise message
-         AudacityMessageBox( XO("Unable to export") );
+         RustacityMessageBox( XO("Unable to export") );
          return ProgressResult::Cancelled;
       }
 
       if (bytes > 0) {
          if (bytes > (int)outFile.Write(buffer.get(), bytes)) {
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             return ProgressResult::Cancelled;
          }
       }
@@ -1995,7 +1995,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
       if (id3len > 0 && endOfFile) {
          if (bytes > (int)outFile.Write(id3buffer.get(), id3len)) {
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             return ProgressResult::Cancelled;
          }
       }
@@ -2010,7 +2010,7 @@ ProgressResult ExportMP3::Export(AudacityProject *project,
           !outFile.Flush() ||
           !outFile.Close()) {
          // TODO: more precise message
-         AudacityMessageBox( XO("Unable to export") );
+         RustacityMessageBox( XO("Unable to export") );
          return ProgressResult::Cancelled;
       }
    }
@@ -2098,7 +2098,7 @@ using id3_tag_holder = std::unique_ptr<id3_tag, id3_tag_deleter>;
 #endif
 
 // returns buffer len; caller frees
-unsigned long ExportMP3::AddTags(AudacityProject *WXUNUSED(project), ArrayOf<char> &buffer, bool *endOfFile, const Tags *tags)
+unsigned long ExportMP3::AddTags(RustacityProject *WXUNUSED(project), ArrayOf<char> &buffer, bool *endOfFile, const Tags *tags)
 {
 #ifdef USE_LIBID3TAG
    id3_tag_holder tp { id3_tag_new() };

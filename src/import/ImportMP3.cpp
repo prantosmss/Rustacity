@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ImportMP3.cpp
 
@@ -26,7 +26,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -116,7 +116,7 @@ public:
    wxString GetPluginStringID() override { return wxT("libmad"); }
    TranslatableString GetPluginFormatDescription() override;
    std::unique_ptr<ImportFileHandle> Open(
-      const FilePath &Filename, AudacityProject*) override;
+      const FilePath &Filename, RustacityProject*) override;
 };
 
 class MP3ImportFileHandle final : public ImportFileHandle
@@ -177,7 +177,7 @@ TranslatableString MP3ImportPlugin::GetPluginFormatDescription()
 }
 
 std::unique_ptr<ImportFileHandle> MP3ImportPlugin::Open(
-   const FilePath &Filename, AudacityProject*)
+   const FilePath &Filename, RustacityProject*)
 {
    auto file = std::make_unique<wxFile>(Filename);
 

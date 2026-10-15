@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TimeDialog.h
 
@@ -8,12 +8,12 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TimeDialog__
-#define __AUDACITY_TimeDialog__
+#ifndef __RUSTACITY_TimeDialog__
+#define __RUSTACITY_TimeDialog__
 
 #include <wx/defs.h>
 
-#include "audacity/ComponentInterface.h" // member variable
+#include "rustacity/ComponentInterface.h" // member variable
 
 #include "widgets/wxPanelWrapper.h" // to inherit
 

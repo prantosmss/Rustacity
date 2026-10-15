@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   GUIPrefs.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_GUI_PREFS__
-#define __AUDACITY_GUI_PREFS__
+#ifndef __RUSTACITY_GUI_PREFS__
+#define __RUSTACITY_GUI_PREFS__
 
 #include <wx/defs.h>
 

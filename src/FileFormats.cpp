@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   FileFormats.cpp
 
@@ -15,14 +15,14 @@ information.
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "FileFormats.h"
 
 #include <wx/arrstr.h>
 #include <wx/intl.h>
 #include "sndfile.h"
 #include "Internat.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "Prefs.h"
 
 #ifndef SNDFILE_1
@@ -328,7 +328,7 @@ int SFFileCloser::operator() (SNDFILE *sf) const
    if (err) {
       char buffer[1000];
       sf_error_str(sf, buffer, 1000);
-      AudacityMessageBox(
+      RustacityMessageBox(
          /* i18n-hint: %s will be the error message from the libsndfile software library */
          XO( "Error (file may not have been written): %s" )
             // Not attempting to localize error messages

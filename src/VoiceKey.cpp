@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   VoiceKey.cpp
 
@@ -18,7 +18,7 @@ or "OFF" point
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "VoiceKey.h"
 
 #include <wx/string.h>
@@ -31,7 +31,7 @@ or "OFF" point
 #include <iostream>
 
 #include "WaveTrack.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/ErrorDialog.h"
 
 using std::cout;
@@ -96,7 +96,7 @@ sampleCount VoiceKey::OnForward (
          backwards by words.  So 'key' is being used in the sense of an index.
          This error message means that you've selected too short
          a region of audio to be able to use this feature.*/
-      AudacityMessageBox( XO("Selection is too small to use voice key.") );
+      RustacityMessageBox( XO("Selection is too small to use voice key.") );
       return start;
    }
    else {
@@ -244,7 +244,7 @@ sampleCount VoiceKey::OnBackward (
 
    if((mWindowSize) >= (len + 10).as_double() ){
 
-      AudacityMessageBox( XO("Selection is too small to use voice key.") );
+      RustacityMessageBox( XO("Selection is too small to use voice key.") );
       return end;
    }
    else {
@@ -388,7 +388,7 @@ sampleCount VoiceKey::OffForward (
 {
 
    if((mWindowSize) >= (len + 10).as_double() ){
-      AudacityMessageBox( XO("Selection is too small to use voice key.") );
+      RustacityMessageBox( XO("Selection is too small to use voice key.") );
 
       return start;
    }
@@ -526,7 +526,7 @@ sampleCount VoiceKey::OffBackward (
 
    if((mWindowSize) >= (len + 10).as_double() ){
 
-      AudacityMessageBox( XO("Selection is too small to use voice key.") );
+      RustacityMessageBox( XO("Selection is too small to use voice key.") );
       return end;
    }
    else {
@@ -830,7 +830,7 @@ void VoiceKey::CalibrateNoise(const WaveTrack & t, sampleCount start, sampleCoun
    text +=
       XO("Direction Changes  -- mean: %1.4f  sd: (%1.4f)\n")
          .Format( mDirectionChangesMean, mDirectionChangesSD );
-   AudacityMessageDialog{
+   RustacityMessageDialog{
       nullptr,
       text,
       XO("Calibration Complete"),

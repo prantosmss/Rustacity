@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 TrackView.cpp
 
@@ -167,9 +167,9 @@ namespace {
 // track Y coordinates
 struct TrackPositioner final : ClientData::Base, wxEvtHandler
 {
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
-   explicit TrackPositioner( AudacityProject &project )
+   explicit TrackPositioner( RustacityProject &project )
       : mProject{ project }
    {
       TrackList::Get( project ).Bind(
@@ -205,8 +205,8 @@ struct TrackPositioner final : ClientData::Base, wxEvtHandler
    }
 };
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-  []( AudacityProject &project ){
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+  []( RustacityProject &project ){
      return std::make_shared< TrackPositioner >( project );
    }
 };

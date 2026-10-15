@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 EffectScienFilter.h
 
@@ -10,8 +10,8 @@ Vaughan Johnson (Preview)
 
 ***********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_SCIENFILTER__
-#define __AUDACITY_EFFECT_SCIENFILTER__
+#ifndef __RUSTACITY_EFFECT_SCIENFILTER__
+#define __RUSTACITY_EFFECT_SCIENFILTER__
 
 #include <wx/setup.h> // for wxUSE_* macros
 

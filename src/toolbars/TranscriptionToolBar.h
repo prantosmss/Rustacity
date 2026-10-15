@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
 
   TranscriptionToolBar.h
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TRANSCRIPTION_TOOLBAR__
-#define __AUDACITY_TRANSCRIPTION_TOOLBAR__
+#ifndef __RUSTACITY_TRANSCRIPTION_TOOLBAR__
+#define __RUSTACITY_TRANSCRIPTION_TOOLBAR__
 
 #include "../Experimental.h"
 
@@ -19,7 +19,7 @@
 
 #include <wx/brush.h> // member variable
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class wxChoice;
 class wxCommandEvent;
@@ -28,7 +28,7 @@ class wxKeyEvent;
 
 class AButton;
 class ASlider;
-class AudacityProject;
+class RustacityProject;
 class BoundedEnvelope;
 class WaveTrack;
 
@@ -65,11 +65,11 @@ class TranscriptionToolBar final : public ToolBar {
 
  public:
 
-   TranscriptionToolBar( AudacityProject &project );
+   TranscriptionToolBar( RustacityProject &project );
    virtual ~TranscriptionToolBar();
 
-   static TranscriptionToolBar &Get( AudacityProject &project );
-   static const TranscriptionToolBar &Get( const AudacityProject &project );
+   static TranscriptionToolBar &Get( RustacityProject &project );
+   static const TranscriptionToolBar &Get( const RustacityProject &project );
 
    void Create(wxWindow *parent) override;
 

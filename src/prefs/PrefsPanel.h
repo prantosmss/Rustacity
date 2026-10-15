@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   PrefsPanel.h
 
@@ -24,8 +24,8 @@ MousePrefs, QualityPrefs, SpectrumPrefs and ThemePrefs.
 
 *//*******************************************************************/
 
-#ifndef __AUDACITY_PREFS_PANEL__
-#define __AUDACITY_PREFS_PANEL__
+#ifndef __RUSTACITY_PREFS_PANEL__
+#define __RUSTACITY_PREFS_PANEL__
 
 #include <functional>
 #include "../widgets/wxPanelWrapper.h" // to inherit
@@ -43,7 +43,7 @@ MousePrefs, QualityPrefs, SpectrumPrefs and ThemePrefs.
 #define TOP_LEVEL_BORDER       5
 #define GENERIC_CONTROL_BORDER 5
 
-class AudacityProject;
+class RustacityProject;
 class ShuttleGui;
 
 class PrefsPanel /* not final */ : public wxPanelWrapper, ComponentInterface
@@ -56,7 +56,7 @@ class PrefsPanel /* not final */ : public wxPanelWrapper, ComponentInterface
    // preview the preference changes for spectrograms.
    using Factory =
       std::function< PrefsPanel * (
-         wxWindow *parent, wxWindowID winid, AudacityProject *) >;
+         wxWindow *parent, wxWindowID winid, RustacityProject *) >;
 
    // Typically you make a static object of this type in the .cpp file that
    // also implements the PrefsPanel subclass.

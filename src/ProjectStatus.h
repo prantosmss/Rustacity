@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectStatus.h
 
@@ -8,8 +8,8 @@ Paul Licameli
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_STATUS__
-#define __AUDACITY_PROJECT_STATUS__
+#ifndef __RUSTACITY_PROJECT_STATUS__
+#define __RUSTACITY_PROJECT_STATUS__
 #endif
 
 #include <utility>
@@ -17,7 +17,7 @@ Paul Licameli
 #include <wx/event.h> // to declare custom event type
 #include "ClientData.h" // to inherit
 
-class AudacityProject;
+class RustacityProject;
 class wxString;
 class wxWindow;
 
@@ -31,17 +31,17 @@ enum StatusBarField : int {
 
 // Type of event emitted by the project when its status message is set
 // GetInt() identifies the intended field of the status bar
-wxDECLARE_EXPORTED_EVENT(AUDACITY_DLL_API,
+wxDECLARE_EXPORTED_EVENT(RUSTACITY_DLL_API,
                          EVT_PROJECT_STATUS_UPDATE, wxCommandEvent);
 
 class ProjectStatus final
    : public ClientData::Base
 {
 public:
-   static ProjectStatus &Get( AudacityProject &project );
-   static const ProjectStatus &Get( const AudacityProject &project );
+   static ProjectStatus &Get( RustacityProject &project );
+   static const ProjectStatus &Get( const RustacityProject &project );
 
-   explicit ProjectStatus( AudacityProject &project );
+   explicit ProjectStatus( RustacityProject &project );
    ProjectStatus( const ProjectStatus & ) = delete;
    ProjectStatus &operator= ( const ProjectStatus & ) = delete;
    ~ProjectStatus() override;
@@ -51,7 +51,7 @@ public:
    // be wide enough to contain any of those strings plus the margin.
    using StatusWidthResult = std::pair< std::vector<TranslatableString>, unsigned >;
    using StatusWidthFunction = std::function<
-      StatusWidthResult( const AudacityProject &, StatusBarField )
+      StatusWidthResult( const RustacityProject &, StatusBarField )
    >;
    using StatusWidthFunctions = std::vector< StatusWidthFunction >;
 
@@ -69,6 +69,6 @@ public:
       StatusBarField field = mainStatusBarField);
 
 private:
-   AudacityProject &mProject;
+   RustacityProject &mProject;
    TranslatableString mLastStatusMessages[ nStatusBarFields ];
 };

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Ruler.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_RULER__
-#define __AUDACITY_RULER__
+#ifndef __RUSTACITY_RULER__
+#define __RUSTACITY_RULER__
 
 #include "wxPanelWrapper.h" // to inherit
 #include "../NumberScale.h" // member variable
@@ -24,7 +24,7 @@ class wxFont;
 class Envelope;
 class ZoomInfo;
 
-class AUDACITY_DLL_API Ruler {
+class RUSTACITY_DLL_API Ruler {
  public:
 
    enum RulerFormat {
@@ -226,7 +226,7 @@ private:
    NumberScale mNumberScale;
 };
 
-class AUDACITY_DLL_API RulerPanel final : public wxPanelWrapper {
+class RUSTACITY_DLL_API RulerPanel final : public wxPanelWrapper {
    DECLARE_DYNAMIC_CLASS(RulerPanel)
 
  public:
@@ -292,4 +292,4 @@ private:
     DECLARE_EVENT_TABLE()
 };
 
-#endif //define __AUDACITY_RULER__
+#endif //define __RUSTACITY_RULER__

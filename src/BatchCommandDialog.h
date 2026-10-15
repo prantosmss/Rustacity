@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   BatchCommandDialog.h
 
@@ -9,8 +9,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_MACRO_COMMAND_DIALOG__
-#define __AUDACITY_MACRO_COMMAND_DIALOG__
+#ifndef __RUSTACITY_MACRO_COMMAND_DIALOG__
+#define __RUSTACITY_MACRO_COMMAND_DIALOG__
 
 #include <wx/defs.h>
 
@@ -21,13 +21,13 @@ class wxTextCtrl;
 class wxListCtrl;
 class wxListEvent;
 class wxButton;
-class AudacityProject;
+class RustacityProject;
 class ShuttleGui;
 
 class MacroCommandDialog final : public wxDialogWrapper {
  public:
    // constructors and destructors
-   MacroCommandDialog(wxWindow *parent, wxWindowID id, AudacityProject &project);
+   MacroCommandDialog(wxWindow *parent, wxWindowID id, RustacityProject &project);
    void SetCommandAndParams(const CommandID &Command, const wxString &Params);
  public:
    CommandID   mSelectedCommand;

@@ -2,7 +2,7 @@ SUBDIRS = help images lib-src po src tests
 
 ACLOCAL_AMFLAGS = -I m4
 
-bin_PROGRAMS = audacity$(EXEEXT)
+bin_PROGRAMS = rustacity$(EXEEXT)
 
 dist_doc_DATA = LICENSE.txt README.txt
 dist_pkgdata_DATA = presets/EQDefaultCurves.xml
@@ -11,14 +11,14 @@ suillibdir = $(pkglibdir)
 suillib_DATA = $(shell [ -e lib-src/lv2/build ] && find lib-src/lv2/build -name \*.so)
 
 nobase_dist_pkgdata_DATA = \
-   include/audacity/ComponentInterface.h \
-   include/audacity/ConfigInterface.h \
-   include/audacity/EffectAutomationParameters.h \
-   include/audacity/EffectInterface.h \
-   include/audacity/ImporterInterface.h \
-   include/audacity/ModuleInterface.h \
-   include/audacity/PluginInterface.h \
-   include/audacity/Types.h \
+   include/rustacity/ComponentInterface.h \
+   include/rustacity/ConfigInterface.h \
+   include/rustacity/EffectAutomationParameters.h \
+   include/rustacity/EffectInterface.h \
+   include/rustacity/ImporterInterface.h \
+   include/rustacity/ModuleInterface.h \
+   include/rustacity/PluginInterface.h \
+   include/rustacity/Types.h \
 	nyquist/aud-do-support.lsp \
 	nyquist/dspprims.lsp \
 	nyquist/envelopes.lsp \
@@ -97,9 +97,9 @@ nobase_dist_pkgdata_DATA = \
    plug-ins/vocoder.ny \
    $(NULL)
 
-audacity$(EXEEXT): src/audacity$(EXEEXT)
-	rm -f audacity$(EXEEXT)
-	cp src/audacity$(EXEEXT) audacity$(EXEEXT)
+rustacity$(EXEEXT): src/rustacity$(EXEEXT)
+	rm -f rustacity$(EXEEXT)
+	cp src/rustacity$(EXEEXT) rustacity$(EXEEXT)
 	[ -e plug-ins ] || ln -s $(srcdir)/plug-ins
 	[ -e nyquist ] || ln -s $(srcdir)/nyquist
 	[ -e locale ] || ln -s po locale
@@ -112,4 +112,4 @@ modules:
 
 .PHONY: modules
 
-CLEANFILES = audacity$(EXEEXT) plug-ins nyquist locale modules
+CLEANFILES = rustacity$(EXEEXT) plug-ins nyquist locale modules

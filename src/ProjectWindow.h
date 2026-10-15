@@ -1,15 +1,15 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectWindow.h
 
-Paul Licameli split from AudacityProject.h
+Paul Licameli split from RustacityProject.h
 
 **********************************************************************/
 
-#ifndef __AUDACITY_PROJECT_WINDOW__
-#define __AUDACITY_PROJECT_WINDOW__
+#ifndef __RUSTACITY_PROJECT_WINDOW__
+#define __RUSTACITY_PROJECT_WINDOW__
 
 #include <memory>
 #include "ProjectWindowBase.h" // to inherit
@@ -31,15 +31,15 @@ class ProjectWindow final : public ProjectWindowBase
    , public PrefsListener
 {
 public:
-   static ProjectWindow &Get( AudacityProject &project );
-   static const ProjectWindow &Get( const AudacityProject &project );
-   static ProjectWindow *Find( AudacityProject *pProject );
-   static const ProjectWindow *Find( const AudacityProject *pProject );
+   static ProjectWindow &Get( RustacityProject &project );
+   static const ProjectWindow &Get( const RustacityProject &project );
+   static ProjectWindow *Find( RustacityProject *pProject );
+   static const ProjectWindow *Find( const RustacityProject *pProject );
 
    explicit ProjectWindow(
       wxWindow * parent, wxWindowID id,
       const wxPoint & pos, const wxSize &size,
-      AudacityProject &project );
+      RustacityProject &project );
    ~ProjectWindow() override;
 
    // Next available ID for sub-windows
@@ -60,7 +60,7 @@ public:
    class PlaybackScroller final : public wxEvtHandler
    {
    public:
-      explicit PlaybackScroller(AudacityProject *project);
+      explicit PlaybackScroller(RustacityProject *project);
 
       enum class Mode {
          Off,
@@ -78,7 +78,7 @@ public:
    private:
       void OnTimer(wxCommandEvent &event);
 
-      AudacityProject *mProject;
+      RustacityProject *mProject;
       Mode mMode { Mode::Off };
    };
    PlaybackScroller &GetPlaybackScroller() { return *mPlaybackScroller; }

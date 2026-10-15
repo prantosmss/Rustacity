@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 NoteTrackButtonHandle.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../../../Audacity.h" // for USE_* macros
+#include "../../../../Rustacity.h" // for USE_* macros
 
 #ifdef USE_MIDI
 #include "NoteTrackButtonHandle.h"
@@ -30,7 +30,7 @@ NoteTrackButtonHandle::NoteTrackButtonHandle
 {
 }
 
-void NoteTrackButtonHandle::Enter(bool, AudacityProject *)
+void NoteTrackButtonHandle::Enter(bool, RustacityProject *)
 {
    mChangeHighlight = RefreshCode::RefreshCell;
 }
@@ -69,19 +69,19 @@ UIHandlePtr NoteTrackButtonHandle::HitTest
 }
 
 UIHandle::Result NoteTrackButtonHandle::Click
-(const TrackPanelMouseEvent &, AudacityProject *)
+(const TrackPanelMouseEvent &, RustacityProject *)
 {
    return RefreshCode::RefreshNone;
 }
 
 UIHandle::Result NoteTrackButtonHandle::Drag
-(const TrackPanelMouseEvent &, AudacityProject *)
+(const TrackPanelMouseEvent &, RustacityProject *)
 {
    return RefreshCode::RefreshNone;
 }
 
 HitTestPreview NoteTrackButtonHandle::Preview
-(const TrackPanelMouseState &, AudacityProject *)
+(const TrackPanelMouseState &, RustacityProject *)
 {
    // auto pTrack = pProject->GetTracks()->Lock(mpTrack);
    auto pTrack = mpTrack.lock();
@@ -92,7 +92,7 @@ HitTestPreview NoteTrackButtonHandle::Preview
 }
 
 UIHandle::Result NoteTrackButtonHandle::Release
-(const TrackPanelMouseEvent &evt, AudacityProject *pProject, wxWindow *)
+(const TrackPanelMouseEvent &evt, RustacityProject *pProject, wxWindow *)
 {
    using namespace RefreshCode;
 
@@ -110,7 +110,7 @@ UIHandle::Result NoteTrackButtonHandle::Release
    return RefreshNone;
 }
 
-UIHandle::Result NoteTrackButtonHandle::Cancel(AudacityProject *)
+UIHandle::Result NoteTrackButtonHandle::Cancel(RustacityProject *)
 {
    return RefreshCode::RefreshNone;
 }

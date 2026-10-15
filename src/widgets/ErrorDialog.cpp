@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ErrorDialog.cpp
 
@@ -14,7 +14,7 @@
 
 *//********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "ErrorDialog.h"
 
 #include <wx/app.h>
@@ -134,12 +134,12 @@ void ShowModelessErrorDialog(wxWindow *parent,
    // but in practice Destroy() in OnOK does that
 }
 
-void AudacityTextEntryDialog::SetInsertionPointEnd()
+void RustacityTextEntryDialog::SetInsertionPointEnd()
 {
    mSetInsertionPointEnd = true;
 }
 
-bool AudacityTextEntryDialog::Show(bool show)
+bool RustacityTextEntryDialog::Show(bool show)
 {
    bool ret = wxTabTraversalWrapper< wxTextEntryDialog >::Show(show);
 

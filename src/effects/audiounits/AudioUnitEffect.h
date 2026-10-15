@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AudioUnitEffect.h
 
@@ -8,9 +8,9 @@
   Leland Lucius
 
 **********************************************************************/
-#ifndef AUDACITY_AUDIOUNIT_EFFECT_H
+#ifndef RUSTACITY_AUDIOUNIT_EFFECT_H
 
-#include "../../Audacity.h" // for USE_* macros
+#include "../../Rustacity.h" // for USE_* macros
 
 #if USE_AUDIO_UNITS
 
@@ -21,9 +21,9 @@
 #include <AudioUnit/AudioUnit.h>
 #include <AudioUnit/AudioUnitProperties.h>
 
-#include "audacity/EffectInterface.h"
-#include "audacity/ModuleInterface.h"
-#include "audacity/PluginInterface.h"
+#include "rustacity/EffectInterface.h"
+#include "rustacity/ModuleInterface.h"
+#include "rustacity/PluginInterface.h"
 
 #include "AUControl.h"
 

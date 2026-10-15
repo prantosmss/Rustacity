@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TimeToolBar.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TIME_TOOLBAR__
-#define __AUDACITY_TIME_TOOLBAR__
+#ifndef __RUSTACITY_TIME_TOOLBAR__
+#define __RUSTACITY_TIME_TOOLBAR__
 
 #include <wx/defs.h>
 
@@ -22,11 +22,11 @@ class TimerToolBarListener;
 class TimerToolBar final : public ToolBar
 {
 public:
-   TimerToolBar(AudacityProject &project);
+   TimerToolBar(RustacityProject &project);
    virtual ~TimerToolBar();
    
-   static TimerToolBar &Get(AudacityProject &project);
-   static const TimerToolBar &Get(const AudacityProject &project);
+   static TimerToolBar &Get(RustacityProject &project);
+   static const TimerToolBar &Get(const RustacityProject &project);
    
    void Populate() override;
    void Repaint(wxDC * WXUNUSED(dc)) override {};

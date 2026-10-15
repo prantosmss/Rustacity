@@ -22,9 +22,9 @@
 #include "CommandType.h"
 #include "Command.h"
 
-//#include "../commands/AudacityCommand.h"
+//#include "../commands/RustacityCommand.h"
 
-class SelectTimeCommand : public AudacityCommand
+class SelectTimeCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -36,7 +36,7 @@ public:
    void PopulateOrExchange(ShuttleGui & S) override;
    bool Apply(const CommandContext & context) override;
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_I#select_time");};
 
    bool bHasT0;
@@ -50,7 +50,7 @@ public:
    bool mFromEnd;
 };
 
-class SelectFrequenciesCommand : public AudacityCommand
+class SelectFrequenciesCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -62,7 +62,7 @@ public:
    void PopulateOrExchange(ShuttleGui & S) override;
    bool Apply(const CommandContext & context) override;
 
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_I#select_frequencies");};
 
    bool bHasBottom;
@@ -73,7 +73,7 @@ public:
 };
 
 
-class SelectTracksCommand : public AudacityCommand
+class SelectTracksCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -84,7 +84,7 @@ public:
    bool DefineParams( ShuttleParams & S ) override;
    void PopulateOrExchange(ShuttleGui & S) override;
    bool Apply(const CommandContext & context) override;
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_I#select_tracks");};
 
    bool bHasFirstTrack;
@@ -97,7 +97,7 @@ public:
 };
 
 
-class SelectCommand : public AudacityCommand
+class SelectCommand : public RustacityCommand
 {
 public:
    static const ComponentInterfaceSymbol Symbol;
@@ -122,7 +122,7 @@ public:
          mSelFreq.Apply( context )&&
          mSelTracks.Apply(context);
    }
-   // AudacityCommand overrides
+   // RustacityCommand overrides
    wxString ManualPage() override {return wxT("Extra_Menu:_Scriptables_II#select");};
 private:
    SelectTimeCommand mSelTime;

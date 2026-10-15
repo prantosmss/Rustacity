@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Track.cpp
 
@@ -21,7 +21,7 @@ and TimeTrack.
 
 *//*******************************************************************/
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 
 #include "Track.h"
 
@@ -491,28 +491,28 @@ wxDEFINE_EVENT(EVT_TRACKLIST_DELETION, TrackListEvent);
 // same value as in the default constructed TrackId:
 long TrackList::sCounter = -1;
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key{
-   [](AudacityProject &project) { return TrackList::Create( &project ); }
+static const RustacityProject::AttachedObjects::RegisteredFactory key{
+   [](RustacityProject &project) { return TrackList::Create( &project ); }
 };
 
-TrackList &TrackList::Get( AudacityProject &project )
+TrackList &TrackList::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< TrackList >( key );
 }
 
-const TrackList &TrackList::Get( const AudacityProject &project )
+const TrackList &TrackList::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-TrackList::TrackList( AudacityProject *pOwner )
+TrackList::TrackList( RustacityProject *pOwner )
 :  wxEvtHandler()
 , mOwner{ pOwner }
 {
 }
 
 // Factory function
-std::shared_ptr<TrackList> TrackList::Create( AudacityProject *pOwner )
+std::shared_ptr<TrackList> TrackList::Create( RustacityProject *pOwner )
 {
    return std::make_shared<TrackList>( pOwner );
 }
@@ -1283,7 +1283,7 @@ bool TrackList::HasPendingTracks() const
 }
 
 #include "ViewInfo.h"
-static auto TrackFactoryFactory = []( AudacityProject &project ) {
+static auto TrackFactoryFactory = []( RustacityProject &project ) {
    auto &dirManager = DirManager::Get( project );
    auto &viewInfo = ViewInfo::Get( project );
    return std::make_shared< TrackFactory >(
@@ -1291,28 +1291,28 @@ static auto TrackFactoryFactory = []( AudacityProject &project ) {
       dirManager.shared_from_this(), &viewInfo );
 };
 
-static const AudacityProject::AttachedObjects::RegisteredFactory key2{
+static const RustacityProject::AttachedObjects::RegisteredFactory key2{
    TrackFactoryFactory
 };
 
-TrackFactory &TrackFactory::Get( AudacityProject &project )
+TrackFactory &TrackFactory::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< TrackFactory >( key2 );
 }
 
-const TrackFactory &TrackFactory::Get( const AudacityProject &project )
+const TrackFactory &TrackFactory::Get( const RustacityProject &project )
 {
-   return Get( const_cast< AudacityProject & >( project ) );
+   return Get( const_cast< RustacityProject & >( project ) );
 }
 
-TrackFactory &TrackFactory::Reset( AudacityProject &project )
+TrackFactory &TrackFactory::Reset( RustacityProject &project )
 {
    auto result = TrackFactoryFactory( project );
    project.AttachedObjects::Assign( key2, result );
    return *result;
 }
 
-void TrackFactory::Destroy( AudacityProject &project )
+void TrackFactory::Destroy( RustacityProject &project )
 {
    project.AttachedObjects::Assign( key2, nullptr );
 }

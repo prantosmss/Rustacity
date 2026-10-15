@@ -1,10 +1,10 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 ProjectAudioIO.cpp
 
-Paul Licameli split from AudacityProject.cpp
+Paul Licameli split from RustacityProject.cpp
 
 **********************************************************************/
 
@@ -13,23 +13,23 @@ Paul Licameli split from AudacityProject.cpp
 #include "AudioIOBase.h"
 #include "Project.h"
 
-static const AudacityProject::AttachedObjects::RegisteredFactory sAudioIOKey{
-  []( AudacityProject &parent ){
+static const RustacityProject::AttachedObjects::RegisteredFactory sAudioIOKey{
+  []( RustacityProject &parent ){
      return std::make_shared< ProjectAudioIO >( parent );
    }
 };
 
-ProjectAudioIO &ProjectAudioIO::Get( AudacityProject &project )
+ProjectAudioIO &ProjectAudioIO::Get( RustacityProject &project )
 {
    return project.AttachedObjects::Get< ProjectAudioIO >( sAudioIOKey );
 }
 
-const ProjectAudioIO &ProjectAudioIO::Get( const AudacityProject &project )
+const ProjectAudioIO &ProjectAudioIO::Get( const RustacityProject &project )
 {
-   return Get( const_cast<AudacityProject &>(project) );
+   return Get( const_cast<RustacityProject &>(project) );
 }
 
-ProjectAudioIO::ProjectAudioIO( AudacityProject &project )
+ProjectAudioIO::ProjectAudioIO( RustacityProject &project )
 : mProject{ project }
 {
 }

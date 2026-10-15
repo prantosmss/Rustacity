@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Theme.h
 
@@ -11,10 +11,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_THEME__
-#define __AUDACITY_THEME__
+#ifndef __RUSTACITY_THEME__
+#define __RUSTACITY_THEME__
 
-#include "Audacity.h"
+#include "Rustacity.h"
 
 #include <vector>
 #include <wx/defs.h>
@@ -60,7 +60,7 @@ enum teThemeType
 
 
 
-class AUDACITY_DLL_API FlowPacker
+class RUSTACITY_DLL_API FlowPacker
 {
 public:
    FlowPacker(){;};
@@ -93,7 +93,7 @@ private:
 
 };
 
-class AUDACITY_DLL_API ThemeBase /* not final */
+class RUSTACITY_DLL_API ThemeBase /* not final */
 {
 public:
    ThemeBase(void);
@@ -156,7 +156,7 @@ protected:
 };
 
 
-class AUDACITY_DLL_API Theme final : public ThemeBase
+class RUSTACITY_DLL_API Theme final : public ThemeBase
 {
 public:
    Theme(void);
@@ -187,6 +187,6 @@ public:
    DECLARE_EVENT_TABLE();
 };
 
-extern AUDACITY_DLL_API Theme theTheme;
+extern RUSTACITY_DLL_API Theme theTheme;
 
-#endif // __AUDACITY_THEME__
+#endif // __RUSTACITY_THEME__

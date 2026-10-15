@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   AudioIO.cpp
 
@@ -413,7 +413,7 @@ time warp info and AudioIOListener and whether the playback is looped.
 
 *//*******************************************************************/
 
-#include "Audacity.h" // for USE_* macros
+#include "Rustacity.h" // for USE_* macros
 #include "AudioIO.h"
 
 #include "Experimental.h"
@@ -467,7 +467,7 @@ time warp info and AudioIOListener and whether the playback is looped.
 #include "prefs/QualityPrefs.h"
 #include "prefs/RecordingPrefs.h"
 #include "widgets/MeterPanelBase.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/ErrorDialog.h"
 #include "widgets/Warning.h"
 
@@ -1008,7 +1008,7 @@ AudioIO::AudioIO()
          errStr += XO("Error: %s").Format( paErrStr );
       // XXX: we are in libaudacity, popping up dialogs not allowed!  A
       // long-term solution will probably involve exceptions
-      AudacityMessageBox(
+      RustacityMessageBox(
          errStr,
          XO("Error Initializing Audio"),
          wxICON_ERROR|wxOK);
@@ -1031,7 +1031,7 @@ AudioIO::AudioIO()
          errStr += XO("Error: %s").Format( pmErrStr );
       // XXX: we are in libaudacity, popping up dialogs not allowed!  A
       // long-term solution will probably involve exceptions
-      AudacityMessageBox(
+      RustacityMessageBox(
          errStr,
          XO("Error Initializing Midi"),
          wxICON_ERROR|wxOK);
@@ -1199,7 +1199,7 @@ wxArrayString AudioIO::GetInputSourceNames()
 #endif
 }
 
-static PaSampleFormat AudacityToPortAudioSampleFormat(sampleFormat format)
+static PaSampleFormat RustacityToPortAudioSampleFormat(sampleFormat format)
 {
    switch(format) {
    case int16Sample:
@@ -1329,7 +1329,7 @@ bool AudioIO::StartPortAudioStream(const AudioIOStartStreamOptions &options,
          return false;
 
       captureParameters.sampleFormat =
-         AudacityToPortAudioSampleFormat(mCaptureFormat);
+         RustacityToPortAudioSampleFormat(mCaptureFormat);
 
       captureParameters.hostApiSpecificStreamInfo = NULL;
       captureParameters.channelCount = mNumCaptureChannels;
@@ -1789,7 +1789,7 @@ int AudioIO::StartStream(const TransportTracks &tracks,
             pListener->OnAudioIOStopRecording();
          StartStreamCleanup();
          // PRL: PortAudio error messages are sadly not internationalized
-         AudacityMessageBox(
+         RustacityMessageBox(
             Verbatim( LAT1CTOWX(Pa_GetErrorText(err)) ) );
          return 0;
       }
@@ -1965,7 +1965,7 @@ bool AudioIO::AllocateBuffers(
             // 100 samples, just give up.
             if(captureBufferSize < 100)
             {
-               AudacityMessageBox( XO("Out of memory!") );
+               RustacityMessageBox( XO("Out of memory!") );
                return false;
             }
 
@@ -2000,7 +2000,7 @@ bool AudioIO::AllocateBuffers(
             (size_t)lrint(mRate * mPlaybackRingBufferSecs);
          if(playbackBufferSize < 100 || mPlaybackSamplesToCopy < 100)
          {
-            AudacityMessageBox( XO("Out of memory!") );
+            RustacityMessageBox( XO("Out of memory!") );
             return false;
          }
       }
@@ -2136,7 +2136,7 @@ bool AudioIO::StartPortMidiStream()
 }
 #endif
 
-bool AudioIO::IsAvailable(AudacityProject *project) const
+bool AudioIO::IsAvailable(RustacityProject *project) const
 {
    return mOwningProject == NULL || mOwningProject == project;
 }
@@ -2667,7 +2667,7 @@ void AudioIO::FillBuffers()
 {
    unsigned int i;
 
-   auto delayedHandler = [this] ( AudacityException * pException ) {
+   auto delayedHandler = [this] ( RustacityException * pException ) {
       // In the main thread, stop recording
       // This is one place where the application handles disk
       // exhaustion exceptions from wave track operations, without rolling
@@ -2680,7 +2680,7 @@ void AudioIO::FillBuffers()
 
       // Note that the Flush in StopStream() may throw another exception,
       // but StopStream() contains that exception, and the logic in
-      // AudacityException::DelayedHandlerAction prevents redundant message
+      // RustacityException::DelayedHandlerAction prevents redundant message
       // boxes.
       StopStream();
       DefaultDelayedHandlerAction{}( pException );
@@ -3041,7 +3041,7 @@ void AudioIO::FillBuffers()
          // end of record buffering
       },
       // handler
-      [this] ( AudacityException *pException ) {
+      [this] ( RustacityException *pException ) {
          if ( pException ) {
             // So that we don't attempt to fill the recording buffer again
             // before the main thread stops recording
@@ -3477,7 +3477,7 @@ double AudioIO::AILAGetLastDecisionTime() {
 }
 
 void AudioIO::AILAProcess(double maxPeak) {
-   AudacityProject *const proj = mOwningProject;
+   RustacityProject *const proj = mOwningProject;
    if (proj && mAILAActive) {
       if (mInputMeter && mInputMeter->IsClipping()) {
          mAILAClipped = true;

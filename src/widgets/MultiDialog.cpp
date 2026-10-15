@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2010 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -18,7 +18,7 @@ for each problem encountered, since there can be many orphans.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "MultiDialog.h"
 
 #include "../ShuttleGui.h"
@@ -36,7 +36,7 @@ for each problem encountered, since there can be many orphans.
 #include <wx/bmpbuttn.h>
 
 
-#include "../AudacityLogger.h"
+#include "../RustacityLogger.h"
 #include "wxPanelWrapper.h"
 #include "../Theme.h"
 #include "../AllThemeResources.h"
@@ -169,7 +169,7 @@ void MultiDialog::OnOK(wxCommandEvent & WXUNUSED(event))
 
 void MultiDialog::OnShowLog(wxCommandEvent & WXUNUSED(event))
 {
-   auto logger = AudacityLogger::Get();
+   auto logger = RustacityLogger::Get();
    if (logger) {
       logger->Show();
    }

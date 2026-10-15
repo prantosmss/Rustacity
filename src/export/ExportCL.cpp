@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ExportCL.cpp
 
@@ -11,7 +11,7 @@
 
 **********************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include "../ProjectSettings.h"
 
@@ -38,7 +38,7 @@
 #include "../Track.h"
 #include "../float_cast.h"
 #include "../widgets/FileHistory.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ProgressDialog.h"
 #include "../widgets/Warning.h"
 #include "../wxFileNameWrapper.h"
@@ -288,7 +288,7 @@ public:
    // Required
    void OptionsCreate(ShuttleGui &S, int format) override;
 
-   ProgressResult Export(AudacityProject *project,
+   ProgressResult Export(RustacityProject *project,
                          std::unique_ptr<ProgressDialog> &pDialog,
                          unsigned channels,
                          const wxFileNameWrapper &fName,
@@ -362,7 +362,7 @@ ExportCL::ExportCL()
    SetDescription(XO("(external program)"),0);
 }
 
-ProgressResult ExportCL::Export(AudacityProject *project,
+ProgressResult ExportCL::Export(RustacityProject *project,
                                 std::unique_ptr<ProgressDialog> &pDialog,
                                 unsigned channels,
                                 const wxFileNameWrapper &fName,
@@ -393,7 +393,7 @@ ProgressResult ExportCL::Export(AudacityProject *project,
 
    rc = wxExecute(mCmd, wxEXEC_ASYNC, &process);
    if (!rc) {
-      AudacityMessageBox( XO("Cannot export audio to %s").Format( path ) );
+      RustacityMessageBox( XO("Cannot export audio to %s").Format( path ) );
       process.Detach();
       process.CloseOutput();
 
@@ -749,7 +749,7 @@ bool ExportCL::CheckFileName(wxFileName &filename, int WXUNUSED(format))
    );
 
    if (argv.size() == 0) {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Program name appears to be missing."),
          XO("Unable to export"),
          wxOK | wxICON_INFORMATION);
@@ -763,7 +763,7 @@ bool ExportCL::CheckFileName(wxFileName &filename, int WXUNUSED(format))
    // Just verify the given path exists if it is absolute.
    if (cmd.IsAbsolute()) {
       if (!cmd.Exists()) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("\"%s\" couldn't be found.").Format(cmd.GetFullPath()),
             XO("Warning"),
             wxOK | wxICON_EXCLAMATION);
@@ -786,7 +786,7 @@ bool ExportCL::CheckFileName(wxFileName &filename, int WXUNUSED(format))
 #endif
 
    if (path.empty()) {
-      int action = AudacityMessageBox(
+      int action = RustacityMessageBox(
          XO("Unable to locate \"%s\" in your path.").Format(cmd.GetFullPath()),
          XO("Warning"),
          wxOK | wxICON_EXCLAMATION);

@@ -1,6 +1,6 @@
 /**********************************************************************
 
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
 
  NoteTrackSliderHandles.h
 
@@ -8,8 +8,8 @@
 
  **********************************************************************/
 
-#ifndef __AUDACITY_NOTE_TRACK_SLIDER_HANDLES__
-#define __AUDACITY_NOTE_TRACK_SLIDER_HANDLES__
+#ifndef __RUSTACITY_NOTE_TRACK_SLIDER_HANDLES__
+#define __RUSTACITY_NOTE_TRACK_SLIDER_HANDLES__
 
 #include "../../../../Experimental.h"
 
@@ -38,12 +38,12 @@ public:
 protected:
    float GetValue() override;
    Result SetValue
-   (AudacityProject *pProject, float newValue) override;
+   (RustacityProject *pProject, float newValue) override;
    Result CommitChanges
-   (const wxMouseEvent &event, AudacityProject *pProject) override;
+   (const wxMouseEvent &event, RustacityProject *pProject) override;
 
    TranslatableString Tip(
-      const wxMouseState &state, AudacityProject &) const override;
+      const wxMouseState &state, RustacityProject &) const override;
 
    bool StopsOnKeystroke () override { return true; }
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ShuttleGui.cpp
 
@@ -93,7 +93,7 @@ for registering for changes.
 *//******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "ShuttleGui.h"
 
 #include "Experimental.h"

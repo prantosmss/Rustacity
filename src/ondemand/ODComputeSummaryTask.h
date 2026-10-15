@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ODComputeSummaryTask.h
 
@@ -16,8 +16,8 @@ updating the ODPCMAliasBlockFile and the GUI of the newly available data.
 
 *//*******************************************************************/
 
-#ifndef __AUDACITY_ODComputeSummaryTask__
-#define __AUDACITY_ODComputeSummaryTask__
+#ifndef __RUSTACITY_ODComputeSummaryTask__
+#define __RUSTACITY_ODComputeSummaryTask__
 
 #include <vector>
 #include "ODTask.h"

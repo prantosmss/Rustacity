@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2008 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -29,12 +29,12 @@ data.
 *//*****************************************************************//**
 
 \class DependencyDialog
-\brief DependencyDialog shows dependencies of an AudacityProject on 
+\brief DependencyDialog shows dependencies of an RustacityProject on 
 AliasedFile s.
 
 *//********************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Dependencies.h"
 
 #include <wx/button.h>
@@ -60,7 +60,7 @@ AliasedFile s.
 #include "WaveTrack.h"
 #include "WaveClip.h"
 #include "prefs/QualityPrefs.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/ProgressDialog.h"
 
 #include <unordered_map>
@@ -75,7 +75,7 @@ using BoolBlockFileHash = std::unordered_map<BlockFile *, bool>;
 // Given a project, returns a single array of all SeqBlocks
 // in the current set of tracks.  Enumerating that array allows
 // you to process all block files in the current set.
-static void GetAllSeqBlocks(AudacityProject *project,
+static void GetAllSeqBlocks(RustacityProject *project,
                             BlockPtrArray *outBlocks)
 {
    for (auto waveTrack : TrackList::Get( *project ).Any< WaveTrack >()) {
@@ -107,7 +107,7 @@ static void ReplaceBlockFiles(BlockPtrArray &blocks,
    }
 }
 
-void FindDependencies(AudacityProject *project,
+void FindDependencies(RustacityProject *project,
                       AliasedFileArray &outAliasedFiles)
 {
    sampleFormat format = QualityPrefs::SampleFormatChoice();
@@ -162,7 +162,7 @@ void FindDependencies(AudacityProject *project,
 // Given a project and a list of aliased files that should no
 // longer be external dependencies (selected by the user), replace
 // all of those alias block files with disk block files.
-static void RemoveDependencies(AudacityProject *project,
+static void RemoveDependencies(RustacityProject *project,
                                AliasedFileArray &aliasedFiles)
 // STRONG-GUARANTEE
 {
@@ -247,7 +247,7 @@ class DependencyDialog final : public wxDialogWrapper
 public:
    DependencyDialog(wxWindow *parent,
                     wxWindowID id,
-                    AudacityProject *project,
+                    RustacityProject *project,
                     AliasedFileArray &aliasedFiles,
                     bool isSaving);
 
@@ -269,7 +269,7 @@ private:
    void SaveFutureActionChoice();
 
 
-   AudacityProject  *mProject;
+   RustacityProject  *mProject;
    AliasedFileArray &mAliasedFiles;
    bool              mIsSaving;
    bool              mHasMissingFiles;
@@ -306,7 +306,7 @@ END_EVENT_TABLE()
 
 DependencyDialog::DependencyDialog(wxWindow *parent,
                                    wxWindowID id,
-                                   AudacityProject *project,
+                                   RustacityProject *project,
                                    AliasedFileArray &aliasedFiles,
                                    bool isSaving)
 : wxDialogWrapper(parent, id, XO("Project Depends on Other Audio Files"),
@@ -569,7 +569,7 @@ void DependencyDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
 {
    if (mIsSaving)
    {
-      int ret = AudacityMessageBox(
+      int ret = RustacityMessageBox(
          XO(
 "If you proceed, your project will not be saved to disk. Is this what you want?"),
          XO("Cancel Save"),
@@ -601,7 +601,7 @@ void DependencyDialog::SaveFutureActionChoice()
 // Checks for alias block files, modifies the project if the
 // user requests it, and returns true if the user continues.
 // Returns false only if the user clicks Cancel.
-bool ShowDependencyDialogIfNeeded(AudacityProject *project,
+bool ShowDependencyDialogIfNeeded(RustacityProject *project,
                                   bool isSaving)
 {
    auto pWindow = FindProjectFrame( project );
@@ -623,7 +623,7 @@ XO("Your project is self-contained; it does not depend on any external audio fil
 is needed to keep their external dependencies in the right place.\n\
 New projects will be self-contained and are less risky.");
 #endif
-         AudacityMessageBox(
+         RustacityMessageBox(
             msg,
             XO("Dependency Check"),
             wxOK | wxICON_INFORMATION,

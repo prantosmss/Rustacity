@@ -12,13 +12,13 @@
 				<string>aup</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>AudacityProject.icns</string>
+			<string>RustacityProject.icns</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>application/x-audacity-project</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>Audacity Project</string>
+			<string>Rustacity Project</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>auDp</string>
@@ -35,7 +35,7 @@
 				<string>wave</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>AudacityWAV.icns</string>
+			<string>RustacityWAV.icns</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>audio/wav</string>
@@ -61,7 +61,7 @@
 				<string>aifc</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>AudacityAIFF.icns</string>
+			<string>RustacityAIFF.icns</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>audio/aiff</string>
@@ -83,7 +83,7 @@
 				<string>au</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>AudacityAU.icns</string>
+			<string>RustacityAU.icns</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>audio/au</string>
@@ -105,7 +105,7 @@
 				<string>mp3</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>AudacityMP3.icns</string>
+			<string>RustacityMP3.icns</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>audio/mpeg</string>
@@ -137,7 +137,7 @@
 				<string>ogg</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>AudacityOGG.icns</string>
+			<string>RustacityOGG.icns</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>audio/ogg</string>
@@ -167,7 +167,7 @@
 				<string>flac</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>AudacityFLAC.icns</string>
+			<string>RustacityFLAC.icns</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>audio/flac</string>
@@ -207,7 +207,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>Rustacity version ${AUDACITY_INFO_VERSION}</string>
 	<key>CFBundleIconFile</key>
-	<string>Audacity.icns</string>
+	<string>Rustacity.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.rustacity.rustacity</string>
 	<key>CFBundleInfoDictionaryVersion</key>

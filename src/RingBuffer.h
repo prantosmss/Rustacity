@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   RingBuffer.h
 
@@ -8,8 +8,8 @@
 
 *******************************************************************/
 
-#ifndef __AUDACITY_RING_BUFFER__
-#define __AUDACITY_RING_BUFFER__
+#ifndef __RUSTACITY_RING_BUFFER__
+#define __RUSTACITY_RING_BUFFER__
 
 #include "SampleFormat.h"
 #include <atomic>
@@ -58,4 +58,4 @@ class RingBuffer {
    SampleBuffer  mBuffer;
 };
 
-#endif /*  __AUDACITY_RING_BUFFER__ */
+#endif /*  __RUSTACITY_RING_BUFFER__ */

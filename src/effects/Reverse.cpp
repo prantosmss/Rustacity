@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Reverse.cpp
 
@@ -14,7 +14,7 @@
 *//********************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Reverse.h"
 #include "LoadEffects.h"
 

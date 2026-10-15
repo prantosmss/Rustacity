@@ -1,6 +1,6 @@
 /**********************************************************************
 
-Audacity: A Digital Audio Editor
+Rustacity: A Digital Audio Editor
 
 NoteTrackControls.cpp
 
@@ -8,7 +8,7 @@ Paul Licameli split from TrackPanel.cpp
 
 **********************************************************************/
 
-#include "../../../../Audacity.h" // for USE_* macros
+#include "../../../../Rustacity.h" // for USE_* macros
 #ifdef USE_MIDI
 #include "NoteTrackControls.h"
 
@@ -40,7 +40,7 @@ NoteTrackControls::~NoteTrackControls()
 
 std::vector<UIHandlePtr> NoteTrackControls::HitTest
 (const TrackPanelMouseState & st,
- const AudacityProject *pProject)
+ const RustacityProject *pProject)
 {
    // Hits are mutually exclusive, results single
    std::vector<UIHandlePtr> results;
@@ -124,7 +124,7 @@ void NoteTrackMenuTable::OnChangeOctave(wxCommandEvent &event)
    const bool bDown = (OnDownOctaveID == event.GetId());
    pTrack->ShiftNoteRange((bDown) ? -12 : 12);
 
-   AudacityProject *const project = &mpData->project;
+   RustacityProject *const project = &mpData->project;
    ProjectHistory::Get( *project )
       .ModifyState(false);
    mpData->result = RefreshCode::RefreshAll;

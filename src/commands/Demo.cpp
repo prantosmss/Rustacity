@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Demo.cpp
 
@@ -9,7 +9,7 @@
 *******************************************************************//**
 
 \class DemoCommand
-\brief An AudacityCommand that does nothing but provide 
+\brief An RustacityCommand that does nothing but provide 
 parameters.  It is for development purposes.
 
 *//****************************************************************//**
@@ -19,7 +19,7 @@ parameters.  It is for development purposes.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Demo.h"
 #include "LoadCommands.h"
 
@@ -29,7 +29,7 @@ parameters.  It is for development purposes.
 
 #include "../Shuttle.h"
 #include "../ShuttleGui.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/valnum.h"
 #include "../commands/CommandContext.h"
 

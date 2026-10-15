@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ToolManager.h
 
@@ -10,8 +10,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_TOOLMANAGER__
-#define __AUDACITY_TOOLMANAGER__
+#ifndef __RUSTACITY_TOOLMANAGER__
+#define __RUSTACITY_TOOLMANAGER__
 
 #include <functional>
 
@@ -35,7 +35,7 @@ class wxTimer;
 class wxTimerEvent;
 class wxWindow;
 
-class AudacityProject;
+class RustacityProject;
 class ProjectWindow;
 class ToolFrame;
 
@@ -54,10 +54,10 @@ class ToolManager final
    using GetTopPanelHook = std::function< wxWindow*( wxWindow& ) >;
    static GetTopPanelHook SetGetTopPanelHook( const GetTopPanelHook& );
 
-   static ToolManager &Get( AudacityProject &project );
-   static const ToolManager &Get( const AudacityProject &project );
+   static ToolManager &Get( RustacityProject &project );
+   static const ToolManager &Get( const RustacityProject &project );
 
-   ToolManager( AudacityProject *parent, wxWindow *topDockParent );
+   ToolManager( RustacityProject *parent, wxWindow *topDockParent );
    ToolManager( const ToolManager & ) PROHIBITED;
    ToolManager &operator=( const ToolManager & ) PROHIBITED;
    ~ToolManager();
@@ -106,7 +106,7 @@ class ToolManager final
    void WriteConfig();
    void Updated();
 
-   AudacityProject *mParent;
+   RustacityProject *mParent;
    wxWindowRef mLastFocus{};
 
    ToolFrame *mDragWindow;
@@ -158,7 +158,7 @@ class ToolFrame final : public wxFrame
 {
 public:
 
-   ToolFrame( AudacityProject *parent, ToolManager *manager, ToolBar *bar, wxPoint pos );
+   ToolFrame( RustacityProject *parent, ToolManager *manager, ToolBar *bar, wxPoint pos );
 
    ~ToolFrame();
 
@@ -197,7 +197,7 @@ public:
 
 private:
 
-   AudacityProject *const mParent;
+   RustacityProject *const mParent;
    ToolManager *mManager;
    ToolBar *mBar;
    wxSize mMinSize;

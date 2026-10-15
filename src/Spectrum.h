@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Spectrum.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SPECTRUM__
-#define __AUDACITY_SPECTRUM__
+#ifndef __RUSTACITY_SPECTRUM__
+#define __RUSTACITY_SPECTRUM__
 
 #include "FFT.h"
 

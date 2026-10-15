@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   MeterToolBar.cpp
 
@@ -17,7 +17,7 @@
 *//*******************************************************************/
 
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "MeterToolBar.h"
 
 // For compilers that support precompilation, includes "wx/wx.h".
@@ -48,7 +48,7 @@ BEGIN_EVENT_TABLE( MeterToolBar, ToolBar )
 END_EVENT_TABLE()
 
 //Standard constructor
-MeterToolBar::MeterToolBar(AudacityProject &project, int type)
+MeterToolBar::MeterToolBar(RustacityProject &project, int type)
 : ToolBar(project, type, XO("Combined Meter"), wxT("CombinedMeter"), true)
 {
    if( mType == RecordMeterBarID ){
@@ -257,17 +257,17 @@ void MeterToolBar::SetDocked(ToolDock *dock, bool pushed) {
 }
 
 static RegisteredToolbarFactory factory1{ RecordMeterBarID,
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       return ToolBar::Holder{
          safenew MeterToolBar{ project, RecordMeterBarID } }; }
 };
 static RegisteredToolbarFactory factory2{ PlayMeterBarID,
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       return ToolBar::Holder{
          safenew MeterToolBar{ project, PlayMeterBarID } }; }
 };
 static RegisteredToolbarFactory factory3{ MeterBarID,
-   []( AudacityProject &project ){
+   []( RustacityProject &project ){
       return ToolBar::Holder{
          safenew MeterToolBar{ project, MeterBarID } }; }
 };

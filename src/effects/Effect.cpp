@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Effect.cpp
 
@@ -15,7 +15,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Effect.h"
 
 #include "../Experimental.h"
@@ -42,7 +42,7 @@
 #include "../tracks/playabletrack/wavetrack/ui/WaveTrackView.h"
 #include "../tracks/playabletrack/wavetrack/ui/WaveTrackViewConstants.h"
 #include "../widgets/NumericTextCtrl.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ErrorDialog.h"
 
 #include <unordered_map>
@@ -175,7 +175,7 @@ wxString Effect::GetVersion()
       return mClient->GetVersion();
    }
 
-   return AUDACITY_VERSION_STRING;
+   return RUSTACITY_VERSION_STRING;
 }
 
 TranslatableString Effect::GetDescription()
@@ -690,7 +690,7 @@ void Effect::ExportPresets()
    wxFFile f(path.GetFullPath(), wxT("wb"));
    if (!f.IsOpened())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Could not open file: \"%s\"").Format( path.GetFullPath() ),
          XO("Error Saving Effect Presets"),
          wxICON_EXCLAMATION,
@@ -701,7 +701,7 @@ void Effect::ExportPresets()
    f.Write(params);
    if (f.Error())
    {
-      AudacityMessageBox(
+      RustacityMessageBox(
          XO("Error writing to file: \"%s\"").Format( path.GetFullPath() ),
          XO("Error Saving Effect Presets"),
          wxICON_EXCLAMATION,
@@ -1695,7 +1695,7 @@ bool Effect::ProcessTrack(int count,
       {
          processed = ProcessBlock(inBufPos.get(), outBufPos.get(), curBlockSize);
       }
-      catch( const AudacityException & WXUNUSED(e) )
+      catch( const RustacityException & WXUNUSED(e) )
       {
          // PRL: Bug 437:
          // Pass this along to our application-level handler
@@ -2072,7 +2072,7 @@ void Effect::CopyInputTracks(bool allSyncLockSelected)
    mOMap.clear();
 
    mOutputTracks = TrackList::Create(
-      const_cast<AudacityProject*>( FindProject() ) // how to remove this const_cast?
+      const_cast<RustacityProject*>( FindProject() ) // how to remove this const_cast?
   );
 
    auto trackRange = mTracks->Any() +
@@ -2273,7 +2273,7 @@ void Effect::ReplaceProcessedTracks(const bool bGoodResult)
    nEffectsDone++;
 }
 
-const AudacityProject *Effect::FindProject() const
+const RustacityProject *Effect::FindProject() const
 {
    if (!inputTracks())
       return nullptr;
@@ -2486,6 +2486,6 @@ int Effect::MessageBox( const TranslatableString& message,
    auto title = titleStr.empty()
       ? GetName()
       : XO("%s: %s").Format( GetName(), titleStr );
-   return AudacityMessageBox( message, title, style, mUIParent );
+   return RustacityMessageBox( message, title, style, mUIParent );
 }
 

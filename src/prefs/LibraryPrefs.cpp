@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LibraryPrefs.cpp
 
@@ -16,7 +16,7 @@ MP3 and FFmpeg encoding libraries.
 
 *//*******************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 #include "LibraryPrefs.h"
 
 #include "../Experimental.h"
@@ -28,7 +28,7 @@ MP3 and FFmpeg encoding libraries.
 #include "../FFmpeg.h"
 #include "../export/ExportMP3.h"
 #include "../widgets/HelpSystem.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -226,7 +226,7 @@ void LibraryPrefs::OnFFmpegFindButton(wxCommandEvent & WXUNUSED(event))
 
    // Libs are fine, don't show "locate" dialog unless user really wants it
    if (!locate) {
-      int response = AudacityMessageBox(
+      int response = RustacityMessageBox(
          XO(
 "Audacity has automatically detected valid FFmpeg libraries.\nDo you still want to locate them manually?"),
          XO("Success"),
@@ -264,7 +264,7 @@ bool LibraryPrefs::Commit()
 #if !defined(DISABLE_DYNAMIC_LOADING_FFMPEG) || !defined(DISABLE_DYNAMIC_LOADING_LAME)
 namespace{
 PrefsPanel::Registration sAttachment{ "Library",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew LibraryPrefs(parent, winid);

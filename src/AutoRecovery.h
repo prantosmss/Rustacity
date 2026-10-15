@@ -1,6 +1,6 @@
 /**********************************************************************
 
-   Audacity: A Digital Audio Editor
+   Rustacity: A Digital Audio Editor
    Audacity(R) is copyright (c) 1999-2010 Audacity Team.
    License: GPL v2.  See License.txt.
 
@@ -8,18 +8,18 @@
 
 *******************************************************************/
 
-#ifndef __AUDACITY_AUTORECOVERY__
-#define __AUDACITY_AUTORECOVERY__
+#ifndef __RUSTACITY_AUTORECOVERY__
+#define __RUSTACITY_AUTORECOVERY__
 
 #include "xml/XMLTagHandler.h"
 
 #include <wx/mstream.h> // member variables
 
 #include <unordered_map>
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 class wxFFile;
-class AudacityProject;
+class RustacityProject;
 
 //
 // XML Handler for a <recordingrecovery> tag
@@ -27,7 +27,7 @@ class AudacityProject;
 class RecordingRecoveryHandler final : public XMLTagHandler
 {
 public:
-   RecordingRecoveryHandler(AudacityProject* proj);
+   RecordingRecoveryHandler(RustacityProject* proj);
    bool HandleXMLTag(const wxChar *tag, const wxChar **attrs) override;
    void HandleXMLEndTag(const wxChar *tag) override;
    XMLTagHandler *HandleXMLChild(const wxChar *tag) override;
@@ -38,7 +38,7 @@ private:
 
    int FindTrack() const;
 
-   AudacityProject* mProject;
+   RustacityProject* mProject;
    int mChannel;
    int mNumChannels;
    int mAutoSaveIdent;
@@ -54,8 +54,8 @@ private:
 using NameMap = std::unordered_map<wxString, short>;
 using IdMap = std::unordered_map<short, wxString>;
 
-// This class's overrides do NOT throw AudacityException.
-class AUDACITY_DLL_API AutoSaveFile final : public XMLWriter
+// This class's overrides do NOT throw RustacityException.
+class RUSTACITY_DLL_API AutoSaveFile final : public XMLWriter
 {
 public:
 

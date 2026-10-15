@@ -6,10 +6,10 @@
 //
 //
 
-#ifndef __AUDACITY_OVERLAY__
-#define __AUDACITY_OVERLAY__
+#ifndef __RUSTACITY_OVERLAY__
+#define __RUSTACITY_OVERLAY__
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 
 #include <utility>
 

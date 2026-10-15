@@ -12,7 +12,7 @@
 \brief Contains definitions for Command, DecoratedCommand,
 ApplyAndSendResponse, and CommandImplementation classes.  These are
 remnants of Dan Horgans external scripting commands.  We now use 
-AudacityCommand and a shuttle system.  This allows commands to be used
+RustacityCommand and a shuttle system.  This allows commands to be used
 from within macros too, to have settings dialogs, using ShuttleGui and
 without need for validators.
 
@@ -22,7 +22,7 @@ Here's the doxygen for the still-remaining going-away classes.
 \class BatchEvalCommandType
 \brief The <something>CommandType classes are classes which are going 
 away.  They all provided a BuildSignature (what parameters they accept)
-and Name, but that is now replaced by the AudacityCommand interface.  
+and Name, but that is now replaced by the RustacityCommand interface.  
 
 We in effect merge the <something>CommandType classes into the 
 <something>Command classes.
@@ -30,7 +30,7 @@ We in effect merge the <something>CommandType classes into the
 \class MessageCommandType
 \brief The <something>CommandType classes are classes which are going 
 away.  They all provided a BuildSignature (what parameters they accept)
-and Name, but that is now replaced by the AudacityCommand interface.  
+and Name, but that is now replaced by the RustacityCommand interface.  
 
 We in effect merge the <something>CommandType classes into the 
 <something>Command classes.
@@ -75,7 +75,7 @@ classes derived from it.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "Command.h"
 
 #include <map>
@@ -89,7 +89,7 @@ classes derived from it.
 
 #include "CommandContext.h"
 
-#include "../AudacityException.h"
+#include "../RustacityException.h"
 
 
 
@@ -170,7 +170,7 @@ bool ApplyAndSendResponse::Apply()
 }
 
 CommandImplementation::CommandImplementation(
-  AudacityProject &project, OldStyleCommandType &type)
+  RustacityProject &project, OldStyleCommandType &type)
 :  OldStyleCommand{ project },
    mType(type),
    mParams(type.GetSignature().GetDefaults()),

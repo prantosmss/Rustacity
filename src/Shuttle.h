@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Shuttle.h
 
@@ -8,8 +8,8 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_SHUTTLE__
-#define __AUDACITY_SHUTTLE__
+#ifndef __RUSTACITY_SHUTTLE__
+#define __RUSTACITY_SHUTTLE__
 
 #include "../include/audacity/ComponentInterface.h"
 

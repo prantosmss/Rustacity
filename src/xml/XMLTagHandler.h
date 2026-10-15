@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   XMLTagHandler.h
 
@@ -15,14 +15,14 @@
   input values from XML files.
 
 **********************************************************************/
-#ifndef __AUDACITY_XML_TAG_HANDLER__
-#define __AUDACITY_XML_TAG_HANDLER__
+#ifndef __RUSTACITY_XML_TAG_HANDLER__
+#define __RUSTACITY_XML_TAG_HANDLER__
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #include <stdio.h>
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 #include "XMLWriter.h"
 class XMLValueChecker
@@ -77,7 +77,7 @@ public:
 };
 
 
-class AUDACITY_DLL_API XMLTagHandler /* not final */ {
+class RUSTACITY_DLL_API XMLTagHandler /* not final */ {
  public:
    XMLTagHandler(){};
    virtual ~XMLTagHandler(){};
@@ -116,5 +116,5 @@ class AUDACITY_DLL_API XMLTagHandler /* not final */ {
    XMLTagHandler *ReadXMLChild(const char *tag);
 };
 
-#endif // define __AUDACITY_XML_TAG_HANDLER__
+#endif // define __RUSTACITY_XML_TAG_HANDLER__
 

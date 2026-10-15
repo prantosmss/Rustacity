@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   WarningsPrefs.cpp
 
@@ -17,7 +17,7 @@
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "WarningsPrefs.h"
 
 #include <wx/defs.h>
@@ -111,7 +111,7 @@ bool WarningsPrefs::Commit()
 
 namespace{
 PrefsPanel::Registration sAttachment{ "Warnings",
-   [](wxWindow *parent, wxWindowID winid, AudacityProject *)
+   [](wxWindow *parent, wxWindowID winid, RustacityProject *)
    {
       wxASSERT(parent); // to justify safenew
       return safenew WarningsPrefs(parent, winid);

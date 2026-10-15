@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   LangChoice.cpp
 
@@ -15,7 +15,7 @@ of languages for Audacity.
 *//*******************************************************************/
 
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "LangChoice.h"
 
 #include <wx/defs.h>
@@ -27,7 +27,7 @@ of languages for Audacity.
 
 #include "Languages.h"
 #include "ShuttleGui.h"
-#include "widgets/AudacityMessageBox.h"
+#include "widgets/RustacityMessageBox.h"
 #include "widgets/wxPanelWrapper.h"
 
 class LangChoiceDialog final : public wxDialogWrapper {
@@ -127,7 +127,7 @@ void LangChoiceDialog::OnOk(wxCommandEvent & WXUNUSED(event))
                  mLang,
                  sname,
                  slang);
-      if ( wxNO == AudacityMessageBox( msg, XO("Confirm"), wxYES_NO ) ) {
+      if ( wxNO == RustacityMessageBox( msg, XO("Confirm"), wxYES_NO ) ) {
          return;
       }
    }

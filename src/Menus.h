@@ -1,16 +1,16 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Menus.h
 
   Dominic Mazzoni
 
 **********************************************************************/
-#ifndef __AUDACITY_MENUS__
-#define __AUDACITY_MENUS__
+#ifndef __RUSTACITY_MENUS__
+#define __RUSTACITY_MENUS__
 
-#include "audacity/Types.h"
+#include "rustacity/Types.h"
 
 #include <wx/string.h> // member variable
 #include "Prefs.h"
@@ -19,7 +19,7 @@
 
 class wxArrayString;
 class wxCommandEvent;
-class AudacityProject;
+class RustacityProject;
 class CommandContext;
 class CommandManager;
 class LabelTrack;
@@ -42,8 +42,8 @@ class MenuCreator
 public:
    MenuCreator();
    ~MenuCreator();
-   void CreateMenusAndCommands(AudacityProject &project);
-   void RebuildMenuBar(AudacityProject &project);
+   void CreateMenusAndCommands(RustacityProject &project);
+   void RebuildMenuBar(RustacityProject &project);
 
    static void RebuildAllMenuBars();
 
@@ -63,19 +63,19 @@ class MenuManager final
 {
 public:
 
-   static MenuManager &Get( AudacityProject &project );
-   static const MenuManager &Get( const AudacityProject &project );
+   static MenuManager &Get( RustacityProject &project );
+   static const MenuManager &Get( const RustacityProject &project );
 
    explicit
-   MenuManager( AudacityProject &project );
+   MenuManager( RustacityProject &project );
    MenuManager( const MenuManager & ) PROHIBITED;
    MenuManager &operator=( const MenuManager & ) PROHIBITED;
    ~MenuManager();
 
    static void Visit( ToolbarMenuVisitor &visitor );
 
-   static void ModifyUndoMenuItems(AudacityProject &project);
-   static void ModifyToolbarMenus(AudacityProject &project);
+   static void ModifyUndoMenuItems(RustacityProject &project);
+   static void ModifyToolbarMenus(RustacityProject &project);
    // Calls ModifyToolbarMenus() on all projects
    static void ModifyAllProjectToolbarMenus();
 
@@ -101,7 +101,7 @@ private:
 
    void OnUndoRedo( wxCommandEvent &evt );
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
 public:
    // 0 is grey out, 1 is Autoselect, 2 is Give warnings.

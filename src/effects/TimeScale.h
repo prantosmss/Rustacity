@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   TimeScale.h
 
@@ -8,10 +8,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_EFFECT_TIMESCALE__
-#define __AUDACITY_EFFECT_TIMESCALE__
+#ifndef __RUSTACITY_EFFECT_TIMESCALE__
+#define __RUSTACITY_EFFECT_TIMESCALE__
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #if USE_SBSMS
 
@@ -105,6 +105,6 @@ private:
    DECLARE_EVENT_TABLE()
 };
 
-#endif // __AUDACITY_EFFECT_TIMESCALE
+#endif // __RUSTACITY_EFFECT_TIMESCALE
 
 #endif // USE_SBSMS

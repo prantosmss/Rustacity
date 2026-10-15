@@ -21,7 +21,7 @@ system by constructing BatchCommandEval objects.
 
 *//*******************************************************************/
 
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "CommandBuilder.h"
 
 #include "CommandDirectory.h"
@@ -31,13 +31,13 @@ system by constructing BatchCommandEval objects.
 #include "../Shuttle.h"
 
 CommandBuilder::CommandBuilder(
-   AudacityProject *project, const wxString &cmdString)
+   RustacityProject *project, const wxString &cmdString)
    : mValid(false)
 {
    BuildCommand(project, cmdString);
 }
 
-CommandBuilder::CommandBuilder(AudacityProject *project,
+CommandBuilder::CommandBuilder(RustacityProject *project,
    const wxString &cmdName, const wxString &params)
    : mValid(false)
 {
@@ -82,7 +82,7 @@ void CommandBuilder::Success(const OldStyleCommandPointer &cmd)
    mValid = true;
 }
 
-void CommandBuilder::BuildCommand(AudacityProject *project,
+void CommandBuilder::BuildCommand(RustacityProject *project,
                                   const wxString &cmdName,
                                   const wxString &cmdParamsArg)
 {
@@ -188,7 +188,7 @@ void CommandBuilder::BuildCommand(AudacityProject *project,
 }
 
 void CommandBuilder::BuildCommand(
-   AudacityProject *project, const wxString &cmdStringArg)
+   RustacityProject *project, const wxString &cmdStringArg)
 {
    wxString cmdString(cmdStringArg);
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   DeviceChange.h
 
@@ -8,10 +8,10 @@
 
 **********************************************************************/
 
-#ifndef __AUDACITY_DEVICECHANGE_H__
-#define __AUDACITY_DEVICECHANGE_H__
+#ifndef __RUSTACITY_DEVICECHANGE_H__
+#define __RUSTACITY_DEVICECHANGE_H__
 
-#include "Audacity.h" // for HAVE_LIBUDEV_H
+#include "Rustacity.h" // for HAVE_LIBUDEV_H
 
 #include "Experimental.h"
 

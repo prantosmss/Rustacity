@@ -1,6 +1,6 @@
 /**********************************************************************
 
- Audacity: A Digital Audio Editor
+ Rustacity: A Digital Audio Editor
 
  PlayableTrackControls.cpp
 
@@ -8,8 +8,8 @@
 
  **********************************************************************/
 
-#ifndef __AUDACITY_PLAYABLE_TRACK_CONTROLS__
-#define __AUDACITY_PLAYABLE_TRACK_CONTROLS__
+#ifndef __RUSTACITY_PLAYABLE_TRACK_CONTROLS__
+#define __RUSTACITY_PLAYABLE_TRACK_CONTROLS__
 
 #include "../../ui/CommonTrackControls.h"
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   Profiler.cpp
 
@@ -20,7 +20,7 @@ but it will probably work fine if you use it on a high level.
 
 *//*******************************************************************/
 
-#include "Audacity.h"
+#include "Rustacity.h"
 #include "Profiler.h"
 
 #include <stdio.h>
@@ -33,7 +33,7 @@ Profiler::~Profiler()
    if(mTasks.size())
    {
       //print everything out.  append to a log.
-      FILE* log = fopen("AudacityProfilerLog.txt", "a");
+      FILE* log = fopen("RustacityProfilerLog.txt", "a");
       time_t now;
 
       time(&now);

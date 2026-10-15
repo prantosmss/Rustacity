@@ -1,4 +1,4 @@
-#include "../Audacity.h"
+#include "../Rustacity.h"
 #include "../Experimental.h"
 
 #include <wx/bmpbuttn.h>
@@ -7,7 +7,7 @@
 
 #include "../AboutDialog.h"
 #include "../AllThemeResources.h"
-#include "../AudacityLogger.h"
+#include "../RustacityLogger.h"
 #include "../AudioIOBase.h"
 #include "../CommonCommandFlags.h"
 #include "../CrashReport.h"
@@ -24,7 +24,7 @@
 #include "../commands/CommandContext.h"
 #include "../commands/CommandManager.h"
 #include "../prefs/PrefsDialog.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/HelpSystem.h"
 
 #if defined(EXPERIMENTAL_CRASH_REPORT)
@@ -35,7 +35,7 @@
 namespace {
 
 void ShowDiagnostics(
-   AudacityProject &project, const wxString &info,
+   RustacityProject &project, const wxString &info,
    const TranslatableString &description, const wxString &defaultPath,
    bool fixedWidth = false)
 {
@@ -81,7 +81,7 @@ void ShowDiagnostics(
       {
          if (!text->SaveFile(fName))
          {
-            AudacityMessageBox(
+            RustacityMessageBox(
                XO("Unable to save %s").Format( description ),
                fileDialogTitle);
          }
@@ -99,7 +99,7 @@ void ShowDiagnostics(
 class QuickFixDialog : public wxDialogWrapper
 {
 public: 
-   QuickFixDialog(wxWindow * pParent, AudacityProject &project);
+   QuickFixDialog(wxWindow * pParent, RustacityProject &project);
    void Populate();
    void PopulateOrExchange(ShuttleGui & S);
    void AddStuck( ShuttleGui & S, bool & bBool, wxString Pref,
@@ -112,7 +112,7 @@ public:
 
    wxString StringFromEvent( wxCommandEvent &event );
 
-   AudacityProject &mProject;
+   RustacityProject &mProject;
 
    int mItem;
    bool mbSyncLocked;
@@ -133,7 +133,7 @@ BEGIN_EVENT_TABLE(QuickFixDialog, wxDialogWrapper)
    EVT_COMMAND_RANGE(HelpButtonID, FakeButtonID-1, wxEVT_BUTTON,  QuickFixDialog::OnHelp)
 END_EVENT_TABLE();
 
-QuickFixDialog::QuickFixDialog(wxWindow * pParent, AudacityProject &project) :
+QuickFixDialog::QuickFixDialog(wxWindow * pParent, RustacityProject &project) :
       wxDialogWrapper(pParent, wxID_ANY, XO("Do you have these problems?"),
             wxDefaultPosition, wxDefaultSize,
             wxDEFAULT_DIALOG_STYLE )
@@ -351,7 +351,7 @@ void OnMidiDeviceInfo(const CommandContext &context)
 
 void OnShowLog( const CommandContext &context )
 {
-   auto logger = AudacityLogger::Get();
+   auto logger = RustacityLogger::Get();
    if (logger) {
       logger->Show();
    }
@@ -459,7 +459,7 @@ void OnAbout(const CommandContext &context)
 
 // Only does the update checks if it's an ALPHA build and not disabled by
 // preferences.
-void MayCheckForUpdates(AudacityProject &project)
+void MayCheckForUpdates(RustacityProject &project)
 {
 #ifdef IS_ALPHA
    OnCheckForUpdates(project);
@@ -477,9 +477,9 @@ void OnHelpWelcome(const CommandContext &context)
 
 } // namespace
 
-static CommandHandlerObject &findCommandHandler(AudacityProject &) {
+static CommandHandlerObject &findCommandHandler(RustacityProject &) {
    // Handler is not stateful.  Doesn't need a factory registered with
-   // AudacityProject.
+   // RustacityProject.
    static HelpActions::Handler instance;
    return instance;
 };

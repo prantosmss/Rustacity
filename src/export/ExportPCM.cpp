@@ -1,6 +1,6 @@
 /**********************************************************************
 
-  Audacity: A Digital Audio Editor
+  Rustacity: A Digital Audio Editor
 
   ExportPCM.cpp
 
@@ -8,7 +8,7 @@
 
 **********************************************************************/
 
-#include "../Audacity.h" // for USE_* macros
+#include "../Rustacity.h" // for USE_* macros
 
 #include <wx/defs.h>
 
@@ -31,7 +31,7 @@
 #include "../ShuttleGui.h"
 #include "../Tags.h"
 #include "../Track.h"
-#include "../widgets/AudacityMessageBox.h"
+#include "../widgets/RustacityMessageBox.h"
 #include "../widgets/ErrorDialog.h"
 #include "../widgets/ProgressDialog.h"
 #include "../wxFileNameWrapper.h"
@@ -381,7 +381,7 @@ void ExportPCMOptions::GetEncodings(int enc)
 void ExportPCMOptions::SendSuffixEvent()
 {
    // Synchronously process a change in suffix.
-   wxCommandEvent evt(AUDACITY_FILE_SUFFIX_EVENT, GetId());
+   wxCommandEvent evt(RUSTACITY_FILE_SUFFIX_EVENT, GetId());
    evt.SetEventObject(this);
    evt.SetString(sf_header_extension(mType));
    ProcessWindowEvent(evt);
@@ -400,7 +400,7 @@ public:
    // Required
 
    void OptionsCreate(ShuttleGui &S, int format) override;
-   ProgressResult Export(AudacityProject *project,
+   ProgressResult Export(RustacityProject *project,
                          std::unique_ptr<ProgressDialog> &pDialog,
                          unsigned channels,
                          const wxFileNameWrapper &fName,
@@ -418,7 +418,7 @@ public:
 private:
    void ReportTooBigError(wxWindow * pParent);
    ArrayOf<char> AdjustString(const wxString & wxStr, int sf_format);
-   bool AddStrings(AudacityProject *project, SNDFILE *sf, const Tags *tags, int sf_format);
+   bool AddStrings(RustacityProject *project, SNDFILE *sf, const Tags *tags, int sf_format);
    bool AddID3Chunk(
       const wxFileNameWrapper &fName, const Tags *tags, int sf_format);
 
@@ -474,7 +474,7 @@ void ExportPCM::ReportTooBigError(wxWindow * pParent)
  * @param subformat Control whether we are doing a "preset" export to a popular
  * file type, or giving the user full control over libsndfile.
  */
-ProgressResult ExportPCM::Export(AudacityProject *project,
+ProgressResult ExportPCM::Export(RustacityProject *project,
                                  std::unique_ptr<ProgressDialog> &pDialog,
                                  unsigned numChannels,
                                  const wxFileNameWrapper &fName,
@@ -550,12 +550,12 @@ ProgressResult ExportPCM::Export(AudacityProject *project,
       // Bug 46.  Trap here, as sndfile.c does not trap it properly.
       if( (numChannels != 1) && ((sf_format & SF_FORMAT_SUBMASK) == SF_FORMAT_GSM610) )
       {
-         AudacityMessageBox( XO("GSM 6.10 requires mono") );
+         RustacityMessageBox( XO("GSM 6.10 requires mono") );
          return ProgressResult::Cancelled;
       }
 
       if (sf_format == SF_FORMAT_WAVEX + SF_FORMAT_GSM610) {
-         AudacityMessageBox(
+         RustacityMessageBox(
             XO("WAVEX and GSM 6.10 formats are not compatible") );
          return ProgressResult::Cancelled;
       }
@@ -569,7 +569,7 @@ ProgressResult ExportPCM::Export(AudacityProject *project,
       if (!sf_format_check(&info))
          info.format = (info.format & SF_FORMAT_TYPEMASK);
       if (!sf_format_check(&info)) {
-         AudacityMessageBox( XO("Cannot export audio in this format.") );
+         RustacityMessageBox( XO("Cannot export audio in this format.") );
          return ProgressResult::Cancelled;
       }
       const auto path = fName.GetFullPath();
@@ -583,7 +583,7 @@ ProgressResult ExportPCM::Export(AudacityProject *project,
       }
 
       if (!sf) {
-         AudacityMessageBox( XO("Cannot export audio to %s").Format( path ) );
+         RustacityMessageBox( XO("Cannot export audio to %s").Format( path ) );
          return ProgressResult::Cancelled;
       }
       // Retrieve tags if not given a set
@@ -654,7 +654,7 @@ ProgressResult ExportPCM::Export(AudacityProject *project,
             if (static_cast<size_t>(samplesWritten) != numSamples) {
                char buffer2[1000];
                sf_error_str(sf.get(), buffer2, 1000);
-               AudacityMessageBox(
+               RustacityMessageBox(
                   XO(
                   /* i18n-hint: %s will be the error message from libsndfile, which
                    * is usually something unhelpful (and untranslated) like "system
@@ -676,13 +676,13 @@ ProgressResult ExportPCM::Export(AudacityProject *project,
              fileFormat == SF_FORMAT_WAVEX) {
             if (!AddStrings(project, sf.get(), metadata, sf_format)) {
                // TODO: more precise message
-               AudacityMessageBox( XO("Unable to export") );
+               RustacityMessageBox( XO("Unable to export") );
                return ProgressResult::Cancelled;
             }
          }
          if (0 != sf.close()) {
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             return ProgressResult::Cancelled;
          }
       }
@@ -695,7 +695,7 @@ ProgressResult ExportPCM::Export(AudacityProject *project,
          // Note: file has closed, and gets reopened and closed again here:
          if (!AddID3Chunk(fName, metadata, sf_format) ) {
             // TODO: more precise message
-            AudacityMessageBox( XO("Unable to export") );
+            RustacityMessageBox( XO("Unable to export") );
             return ProgressResult::Cancelled;
          }
 
@@ -789,7 +789,7 @@ ArrayOf<char> ExportPCM::AdjustString(const wxString & wxStr, int sf_format)
    return pDest;
 }
 
-bool ExportPCM::AddStrings(AudacityProject * WXUNUSED(project), SNDFILE *sf, const Tags *tags, int sf_format)
+bool ExportPCM::AddStrings(RustacityProject * WXUNUSED(project), SNDFILE *sf, const Tags *tags, int sf_format)
 {
    if (tags->HasTag(TAG_TITLE)) {
       auto ascii7Str = AdjustString(tags->GetTag(TAG_TITLE), sf_format);
