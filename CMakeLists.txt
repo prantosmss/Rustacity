@@ -263,6 +263,7 @@ check_include_file( "unistd.h" HAVE_UNISTD_H )
 check_include_file( "xmmintrin.h" HAVE_XMMINTRIN_H )
 check_include_file( "sys/param.h" HAVE_SYS_PARAM_H )
 check_include_file( "sys/stat.h" HAVE_SYS_STAT_H )
+check_include_file( "sys/time.h" HAVE_SYS_TIME_H )
 check_include_file( "sys/types.h" HAVE_SYS_TYPES_H )
 check_include_file( "sys/wait.h" HAVE_SYS_WAIT_H )
 
