@@ -93,7 +93,7 @@ hdiutil convert TMP.dmg -format UDZO -imagekey zlib-level=9 -o "$DMG.dmg"
 
 # Create zip version
 rm -rf "${DMG}/.background"
-rm -rf "${DMG}/Audacity.app/help/"
+rm -rf "${DMG}/Rustacity.app/help/"
 zip -r9 "${DMG}.zip" "${DMG}"
 
 # Cleanup

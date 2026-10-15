@@ -1,5 +1,5 @@
 #
-# CMake based build for Audacity
+# CMake based build for Rustacity
 #
 # Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
 #
@@ -141,7 +141,7 @@ jobs:
         # Convert to CMake path
         export WXWIN="${WXWIN//\\//}"
 
-        # Configure Audacity
+        # Configure Rustacity
         #
         # The wxWidgets_USE_REL_AND_DBG is needed because,
         # on Github, we only build the Release version of
@@ -156,10 +156,10 @@ jobs:
               -A ${{matrix.config.platform}} \
               -D wxWidgets_USE_REL_AND_DBG=NO
 
-        # Build Audacity
+        # Build Rustacity
         cmake --build build --config Release --verbose
 
-        # "Install" Audacity
+        # "Install" Rustacity
         mkdir -p "${DEST}"
         cp -a build/bin/Release/* "${DEST}"
         rm -f "${DEST}"/{*.iobj,*.ipdb}
@@ -226,15 +226,15 @@ jobs:
         # "Install" wxWidgets
         sudo cp -a "${WXWIN}"/usr/* /usr
 
-        # Configure Audacity
+        # Configure Rustacity
         cmake -S . \
               -B build \
               -G "${{matrix.config.generator}}"
 
-        # Build Audacity
+        # Build Rustacity
         cmake --build build --config Release
 
-        # "Install" Audacity
+        # "Install" Rustacity
         mkdir -p "${DEST}"
         cp -a build/bin/Release/ "${DEST}"
 
@@ -281,35 +281,35 @@ jobs:
         # "Install" wxWidgets
         sudo cp -a "${WXWIN}"/* /
 
-        # Configure Audacity
+        # Configure Rustacity
         cmake -S . \
               -B build \
               -G "${{matrix.config.generator}}"
 
-        # Build Audacity
+        # Build Rustacity
         cmake --build build --config Release
 
-        # "Install" Audacity
+        # "Install" Rustacity
         cmake --install build --config Release --prefix "${DEST}"
 
         # Create the lib directory
         mkdir -p ${DEST}/lib
 
         # Copy over wxWidgets libs
-        ldd ${DEST}/bin/audacity
-        for lib in $(ldd ${DEST}/bin/audacity | awk '/libwx/{print $3}')
+        ldd ${DEST}/bin/rustacity
+        for lib in $(ldd ${DEST}/bin/rustacity | awk '/libwx/{print $3}')
         do
            echo ${lib}
            ldd ${lib} | awk '/libwx/{print $3}'
         done | sort -u | xargs cp -n -H -t ${DEST}/lib
 
         # Create wrapper script
-        cat >"${DEST}/audacity" <<"EOF"
+        cat >"${DEST}/rustacity" <<"EOF"
         #!/bin/sh
         export LD_LIBRARY_PATH="${0%/*}/lib:${LD_LIBRARY_PATH}"
-        "${0%/*}/bin/audacity"
+        "${0%/*}/bin/rustacity"
         EOF
-        chmod +x "${DEST}/audacity"
+        chmod +x "${DEST}/rustacity"
 
         # Create artifact (zipped as Github actions don't preserve permissions)
         cmake -E tar c "${GITHUB_SHA}.zip" --format=zip "${DEST}"

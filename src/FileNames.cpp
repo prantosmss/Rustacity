@@ -236,9 +236,15 @@ FilePath FileNames::AutoSaveDir()
 // the path is 'Audacity'.
 wxString FileNames::LowerCaseAppNameInPath( const wxString & dirIn){
    wxString dir = dirIn;
-   // BUG 1577 Capitalisation of Audacity in path...
-   if( dir.EndsWith( "Audacity" ) )
+   // BUG 1577 Capitalisation of the app name in path...
+   if( dir.EndsWith( "Rustacity" ) )
    {
+      int nChars = dir.length() - wxString( "Rustacity" ).length();
+      dir = dir.Left( nChars ) + "rustacity";
+   }
+   else if( dir.EndsWith( "Audacity" ) )
+   {
+      // Legacy Audacity data directory
       int nChars = dir.length() - wxString( "Audacity" ).length();
       dir = dir.Left( nChars ) + "audacity";
    }

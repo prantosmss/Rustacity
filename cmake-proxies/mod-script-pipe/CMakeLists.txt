@@ -40,7 +40,7 @@ list( APPEND LOPTS
 
 list( APPEND LIBRARIES
    PRIVATE
-      Audacity
+      Rustacity
       $<$<PLATFORM_ID:Windows>:wxWidgets>      
 )
 

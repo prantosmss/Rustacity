@@ -114,10 +114,10 @@ BUILDING FROM THE COMMAND LINE
 
       xcodebuild --configuration Release
 
-   The "Audacity.app" bundle will be in the "bin/Release" subdirectory of your
+   The "Rustacity.app" bundle will be in the "bin/Release" subdirectory of your
    "build" folder, so you can start it via Finder or:
 
-      open bin/Release/Audacity.app
+      open bin/Release/Rustacity.app
 
 Notes:
 

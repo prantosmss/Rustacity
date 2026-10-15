@@ -7,7 +7,7 @@
 ;
 
 ; This requires that the ISS Preprocessor be installed
-#define AppExe "..\release\audacity.exe" 
+#define AppExe "..\release\rustacity.exe" 
 #define AppMajor ""
 #define AppMinor ""
 #define AppRev ""
@@ -59,7 +59,7 @@ DisableDirPage=no
 ; Always warn if dir exists, because we'll overwrite previous Audacity.
 DirExistsWarning=yes
 DisableProgramGroupPage=yes
-UninstallDisplayIcon="{app}\audacity.exe"
+UninstallDisplayIcon="{app}\rustacity.exe"
 
 ; No longer force them to accept the license, just display it.   LicenseFile=..\LICENSE.txt
 InfoBeforeFile=".\audacity_InnoWizard_InfoBefore.rtf"
@@ -133,8 +133,8 @@ Source: "..\release\plug-ins\*"; DestDir: "{app}\Plug-Ins\"; Flags: ignoreversio
 Source: "..\release\modules\mod-script-pipe.dll"; DestDir: "{app}\modules\"; Flags: ignoreversion
 
 [Icons]
-Name: "{commonprograms}\Rustacity"; Filename: "{app}\audacity.exe"
-Name: "{commondesktop}\Rustacity"; Filename: "{app}\audacity.exe"; Tasks: desktopicon
+Name: "{commonprograms}\Rustacity"; Filename: "{app}\rustacity.exe"
+Name: "{commondesktop}\Rustacity"; Filename: "{app}\rustacity.exe"; Tasks: desktopicon
 
 [InstallDelete]
 ; Get rid of Audacity 1.0.0 stuff that's no longer used.
@@ -193,21 +193,21 @@ Type: files; Name: "{app}\Plug-Ins\crossfadeout.ny"
 Type: files; Name: "{app}\Plug-Ins\clicktrack.ny"
                                             
 [Registry]
-; No longer allow user to choose whether to associate AUP file type with Audacity.
+; No longer allow user to choose whether to associate AUP file type with Rustacity.
 ; Leaving this one commented out example of the old way.
-; Root: HKCR; Subkey: ".AUP"; ValueType: string; ValueData: "Audacity.Project"; Flags: createvalueifdoesntexist uninsdeletekey; Tasks: associate_aup
-Root: HKCR; Subkey: ".AUP"; ValueType: string; ValueData: "Audacity.Project"; Flags: createvalueifdoesntexist uninsdeletekey;
-Root: HKCR; Subkey: "Audacity.Project\OpenWithList\audacity.exe"; Flags: createvalueifdoesntexist uninsdeletekey;
-Root: HKCR; Subkey: "Audacity.Project"; ValueType: string; ValueData: "Audacity Project File"; Flags: createvalueifdoesntexist uninsdeletekey;
-Root: HKCR; Subkey: "Audacity.Project\shell"; ValueType: string; ValueData: ""; Flags: createvalueifdoesntexist uninsdeletekey;
-Root: HKCR; Subkey: "Audacity.Project\shell\open"; Flags: createvalueifdoesntexist uninsdeletekey;
-Root: HKCR; Subkey: "Audacity.Project\shell\open\command"; ValueType: string; ValueData: """{app}\audacity.exe"" ""%1"""; Flags: createvalueifdoesntexist uninsdeletekey;
+; Root: HKCR; Subkey: ".AUP"; ValueType: string; ValueData: "Rustacity.Project"; Flags: createvalueifdoesntexist uninsdeletekey; Tasks: associate_aup
+Root: HKCR; Subkey: ".AUP"; ValueType: string; ValueData: "Rustacity.Project"; Flags: createvalueifdoesntexist uninsdeletekey;
+Root: HKCR; Subkey: "Rustacity.Project\OpenWithList\rustacity.exe"; Flags: createvalueifdoesntexist uninsdeletekey;
+Root: HKCR; Subkey: "Rustacity.Project"; ValueType: string; ValueData: "Rustacity Project File"; Flags: createvalueifdoesntexist uninsdeletekey;
+Root: HKCR; Subkey: "Rustacity.Project\shell"; ValueType: string; ValueData: ""; Flags: createvalueifdoesntexist uninsdeletekey;
+Root: HKCR; Subkey: "Rustacity.Project\shell\open"; Flags: createvalueifdoesntexist uninsdeletekey;
+Root: HKCR; Subkey: "Rustacity.Project\shell\open\command"; ValueType: string; ValueData: """{app}\rustacity.exe"" ""%1"""; Flags: createvalueifdoesntexist uninsdeletekey;
 
 ;The following would allow a following 'help' installer to know where to put the 'help' files.
-;Root: HKCR; Subkey: "Audacity.Project\Path";  ValueType: string; ValueData: {app}; Flags: createvalueifdoesntexist uninsdeletekey;
+;Root: HKCR; Subkey: "Rustacity.Project\Path";  ValueType: string; ValueData: {app}; Flags: createvalueifdoesntexist uninsdeletekey;
 
 [Run]
-Filename: "{app}\audacity.exe"; Description: "{cm:LaunchProgram,Rustacity}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\rustacity.exe"; Description: "{cm:LaunchProgram,Rustacity}"; Flags: nowait postinstall skipifsilent
 
 [Languages]
 ; NOTE: "0" in locale name will be translated to "@" when read by Audacity.

@@ -3,7 +3,7 @@
 
 /* define if Audacity is being installed under a name other than "audacity",
    so it can find the files it needs at runtime */
-#define AUDACITY_NAME "audacity"
+#define AUDACITY_NAME "rustacity"
 
 /* Define we are compiling Audacity itself, not an Audacity plug-in */
 #define BUILDING_AUDACITY 1
@@ -102,19 +102,19 @@
 #define LT_OBJDIR ".libs/"
 
 /* Name of package */
-#define PACKAGE "audacity"
+#define PACKAGE "rustacity"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT ""
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "audacity"
+#define PACKAGE_NAME "rustacity"
 
 /* Define to the full name and version of this package. */
 #define PACKAGE_STRING "audacity 2.0.6"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "audacity"
+#define PACKAGE_TARNAME "rustacity"
 
 /* Define to the home page for this package. */
 #define PACKAGE_URL ""

@@ -1,5 +1,5 @@
 # Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
-name: Build Audacity
+name: Build Rustacity
 
 on:
   push:
@@ -126,7 +126,7 @@ jobs:
             CD ..
         )
 
-        :: Build Audacity
+        :: Build Rustacity
         CD win
 
         :: Restore packages (for gettext)
@@ -136,7 +136,7 @@ jobs:
         msbuild audacity.sln /m /p:Configuration=Release /p:Platform=Win32
         IF NOT %ERRORLEVEL% == 0 EXIT %ERRORLEVEL%
 
-        :: "Install" Audacity
+        :: "Install" Rustacity
         MKDIR "%LONGHASH%"
         XCOPY Release "%LONGHASH%" /E /I /Q /Y
         XCOPY %WXWIN%\lib\vc_dll\*u_net_*.dll "%LONGHASH%" /E /I /Q /Y
@@ -188,7 +188,7 @@ jobs:
         # "Install" wxWidgets
         sudo cp -a "${WXROOT}"/* /
 
-        # Configure Audacity
+        # Configure Rustacity
         mkdir bld
         cd bld
         ../configure --with-lib-preference='local system'
@@ -211,15 +211,15 @@ jobs:
         # Create wrapper script
         #
         # (This is only needed if using our wxWidgets libs)
-        cat >"${DESTDIR}/audacity" <<"EOF"
+        cat >"${DESTDIR}/rustacity" <<"EOF"
         #!/bin/sh
         export LD_LIBRARY_PATH="${0%/*}:${LD_LIBRARY_PATH}"
-        "${0%/*}/audacity.bin"
+        "${0%/*}/rustacity.bin"
         EOF
-        chmod +x "${DESTDIR}/audacity"
+        chmod +x "${DESTDIR}/rustacity"
 
         # Copy over dist files
-        cp -a audacity "${DESTDIR}/audacity.bin"
+        cp -a rustacity "${DESTDIR}/rustacity.bin"
         cp -aL nyquist plug-ins "${DESTDIR}"
         mkdir "${DESTDIR}/help" "${DESTDIR}/locale/"
         cp -aL $(find locale/ -type d) "${DESTDIR}/locale/"
@@ -295,7 +295,7 @@ jobs:
         # "Install" wxWidgets
         sudo cp -a "${WXROOT}/usr/local" /usr/
 
-        # Build Audacity
+        # Build Rustacity
         cd mac
 
         # Temporary workaround until they can be incorporated into
@@ -306,12 +306,12 @@ jobs:
         xcodebuild -configuration Release64 install 
         cd ..
 
-        # "Install" Audacity
+        # "Install" Rustacity
         mkdir -p macos
-        cp -a /tmp/Audacity.dst/Audacity.app macos
+        cp -a /tmp/Rustacity.dst/Rustacity.app macos
         
         # Create artifact (zipped as Github actions don't preserve permissions)
-        cd "/tmp/Audacity.dst"
+        cd "/tmp/Rustacity.dst"
         zip -r9 "${GITHUB_WORKSPACE}/${LONGHASH}.zip" *
 
     # =========================================================================

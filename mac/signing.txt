@@ -26,7 +26,7 @@ with the following:
    eyes.
 
 4) Build the Release version of Audacity. You can follow the cmake_build.txt
-   instructions in this folder. Once complete, you should find "Audacity.app"
+   instructions in this folder. Once complete, you should find "Rustacity.app"
    in:
 
       audacity/bld/bin/Release

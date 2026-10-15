@@ -344,7 +344,7 @@ wxString GUIPrefs::SetLang( const wxString & lang )
    sLocale->AddCatalog(wxT("wxstd"));
 
    // Must match TranslationExists() in Languages.cpp
-   sLocale->AddCatalog("audacity");
+   sLocale->AddCatalog("rustacity");
 
    // Initialize internationalisation (number formats etc.)
    //

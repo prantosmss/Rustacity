@@ -1,5 +1,5 @@
 
-set( TARGET Audacity )
+set( TARGET Rustacity )
 set( TARGET_ROOT ${topdir}/src )
 
 message( STATUS "========== Configuring ${TARGET} ==========" )
@@ -1365,8 +1365,8 @@ source_group(
     PREFIX
         "CMake"
     FILES
-        ${_INTDIR}/CMakeFiles/Audacity.dir/cmake_pch.cxx
-        ${_INTDIR}/CMakeFiles/Audacity.dir/cmake_pch.hxx
+        ${_INTDIR}/CMakeFiles/Rustacity.dir/cmake_pch.cxx
+        ${_INTDIR}/CMakeFiles/Rustacity.dir/cmake_pch.hxx
 )
 
 target_sources( ${TARGET} PRIVATE ${HEADERS} ${SOURCES} ${RESOURCES} ${MAC_RESOURCES} ${WIN_RESOURCES} )
@@ -1383,9 +1383,9 @@ endif()
 if( NOT "${CMAKE_GENERATOR}" MATCHES "Xcode|Visual Studio*" )
    if( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
       install( FILES "${_DEST}/Info.plist"
-               DESTINATION "${CMAKE_INSTALL_BINDIR}/Audacity.app/Contents" )
+               DESTINATION "${CMAKE_INSTALL_BINDIR}/Rustacity.app/Contents" )
       install( PROGRAMS "${_EXEDIR}/${AUDACITY_NAME}" "${_EXEDIR}/Wrapper"
-               DESTINATION "${CMAKE_INSTALL_BINDIR}/Audacity.app/Contents/MacOS" )
+               DESTINATION "${CMAKE_INSTALL_BINDIR}/Rustacity.app/Contents/MacOS" )
    else()
       install( PROGRAMS "${_EXEDIR}/${AUDACITY_NAME}"
                TYPE BIN )

@@ -1,6 +1,6 @@
-* To install or reinstall Audacity, drag the "Audacity.app" icon in the
+* To install or reinstall Audacity, drag the "Rustacity.app" icon in the
    DMG window to the /Applications folder icon on the right. Alternatively,
-   drag the "Audacity.app" icon to any other location of your choosing. 
+   drag the "Rustacity.app" icon to any other location of your choosing. 
 
 * Do not double-click the "Audacity" icon in the DMG to launch Audacity 
    from there. 

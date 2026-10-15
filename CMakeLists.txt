@@ -78,7 +78,7 @@ if( CCACHE_PROGRAM )
 endif()
 
 # Our very own project
-project( Audacity )
+project( Rustacity )
 
 # Load our functions/macros
 include( AudacityFunctions )
@@ -176,14 +176,14 @@ if( CMAKE_GENERATOR MATCHES "Visual Studio" )
 endif()
 
 # Where the final product is stored
-set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/audacity )
-set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/audacity )
+set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/rustacity )
+set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/rustacity )
 set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
 
 # Set up RPATH handling
 set( CMAKE_SKIP_BUILD_RPATH FALSE )
 set( CMAKE_BUILD_WITH_INSTALL_RPATH FALSE )
-set( CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_FULL_LIBDIR}/audacity" )
+set( CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_FULL_LIBDIR}/rustacity" )
 set( CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE )
 set( CMAKE_MACOSX_RPATH FALSE )
 
@@ -354,15 +354,15 @@ string( REGEX REPLACE "/+$" "" _EXEDIR "${_EXEDIR}" )
 
 # Adjust them for the Mac
 if( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
-   set( _DEST "${_DEST}/Audacity.app/Contents" )
+   set( _DEST "${_DEST}/Rustacity.app/Contents" )
    set( _EXEDIR "${_DEST}/MacOS" )
 endif()
 
 set( _PREFIX "${CMAKE_INSTALL_PREFIX}" )
-set( _LIBDIR "${CMAKE_INSTALL_LIBDIR}/audacity" )
+set( _LIBDIR "${CMAKE_INSTALL_LIBDIR}/rustacity" )
 set( _RPATH "\$ORIGIN/../${_LIBDIR}" )
 set( _DATADIR "${CMAKE_INSTALL_DATADIR}" )
-set( _PKGDATA "${_DATADIR}/audacity/" )
+set( _PKGDATA "${_DATADIR}/rustacity/" )
 set( _MANDIR "${CMAKE_INSTALL_MANDIR}" )
 
 # Precreate the lib and lib64 directories so we can make then the same
@@ -376,11 +376,11 @@ if( NOT CMAKE_INSTALL_LIBDIR STREQUAL "lib" AND NOT EXISTS "${CMAKE_BINARY_DIR}/
    file( CREATE_LINK "${CMAKE_BINARY_DIR}/lib" "${CMAKE_BINARY_DIR}/lib64" SYMBOLIC )
 endif()
 
-# Define Audacity's name
+# Define Rustacity's name
 if( CMAKE_SYSTEM_NAME MATCHES "Darwin|Windows" )
-   set( AUDACITY_NAME "Audacity" )
+   set( AUDACITY_NAME "Rustacity" )
 else()
-   set( AUDACITY_NAME "audacity" )
+   set( AUDACITY_NAME "rustacity" )
 endif()
 
 # Extract the Audacity version information

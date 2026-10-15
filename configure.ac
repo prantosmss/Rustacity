@@ -102,11 +102,11 @@ dnl I feign at this monstrosity, but no one depends on this particular
 dnl feature but me, as Debian package maintainer, so no one else should
 dnl need to worry about understanding it...
 program_transform_name=`echo $program_transform_name | sed 's/\\$\\$/$/'`
-AUDACITY_NAME=`echo audacity | sed $program_transform_name`
+AUDACITY_NAME=`echo rustacity | sed $program_transform_name`
 
-if [[ "$AUDACITY_NAME" = "audacity" ]] ; then
-    AC_DEFINE(AUDACITY_NAME, "audacity",
-        [define if Audacity is being installed under a name other than "audacity",
+if [[ "$AUDACITY_NAME" = "rustacity" ]] ; then
+    AC_DEFINE(AUDACITY_NAME, "rustacity",
+        [define if Rustacity is being installed under a name other than "rustacity",
          so it can find the files it needs at runtime])
 else
     AC_DEFINE_UNQUOTED(AUDACITY_NAME, "$AUDACITY_NAME")
@@ -574,7 +574,7 @@ case "${host_os}" in
       PRECOMP_CFLAGS="-include AudacityHeaders.h"
       CONFIGHEADER="configunix.h"
       CXXFLAGS="-I\$(top_srcdir)/mac $CXXFLAGS"
-      EXTRATARGETS="../Audacity.app"
+      EXTRATARGETS="../Rustacity.app"
       if [[ "$use_audiounits" = "auto" ]] ; then
          use_audiounits="yes"
       fi

@@ -28,7 +28,7 @@ executable.
 #include <string.h>
 #include <unistd.h>
 
-static const char audacity[] = "Audacity";
+static const char audacity[] = "Rustacity";
 extern char **environ;
 
 int main(int argc, char *argv[])

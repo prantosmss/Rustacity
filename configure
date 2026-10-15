@@ -19021,11 +19021,11 @@ fi
 
 
 program_transform_name=`echo $program_transform_name | sed 's/\\$\\$/$/'`
-AUDACITY_NAME=`echo audacity | sed $program_transform_name`
+AUDACITY_NAME=`echo rustacity | sed $program_transform_name`
 
-if [ "$AUDACITY_NAME" = "audacity" ] ; then
+if [ "$AUDACITY_NAME" = "rustacity" ] ; then
 
-$as_echo "#define AUDACITY_NAME \"audacity\"" >>confdefs.h
+$as_echo "#define AUDACITY_NAME \"rustacity\"" >>confdefs.h
 
 else
     cat >>confdefs.h <<_ACEOF
@@ -23656,7 +23656,7 @@ case "${host_os}" in
       PRECOMP_CFLAGS="-include AudacityHeaders.h"
       CONFIGHEADER="configunix.h"
       CXXFLAGS="-I\$(top_srcdir)/mac $CXXFLAGS"
-      EXTRATARGETS="../Audacity.app"
+      EXTRATARGETS="../Rustacity.app"
       if [ "$use_audiounits" = "auto" ] ; then
          use_audiounits="yes"
       fi

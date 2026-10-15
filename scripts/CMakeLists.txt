@@ -50,7 +50,7 @@ list( APPEND EXCLUDES
    win
 )
 
-set( TLD "audacity-minsrc-${AUDACITY_DIST_VERSION}${AUDACITY_SUFFIX}" )
+set( TLD "rustacity-minsrc-${AUDACITY_DIST_VERSION}${AUDACITY_SUFFIX}" )
 set( TARBALL "${PROJECT_BINARY_DIR}/${TLD}.tar.xz" )
    
 add_custom_target( ${TARGET}

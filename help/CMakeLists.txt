@@ -36,7 +36,7 @@ add_custom_target( ${TARGET} DEPENDS "${out}" )
 
 if( NOT "${CMAKE_GENERATOR}" MATCHES "Xcode|Visual Studio*" )
    install( DIRECTORY "${dst}" OPTIONAL
-            DESTINATION "${_DATADIR}/audacity/help" )
+            DESTINATION "${_DATADIR}/rustacity/help" )
    install( FILES "${_SRCDIR}/audacity.1"
             DESTINATION "${_MANDIR}/man1" )
    install( FILES "${_SRCDIR}/audacity.appdata.xml"

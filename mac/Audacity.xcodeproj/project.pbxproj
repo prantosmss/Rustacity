@@ -1707,7 +1707,7 @@
 		2892CE28131AFB1900E1E17D /* Install miscellany */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
-			dstPath = /Audacity.app/Contents;
+			dstPath = /Rustacity.app/Contents;
 			dstSubfolderSpec = 0;
 			files = (
 				28006FFC132C169700BD34D7 /* Install.txt in Install miscellany */,
@@ -2004,7 +2004,7 @@
 		176EEBEA09A2F16200188F3B /* libFLAC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFLAC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		176EEC1E09A2F2DD00188F3B /* libFLAC++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFLAC++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		178CF4FF0989541C0056CE58 /* configmac.h */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 3; lastKnownFileType = sourcecode.c.h; name = configmac.h; path = mac/configmac.h; sourceTree = "<group>"; tabWidth = 3; };
-		1790AFB009883B6D008A330A /* Audacity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audacity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1790AFB009883B6D008A330A /* Rustacity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rustacity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1790AFC709883BFD008A330A /* AboutDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = AboutDialog.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		1790AFC809883BFD008A330A /* AboutDialog.h */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = AboutDialog.h; sourceTree = "<group>"; tabWidth = 3; };
 		1790AFC909883BFD008A330A /* AColor.cpp */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = AColor.cpp; sourceTree = "<group>"; tabWidth = 3; };
@@ -4493,7 +4493,7 @@
 		1790AFB109883B6D008A330A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1790AFB009883B6D008A330A /* Audacity.app */,
+				1790AFB009883B6D008A330A /* Rustacity.app */,
 				17073EE80988DBDD008541CC /* libportsmf.a */,
 				176EEBEA09A2F16200188F3B /* libFLAC.a */,
 				176EEC1E09A2F2DD00188F3B /* libFLAC++.a */,
@@ -7811,7 +7811,7 @@
 			);
 			name = Audacity;
 			productName = Audacity;
-			productReference = 1790AFB009883B6D008A330A /* Audacity.app */;
+			productReference = 1790AFB009883B6D008A330A /* Rustacity.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2800FE060FF322D4005CA9E5 /* portmidi */ = {
@@ -8218,7 +8218,7 @@
 			);
 			name = "Copy nyquist";
 			outputPaths = (
-				"$(TARGET_BUILD_DIR)/Audacity.app/Contents/nyquist",
+				"$(TARGET_BUILD_DIR)/Rustacity.app/Contents/nyquist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8234,7 +8234,7 @@
 			);
 			name = "Copy plug-ins";
 			outputPaths = (
-				"$(TARGET_BUILD_DIR)/Audacity.app/Contents/plug-ins",
+				"$(TARGET_BUILD_DIR)/Rustacity.app/Contents/plug-ins",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -9809,7 +9809,7 @@
 					"-lFLAC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.audacityteam.audacity;
-				PRODUCT_NAME = Audacity;
+				PRODUCT_NAME = Rustacity;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(TOPLEVEL)/include $(TOPLEVEL)/mac/config/$(arch)/src/** $(TOPLEVEL)/mac $(TOPLEVEL)/src/** $(TOPLEVEL)/lib-src/FileDialog $(TOPLEVEL)/lib-src/libflac/include $(TOPLEVEL)/lib-src/libid3tag $(TOPLEVEL)/lib-src/lame $(TOPLEVEL)/mac/config/$(arch)/lib-src/libmad $(TOPLEVEL)/lib-src/libmad $(TOPLEVEL)/lib-src/libogg/include $(TOPLEVEL)/lib-src/libnyquist $(TOPLEVEL)/lib-src/libnyquist/nyq $(TOPLEVEL)/mac/config/$(arch)/lib-src/libsndfile/** $(TOPLEVEL)/lib-src/libsndfile/src $(TOPLEVEL)/lib-src/libsoxr/src $(TOPLEVEL)/lib-src/libvamp $(TOPLEVEL)/lib-src/libvorbis/include $(TOPLEVEL)/lib-src/portaudio-v19/include $(TOPLEVEL)/lib-src/portmixer/px_common $(TOPLEVEL)/lib-src/portmixer/include $(TOPLEVEL)/lib-src/portsmf $(TOPLEVEL)/mac/config/$(arch)/lib-src/soundtouch/** $(TOPLEVEL)/lib-src/soundtouch/include $(TOPLEVEL)/lib-src/lv2/lv2 $(TOPLEVEL)/lib-src/lv2/lilv $(TOPLEVEL)/lib-src/lv2/suil $(TOPLEVEL)/lib-src/twolame/libtwolame $(TOPLEVEL)/mac/config/$(arch)/lib-src/sbsms/** $(TOPLEVEL)/lib-src/lib-widget-extra/";
 				WARNING_CFLAGS = "-Wno-nonnull";
@@ -10146,7 +10146,7 @@
 					"-lFLAC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.audacityteam.audacity;
-				PRODUCT_NAME = Audacity;
+				PRODUCT_NAME = Rustacity;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(TOPLEVEL)/include $(TOPLEVEL)/mac/config/$(arch)/src/** $(TOPLEVEL)/mac $(TOPLEVEL)/src/** $(TOPLEVEL)/lib-src/FileDialog $(TOPLEVEL)/lib-src/libflac/include $(TOPLEVEL)/lib-src/libid3tag $(TOPLEVEL)/lib-src/lame $(TOPLEVEL)/mac/config/$(arch)/lib-src/libmad $(TOPLEVEL)/lib-src/libmad $(TOPLEVEL)/lib-src/libogg/include $(TOPLEVEL)/lib-src/libnyquist $(TOPLEVEL)/lib-src/libnyquist/nyq $(TOPLEVEL)/mac/config/$(arch)/lib-src/libsndfile/** $(TOPLEVEL)/lib-src/libsndfile/src $(TOPLEVEL)/lib-src/libsoxr/src $(TOPLEVEL)/lib-src/libvamp $(TOPLEVEL)/lib-src/libvorbis/include $(TOPLEVEL)/lib-src/portaudio-v19/include $(TOPLEVEL)/lib-src/portmixer/px_common $(TOPLEVEL)/lib-src/portmixer/include $(TOPLEVEL)/lib-src/portsmf $(TOPLEVEL)/mac/config/$(arch)/lib-src/soundtouch/** $(TOPLEVEL)/lib-src/soundtouch/include $(TOPLEVEL)/lib-src/lv2/lv2 $(TOPLEVEL)/lib-src/lv2/lilv $(TOPLEVEL)/lib-src/lv2/suil $(TOPLEVEL)/lib-src/twolame/libtwolame $(TOPLEVEL)/mac/config/$(arch)/lib-src/sbsms/** $(TOPLEVEL)/lib-src/lib-widget-extra/";
 				WARNING_CFLAGS = "-Wno-nonnull";
@@ -10574,7 +10574,7 @@
 					"-lFLAC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.audacityteam.audacity;
-				PRODUCT_NAME = Audacity;
+				PRODUCT_NAME = Rustacity;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(TOPLEVEL)/include $(TOPLEVEL)/mac/config/$(arch)/src/** $(TOPLEVEL)/mac $(TOPLEVEL)/src/** $(TOPLEVEL)/lib-src/FileDialog $(TOPLEVEL)/lib-src/libflac/include $(TOPLEVEL)/lib-src/libid3tag $(TOPLEVEL)/lib-src/lame $(TOPLEVEL)/mac/config/$(arch)/lib-src/libmad $(TOPLEVEL)/lib-src/libmad $(TOPLEVEL)/lib-src/libogg/include $(TOPLEVEL)/lib-src/libnyquist $(TOPLEVEL)/lib-src/libnyquist/nyq $(TOPLEVEL)/mac/config/$(arch)/lib-src/libsndfile/** $(TOPLEVEL)/lib-src/libsndfile/src $(TOPLEVEL)/lib-src/libsoxr/src $(TOPLEVEL)/lib-src/libvamp $(TOPLEVEL)/lib-src/libvorbis/include $(TOPLEVEL)/lib-src/portaudio-v19/include $(TOPLEVEL)/lib-src/portmixer/px_common $(TOPLEVEL)/lib-src/portmixer/include $(TOPLEVEL)/lib-src/portsmf $(TOPLEVEL)/mac/config/$(arch)/lib-src/soundtouch/** $(TOPLEVEL)/lib-src/soundtouch/include $(TOPLEVEL)/lib-src/lv2/lv2 $(TOPLEVEL)/lib-src/lv2/lilv $(TOPLEVEL)/lib-src/lv2/suil $(TOPLEVEL)/lib-src/twolame/libtwolame $(TOPLEVEL)/mac/config/$(arch)/lib-src/sbsms/** $(TOPLEVEL)/lib-src/lib-widget-extra/";
 				WARNING_CFLAGS = "-Wno-nonnull";
@@ -11035,7 +11035,7 @@
 					"-lFLAC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.audacityteam.audacity;
-				PRODUCT_NAME = Audacity;
+				PRODUCT_NAME = Rustacity;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "$(TOPLEVEL)/include $(TOPLEVEL)/mac/config/$(arch)/src/** $(TOPLEVEL)/mac $(TOPLEVEL)/src/** $(TOPLEVEL)/lib-src/FileDialog $(TOPLEVEL)/lib-src/libflac/include $(TOPLEVEL)/lib-src/libid3tag $(TOPLEVEL)/lib-src/lame $(TOPLEVEL)/mac/config/$(arch)/lib-src/libmad $(TOPLEVEL)/lib-src/libmad $(TOPLEVEL)/lib-src/libogg/include $(TOPLEVEL)/lib-src/libnyquist $(TOPLEVEL)/lib-src/libnyquist/nyq $(TOPLEVEL)/mac/config/$(arch)/lib-src/libsndfile/** $(TOPLEVEL)/lib-src/libsndfile/src $(TOPLEVEL)/lib-src/libsoxr/src $(TOPLEVEL)/lib-src/libvamp $(TOPLEVEL)/lib-src/libvorbis/include $(TOPLEVEL)/lib-src/portaudio-v19/include $(TOPLEVEL)/lib-src/portmixer/px_common $(TOPLEVEL)/lib-src/portmixer/include $(TOPLEVEL)/lib-src/portsmf $(TOPLEVEL)/mac/config/$(arch)/lib-src/soundtouch/** $(TOPLEVEL)/lib-src/soundtouch/include $(TOPLEVEL)/lib-src/lv2/lv2 $(TOPLEVEL)/lib-src/lv2/lilv $(TOPLEVEL)/lib-src/lv2/suil $(TOPLEVEL)/lib-src/twolame/libtwolame $(TOPLEVEL)/mac/config/$(arch)/lib-src/sbsms/** $(TOPLEVEL)/lib-src/lib-widget-extra/";
 				WARNING_CFLAGS = "-Wno-nonnull";

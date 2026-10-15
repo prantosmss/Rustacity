@@ -1221,7 +1221,7 @@ bool AudacityApp::OnInit()
 #endif
 
    // Don't use AUDACITY_NAME here.
-   // We want Audacity with a capital 'A'
+   // We want Rustacity with a capital 'R'
 
 // DA: App name
 #ifndef EXPERIMENTAL_DA
@@ -1258,11 +1258,11 @@ bool AudacityApp::OnInit()
       /* On Unix systems, the environment variable TMPDIR may point to
          an unusual path when /tmp and /var/tmp are not desirable. */
       FileNames::SetDefaultTempDir( wxString::Format(
-         wxT("%s/audacity-%s"), envTempDir, wxGetUserId() ) );
+         wxT("%s/rustacity-%s"), envTempDir, wxGetUserId() ) );
    } else {
       /* On Unix systems, the default temp dir is in /var/tmp. */
       FileNames::SetDefaultTempDir( wxString::Format(
-         wxT("/var/tmp/audacity-%s"), wxGetUserId() ) );
+         wxT("/var/tmp/rustacity-%s"), wxGetUserId() ) );
    }
 
 // DA: Path env variable.
@@ -1286,13 +1286,13 @@ bool AudacityApp::OnInit()
       wxT(INSTALL_PREFIX), wxT(AUDACITY_NAME)),
       audacityPathList);
 #else //AUDACITY_NAME
-   FileNames::AddUniquePathToPathList(wxString::Format(wxT("%s/.audacity-files"),
+   FileNames::AddUniquePathToPathList(wxString::Format(wxT("%s/.rustacity-files"),
       home),
       audacityPathList);
-   FileNames::AddUniquePathToPathList(wxString::Format(wxT("%s/share/audacity"),
+   FileNames::AddUniquePathToPathList(wxString::Format(wxT("%s/share/rustacity"),
       wxT(INSTALL_PREFIX)),
       audacityPathList);
-   FileNames::AddUniquePathToPathList(wxString::Format(wxT("%s/share/doc/audacity"),
+   FileNames::AddUniquePathToPathList(wxString::Format(wxT("%s/share/doc/rustacity"),
       wxT(INSTALL_PREFIX)),
       audacityPathList);
 #endif //AUDACITY_NAME
@@ -2360,32 +2360,32 @@ void AudacityApp::AssociateFileTypes()
             if (root_key.empty()) {
                //v Warn that we can't set keys. Ask whether to set pref for no retry?
             } else {
-               associateFileTypes = wxT("Audacity.Project"); // Finally set value for .AUP key
+               associateFileTypes = wxT("Rustacity.Project"); // Finally set value for .AUP key
 
-               associateFileTypes.SetName(root_key + wxT("Audacity.Project"));
+               associateFileTypes.SetName(root_key + wxT("Rustacity.Project"));
                if(!associateFileTypes.Exists()) {
                   associateFileTypes.Create(true);
-                  associateFileTypes = wxT("Audacity Project File");
+                  associateFileTypes = wxT("Rustacity Project File");
                }
 
-               associateFileTypes.SetName(root_key + wxT("Audacity.Project\\shell"));
+               associateFileTypes.SetName(root_key + wxT("Rustacity.Project\\shell"));
                if(!associateFileTypes.Exists()) {
                   associateFileTypes.Create(true);
                   associateFileTypes = wxT("");
                }
 
-               associateFileTypes.SetName(root_key + wxT("Audacity.Project\\shell\\open"));
+               associateFileTypes.SetName(root_key + wxT("Rustacity.Project\\shell\\open"));
                if(!associateFileTypes.Exists()) {
                   associateFileTypes.Create(true);
                }
 
-               associateFileTypes.SetName(root_key + wxT("Audacity.Project\\shell\\open\\command"));
+               associateFileTypes.SetName(root_key + wxT("Rustacity.Project\\shell\\open\\command"));
                wxString tmpRegAudPath;
                if(associateFileTypes.Exists()) {
                   tmpRegAudPath = wxString(associateFileTypes).Lower();
                }
                if (!associateFileTypes.Exists() ||
-                     (tmpRegAudPath.Find(wxT("audacity.exe")) >= 0)) {
+                     (tmpRegAudPath.Find(wxT("rustacity.exe")) >= 0)) {
                   associateFileTypes.Create(true);
                   associateFileTypes = (wxString)argv[0] + (wxString)wxT(" \"%1\"");
                }
@@ -2394,19 +2394,19 @@ void AudacityApp::AssociateFileTypes()
                // These can be use later to support more startup messages
                // like maybe "Import into existing project" or some such.
                // Leaving here for an example...
-               associateFileTypes.SetName(root_key + wxT("Audacity.Project\\shell\\open\\ddeexec"));
+               associateFileTypes.SetName(root_key + wxT("Rustacity.Project\\shell\\open\\ddeexec"));
                if(!associateFileTypes.Exists()) {
                   associateFileTypes.Create(true);
                   associateFileTypes = wxT("%1");
                }
 
-               associateFileTypes.SetName(root_key + wxT("Audacity.Project\\shell\\open\\ddeexec\\Application"));
+               associateFileTypes.SetName(root_key + wxT("Rustacity.Project\\shell\\open\\ddeexec\\Application"));
                if(!associateFileTypes.Exists()) {
                   associateFileTypes.Create(true);
                   associateFileTypes = IPC_APPL;
                }
 
-               associateFileTypes.SetName(root_key + wxT("Audacity.Project\\shell\\open\\ddeexec\\Topic"));
+               associateFileTypes.SetName(root_key + wxT("Rustacity.Project\\shell\\open\\ddeexec\\Topic"));
                if(!associateFileTypes.Exists()) {
                   associateFileTypes.Create(true);
                   associateFileTypes = IPC_TOPIC;
