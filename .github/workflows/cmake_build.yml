@@ -196,6 +196,11 @@ jobs:
           # exactly as upstream libpng 1.6.45+ does.
           sed -i '' 's|#      include <fp.h>|#      include <math.h>|' wxroot/src/png/pngpriv.h
 
+          # Same trap in the bundled zlib: its classic-Mac block in zutil.h
+          # is triggered by TARGET_OS_MAC and #define's fdopen away, which
+          # breaks the <stdio.h> declaration on modern SDKs.
+          sed -i '' 's@ || defined(TARGET_OS_MAC)@@' wxroot/src/zlib/zutil.h
+
           # Make sure our flags are included
           export CXX="g++ -std=c++1z -stdlib=libc++"
           export LD="g++ -std=c++1z -stdlib=libc++"
