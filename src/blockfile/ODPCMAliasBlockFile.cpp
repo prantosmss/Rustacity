@@ -38,7 +38,7 @@ The summary is eventually computed and written to a file in a background thread.
 //#include <errno.h>
 
 const int aheaderTagLen = 20;
-char aheaderTag[aheaderTagLen + 1] = "RustacityBlockFile112";
+char aheaderTag[aheaderTagLen + 1] = "RustacityBlockFile11";
 
 
 ODPCMAliasBlockFile::ODPCMAliasBlockFile(

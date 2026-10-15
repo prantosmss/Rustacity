@@ -66,7 +66,7 @@ out.
 #endif
 
 static const int headerTagLen = 20;
-static char headerTag[headerTagLen + 1] = "RustacityBlockFile112";
+static char headerTag[headerTagLen + 1] = "RustacityBlockFile11";
 
 SummaryInfo::SummaryInfo(size_t samples)
 {

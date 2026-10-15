@@ -33,7 +33,7 @@ The summary is eventually computed and written to a file in a background thread.
 #include "NotYetAvailableException.h"
 
 const int bheaderTagLen = 20;
-char bheaderTag[bheaderTagLen + 1] = "RustacityBlockFile112";
+char bheaderTag[bheaderTagLen + 1] = "RustacityBlockFile11";
 
 
 
