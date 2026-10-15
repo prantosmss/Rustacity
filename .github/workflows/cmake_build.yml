@@ -238,9 +238,17 @@ jobs:
         sudo cp -a "${WXWIN}"/usr/* /usr
 
         # Configure Rustacity
+        #
+        # Xcode 14+ rejects an empty code signing identity, and Github's
+        # macOS runners have no signing certificates.  Disable signing so
+        # the 'Command-line Tool' targets (mod-script-pipe, Wrapper) can
+        # be built.
         cmake -S . \
               -B build \
-              -G "${{matrix.config.generator}}"
+              -G "${{matrix.config.generator}}" \
+              -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY="" \
+              -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED=NO \
+              -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO
 
         # Build Rustacity
         cmake --build build --config Release
