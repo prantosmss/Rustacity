@@ -222,7 +222,7 @@ VendorSymbol NyquistEffect::GetVendor()
 {
    if (mIsPrompt)
    {
-      return XO("Audacity");
+      return XO("Rustacity");
    }
 
    return mAuthor;

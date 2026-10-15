@@ -278,7 +278,7 @@ AboutDialog *AboutDialog::ActiveIntance()
 }
 
 AboutDialog::AboutDialog(wxWindow * parent)
-   :  wxDialogWrapper(parent, -1, XO("About Audacity"),
+   :  wxDialogWrapper(parent, -1, XO("About Rustacity"),
                wxDefaultPosition, wxDefaultSize,
                wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER)
 {
@@ -366,10 +366,10 @@ visit our [[https://forum.audacityteam.org/|forum]].");
       << wxT("&nbsp; &nbsp; The name <b>Audacity</b> is a registered trademark of Dominic Mazzoni.<br><br>")
 
 #else
-      << XO("<h3>Audacity ")
+      << XO("<h3>Rustacity ")
       << wxString(AUDACITY_VERSION_STRING)
       << wxT("</center></h3>")
-      << XO("Audacity the free, open source, cross-platform software for recording and editing sounds.")
+      << XO("Rustacity, an Audacity fork: the free, open source, cross-platform software for recording and editing sounds.")
 #endif
 
       // << wxT("<p><br>")
@@ -440,15 +440,15 @@ visit our [[https://forum.audacityteam.org/|forum]].");
 #ifdef EXPERIMENTAL_DA
       << wxT("<br>DarkAudacity website: [[http://www.darkaudacity.com/|https://www.darkaudacity.com/]]")
 #else
-      << XO("<p><br>&nbsp; &nbsp; <b>Audacity<sup>&reg;</sup></b> software is copyright &copy; 1999-2018 Audacity Team.<br>")
+      << XO("<p><br>&nbsp; &nbsp; <b>Rustacity</b> is a fork of Audacity for the Rustaceans.<br>")
 
-      << XO("&nbsp; &nbsp; The name <b>Audacity</b> is a registered trademark of Dominic Mazzoni.<br><br>")
+      << XO("&nbsp; &nbsp; <b>Audacity</b> software is copyright &copy; 1999-2018 Audacity Team, and its name is a registered trademark of Dominic Mazzoni.<br><br>")
 #endif
 
       << wxT("</center>")
    ;
 
-   auto pPage = S.StartNotebookPage( XO("Audacity") );
+   auto pPage = S.StartNotebookPage( XO("Rustacity") );
    S.StartVerticalLay(1);
    {
       //v For now, change to AudacityLogoWithName via old-fashioned way, not Theme.

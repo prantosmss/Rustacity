@@ -372,7 +372,7 @@ wxAccStatus TreeCtrlAx::Select(int childId, wxAccSelectionFlags selectFlags)
 
 // PrefsPanel might move out into its own file in due ocurse.
 PluginPath PrefsPanel::GetPath(){      return BUILTIN_PREFS_PANEL_PREFIX + GetSymbol().Internal(); }
-VendorSymbol PrefsPanel::GetVendor(){  return XO("Audacity");}
+VendorSymbol PrefsPanel::GetVendor(){  return XO("Rustacity");}
 wxString PrefsPanel::GetVersion(){     return AUDACITY_VERSION_STRING;}
 
 
@@ -556,7 +556,7 @@ PrefsDialog::Factories
 PrefsDialog::PrefsDialog(
    wxWindow * parent, AudacityProject *pProject,
    const TranslatableString &titlePrefix, Factories &factories)
-:  wxDialogWrapper(parent, wxID_ANY, XO("Audacity Preferences"),
+:  wxDialogWrapper(parent, wxID_ANY, XO("Rustacity Preferences"),
             wxDefaultPosition,
             wxDefaultSize,
             wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER)

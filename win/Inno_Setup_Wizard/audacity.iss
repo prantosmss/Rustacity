@@ -1,5 +1,5 @@
-﻿;   Audacity: A Digital Audio Editor
-;   Audacity(R) is copyright (c) 1999-2016 Audacity Team.
+﻿;   Rustacity: A Digital Audio Editor
+;   Rustacity is a fork of Audacity. Audacity(R) is copyright (c) 1999-2016 Audacity Team.
 ;   License: GPL v2.  See License.txt.
 ;
 ;   audacity.iss
@@ -22,7 +22,7 @@ Filename: "{app}\unins*.*";
 
 [Setup]
 ; compiler-related directives
-OutputBaseFilename=audacity-win-{#AppVersion}
+OutputBaseFilename=rustacity-win-{#AppVersion}
 
 WizardImageFile=".\audacity_InnoWizardImage.bmp"
 WizardSmallImageFile=".\audacity_InnoWizardSmallImage.bmp"
@@ -35,16 +35,16 @@ SolidCompression=yes
 DisableWelcomePage=no
 
 AppName={#AppName}
-AppVerName=Audacity {#AppVersion}
+AppVerName=Rustacity {#AppVersion}
 ; Specify AppVersion as well, so it appears in the Add/Remove Programs entry. 
 AppVersion={#AppVersion}
-AppPublisher="Audacity Team"
-AppPublisherURL=http://audacityteam.org
-AppSupportURL=http://audacityteam.org
-AppUpdatesURL=http://audacityteam.org
+AppPublisher="Rustacity Project"
+AppPublisherURL=https://github.com/prantosmss/Rustacity
+AppSupportURL=https://github.com/prantosmss/Rustacity
+AppUpdatesURL=https://github.com/prantosmss/Rustacity
 ChangesAssociations=yes
 
-DefaultDirName={pf}\Audacity
+DefaultDirName={pf}\Rustacity
 
 VersionInfoProductName={#AppName}
 VersionInfoProductTextVersion={#GetFileProductVersion(AppExe)}
@@ -133,8 +133,8 @@ Source: "..\release\plug-ins\*"; DestDir: "{app}\Plug-Ins\"; Flags: ignoreversio
 Source: "..\release\modules\mod-script-pipe.dll"; DestDir: "{app}\modules\"; Flags: ignoreversion
 
 [Icons]
-Name: "{commonprograms}\Audacity"; Filename: "{app}\audacity.exe"
-Name: "{commondesktop}\Audacity"; Filename: "{app}\audacity.exe"; Tasks: desktopicon
+Name: "{commonprograms}\Rustacity"; Filename: "{app}\audacity.exe"
+Name: "{commondesktop}\Rustacity"; Filename: "{app}\audacity.exe"; Tasks: desktopicon
 
 [InstallDelete]
 ; Get rid of Audacity 1.0.0 stuff that's no longer used.
@@ -207,7 +207,7 @@ Root: HKCR; Subkey: "Audacity.Project\shell\open\command"; ValueType: string; Va
 ;Root: HKCR; Subkey: "Audacity.Project\Path";  ValueType: string; ValueData: {app}; Flags: createvalueifdoesntexist uninsdeletekey;
 
 [Run]
-Filename: "{app}\audacity.exe"; Description: "{cm:LaunchProgram,Audacity}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\audacity.exe"; Description: "{cm:LaunchProgram,Rustacity}"; Flags: nowait postinstall skipifsilent
 
 [Languages]
 ; NOTE: "0" in locale name will be translated to "@" when read by Audacity.

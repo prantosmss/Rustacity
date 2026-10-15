@@ -165,7 +165,7 @@ VendorSymbol Effect::GetVendor()
       return mClient->GetVendor();
    }
 
-   return XO("Audacity");
+   return XO("Rustacity");
 }
 
 wxString Effect::GetVersion()

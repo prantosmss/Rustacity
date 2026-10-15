@@ -333,7 +333,7 @@ void PopulatePreferences()
 "Reset Preferences?\n\nThis is a one-time question, after an 'install' where you asked to have the Preferences reset.");
       int action = AudacityMessageBox(
          prompt,
-         XO("Reset Audacity Preferences"),
+         XO("Reset Rustacity Preferences"),
          wxYES_NO, NULL);
       if (action == wxYES)   // reset
       {
@@ -664,7 +664,7 @@ class GnomeShutdown
  public:
    GnomeShutdown()
    {
-      mArgv[0].reset(strdup("Audacity"));
+      mArgv[0].reset(strdup("Rustacity"));
 
       mGnomeui = dlopen("libgnomeui-2.so.0", RTLD_NOW);
       if (!mGnomeui) {
@@ -1225,7 +1225,7 @@ bool AudacityApp::OnInit()
 
 // DA: App name
 #ifndef EXPERIMENTAL_DA
-   wxString appName = wxT("Audacity");
+   wxString appName = wxT("Rustacity");
 #else
    wxString appName = wxT("DarkAudacity");
 #endif
@@ -1496,7 +1496,7 @@ bool AudacityApp::OnInit()
       temporarywindow.SetPosition( wndRect.GetTopLeft() );
       // Centered on whichever screen it is on.
       temporarywindow.Center();
-      temporarywindow.SetTitle(_("Audacity is starting up..."));
+      temporarywindow.SetTitle(_("Rustacity is starting up..."));
       SetTopWindow(&temporarywindow);
       temporarywindow.Raise();
 
@@ -1522,7 +1522,7 @@ bool AudacityApp::OnInit()
       fileMenu->Append(wxID_NEW, wxString(_("&New")) + wxT("\tCtrl+N"));
       fileMenu->Append(wxID_OPEN, wxString(_("&Open...")) + wxT("\tCtrl+O"));
       fileMenu->AppendSubMenu(urecentMenu.release(), _("Open &Recent..."));
-      fileMenu->Append(wxID_ABOUT, _("&About Audacity..."));
+      fileMenu->Append(wxID_ABOUT, _("&About Rustacity..."));
       fileMenu->Append(wxID_PREFERENCES, wxString(_("&Preferences...")) + wxT("\tCtrl+,"));
 
       {

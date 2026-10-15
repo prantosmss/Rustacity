@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>org.audacityteam.Audacity</id>
+  <id>org.rustacity.rustacity</id>
   <launchable type="desktop">audacity.desktop</launchable>
   <project_license>GPL-2.0 and CC-BY-3.0</project_license>
   <metadata_license>CC0-1.0</metadata_license>
-  <name>Audacity</name>
+  <name>Rustacity</name>
   <summary>Record and edit audio files</summary>
   <description>
-    <p>Audacity® is a free, easy-to-use, multi-track audio editor and recorder for Windows, Mac OS X, GNU/Linux and other operating systems. The interface is translated into many languages.</p>
-    <p>You can use Audacity to:</p>
+    <p>Rustacity is a fork of Audacity 2.4.1 created for the Rustaceans. It is a free, easy-to-use, multi-track audio editor and recorder for Windows, Mac OS X, GNU/Linux and other operating systems, with a Rust-based extension engine for adding new functionality.</p>
+    <p>You can use Rustacity to:</p>
     <ul>
       <li>Record live audio</li>
       <li>Convert tapes and records into digital recordings or CDs</li>
@@ -40,7 +40,7 @@
   <releases>
     <release version="2.3.0" date="2018-09-29">
      <description>
-        <p>New features in Audacity 2.3.0:</p>
+        <p>New features in Rustacity 2.3.0:</p>
         <ul>
           <li>New feature – Punch and Roll Recording.</li>
           <li>Pinned-play-head can now be repositioned by dragging.</li>

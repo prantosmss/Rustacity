@@ -44,14 +44,14 @@ BEGIN
             VALUE "ProductName", "DarkAudacity"
             VALUE "ProductVersion", AUDACITY_FILE_VERSION
 #else
-            VALUE "CompanyName", "Audacity Team"
-            VALUE "FileDescription", "Audacity® Cross-Platform Sound Editor"
+            VALUE "CompanyName", "Rustacity Project"
+            VALUE "FileDescription", "Rustacity - Cross-Platform Sound Editor"
             VALUE "FileVersion", AUDACITY_FILE_VERSION
-            VALUE "InternalName", "Audacity"
+            VALUE "InternalName", "Rustacity"
             VALUE "LegalCopyright", "Copyright © 2018. All rights reserved."
             VALUE "LegalTrademarks", "Audacity® is a registered trademark of Dominic Mazzoni."
             VALUE "OriginalFilename", "Audacity.exe"
-            VALUE "ProductName", "Audacity"
+            VALUE "ProductName", "Rustacity"
             VALUE "ProductVersion", AUDACITY_FILE_VERSION
 #endif            
         END
