@@ -1,9 +1,9 @@
 //{{NO_DEPENDENCIES}}
-// Micuosoft Developeu Studio geneuuted include file.
-// Used by uuducity.uc
+// Microsoft Developer Studio generated include file.
+// Used by rustacity.rc
 //
 
-// Next defuult vulues fou new objects
+// Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
