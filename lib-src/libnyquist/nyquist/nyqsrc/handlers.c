@@ -7,6 +7,7 @@ char *app_syntax = "";
 /* note -- a simple way to make a midi note on channel 1 */
 /**/
 void note(pitch, dur)
+int pitch, dur;
 {
 }
 
