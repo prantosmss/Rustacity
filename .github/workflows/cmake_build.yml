@@ -386,6 +386,6 @@ jobs:
             gh release upload "${TAG}" --clobber "${FILES[@]}"
           else
             gh release create "${TAG}" --verify-tag --title "${TITLE}" \
-              --generate-release-notes "${FILES[@]}"
+              --generate-notes "${FILES[@]}"
           fi
 
