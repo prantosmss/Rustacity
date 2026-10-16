@@ -369,6 +369,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
       - name: Download all artifacts
         uses: actions/download-artifact@v7
         with:
@@ -380,8 +383,16 @@ jobs:
         run: |
           set -eux
           TAG="${GITHUB_REF_NAME}"
-          TITLE="Rustacity ${TAG#rustacity-}"
-          mapfile -t FILES < <(find dist -type f | sort)
+          VERSION="${TAG#rustacity-}"
+          TITLE="Rustacity ${VERSION}"
+          # Every platform zip shares the same commit-zip basename, which
+          # would collide as release assets - give each one a unique name.
+          mkdir -p assets
+          while IFS= read -r f; do
+            dir=$(basename "$(dirname "$f")")
+            cp "$f" "assets/Rustacity-${VERSION}-${dir}.zip"
+          done < <(find dist -type f | sort)
+          FILES=(assets/*.zip)
           if gh release view "${TAG}" >/dev/null 2>&1; then
             gh release upload "${TAG}" --clobber "${FILES[@]}"
           else
