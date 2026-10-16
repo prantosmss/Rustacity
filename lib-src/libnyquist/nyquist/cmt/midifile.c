@@ -380,6 +380,7 @@ int c;
 
 static void
 metaevent(type)
+int type;
 {
         int leng = msgleng();
         char *m = msg();
@@ -510,6 +511,7 @@ readvarinum()
 
 static long
 to32bit(c1,c2,c3,c4)
+int c1, c2, c3, c4;
 {
         long value = 0L;
 
