@@ -335,6 +335,18 @@ jobs:
         # "Install" Rustacity
         cmake --install build --config Release --prefix "${DEST}"
 
+        # The Rust DSP core has to be linked in, not merely built: the C++
+        # side calls it, and an unreferenced archive member is dropped from
+        # the link, so a symbol that is present proves the core is used.
+        # (Checked on Linux only - the check is about the shared CMake
+        # wiring, and nm is not available on the Windows runners.)
+        if ! nm "${DEST}/bin/rustacity" | grep -q "rustacity_biquad_design_butterworth"
+        then
+          echo "::error::The Rust DSP core is not linked into ${DEST}/bin/rustacity"
+          nm "${DEST}/bin/rustacity" | grep -i rustacity_ || true
+          exit 1
+        fi
+
         # Create the lib directory
         mkdir -p ${DEST}/lib
 
@@ -379,6 +391,11 @@ jobs:
       - name: Run cargo tests
         working-directory: rust
         run: cargo test --workspace
+
+      # The hand-written header in rust/dsp/include must keep declaring
+      # exactly what the Rust core exports (scripts/check_dsp_abi.py).
+      - name: Check the DSP ABI against its header
+        run: python3 scripts/check_dsp_abi.py
 
   # =========================================================================
   # SHARED: Publish a GitHub Release when a tag is pushed
