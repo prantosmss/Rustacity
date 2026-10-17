@@ -3233,7 +3233,6 @@
 		28ED7B791A1C77BF008A01D9 /* StudioFadeOut.ny */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = StudioFadeOut.ny; path = "../plug-ins/StudioFadeOut.ny"; sourceTree = SOURCE_ROOT; };
 		28F00A900A3E2FF100A3E5F5 /* FileNames.cpp */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = FileNames.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		28F00A910A3E2FF100A3E5F5 /* FileNames.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = FileNames.h; sourceTree = "<group>"; tabWidth = 3; };
-		28F00A920A3E2FF100A3E5F5 /* ThemeAsCeeCode.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = ThemeAsCeeCode.h; sourceTree = "<group>"; tabWidth = 3; };
 		28F1D8170A2D0018005506A7 /* AttachableScrollBar.cpp */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = AttachableScrollBar.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		28F1D8180A2D0018005506A7 /* AttachableScrollBar.h */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = AttachableScrollBar.h; sourceTree = "<group>"; tabWidth = 3; };
 		28F1D8190A2D0018005506A7 /* ExpandingToolBar.cpp */ = {isa = PBXFileReference; fileEncoding = 5; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = ExpandingToolBar.cpp; sourceTree = "<group>"; tabWidth = 3; };
@@ -4752,7 +4751,6 @@
 				1790B0E109883BFD008A330A /* Tags.h */,
 				283A11A80A2C0E15004372C4 /* Theme.cpp */,
 				283A11A90A2C0E15004372C4 /* Theme.h */,
-				28F00A920A3E2FF100A3E5F5 /* ThemeAsCeeCode.h */,
 				287F9F3C0A69748F00F025FA /* TimeDialog.cpp */,
 				287F9F3B0A69748F00F025FA /* TimeDialog.h */,
 				2860BA220E0F0D8600A13878 /* TimerRecordDialog.cpp */,

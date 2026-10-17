@@ -346,7 +346,7 @@ am__rustacity_SOURCES_DIST = BlockFile.cpp BlockFile.h DirManager.cpp \
 	Spectrum.h SpectrumAnalyst.cpp SpectrumAnalyst.h \
 	SplashDialog.cpp SplashDialog.h SseMathFuncs.cpp \
 	SseMathFuncs.h Tags.cpp Tags.h Theme.cpp Theme.h \
-	ThemeAsCeeCode.h TimeDialog.cpp TimeDialog.h \
+	TimeDialog.cpp TimeDialog.h \
 	TimerRecordDialog.cpp TimerRecordDialog.h TimeTrack.cpp \
 	TimeTrack.h Track.cpp Track.h TrackArtist.cpp TrackArtist.h \
 	TrackInfo.cpp TrackInfo.h TrackPanel.cpp TrackPanel.h \
@@ -1480,7 +1480,7 @@ rustacity_SOURCES = $(librustacity_la_SOURCES) AboutDialog.cpp \
 	Spectrum.h SpectrumAnalyst.cpp SpectrumAnalyst.h \
 	SplashDialog.cpp SplashDialog.h SseMathFuncs.cpp \
 	SseMathFuncs.h Tags.cpp Tags.h Theme.cpp Theme.h \
-	ThemeAsCeeCode.h TimeDialog.cpp TimeDialog.h \
+	TimeDialog.cpp TimeDialog.h \
 	TimerRecordDialog.cpp TimerRecordDialog.h TimeTrack.cpp \
 	TimeTrack.h Track.cpp Track.h TrackArtist.cpp TrackArtist.h \
 	TrackInfo.cpp TrackInfo.h TrackPanel.cpp TrackPanel.h \

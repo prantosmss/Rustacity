@@ -277,7 +277,6 @@ list( APPEND SOURCES
       Tags.h
       Theme.cpp
       Theme.h
-      ThemeAsCeeCode.h
       TimeDialog.cpp
       TimeDialog.h
       TimeTrack.cpp

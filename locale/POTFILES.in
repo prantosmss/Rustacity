@@ -240,7 +240,6 @@ src/Tags.cpp
 src/Tags.h
 src/Theme.cpp
 src/Theme.h
-src/ThemeAsCeeCode.h
 src/TimeDialog.cpp
 src/TimeDialog.h
 src/TimeTrack.cpp

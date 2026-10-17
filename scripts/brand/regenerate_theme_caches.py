@@ -31,11 +31,12 @@ Two more things the same run takes care of:
 * ``src/AllThemeResources.h`` declares the same palette as a fallback for the
   case where a cache cannot be read, so ``--sync-header`` puts its colour
   defaults through the same mapping (numbers only, formatting untouched).
-* ``src/ThemeAsCeeCode.h`` is a "theme as code" file a DarkAudacity build saved
-  into the tree.  Nothing #includes it, but it held the whole old DarkAudacity
-  bitmap set and palette; its cells do not line up with the current resource
-  list, so it cannot be patched in place and is instead rewritten with the
-  payload of the rebranded Dark theme - the theme that file stands for.
+* ``src/ThemeAsCeeCode.h`` was a "theme as code" file a DarkAudacity build had
+  saved into the tree.  Nothing #included it and it was never part of a binary,
+  but it held the whole old DarkAudacity bitmap set and palette, so it was dealt
+  with first (rewritten with the rebranded Dark payload) and then deleted along
+  with its build references.  A step near the bottom of ``main()`` still handles
+  a tree that has not had it removed yet.
 
 Usage
 -----
@@ -110,7 +111,9 @@ LOGO_SIZE = 48
 # around.  Its own layout is from an older resource list (none of its cells line
 # up with the current one, so it cannot be patched in place); it is rewritten
 # instead with the payload of the rebranded Dark theme, which is what the file
-# is for: the theme a DarkAudacity build compiles in.
+# is for: the theme a DarkAudacity build compiles in.  The file has since been
+# deleted from the tree, so this is now only a fallback for a tree that still
+# carries it - the guard below never recreates it.
 LEGACY_CACHE = ROOT / "src/ThemeAsCeeCode.h"
 LEGACY_SOURCE_THEME = "Dark"
 
@@ -846,10 +849,11 @@ def main(argv=None):
         if problems:
             return 1
 
-    if args.apply:
+    if args.apply and LEGACY_CACHE.exists():
         # The compiled-in "theme as code" file a DarkAudacity build saved into
         # src/: not compiled, but it still carried the old bitmap set and the old
-        # palette.  Give it the payload of the rebranded theme it stands for.
+        # palette.  The file has been deleted from the tree, so this step only
+        # runs for a tree that still has it, and it never recreates it.
         source = THEMES[LEGACY_SOURCE_THEME]
         before = LEGACY_CACHE.read_bytes()
         write_cache(LEGACY_CACHE, read_cache(source), cache_header(LEGACY_CACHE))

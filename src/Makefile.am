@@ -287,7 +287,6 @@ rustacity_SOURCES = \
 	Tags.h \
 	Theme.cpp \
 	Theme.h \
-	ThemeAsCeeCode.h \
 	TimeDialog.cpp \
 	TimeDialog.h \
 	TimerRecordDialog.cpp \
