@@ -109,6 +109,28 @@ size_t rustacity_phaser_process(rustacity_phaser_t *handle,
                                 const float *input, float *output,
                                 size_t len);
 
+/* --- EffectWahwah's wah filter --------------------------------------- */
+
+/* Opaque state of one channel: the LFO and the wah filter (the C++
+ * EffectWahwahState).  The C++ side keeps one handle for the master and one
+ * per realtime group. */
+typedef struct rustacity_wahwah rustacity_wahwah_t;
+
+/* `sample_rate` is narrowed to float, like the C++ Init() took a float. */
+rustacity_wahwah_t *rustacity_wahwah_new(float sample_rate);
+void rustacity_wahwah_free(rustacity_wahwah_t *handle);
+
+/* Filter `len` samples of one channel from `input` to `output`, which may
+ * alias, with the effect's settings for this block: the LFO frequency in Hz
+ * and its start phase in degrees, the depth (0..100), the resonance (greater
+ * than 0), the frequency offset (0..100) and the output gain in dB.  Returns
+ * `len`, or 0 if the handle or a pointer is unusable. */
+size_t rustacity_wahwah_process(rustacity_wahwah_t *handle,
+                                double freq, double phase_deg, int depth,
+                                double res, int freq_ofs, double out_gain_db,
+                                const float *input, float *output,
+                                size_t len);
+
 /* --- EBU R128 loudness measurement ---------------------------------- */
 
 /* Opaque loudness meter; `rate` is the sample rate in Hz and

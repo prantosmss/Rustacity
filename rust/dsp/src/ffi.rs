@@ -14,7 +14,8 @@ use std::panic::{catch_unwind, AssertUnwindSafe};
 use crate::bass_treble::BassTreble;
 use crate::biquad::{self, Biquad};
 use crate::ebur128::{self, Ebur128};
-use crate::phaser::{Params, Phaser};
+use crate::phaser::Phaser;
+use crate::wahwah::Wahwah;
 
 /// `rustacity_biquad_t` is 9 doubles - the C++ side asserts that the
 /// C++ `Biquad` has exactly the same size.
@@ -255,7 +256,7 @@ pub extern "C" fn rustacity_phaser_process(
         if handle.is_null() || input.is_null() || output.is_null() {
             return 0;
         }
-        let params = Params {
+        let params = crate::phaser::Params {
             stages,
             dry_wet,
             freq,
@@ -266,6 +267,65 @@ pub extern "C" fn rustacity_phaser_process(
         };
         // SAFETY: non-null, aligned and dereferenceable by contract; input
         // and output may alias (each sample is read before it is written).
+        unsafe { (*handle).process_raw(params, input, output, len) };
+        len
+    })
+}
+
+/// Create the wah filter of EffectWahwah for one channel, or null if the
+/// arguments are unusable.
+#[no_mangle]
+pub extern "C" fn rustacity_wahwah_new(sample_rate: f32) -> *mut Wahwah {
+    guard(core::ptr::null_mut(), || {
+        if !sample_rate.is_finite() || sample_rate <= 0.0 {
+            return core::ptr::null_mut();
+        }
+        Box::into_raw(Box::new(Wahwah::new(sample_rate)))
+    })
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_wahwah_free(handle: *mut Wahwah) {
+    guard((), || {
+        if handle.is_null() {
+            return;
+        }
+        // SAFETY: the pointer came from `rustacity_wahwah_new` and is consumed
+        // exactly once.
+        unsafe { drop(Box::from_raw(handle)) };
+    });
+}
+
+/// Filter `len` samples of one channel from `input` to `output`, which may
+/// alias, with the effect's settings for this block; returns `len`, or 0 if
+/// the arguments are unusable.
+#[no_mangle]
+pub extern "C" fn rustacity_wahwah_process(
+    handle: *mut Wahwah,
+    freq: f64,
+    phase_deg: f64,
+    depth: c_int,
+    res: f64,
+    freq_ofs: c_int,
+    out_gain_db: f64,
+    input: *const f32,
+    output: *mut f32,
+    len: usize,
+) -> usize {
+    guard(0, || {
+        if handle.is_null() || input.is_null() || output.is_null() {
+            return 0;
+        }
+        let params = crate::wahwah::Params {
+            freq,
+            phase_deg,
+            depth,
+            res,
+            freq_ofs,
+            out_gain_db,
+        };
+        // SAFETY: non-null, aligned and dereferenceable by contract; input and
+        // output may alias (each sample is read before it is written).
         unsafe { (*handle).process_raw(params, input, output, len) };
         len
     })
@@ -443,6 +503,24 @@ mod tests {
                 100,
                 0,
                 0.0,
+                core::ptr::null(),
+                core::ptr::null_mut(),
+                8
+            ),
+            0
+        );
+        assert!(rustacity_wahwah_new(0.0).is_null());
+        assert!(rustacity_wahwah_new(f32::NAN).is_null());
+        rustacity_wahwah_free(core::ptr::null_mut());
+        assert_eq!(
+            rustacity_wahwah_process(
+                core::ptr::null_mut(),
+                1.5,
+                0.0,
+                70,
+                2.5,
+                30,
+                -6.0,
                 core::ptr::null(),
                 core::ptr::null_mut(),
                 8
