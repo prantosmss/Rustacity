@@ -1,19 +1,5 @@
-# Autotools generated files
-locale/Makefile.in
+# In-source makefiles; the handcrafted ones inside lib-src are tracked
 Makefile
-aclocal.m4
-autom4te.cache
-config.status
-bin-stamp
-.deps
-.dirstamp
-lib-stamp
-libtool
-stamp-h*
-stamp-po
-*.stamp
-
-# Handcrafted makefiles
 !lib-src/expat/amiga/Makefile
 !lib-src/libnyquist/nyquist/sys/unix/*/Makefile
 !lib-src/lv2/Makefile
