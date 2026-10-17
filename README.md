@@ -41,3 +41,29 @@ cargo test --workspace
 ```
 
 The ABI conventions, the panic policy and the rules for porting more of the audio engine to Rust are in [`rust/README.md`](rust/README.md).
+
+## Releasing
+
+Releases are cut from `main` with an annotated tag, whose name is the release
+number; the version the application itself reports stays the upstream 2.4.x
+string it has always been:
+
+```sh
+git tag -a rustacity-0.4.0 -F notes.md   # the tag message is the release prose
+git push origin rustacity-0.4.0
+```
+
+The tag push runs the `Publish Release` job. It waits for the build matrix and
+the Rust tests, takes the four platform zips from the run, names them
+`Rustacity-<version>-<platform>.zip`, and publishes the GitHub release with
+notes generated from the commits since the previous tag.
+
+The release is created with the maintainer's `RELEASE_TOKEN` repository secret
+rather than the workflow's `GITHUB_TOKEN`, so that it is attributed to a person
+and not to `github-actions[bot]`. The secret must be able to write this
+repository's contents: a fine-grained token with access to the `Rustacity`
+repository and the *Contents: Read and write* permission, or a classic token
+with the `repo` scope. A missing secret fails the job before it publishes
+anything; a secret without those rights fails it with `HTTP 403: Resource not
+accessible by personal access token`. In either case the four zips are in the
+run's artifacts, and the release can be published by hand from them.
