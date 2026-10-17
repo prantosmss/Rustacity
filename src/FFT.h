@@ -50,6 +50,10 @@ class TranslatableString;
 #include <wx/defs.h>
 #include <wx/wxchar.h>
 
+// The window functions, enum eWindowFunctions, live in FFTMath.h alongside
+// the arithmetic that is indexed by them.
+#include "FFTMath.h"
+
 #ifndef M_PI
 #define	M_PI		3.14159265358979323846  /* pi */
 #endif
@@ -101,21 +105,6 @@ void FFT(size_t NumSamples,
  * It remains for compatibility until we decide to upgrade all the old uses
  * All functions have 0 in data[0] except Rectangular, Hamming and Gaussians
  */
-
-enum eWindowFunctions
-{
-   eWinFuncRectangular,
-   eWinFuncBartlett,
-   eWinFuncHamming,
-   eWinFuncHanning,
-   eWinFuncBlackman,
-   eWinFuncBlackmanHarris,
-   eWinFuncWelch,
-   eWinFuncGaussian25,
-   eWinFuncGaussian35,
-   eWinFuncGaussian45,
-   eWinFuncCount
-};
 
 void WindowFunc(int whichFunction, size_t NumSamples, float *data);
 

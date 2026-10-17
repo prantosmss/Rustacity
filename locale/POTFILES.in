@@ -90,6 +90,8 @@ src/EnvelopeEditor.h
 src/Experimental.h
 src/FFT.cpp
 src/FFT.h
+src/FFTMath.cpp
+src/FFTMath.h
 src/FFmpeg.cpp
 src/FFmpeg.h
 src/FileException.cpp
