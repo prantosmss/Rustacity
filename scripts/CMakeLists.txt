@@ -14,11 +14,6 @@ list( APPEND EXCLUDES
    .gitattributes
    .github
    .gitignore
-   .travis.yml
-   appveyor.yml
-   autotools
-   configure
-   configure.ac
 #   lib-src/expat
 #   lib-src/libid3tag
 #   lib-src/libmad
@@ -37,16 +32,11 @@ list( APPEND EXCLUDES
    lib-src/portmidi/pm_test
    lib-src/portmidi/portmidi_cdt.zip
 #   lib-src/soundtouch
-   m4
    mac
    plug-ins/analyze.ny
    plug-ins/fadein.ny
    plug-ins/fadeout.ny
    plug-ins/undcbias.ny
-   qa
-   tests/ProjectCheckTests
-   tests/samples
-   todo.txt
    win
 )
 
