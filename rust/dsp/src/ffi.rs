@@ -13,6 +13,7 @@ use std::panic::{catch_unwind, AssertUnwindSafe};
 
 use crate::bass_treble::BassTreble;
 use crate::biquad::{self, Biquad};
+use crate::distortion::Distortion;
 use crate::ebur128::{self, Ebur128};
 use crate::phaser::Phaser;
 use crate::wahwah::Wahwah;
@@ -331,6 +332,67 @@ pub extern "C" fn rustacity_wahwah_process(
     })
 }
 
+/// Create the waveshaper of EffectDistortion for one channel, or null if the
+/// arguments are unusable.
+#[no_mangle]
+pub extern "C" fn rustacity_distortion_new(sample_rate: f32) -> *mut Distortion {
+    guard(core::ptr::null_mut(), || {
+        if !sample_rate.is_finite() || sample_rate <= 0.0 {
+            return core::ptr::null_mut();
+        }
+        Box::into_raw(Box::new(Distortion::new(sample_rate)))
+    })
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_distortion_free(handle: *mut Distortion) {
+    guard((), || {
+        if handle.is_null() {
+            return;
+        }
+        // SAFETY: the pointer came from `rustacity_distortion_new` and is
+        // consumed exactly once.
+        unsafe { drop(Box::from_raw(handle)) };
+    });
+}
+
+/// Shape `len` samples of one channel from `input` to `output`, which may
+/// alias, with the effect's settings for this block; returns `len`, or 0 if
+/// the arguments are unusable.
+#[no_mangle]
+pub extern "C" fn rustacity_distortion_process(
+    handle: *mut Distortion,
+    table_choice: c_int,
+    dc_block: c_int,
+    threshold_db: f64,
+    noise_floor: f64,
+    param1: f64,
+    param2: f64,
+    repeats: c_int,
+    input: *const f32,
+    output: *mut f32,
+    len: usize,
+) -> usize {
+    guard(0, || {
+        if handle.is_null() || input.is_null() || output.is_null() {
+            return 0;
+        }
+        let params = crate::distortion::Params {
+            table_choice,
+            dc_block: dc_block != 0,
+            threshold_db,
+            noise_floor,
+            param1,
+            param2,
+            repeats,
+        };
+        // SAFETY: non-null, aligned and dereferenceable by contract; input and
+        // output may alias (each sample is read before it is written).
+        unsafe { (*handle).process_raw(params, input, output, len) };
+        len
+    })
+}
+
 /// Create a loudness meter, or null if the arguments are unusable.
 #[no_mangle]
 pub extern "C" fn rustacity_ebur128_new(rate: f64, channels: usize) -> *mut Ebur128 {
@@ -521,6 +583,25 @@ mod tests {
                 2.5,
                 30,
                 -6.0,
+                core::ptr::null(),
+                core::ptr::null_mut(),
+                8
+            ),
+            0
+        );
+        assert!(rustacity_distortion_new(0.0).is_null());
+        assert!(rustacity_distortion_new(f32::NAN).is_null());
+        rustacity_distortion_free(core::ptr::null_mut());
+        assert_eq!(
+            rustacity_distortion_process(
+                core::ptr::null_mut(),
+                0,
+                0,
+                -6.0,
+                -70.0,
+                50.0,
+                50.0,
+                1,
                 core::ptr::null(),
                 core::ptr::null_mut(),
                 8
