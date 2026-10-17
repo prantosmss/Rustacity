@@ -19,19 +19,27 @@ Rustacity is an easy-to-use, multi-track audio editor and recorder for Windows, 
 - **Accessibility** for VI users.
 - **Analysis and visualization** tools to analyze audio, or other signal data.
 
-## Roadmap
+## Documentation
 
-- **Rust extension engine** — a Rust-based plugin/extension layer for adding new functionality to the editor.
+| | |
+| --- | --- |
+| [Repository layout](docs/repository-layout.md) | what each top-level directory is, what is ours, what is vendored, and what has been removed |
+| [Architecture](docs/architecture.md) | the C++ shell and the Rust core, the C ABI, the panic policy, what CI proves, and how a unit is ported |
+| [Port status](docs/port-status.md) | which DSP units are Rust, which are not yet, and why |
+| [Golden values](docs/goldens.md) | how each port is checked against the implementation it replaced |
+| [Roadmap](docs/roadmap.md) | an FFT in Rust next, then the extension engine |
 
 ## Getting Started
 
-Rustacity is built from source with CMake. The GitHub Actions workflows in `.github/workflows/` build every supported platform, run the Rust DSP tests and the golden-value checks, and publish releases.
+Rustacity is built from source with CMake. The build compiles the Rust core and links it, so a Rust toolchain is required in addition to a C++ one, and wxWidgets is not optional: the build wants the pinned fork (`audacity/wxWidgets`, branch `audacity-fixes-3.1.3`).
+
+The canonical recipe per platform is the CI workflow, [`.github/workflows/cmake_build.yml`](.github/workflows/cmake_build.yml) - what it runs is what produces the releases.
 
 Because Rustacity is a fork of Audacity 2.4.1, end-user documentation, forums, and developer references are still available from the upstream [Audacity website](https://www.audacityteam.org/), [Audacity Forum](https://forum.audacityteam.org/), and [Audacity Wiki](https://wiki.audacityteam.org/wiki/For_Developers).
 
 ### The Rust DSP core
 
-Parts of the audio processing are implemented in Rust, in the `rustacity-dsp` crate under `rust/dsp/`. The build invokes `cargo` and links the crate as a static library, so a Rust toolchain is required in addition to the C++ one; the C interface between the two halves is `rust/dsp/include/rustacity_dsp.h`.
+Parts of the audio processing are implemented in Rust, in the `rustacity-dsp` crate under `rust/dsp/`. The build invokes `cargo` and links the crate as a static library; the C interface between the two halves is `rust/dsp/include/rustacity_dsp.h`.
 
 The ported code is checked against reference values captured from the original C++ implementation (`rust/dsp/goldens/reference.txt`):
 
@@ -40,7 +48,7 @@ cd rust
 cargo test --workspace
 ```
 
-The ABI conventions, the panic policy and the rules for porting more of the audio engine to Rust are in [`rust/README.md`](rust/README.md).
+The ABI conventions, the panic policy and the rules for porting more of the audio engine to Rust are in [`docs/architecture.md`](docs/architecture.md), with the crate-level detail in [`rust/README.md`](rust/README.md).
 
 ## Releasing
 
