@@ -62,21 +62,6 @@ lib-src/lv2/*/build/
 lib-src/lv2/srcdir.mk
 .lock-waf_linux2_build
 
-# Mac build outputs
-mac/Rustacity.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-mac/Rustacity.xcodeproj/project.xcworkspace/xcshareddata/Rustacity.xccheckout
-mac/Makefile
-mac/confdefs.h
-mac/config.status
-mac/conftest.c
-mac/help/
-mac/images/
-mac/lib-src/
-mac/libtool
-mac/po/
-mac/src/
-mac/tests/
-
 # Compiled Object files
 *.slo
 *.lo
@@ -159,29 +144,16 @@ lib-src/twolame/simplefrontend/stwolame
 .DS_Store
 xcuserdata
 *.xcconfig
-mac/build
 
 # Windows specific
-win/Debug
-win/Release
-win/Projects/*/Debug
-win/Projects/*/Release
-win/.vs/
-win/packages
-win/.nuget
 win-alt-build
 
 # All those help files
 help/manual*
 help/temp*
 
-# Misc
-src/RevisionIdent.h
-win/resetPrefs.txt
-
 # Emacs backup files
 *~
-win/xaudacity.ico
 *.sublime-project
 *.sublime-workspace
 
