@@ -2,12 +2,14 @@
 //!
 //! The declarations live in `include/rustacity_dsp.h`; every function
 //! here mirrors one C++ entry point of the original implementation.
-//! Pointers are validated before use and no panic can cross the FFI
-//! boundary (the release profile aborts instead of unwinding).
+//! Pointers are validated before use and no panic may cross the FFI
+//! boundary: each entry point runs under [`guard`], which turns a panic
+//! into a harmless return value instead of unwinding into C++.
 //!
 //! Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
 
 use core::ffi::c_int;
+use std::panic::{catch_unwind, AssertUnwindSafe};
 
 use crate::biquad::{self, Biquad};
 use crate::ebur128::{self, Ebur128};
@@ -16,6 +18,25 @@ use crate::ebur128::{self, Ebur128};
 /// C++ `Biquad` has exactly the same size.
 const _: () =
     assert!(core::mem::size_of::<Biquad>() == 9 * core::mem::size_of::<f64>());
+
+/// Run `f`, returning `fallback` if it panics.
+///
+/// Every entry point below is wrapped in this guard, because the C++
+/// caller cannot cope with an unwind and aborting the process would
+/// cost the user whatever they had not saved.  The default panic hook
+/// still reports where the panic happened, so the fault stays
+/// diagnosable.
+///
+/// `AssertUnwindSafe` is needed because the closures capture the raw
+/// pointers that came from C++, which are not `UnwindSafe`.  That is
+/// sound here: a caught panic cannot leave anything observable to the
+/// caller.
+fn guard<R>(fallback: R, f: impl FnOnce() -> R) -> R {
+    match catch_unwind(AssertUnwindSafe(f)) {
+        Ok(value) => value,
+        Err(_) => fallback,
+    }
+}
 
 /// Copy `sections` into the caller's buffer, at most `cap` entries,
 /// and return how many were written.
@@ -34,11 +55,13 @@ fn write_sections(out: *mut Biquad, cap: usize, sections: Vec<Biquad>) -> c_int 
 
 #[no_mangle]
 pub extern "C" fn rustacity_biquad_reset(bq: *mut Biquad) {
-    if bq.is_null() {
-        return;
-    }
-    // SAFETY: non-null, aligned and dereferenceable by contract.
-    unsafe { (*bq).reset() };
+    guard((), || {
+        if bq.is_null() {
+            return;
+        }
+        // SAFETY: non-null, aligned and dereferenceable by contract.
+        unsafe { (*bq).reset() };
+    });
 }
 
 #[no_mangle]
@@ -48,18 +71,20 @@ pub extern "C" fn rustacity_biquad_process(
     output: *mut f32,
     num_samples: c_int,
 ) {
-    if bq.is_null() || input.is_null() || output.is_null() || num_samples <= 0 {
-        return;
-    }
-    // SAFETY: the caller guarantees valid pointers for `num_samples`
-    // samples; input and output may alias (the loop reads each sample
-    // before writing it), so raw pointers are used throughout.
-    let bq = unsafe { &mut *bq };
-    for i in 0..num_samples as isize {
-        let x = unsafe { *input.offset(i) };
-        let y = bq.process_one(x);
-        unsafe { *output.offset(i) = y };
-    }
+    guard((), || {
+        if bq.is_null() || input.is_null() || output.is_null() || num_samples <= 0 {
+            return;
+        }
+        // SAFETY: the caller guarantees valid pointers for `num_samples`
+        // samples; input and output may alias (the loop reads each sample
+        // before writing it), so raw pointers are used throughout.
+        let bq = unsafe { &mut *bq };
+        for i in 0..num_samples as isize {
+            let x = unsafe { *input.offset(i) };
+            let y = bq.process_one(x);
+            unsafe { *output.offset(i) = y };
+        }
+    });
 }
 
 #[no_mangle]
@@ -71,11 +96,13 @@ pub extern "C" fn rustacity_biquad_design_butterworth(
     fc: f64,
     subtype: c_int,
 ) -> c_int {
-    write_sections(
-        out,
-        cap,
-        biquad::calc_butterworth_filter(order, fn_hz, fc, subtype),
-    )
+    guard(0, || {
+        write_sections(
+            out,
+            cap,
+            biquad::calc_butterworth_filter(order, fn_hz, fc, subtype),
+        )
+    })
 }
 
 #[no_mangle]
@@ -88,11 +115,13 @@ pub extern "C" fn rustacity_biquad_design_chebyshev1(
     ripple: f64,
     subtype: c_int,
 ) -> c_int {
-    write_sections(
-        out,
-        cap,
-        biquad::calc_chebyshev_type1_filter(order, fn_hz, fc, ripple, subtype),
-    )
+    guard(0, || {
+        write_sections(
+            out,
+            cap,
+            biquad::calc_chebyshev_type1_filter(order, fn_hz, fc, ripple, subtype),
+        )
+    })
 }
 
 #[no_mangle]
@@ -105,62 +134,76 @@ pub extern "C" fn rustacity_biquad_design_chebyshev2(
     ripple: f64,
     subtype: c_int,
 ) -> c_int {
-    write_sections(
-        out,
-        cap,
-        biquad::calc_chebyshev_type2_filter(order, fn_hz, fc, ripple, subtype),
-    )
+    guard(0, || {
+        write_sections(
+            out,
+            cap,
+            biquad::calc_chebyshev_type2_filter(order, fn_hz, fc, ripple, subtype),
+        )
+    })
 }
 
 #[no_mangle]
 pub extern "C" fn rustacity_biquad_cheby_poly(order: c_int, norm_freq: f64) -> f64 {
-    if !(biquad::MIN_ORDER..=biquad::MAX_ORDER).contains(&order) {
-        return 0.0;
-    }
-    biquad::cheby_poly(order, norm_freq)
+    guard(0.0, || {
+        if !(biquad::MIN_ORDER..=biquad::MAX_ORDER).contains(&order) {
+            return 0.0;
+        }
+        biquad::cheby_poly(order, norm_freq)
+    })
 }
 
 /// Create a loudness meter, or null if the arguments are unusable.
 #[no_mangle]
 pub extern "C" fn rustacity_ebur128_new(rate: f64, channels: usize) -> *mut Ebur128 {
-    if !rate.is_finite() || rate <= 0.0 || channels == 0 {
-        return core::ptr::null_mut();
-    }
-    Box::into_raw(Box::new(Ebur128::new(rate, channels)))
+    guard(core::ptr::null_mut(), || {
+        if !rate.is_finite() || rate <= 0.0 || channels == 0 {
+            return core::ptr::null_mut();
+        }
+        Box::into_raw(Box::new(Ebur128::new(rate, channels)))
+    })
 }
 
 #[no_mangle]
 pub extern "C" fn rustacity_ebur128_free(meter: *mut Ebur128) {
-    if meter.is_null() {
-        return;
-    }
-    // SAFETY: the pointer came from `rustacity_ebur128_new` and is
-    // consumed exactly once.
-    unsafe { drop(Box::from_raw(meter)) };
+    guard((), || {
+        if meter.is_null() {
+            return;
+        }
+        // SAFETY: the pointer came from `rustacity_ebur128_new` and is
+        // consumed exactly once.
+        unsafe { drop(Box::from_raw(meter)) };
+    });
 }
 
 #[no_mangle]
 pub extern "C" fn rustacity_ebur128_initialize(meter: *mut Ebur128) {
-    // SAFETY: `meter.as_mut()` is null-checked.
-    if let Some(meter) = unsafe { meter.as_mut() } {
-        meter.initialize();
-    }
+    guard((), || {
+        // SAFETY: `meter.as_mut()` is null-checked.
+        if let Some(meter) = unsafe { meter.as_mut() } {
+            meter.initialize();
+        }
+    });
 }
 
 #[no_mangle]
 pub extern "C" fn rustacity_ebur128_process_sample(meter: *mut Ebur128, x: f32, channel: usize) {
-    // SAFETY: `meter.as_mut()` is null-checked.
-    if let Some(meter) = unsafe { meter.as_mut() } {
-        meter.process_sample_from_channel(x, channel);
-    }
+    guard((), || {
+        // SAFETY: `meter.as_mut()` is null-checked.
+        if let Some(meter) = unsafe { meter.as_mut() } {
+            meter.process_sample_from_channel(x, channel);
+        }
+    });
 }
 
 #[no_mangle]
 pub extern "C" fn rustacity_ebur128_next_sample(meter: *mut Ebur128) {
-    // SAFETY: `meter.as_mut()` is null-checked.
-    if let Some(meter) = unsafe { meter.as_mut() } {
-        meter.next_sample();
-    }
+    guard((), || {
+        // SAFETY: `meter.as_mut()` is null-checked.
+        if let Some(meter) = unsafe { meter.as_mut() } {
+            meter.next_sample();
+        }
+    });
 }
 
 #[no_mangle]
@@ -170,34 +213,38 @@ pub extern "C" fn rustacity_ebur128_process_block(
     channel_count: usize,
     len: usize,
 ) {
-    if channels.is_null() {
-        return;
-    }
-    // SAFETY: `meter.as_mut()` is null-checked.
-    let Some(meter) = (unsafe { meter.as_mut() }) else {
-        return;
-    };
-    let count = channel_count.min(meter.channel_count());
-    let mut slices: Vec<&[f32]> = Vec::with_capacity(count);
-    for i in 0..count {
-        // SAFETY: the caller guarantees `channel_count` valid pointers.
-        let channel = unsafe { *channels.add(i) };
-        if channel.is_null() {
+    guard((), || {
+        if channels.is_null() {
             return;
         }
-        // SAFETY: the caller guarantees `len` readable samples.
-        slices.push(unsafe { core::slice::from_raw_parts(channel, len) });
-    }
-    meter.process_block(&slices);
+        // SAFETY: `meter.as_mut()` is null-checked.
+        let Some(meter) = (unsafe { meter.as_mut() }) else {
+            return;
+        };
+        let count = channel_count.min(meter.channel_count());
+        let mut slices: Vec<&[f32]> = Vec::with_capacity(count);
+        for i in 0..count {
+            // SAFETY: the caller guarantees `channel_count` valid pointers.
+            let channel = unsafe { *channels.add(i) };
+            if channel.is_null() {
+                return;
+            }
+            // SAFETY: the caller guarantees `len` readable samples.
+            slices.push(unsafe { core::slice::from_raw_parts(channel, len) });
+        }
+        meter.process_block(&slices);
+    });
 }
 
 #[no_mangle]
 pub extern "C" fn rustacity_ebur128_integrative_loudness(meter: *mut Ebur128) -> f64 {
-    // SAFETY: `meter.as_mut()` is null-checked.
-    match unsafe { meter.as_mut() } {
-        Some(meter) => meter.integrative_loudness(),
-        None => 0.0,
-    }
+    guard(0.0, || {
+        // SAFETY: `meter.as_mut()` is null-checked.
+        match unsafe { meter.as_mut() } {
+            Some(meter) => meter.integrative_loudness(),
+            None => 0.0,
+        }
+    })
 }
 
 /// Fill `out[0..2]` with the K-weighting filter pair (HSF, HPF).
@@ -207,6 +254,60 @@ pub extern "C" fn rustacity_ebur128_weighting_filter(
     out: *mut Biquad,
     cap: usize,
 ) -> c_int {
-    write_sections(out, cap, ebur128::calc_weighting_filter(fs).to_vec())
+    guard(0, || {
+        write_sections(out, cap, ebur128::calc_weighting_filter(fs).to_vec())
+    })
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// The whole point of the guard: a panic inside the core comes back
+    /// as a value, never as an unwind into C++ and never as an abort.
+    /// The panic message printed by the default hook is expected here.
+    #[test]
+    fn guard_turns_a_panic_into_the_fallback() {
+        assert_eq!(guard(7, || panic!("deliberate test panic")), 7);
+    }
+
+    #[test]
+    fn guard_passes_a_normal_result_through() {
+        assert_eq!(guard(7, || 9), 9);
+    }
+
+    /// The nulls and invalid values a C++ caller can produce must be
+    /// tolerated, not turned into a process abort.
+    #[test]
+    fn entry_points_tolerate_bad_arguments() {
+        rustacity_biquad_reset(core::ptr::null_mut());
+        rustacity_biquad_process(
+            core::ptr::null_mut(),
+            core::ptr::null(),
+            core::ptr::null_mut(),
+            16,
+        );
+        assert_eq!(
+            rustacity_biquad_design_butterworth(core::ptr::null_mut(), 0, 3, 48000.0, 1000.0, 0),
+            0
+        );
+        assert_eq!(rustacity_biquad_cheby_poly(0, 0.5), 0.0);
+        assert_eq!(rustacity_biquad_cheby_poly(99, 0.5), 0.0);
+
+        assert!(rustacity_ebur128_new(f64::NAN, 2).is_null());
+        assert!(rustacity_ebur128_new(48000.0, 0).is_null());
+        rustacity_ebur128_initialize(core::ptr::null_mut());
+        rustacity_ebur128_process_sample(core::ptr::null_mut(), 0.0, 0);
+        rustacity_ebur128_next_sample(core::ptr::null_mut());
+        rustacity_ebur128_process_block(core::ptr::null_mut(), core::ptr::null(), 0, 0);
+        assert_eq!(
+            rustacity_ebur128_integrative_loudness(core::ptr::null_mut()),
+            0.0
+        );
+        rustacity_ebur128_free(core::ptr::null_mut());
+        assert_eq!(
+            rustacity_ebur128_weighting_filter(48000.0, core::ptr::null_mut(), 0),
+            0
+        );
+    }
+}

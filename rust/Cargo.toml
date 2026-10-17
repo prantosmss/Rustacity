@@ -6,7 +6,10 @@
 members = ["dsp"]
 resolver = "2"
 
-# rustacity-dsp is linked into the C++ application as a static library;
-# a panic must never unwind across the C ABI boundary.
+# rustacity-dsp is linked into the C++ application as a static library.
+# A panic must never unwind into the C++ caller, but "abort" would kill
+# the editor - and whatever the user had not saved - the first time any
+# of the growing Rust surface panicked.  The profile therefore unwinds
+# and every entry point catches the panic in ffi.rs::guard.
 [profile.release]
-panic = "abort"
+panic = "unwind"
