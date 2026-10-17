@@ -17,24 +17,11 @@
 #define __RUSTACITY_EFFECT_WAHWAH__
 
 #include "Effect.h"
+#include "WahwahFilter.h"
 
 class wxSlider;
 class wxTextCtrl;
 class ShuttleGui;
-
-class EffectWahwahState
-{
-public:
-   float samplerate;
-   double depth;
-   double freqofs;
-   double phase;
-   double outgain;
-   double lfoskip;
-   unsigned long skipcount;
-   double xn1, xn2, yn1, yn2;
-   double b0, b1, b2, a0, a1, a2;
-};
 
 class EffectWahwah final : public Effect
 {
@@ -80,9 +67,6 @@ public:
 
 private:
    // EffectWahwah implementation
-
-   void InstanceInit(EffectWahwahState & data, float sampleRate);
-   size_t InstanceProcess(EffectWahwahState & data, float **inBlock, float **outBlock, size_t blockLen);
 
    void OnFreqSlider(wxCommandEvent & evt);
    void OnPhaseSlider(wxCommandEvent & evt);

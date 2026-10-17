@@ -521,6 +521,7 @@ list( APPEND SOURCES
       effects/TwoPassSimpleMono.h
       effects/Wahwah.cpp
       effects/Wahwah.h
+      effects/WahwahFilter.h
 
       # VST Effects
 
