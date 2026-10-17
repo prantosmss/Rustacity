@@ -9,6 +9,7 @@ library.
 | path | what it is |
 | --- | --- |
 | `Cargo.toml` | the workspace; `panic = "unwind"` on purpose, see below |
+| `dsp/src/bass_treble.rs` | EffectBassTreble's low/high shelf filters |
 | `dsp/src/biquad.rs` | biquad filter design and processing |
 | `dsp/src/ebur128.rs` | EBU R128 loudness measurement |
 | `dsp/src/ffi.rs` | the C ABI: every entry point, each under a panic guard |

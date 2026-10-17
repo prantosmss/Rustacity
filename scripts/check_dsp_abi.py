@@ -33,10 +33,11 @@ LINE_COMMENT = re.compile(r"//[^\n]*")
 # `pub extern "C" fn name(` and `pub unsafe extern "C" fn name(`.
 EXPORT = re.compile(r'pub\s+(?:unsafe\s+)?extern\s+"C"\s+fn\s+([A-Za-z_][A-Za-z0-9_]*)')
 
-# A declaration: the line starts with a return type (void/int/float/double or a
-# rustacity_ type), optionally a pointer star, then the function name and "(".
+# A declaration: the line starts with a return type (void/int/size_t/float/
+# double or a rustacity_ type), optionally a pointer star, then the function
+# name and "(".
 DECLARATION = re.compile(
-    r"^\s*(?:void|int|float|double|rustacity_[A-Za-z0-9_]+)\s*\*?\s*"
+    r"^\s*(?:void|int|size_t|float|double|rustacity_[A-Za-z0-9_]+)\s*\*?\s*"
     r"(rustacity_[A-Za-z0-9_]+)\s*\(",
     re.MULTILINE,
 )

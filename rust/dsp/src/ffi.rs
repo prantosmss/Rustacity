@@ -11,6 +11,7 @@
 use core::ffi::c_int;
 use std::panic::{catch_unwind, AssertUnwindSafe};
 
+use crate::bass_treble::BassTreble;
 use crate::biquad::{self, Biquad};
 use crate::ebur128::{self, Ebur128};
 
@@ -150,6 +151,61 @@ pub extern "C" fn rustacity_biquad_cheby_poly(order: c_int, norm_freq: f64) -> f
             return 0.0;
         }
         biquad::cheby_poly(order, norm_freq)
+    })
+}
+
+/// Create the shelf filters of EffectBassTreble for one channel, or null if
+/// the arguments are unusable.
+#[no_mangle]
+pub extern "C" fn rustacity_bass_treble_new(sample_rate: f32) -> *mut BassTreble {
+    guard(core::ptr::null_mut(), || {
+        if !sample_rate.is_finite() || sample_rate <= 0.0 {
+            return core::ptr::null_mut();
+        }
+        Box::into_raw(Box::new(BassTreble::new(sample_rate)))
+    })
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_bass_treble_free(handle: *mut BassTreble) {
+    guard((), || {
+        if handle.is_null() {
+            return;
+        }
+        // SAFETY: the pointer came from `rustacity_bass_treble_new` and is
+        // consumed exactly once.
+        unsafe { drop(Box::from_raw(handle)) };
+    });
+}
+
+/// Filter `len` samples of one channel from `input` to `output`, which may
+/// alias, with the effect's three parameters for this block; returns `len`,
+/// or 0 if the arguments are unusable.
+#[no_mangle]
+pub extern "C" fn rustacity_bass_treble_process(
+    handle: *mut BassTreble,
+    bass_db: f64,
+    treble_db: f64,
+    gain_db: f64,
+    input: *const f32,
+    output: *mut f32,
+    len: usize,
+) -> usize {
+    guard(0, || {
+        if handle.is_null() || input.is_null() || output.is_null() {
+            return 0;
+        }
+        // SAFETY: non-null, aligned and dereferenceable by contract; input
+        // and output may alias (each sample is read before it is written),
+        // so raw pointers are used throughout.
+        let handle = unsafe { &mut *handle };
+        handle.set_parameters(bass_db, treble_db, gain_db);
+        for i in 0..len {
+            let x = unsafe { *input.add(i) };
+            let y = handle.process_one(x);
+            unsafe { *output.add(i) = y };
+        }
+        len
     })
 }
 
@@ -296,6 +352,22 @@ mod tests {
 
         assert!(rustacity_ebur128_new(f64::NAN, 2).is_null());
         assert!(rustacity_ebur128_new(48000.0, 0).is_null());
+
+        assert!(rustacity_bass_treble_new(0.0).is_null());
+        assert!(rustacity_bass_treble_new(f32::NAN).is_null());
+        rustacity_bass_treble_free(core::ptr::null_mut());
+        assert_eq!(
+            rustacity_bass_treble_process(
+                core::ptr::null_mut(),
+                0.0,
+                0.0,
+                0.0,
+                core::ptr::null(),
+                core::ptr::null_mut(),
+                8
+            ),
+            0
+        );
         rustacity_ebur128_initialize(core::ptr::null_mut());
         rustacity_ebur128_process_sample(core::ptr::null_mut(), 0.0, 0);
         rustacity_ebur128_next_sample(core::ptr::null_mut());

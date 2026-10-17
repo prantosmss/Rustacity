@@ -3,6 +3,10 @@
 //! The records come from `rust/dsp/goldens/reference.txt`, captured
 //! from the ORIGINAL C++ implementation by `src/goldendump.cpp`.
 
+// Every golden test includes this module but uses only the part of it that
+// its own records need, so unused items are expected here.
+#![allow(dead_code)]
+
 /// One `GOLDEN`-style record: the record kind plus its fields.
 pub struct Record {
     pub kind: String,

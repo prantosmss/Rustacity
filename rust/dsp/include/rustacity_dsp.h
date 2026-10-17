@@ -64,6 +64,27 @@ int rustacity_biquad_design_chebyshev2(rustacity_biquad_t *out, size_t cap,
 
 double rustacity_biquad_cheby_poly(int order, double norm_freq);
 
+/* --- EffectBassTreble's shelf filters --------------------------------- */
+
+/* Opaque state of one channel: a low shelf at 250 Hz, a high shelf at
+ * 4 kHz and the effect's output gain (the C++ EffectBassTrebleState).  The
+ * C++ side keeps one handle for the master and one per realtime group. */
+typedef struct rustacity_bass_treble rustacity_bass_treble_t;
+
+/* `sample_rate` is narrowed to float, like the C++ Init() took a float. */
+rustacity_bass_treble_t *rustacity_bass_treble_new(float sample_rate);
+void rustacity_bass_treble_free(rustacity_bass_treble_t *handle);
+
+/* Filter `len` samples of one channel from `input` to `output`, which may
+ * alias, with the effect's three parameters for this block.  Returns `len`,
+ * or 0 if the handle or a pointer is unusable.  Like the original
+ * Process(), every call designs the coefficients again. */
+size_t rustacity_bass_treble_process(rustacity_bass_treble_t *handle,
+                                     double bass_db, double treble_db,
+                                     double gain_db,
+                                     const float *input, float *output,
+                                     size_t len);
+
 /* --- EBU R128 loudness measurement ---------------------------------- */
 
 /* Opaque loudness meter; `rate` is the sample rate in Hz and

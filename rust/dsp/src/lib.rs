@@ -6,6 +6,7 @@
 //!
 //! Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
 
+pub mod bass_treble;
 pub mod biquad;
 pub mod ebur128;
 
