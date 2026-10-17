@@ -427,7 +427,7 @@ jobs:
           do
             name=$(basename "${src}" .cpp)
             echo "::group::${name}"
-            g++ -std=c++17 -O2 -Wall -Wextra -Isrc/effects \
+            g++ -std=c++17 -O2 -Wall -Wextra -Isrc -Isrc/effects \
               -o "/tmp/${name}" "${src}"
             "/tmp/${name}" | tee "out/${name}.txt"
             echo "::endgroup::"
