@@ -1,0 +1,13 @@
+[package]
+name = "rustacity-dsp"
+version = "0.2.0"
+edition = "2021"
+license = "GPL-2.0-or-later"
+description = "DSP core of Rustacity: biquad filter design and EBU R128 loudness measurement"
+publish = false
+
+[lib]
+name = "rustacity_dsp"
+# "staticlib" is linked into the C++ application, "rlib" is what the
+# test suite builds against.
+crate-type = ["staticlib", "rlib"]

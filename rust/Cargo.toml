@@ -1,0 +1,12 @@
+# Cargo workspace for Rustacity's Rust components.
+#
+# Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
+
+[workspace]
+members = ["dsp"]
+resolver = "2"
+
+# rustacity-dsp is linked into the C++ application as a static library;
+# a panic must never unwind across the C ABI boundary.
+[profile.release]
+panic = "abort"
