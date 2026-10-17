@@ -184,7 +184,6 @@ win/resetPrefs.txt
 win/xaudacity.ico
 *.sublime-project
 *.sublime-workspace
-/tests/results/*.png
 
 #other files that get in the way
 */not-for-git/*
