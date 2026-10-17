@@ -17,16 +17,18 @@
 #define __RUSTACITY_EFFECT_PHASER__
 
 #include "Effect.h"
-#include "PhaserFilter.h"
+
+/// The allpass filter lives in the Rust DSP core (rust/dsp); this is an
+/// opaque handle to it.  See rust/dsp/include/rustacity_dsp.h for the C ABI.
+struct rustacity_phaser;
 
 class wxSlider;
 class wxTextCtrl;
 class ShuttleGui;
 
-// The allpass array of the filter (PhaserFilter.h) is this large.
+// The most stages the effect offers; the Rust filter clamps a block to the
+// same maximum (MAX_STAGES in rust/dsp/src/phaser.rs).
 #define NUM_STAGES 24
-static_assert(NUM_STAGES == kPhaserMaxStages,
-              "NUM_STAGES must match kPhaserMaxStages");
 
 class EffectPhaser final : public Effect
 {
@@ -53,6 +55,7 @@ public:
    unsigned GetAudioOutCount() override;
    bool ProcessInitialize(sampleCount totalLen, ChannelNames chanMap = NULL) override;
    size_t ProcessBlock(float **inBlock, float **outBlock, size_t blockLen) override;
+   bool ProcessFinalize() override;
    bool RealtimeInitialize() override;
    bool RealtimeAddProcessor(unsigned numChannels, float sampleRate) override;
    bool RealtimeFinalize() override;
@@ -101,8 +104,8 @@ private:
 */
 
 private:
-   EffectPhaserState mMaster;
-   std::vector<EffectPhaserState> mSlaves;
+   rustacity_phaser* mMaster;
+   std::vector<rustacity_phaser*> mSlaves;
 
    // parameters
    int mStages;

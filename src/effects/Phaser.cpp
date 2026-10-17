@@ -22,6 +22,11 @@
 #include "../Rustacity.h"
 #include "Phaser.h"
 #include "LoadEffects.h"
+#include "rustacity_dsp.h"
+
+// The allpass filter itself lives in the Rust core (rust/dsp, crate
+// "rustacity-dsp"); this file is the C++ side of the C ABI declared in
+// rust/dsp/include/rustacity_dsp.h.
 
 #include "../Experimental.h"
 
@@ -98,11 +103,17 @@ EffectPhaser::EffectPhaser()
    mFeedback = DEF_Feedback;
    mOutGain = DEF_OutGain;
 
+   mMaster = nullptr;
+
    SetLinearEffectFlag(true);
 }
 
 EffectPhaser::~EffectPhaser()
 {
+   rustacity_phaser_free(mMaster);
+
+   for (auto slave : mSlaves)
+      rustacity_phaser_free(slave);
 }
 
 // ComponentInterface implementation
@@ -153,23 +164,39 @@ unsigned EffectPhaser::GetAudioOutCount()
 bool EffectPhaser::ProcessInitialize(sampleCount WXUNUSED(totalLen), ChannelNames WXUNUSED(chanMap))
 {
    // The C++ also offset the start phase by M_PI for a front-right channel,
-   // but the first block overwrites the state's phase from the parameter, so
+   // but the first block overwrote the state's phase from the parameter, so
    // that offset never reached the filter.
-   mMaster.Init(mSampleRate);
+   //
+   // Re-running the effect must not leak the previous run's handle; freeing a
+   // null one is a no-op.
+   rustacity_phaser_free(mMaster);
 
-   return true;
+   mMaster = rustacity_phaser_new(static_cast<float>(mSampleRate));
+
+   return mMaster != nullptr;
 }
 
 size_t EffectPhaser::ProcessBlock(float **inBlock, float **outBlock, size_t blockLen)
 {
-   return mMaster.Process(mStages, mDryWet, mFreq, mPhase, mDepth, mFeedback,
-                          mOutGain, inBlock[0], outBlock[0], blockLen);
+   return rustacity_phaser_process(mMaster, mStages, mDryWet, mFreq, mPhase,
+                                   mDepth, mFeedback, mOutGain, inBlock[0],
+                                   outBlock[0], blockLen);
+}
+
+bool EffectPhaser::ProcessFinalize()
+{
+   rustacity_phaser_free(mMaster);
+   mMaster = nullptr;
+
+   return true;
 }
 
 bool EffectPhaser::RealtimeInitialize()
 {
    SetBlockSize(512);
 
+   for (auto slave : mSlaves)
+      rustacity_phaser_free(slave);
    mSlaves.clear();
 
    return true;
@@ -177,17 +204,17 @@ bool EffectPhaser::RealtimeInitialize()
 
 bool EffectPhaser::RealtimeAddProcessor(unsigned WXUNUSED(numChannels), float sampleRate)
 {
-   EffectPhaserState slave;
-
-   slave.Init(sampleRate);
+   rustacity_phaser* slave = rustacity_phaser_new(sampleRate);
 
    mSlaves.push_back(slave);
 
-   return true;
+   return slave != nullptr;
 }
 
 bool EffectPhaser::RealtimeFinalize()
 {
+   for (auto slave : mSlaves)
+      rustacity_phaser_free(slave);
    mSlaves.clear();
 
    return true;
@@ -199,9 +226,9 @@ size_t EffectPhaser::RealtimeProcess(int group,
                                           size_t numSamples)
 {
 
-   return mSlaves[group].Process(mStages, mDryWet, mFreq, mPhase, mDepth,
-                                 mFeedback, mOutGain, inbuf[0], outbuf[0],
-                                 numSamples);
+   return rustacity_phaser_process(mSlaves[group], mStages, mDryWet, mFreq,
+                                   mPhase, mDepth, mFeedback, mOutGain, inbuf[0],
+                                   outbuf[0], numSamples);
 }
 bool EffectPhaser::DefineParams( ShuttleParams & S ){
    S.SHUTTLE_PARAM( mStages,    Stages );
