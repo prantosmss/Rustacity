@@ -12,26 +12,13 @@
 #ifndef __RUSTACITY_EFFECT_BASS_TREBLE__
 #define __RUSTACITY_EFFECT_BASS_TREBLE__
 
+#include "BassTrebleFilter.h"
 #include "Effect.h"
 
 class wxSlider;
 class wxCheckBox;
 class wxTextCtrl;
 class ShuttleGui;
-
-class EffectBassTrebleState
-{
-public:
-   float samplerate;
-   double treble;
-   double bass;
-   double gain;
-   double slope, hzBass, hzTreble;
-   double a0Bass, a1Bass, a2Bass, b0Bass, b1Bass, b2Bass;
-   double a0Treble, a1Treble, a2Treble, b0Treble, b1Treble, b2Treble;
-   double xn1Bass, xn2Bass, yn1Bass, yn2Bass;
-   double xn1Treble, xn2Treble, yn1Treble, yn2Treble;
-};
 
 class EffectBassTreble final : public Effect
 {
@@ -79,15 +66,6 @@ public:
    bool CheckWhetherSkipEffect() override;
 
 private:
-   // EffectBassTreble implementation
-
-   void InstanceInit(EffectBassTrebleState & data, float sampleRate);
-   size_t InstanceProcess(EffectBassTrebleState & data, float **inBlock, float **outBlock, size_t blockLen);
-
-   void Coefficents(double hz, double slope, double gain, double samplerate, int type,
-                    double& a0, double& a1, double& a2, double& b0, double& b1, double& b2);
-   float DoFilter(EffectBassTrebleState & data, float in);
-
    void OnBassText(wxCommandEvent & evt);
    void OnTrebleText(wxCommandEvent & evt);
    void OnGainText(wxCommandEvent & evt);
