@@ -21,6 +21,11 @@
 #include "../Rustacity.h"
 #include "Wahwah.h"
 #include "LoadEffects.h"
+#include "rustacity_dsp.h"
+
+// The wah filter itself lives in the Rust core (rust/dsp, crate
+// "rustacity-dsp"); this file is the C++ side of the C ABI declared in
+// rust/dsp/include/rustacity_dsp.h.
 
 #include "../Experimental.h"
 
@@ -89,11 +94,17 @@ EffectWahwah::EffectWahwah()
    mFreqOfs = DEF_FreqOfs;
    mOutGain = DEF_OutGain;
 
+   mMaster = nullptr;
+
    SetLinearEffectFlag(true);
 }
 
 EffectWahwah::~EffectWahwah()
 {
+   rustacity_wahwah_free(mMaster);
+
+   for (auto slave : mSlaves)
+      rustacity_wahwah_free(slave);
 }
 
 // ComponentInterface implementation
@@ -141,28 +152,42 @@ unsigned EffectWahwah::GetAudioOutCount()
    return 1;
 }
 
-bool EffectWahwah::ProcessInitialize(sampleCount WXUNUSED(totalLen), ChannelNames chanMap)
+bool EffectWahwah::ProcessInitialize(sampleCount WXUNUSED(totalLen), ChannelNames WXUNUSED(chanMap))
 {
-   mMaster.Init(mSampleRate);
+   // The C++ also offset the start phase by M_PI for a front-right channel,
+   // but the first block overwrote the state's phase from the parameter, so
+   // that offset never reached the filter.
+   //
+   // Re-running the effect must not leak the previous run's handle; freeing a
+   // null one is a no-op.
+   rustacity_wahwah_free(mMaster);
 
-   if (chanMap[0] == ChannelNameFrontRight)
-   {
-      mMaster.phase += M_PI;
-   }
+   mMaster = rustacity_wahwah_new(static_cast<float>(mSampleRate));
 
-   return true;
+   return mMaster != nullptr;
 }
 
 size_t EffectWahwah::ProcessBlock(float **inBlock, float **outBlock, size_t blockLen)
 {
-   return mMaster.Process(mFreq, mPhase, mDepth, mRes, mFreqOfs, mOutGain,
-                          inBlock[0], outBlock[0], blockLen);
+   return rustacity_wahwah_process(mMaster, mFreq, mPhase, mDepth, mRes,
+                                   mFreqOfs, mOutGain, inBlock[0], outBlock[0],
+                                   blockLen);
+}
+
+bool EffectWahwah::ProcessFinalize()
+{
+   rustacity_wahwah_free(mMaster);
+   mMaster = nullptr;
+
+   return true;
 }
 
 bool EffectWahwah::RealtimeInitialize()
 {
    SetBlockSize(512);
 
+   for (auto slave : mSlaves)
+      rustacity_wahwah_free(slave);
    mSlaves.clear();
 
    return true;
@@ -170,17 +195,17 @@ bool EffectWahwah::RealtimeInitialize()
 
 bool EffectWahwah::RealtimeAddProcessor(unsigned WXUNUSED(numChannels), float sampleRate)
 {
-   EffectWahwahState slave;
-
-   slave.Init(sampleRate);
+   rustacity_wahwah* slave = rustacity_wahwah_new(sampleRate);
 
    mSlaves.push_back(slave);
 
-   return true;
+   return slave != nullptr;
 }
 
 bool EffectWahwah::RealtimeFinalize()
 {
+   for (auto slave : mSlaves)
+      rustacity_wahwah_free(slave);
    mSlaves.clear();
 
    return true;
@@ -192,8 +217,9 @@ size_t EffectWahwah::RealtimeProcess(int group,
                                           size_t numSamples)
 {
 
-   return mSlaves[group].Process(mFreq, mPhase, mDepth, mRes, mFreqOfs,
-                                 mOutGain, inbuf[0], outbuf[0], numSamples);
+   return rustacity_wahwah_process(mSlaves[group], mFreq, mPhase, mDepth, mRes,
+                                   mFreqOfs, mOutGain, inbuf[0], outbuf[0],
+                                   numSamples);
 }
 
 bool EffectWahwah::DefineParams( ShuttleParams & S ){

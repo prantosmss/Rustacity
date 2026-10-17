@@ -17,7 +17,10 @@
 #define __RUSTACITY_EFFECT_WAHWAH__
 
 #include "Effect.h"
-#include "WahwahFilter.h"
+
+/// The wah filter lives in the Rust DSP core (rust/dsp); this is an opaque
+/// handle to it.  See rust/dsp/include/rustacity_dsp.h for the C ABI.
+struct rustacity_wahwah;
 
 class wxSlider;
 class wxTextCtrl;
@@ -48,6 +51,7 @@ public:
    unsigned GetAudioOutCount() override;
    bool ProcessInitialize(sampleCount totalLen, ChannelNames chanMap = NULL) override;
    size_t ProcessBlock(float **inBlock, float **outBlock, size_t blockLen) override;
+   bool ProcessFinalize() override;
    bool RealtimeInitialize() override;
    bool RealtimeAddProcessor(unsigned numChannels, float sampleRate) override;
    bool RealtimeFinalize() override;
@@ -83,8 +87,8 @@ private:
    void OnGainText(wxCommandEvent & evt);
 
 private:
-   EffectWahwahState mMaster;
-   std::vector<EffectWahwahState> mSlaves;
+   rustacity_wahwah* mMaster;
+   std::vector<rustacity_wahwah*> mSlaves;
 
    /* Parameters:
    mFreq - LFO frequency
