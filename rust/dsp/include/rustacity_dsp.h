@@ -77,6 +77,34 @@ float rustacity_biquad_dist_sqr(double x1, double y1, double x2, double y2);
 
 double rustacity_biquad_cheby_poly(int order, double norm_freq);
 
+/* --- EBU R128 loudness measurement ---------------------------------- */
+
+/* Opaque loudness meter; `rate` is the sample rate in Hz and
+ * `channels` the number of channels (1 for mono, 2 for stereo). */
+typedef struct rustacity_ebur128 rustacity_ebur128_t;
+
+rustacity_ebur128_t *rustacity_ebur128_new(double rate, size_t channels);
+void rustacity_ebur128_free(rustacity_ebur128_t *meter);
+
+void rustacity_ebur128_initialize(rustacity_ebur128_t *meter);
+void rustacity_ebur128_process_sample(rustacity_ebur128_t *meter, float x,
+                                      size_t channel);
+
+/* `channels[i]` is a buffer of `len` samples; `channels[0]` is
+ * processed first, exactly like ProcessSampleFromChannel() per channel
+ * followed by NextSample(). */
+void rustacity_ebur128_process_block(rustacity_ebur128_t *meter,
+                                     const float *const *channels,
+                                     size_t channel_count, size_t len);
+
+void rustacity_ebur128_next_sample(rustacity_ebur128_t *meter);
+double rustacity_ebur128_integrative_loudness(rustacity_ebur128_t *meter);
+
+/* The K-weighting filter pair (HSF, HPF) for `fs`, mirroring
+ * EBUR128::CalcWeightingFilter(); returns 2. */
+int rustacity_ebur128_weighting_filter(double fs, rustacity_biquad_t *out,
+                                       size_t cap);
+
 #ifdef __cplusplus
 }
 #endif

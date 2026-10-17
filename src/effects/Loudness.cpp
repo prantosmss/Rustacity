@@ -495,13 +495,15 @@ void EffectLoudness::LoadBufferBlock(TrackIterRange<WaveTrack> range,
 /// (for loudness).
 bool EffectLoudness::AnalyseBufferBlock()
 {
-   for(size_t i = 0; i < mTrackBufferLen; i++)
+   const float* channels[2] = {};
+   channels[0] = mTrackBuffer[0].get();
+   size_t channelCount = 1;
+   if(mProcStereo)
    {
-      mLoudnessProcessor->ProcessSampleFromChannel(mTrackBuffer[0][i], 0);
-      if(mProcStereo)
-         mLoudnessProcessor->ProcessSampleFromChannel(mTrackBuffer[1][i], 1);
-      mLoudnessProcessor->NextSample();
+      channels[1] = mTrackBuffer[1].get();
+      channelCount = 2;
    }
+   mLoudnessProcessor->ProcessBlock(channels, channelCount, mTrackBufferLen);
 
    if(!UpdateProgress())
       return false;

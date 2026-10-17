@@ -7,5 +7,6 @@
 //! Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
 
 pub mod biquad;
+pub mod ebur128;
 
 mod ffi;
