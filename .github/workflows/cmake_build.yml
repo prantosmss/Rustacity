@@ -117,6 +117,15 @@ jobs:
       run: |
         set -x
 
+        # The Rust DSP core is compiled by cargo during the CMake build;
+        # install the target matching the MSVC platform first.
+        if [ "${{matrix.config.platform}}" = "Win32" ]
+        then
+          rustup target add i686-pc-windows-msvc
+        else
+          rustup target add x86_64-pc-windows-msvc
+        fi
+
         # Build wxWidgets if needed
         if [ ! -e "${WXWIN}" ]
         then
@@ -326,7 +335,7 @@ jobs:
         # Capture golden reference values for the Rust DSP port tests
         # (prints "GOLDEN ..." lines checked into rust/dsp/goldens/)
         cmake --build build --config Release --target goldendump
-        ./build/src/goldendump
+        ./build/bin/goldendump
 
         # "Install" Rustacity
         cmake --install build --config Release --prefix "${DEST}"
