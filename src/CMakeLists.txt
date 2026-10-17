@@ -427,7 +427,6 @@ list( APPEND SOURCES
       effects/AutoDuck.h
       effects/BassTreble.cpp
       effects/BassTreble.h
-      effects/BassTrebleFilter.h
       effects/Biquad.cpp
       effects/Biquad.h
       effects/ChangePitch.cpp

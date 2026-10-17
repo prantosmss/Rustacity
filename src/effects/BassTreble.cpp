@@ -17,6 +17,11 @@
 #include "../Rustacity.h"
 #include "BassTreble.h"
 #include "LoadEffects.h"
+#include "rustacity_dsp.h"
+
+// The shelf filters themselves live in the Rust core (rust/dsp, crate
+// "rustacity-dsp"); this file is the C++ side of the C ABI declared in
+// rust/dsp/include/rustacity_dsp.h.
 
 #include "../Experimental.h"
 
@@ -81,11 +86,17 @@ EffectBassTreble::EffectBassTreble()
    mGain = DEF_Gain;
    mLink = DEF_Link;
 
+   mMaster = nullptr;
+
    SetLinearEffectFlag(true);
 }
 
 EffectBassTreble::~EffectBassTreble()
 {
+   rustacity_bass_treble_free(mMaster);
+
+   for (auto slave : mSlaves)
+      rustacity_bass_treble_free(slave);
 }
 
 // ComponentInterface implementation
@@ -136,20 +147,35 @@ unsigned EffectBassTreble::GetAudioOutCount()
 
 bool EffectBassTreble::ProcessInitialize(sampleCount WXUNUSED(totalLen), ChannelNames WXUNUSED(chanMap))
 {
-   mMaster.Init(mSampleRate, mGain);
+   // Re-running the effect must not leak the previous run's handle; freeing
+   // a null one is a no-op.
+   rustacity_bass_treble_free(mMaster);
 
-   return true;
+   mMaster = rustacity_bass_treble_new(static_cast<float>(mSampleRate));
+
+   return mMaster != nullptr;
 }
 
 size_t EffectBassTreble::ProcessBlock(float **inBlock, float **outBlock, size_t blockLen)
 {
-   return mMaster.Process(mBass, mTreble, mGain, inBlock[0], outBlock[0], blockLen);
+   return rustacity_bass_treble_process(mMaster, mBass, mTreble, mGain,
+                                        inBlock[0], outBlock[0], blockLen);
+}
+
+bool EffectBassTreble::ProcessFinalize()
+{
+   rustacity_bass_treble_free(mMaster);
+   mMaster = nullptr;
+
+   return true;
 }
 
 bool EffectBassTreble::RealtimeInitialize()
 {
    SetBlockSize(512);
 
+   for (auto slave : mSlaves)
+      rustacity_bass_treble_free(slave);
    mSlaves.clear();
 
    return true;
@@ -157,17 +183,17 @@ bool EffectBassTreble::RealtimeInitialize()
 
 bool EffectBassTreble::RealtimeAddProcessor(unsigned WXUNUSED(numChannels), float sampleRate)
 {
-   EffectBassTrebleState slave;
-
-   slave.Init(sampleRate, mGain);
+   rustacity_bass_treble* slave = rustacity_bass_treble_new(sampleRate);
 
    mSlaves.push_back(slave);
 
-   return true;
+   return slave != nullptr;
 }
 
 bool EffectBassTreble::RealtimeFinalize()
 {
+   for (auto slave : mSlaves)
+      rustacity_bass_treble_free(slave);
    mSlaves.clear();
 
    return true;
@@ -178,7 +204,8 @@ size_t EffectBassTreble::RealtimeProcess(int group,
                                               float **outbuf,
                                               size_t numSamples)
 {
-   return mSlaves[group].Process(mBass, mTreble, mGain, inbuf[0], outbuf[0], numSamples);
+   return rustacity_bass_treble_process(mSlaves[group], mBass, mTreble, mGain,
+                                        inbuf[0], outbuf[0], numSamples);
 }
 bool EffectBassTreble::DefineParams( ShuttleParams & S ){
    S.SHUTTLE_PARAM( mBass, Bass );

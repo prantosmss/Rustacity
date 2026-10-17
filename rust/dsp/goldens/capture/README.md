@@ -30,8 +30,8 @@ them like any other record.
 To run a dumper by hand, from the root of the checkout:
 
 ```sh
-g++ -std=c++17 -O2 -Isrc/effects -o /tmp/basstreble basstreble.cpp
-/tmp/basstreble
+g++ -std=c++17 -O2 -Isrc/effects -o /tmp/<unit> <unit>.cpp
+/tmp/<unit>
 ```
 
 The printed values depend on the C++ standard library's `libm`, so capture

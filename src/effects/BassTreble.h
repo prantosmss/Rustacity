@@ -12,8 +12,12 @@
 #ifndef __RUSTACITY_EFFECT_BASS_TREBLE__
 #define __RUSTACITY_EFFECT_BASS_TREBLE__
 
-#include "BassTrebleFilter.h"
 #include "Effect.h"
+
+/// The shelf filters live in the Rust DSP core (rust/dsp); this is an
+/// opaque handle to them.  See rust/dsp/include/rustacity_dsp.h for the
+/// C ABI.
+struct rustacity_bass_treble;
 
 class wxSlider;
 class wxCheckBox;
@@ -45,6 +49,7 @@ public:
    unsigned GetAudioOutCount() override;
    bool ProcessInitialize(sampleCount totalLen, ChannelNames chanMap = NULL) override;
    size_t ProcessBlock(float **inBlock, float **outBlock, size_t blockLen) override;
+   bool ProcessFinalize() override;
    bool RealtimeInitialize() override;
    bool RealtimeAddProcessor(unsigned numChannels, float sampleRate) override;
    bool RealtimeFinalize() override;
@@ -78,8 +83,8 @@ private:
    void UpdateGain(double oldVal, int control );
 
 private:
-   EffectBassTrebleState mMaster;
-   std::vector<EffectBassTrebleState> mSlaves;
+   rustacity_bass_treble* mMaster;
+   std::vector<rustacity_bass_treble*> mSlaves;
 
    double      mBass;
    double      mTreble;
