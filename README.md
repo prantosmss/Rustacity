@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/rustacity.svg" alt="Rustacity" width="96" height="96">
+</p>
+
 # Rustacity
 
 **An [Audacity](https://www.audacityteam.org) v2.4.1 fork created for the Rustaceans.**
