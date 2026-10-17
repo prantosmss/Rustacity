@@ -1,14 +1,17 @@
-Note: Audacity is distributed under the terms of the GNU GPL Version 2.
-This includes everything in the source code distribution
-except code in the lib-src directory.  Code in the lib-src
-directory may be released under a different license
-(which is GPL-compatible).  For a summary, see the
-README.txt file, and for specific details, see the license
-information inside each subdirectory of lib-src.
+Note: Rustacity is a fork of Audacity 2.4.1 and is distributed under the terms
+of the GNU GPL Version 2, as Audacity is.  Audacity(R) is copyright (c)
+1999-2016 Audacity Team, and its notices are kept throughout this tree.
+Changes made for the fork are copyright (c) 2026 Sadik Pranto, and are
+licensed under the same terms.
+
+This includes everything in the source code distribution except code in the
+lib-src directory.  Code in the lib-src directory may be released under a
+different license (which is GPL-compatible); for specific details, see the
+license information inside each subdirectory of lib-src.
 
 Documentation is distributed under the Creative Commons license (CC BY 3.0)
 Please see here for that:
-http://creativecommons.org/licenses/by/3.0/legalcode
+https://creativecommons.org/licenses/by/3.0/legalcode
 
 The full text of the GNU GPL follows:
 
