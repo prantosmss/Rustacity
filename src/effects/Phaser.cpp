@@ -150,20 +150,20 @@ unsigned EffectPhaser::GetAudioOutCount()
    return 1;
 }
 
-bool EffectPhaser::ProcessInitialize(sampleCount WXUNUSED(totalLen), ChannelNames chanMap)
+bool EffectPhaser::ProcessInitialize(sampleCount WXUNUSED(totalLen), ChannelNames WXUNUSED(chanMap))
 {
-   InstanceInit(mMaster, mSampleRate);
-   if (chanMap[0] == ChannelNameFrontRight)
-   {
-      mMaster.phase += M_PI;
-   }
+   // The C++ also offset the start phase by M_PI for a front-right channel,
+   // but the first block overwrites the state's phase from the parameter, so
+   // that offset never reached the filter.
+   mMaster.Init(mSampleRate);
 
    return true;
 }
 
 size_t EffectPhaser::ProcessBlock(float **inBlock, float **outBlock, size_t blockLen)
 {
-   return InstanceProcess(mMaster, inBlock, outBlock, blockLen);
+   return mMaster.Process(mStages, mDryWet, mFreq, mPhase, mDepth, mFeedback,
+                          mOutGain, inBlock[0], outBlock[0], blockLen);
 }
 
 bool EffectPhaser::RealtimeInitialize()
@@ -179,7 +179,7 @@ bool EffectPhaser::RealtimeAddProcessor(unsigned WXUNUSED(numChannels), float sa
 {
    EffectPhaserState slave;
 
-   InstanceInit(slave, sampleRate);
+   slave.Init(sampleRate);
 
    mSlaves.push_back(slave);
 
@@ -199,7 +199,9 @@ size_t EffectPhaser::RealtimeProcess(int group,
                                           size_t numSamples)
 {
 
-   return InstanceProcess(mSlaves[group], inbuf, outbuf, numSamples);
+   return mSlaves[group].Process(mStages, mDryWet, mFreq, mPhase, mDepth,
+                                 mFeedback, mOutGain, inbuf[0], outbuf[0],
+                                 numSamples);
 }
 bool EffectPhaser::DefineParams( ShuttleParams & S ){
    S.SHUTTLE_PARAM( mStages,    Stages );
@@ -380,75 +382,6 @@ bool EffectPhaser::TransferDataFromWindow()
 }
 
 // EffectPhaser implementation
-
-void EffectPhaser::InstanceInit(EffectPhaserState & data, float sampleRate)
-{
-   data.samplerate = sampleRate;
-
-   for (int j = 0; j < mStages; j++)
-   {
-      data.old[j] = 0;
-   }
-
-   data.skipcount = 0;
-   data.gain = 0;
-   data.fbout = 0;
-   data.laststages = 0;
-   data.outgain = 0;
-
-   return;
-}
-
-size_t EffectPhaser::InstanceProcess(EffectPhaserState & data, float **inBlock, float **outBlock, size_t blockLen)
-{
-   float *ibuf = inBlock[0];
-   float *obuf = outBlock[0];
-
-   for (int j = data.laststages; j < mStages; j++)
-   {
-      data.old[j] = 0;
-   }
-   data.laststages = mStages;
-
-   data.lfoskip = mFreq * 2 * M_PI / data.samplerate;
-   data.phase = mPhase * M_PI / 180;
-   data.outgain = DB_TO_LINEAR(mOutGain);
-
-   for (decltype(blockLen) i = 0; i < blockLen; i++)
-   {
-      double in = ibuf[i];
-
-      double m = in + data.fbout * mFeedback / 101;  // Feedback must be less than 100% to avoid infinite gain.
-
-      if (((data.skipcount++) % lfoskipsamples) == 0)
-      {
-         //compute sine between 0 and 1
-         data.gain =
-            (1.0 +
-             cos(data.skipcount.as_double() * data.lfoskip
-                 + data.phase)) / 2.0;
-
-         // change lfo shape
-         data.gain = expm1(data.gain * phaserlfoshape) / expm1(phaserlfoshape);
-
-         // attenuate the lfo
-         data.gain = 1.0 - data.gain / 255.0 * mDepth;
-      }
-
-      // phasing routine
-      for (int j = 0; j < mStages; j++)
-      {
-         double tmp = data.old[j];
-         data.old[j] = data.gain * tmp + m;
-         m = tmp - data.gain * data.old[j];
-      }
-      data.fbout = m;
-
-      obuf[i] = (float) (data.outgain * (m * mDryWet + in * (255 - mDryWet)) / 255);
-   }
-
-   return blockLen;
-}
 
 void EffectPhaser::OnStagesSlider(wxCommandEvent & evt)
 {

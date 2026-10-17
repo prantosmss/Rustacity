@@ -17,27 +17,16 @@
 #define __RUSTACITY_EFFECT_PHASER__
 
 #include "Effect.h"
+#include "PhaserFilter.h"
 
 class wxSlider;
 class wxTextCtrl;
 class ShuttleGui;
 
+// The allpass array of the filter (PhaserFilter.h) is this large.
 #define NUM_STAGES 24
-
-class EffectPhaserState
-{
-public:
-   // state variables
-   float samplerate;
-   sampleCount skipcount;
-   double old[NUM_STAGES]; // must be as large as MAX_STAGES
-   double gain;
-   double fbout;
-   double outgain;
-   double lfoskip;
-   double phase;
-   int laststages;
-};
+static_assert(NUM_STAGES == kPhaserMaxStages,
+              "NUM_STAGES must match kPhaserMaxStages");
 
 class EffectPhaser final : public Effect
 {
@@ -83,9 +72,6 @@ public:
 
 private:
    // EffectPhaser implementation
-
-   void InstanceInit(EffectPhaserState & data, float sampleRate);
-   size_t InstanceProcess(EffectPhaserState & data, float **inBlock, float **outBlock, size_t blockLen);
 
    void OnStagesSlider(wxCommandEvent & evt);
    void OnDryWetSlider(wxCommandEvent & evt);

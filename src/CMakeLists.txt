@@ -483,6 +483,7 @@ list( APPEND SOURCES
       effects/Paulstretch.h
       effects/Phaser.cpp
       effects/Phaser.h
+      effects/PhaserFilter.h
       effects/RealtimeEffectManager.cpp
       effects/RealtimeEffectManager.h
       effects/Repair.cpp
