@@ -47,7 +47,7 @@ Usage
     python scripts/brand/regenerate_theme_caches.py --sync-header
     python scripts/brand/regenerate_theme_caches.py --extract DIR
 
-Requires Python 3 with Pillow and the brand kit in ``brand/`` (see
+Requires Python 3 with Pillow and the brand kit in ``images/brand/`` (see
 ``build_brand_assets.py``).
 """
 

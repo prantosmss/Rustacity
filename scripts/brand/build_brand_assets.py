@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate Rustacity's image assets from the SVG sources in ``brand/``.
+"""Regenerate Rustacity's image assets from the SVG sources in ``images/brand/``.
 
 This script is the single source of truth for every raster/icon asset that
 carries the Rustacity identity: application icons (Windows ``.ico``, macOS
@@ -8,7 +8,8 @@ lockups, the installer/DMG artwork, the macOS document icons and the GNOME
 mime icon.
 
 Nothing here draws the logo: every mark, lockup and icon is rasterised straight
-from the SVG files in ``brand/`` (which are, on purpose, not tracked by git).
+from the SVG files in ``images/brand/``, which are tracked with the sources so
+the assets can be rebuilt from a clean clone.
 
 Tooling
 -------
@@ -43,9 +44,9 @@ from pathlib import Path
 from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
-BRAND = ROOT / "brand"
+BRAND = ROOT / "images" / "brand"
 
-# --- The Rustacity palette (see brand/rustacity-brand-sheet.svg) -------------
+# --- The Rustacity palette (see images/brand/rustacity-brand-sheet.svg) ------
 RUST_ORANGE = (0xD9, 0x48, 0x1F)
 EMBER = (0xF4, 0x73, 0x3A)
 CREAM = (0xF5, 0xE9, 0xDD)

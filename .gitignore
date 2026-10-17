@@ -206,6 +206,3 @@ win/xaudacity.ico
 #other files that get in the way
 */not-for-git/*
 *.dll
-
-#the Rustacity brand kit (SVG sources); the assets built from it are committed
-/brand/
