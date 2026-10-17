@@ -71,27 +71,6 @@ void Biquad::Process(float* pfIn, float* pfOut, int iNumSamples)
    RustDsp::CopyFromRust(*this, state);
 }
 
-// The Chebyshev coefficients are no longer read by this file - the
-// authoritative copy used by the design functions lives in the Rust
-// core (rust/dsp/src/biquad.rs) - but the table keeps its definition
-// here because Biquad.h declares it.  The golden-value tests
-// (rust/dsp/tests/) compare the two copies through ChebyPoly().
-const double Biquad::s_fChebyCoeffs[MAX_Order][MAX_Order + 1] =
-{
-   // For Chebyshev polynomials of the first kind (see http://en.wikipedia.org/wiki/Chebyshev_polynomial)
-   // Coeffs are in the order 0, 1, 2...9
-   { 0,  1},        // order 1
-   {-1,  0,   2},   // order 2 etc.
-   { 0, -3,   0,    4},
-   { 1,  0,  -8,    0,    8},
-   { 0,  5,   0,  -20,    0,   16},
-   {-1,  0,  18,    0,  -48,    0,   32},
-   { 0, -7,   0,   56,    0, -112,    0,   64},
-   { 1,  0, -32,    0,  160,    0, -256,    0,  128},
-   { 0,  9,   0, -120,    0,  432,    0, -576,    0,   256},
-   {-1,  0,  50,    0, -400,    0, 1120,    0, -1280,    0, 512}
-};
-
 ArrayOf<Biquad> Biquad::CalcButterworthFilter(int order, double fn, double fc, int type)
 {
    auto sections = SectionBuffer(order);

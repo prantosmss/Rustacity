@@ -63,15 +63,6 @@ pub extern "C" fn rustacity_biquad_process(
 }
 
 #[no_mangle]
-pub extern "C" fn rustacity_biquad_process_one(bq: *mut Biquad, x: f32) -> f32 {
-    if bq.is_null() {
-        return 0.0;
-    }
-    // SAFETY: non-null, aligned and dereferenceable by contract.
-    unsafe { (*bq).process_one(x) }
-}
-
-#[no_mangle]
 pub extern "C" fn rustacity_biquad_design_butterworth(
     out: *mut Biquad,
     cap: usize,

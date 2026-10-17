@@ -33,22 +33,6 @@ struct Biquad
       MAX_Order = 10
    };
 
-   inline float ProcessOne(float fIn)
-   {
-      // Biquad must use double for all calculations. Otherwise some
-      // filters may have catastrophic rounding errors!
-      double fOut = double(fIn) * fNumerCoeffs[B0] +
-            fPrevIn * fNumerCoeffs[B1] +
-            fPrevPrevIn * fNumerCoeffs[B2] -
-            fPrevOut * fDenomCoeffs[A1] -
-            fPrevPrevOut * fDenomCoeffs[A2];
-      fPrevPrevIn = fPrevIn;
-      fPrevIn = fIn;
-      fPrevPrevOut = fPrevOut;
-      fPrevOut = fOut;
-      return fOut;
-   }
-
    double fNumerCoeffs[3]; // B0 B1 B2
    double fDenomCoeffs[2]; // A1 A2, A0 == 1.0
    double fPrevIn;
@@ -72,7 +56,6 @@ struct Biquad
    static bool BilinTransform (double fSX, double fSY, double* pfZX, double* pfZY);
    static float Calc2D_DistSqr (double fX1, double fY1, double fX2, double fY2);
 
-   static const double s_fChebyCoeffs[MAX_Order][MAX_Order + 1];
    static double ChebyPoly(int Order, double NormFreq);
 };
 

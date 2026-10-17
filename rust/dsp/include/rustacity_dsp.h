@@ -49,8 +49,6 @@ void rustacity_biquad_reset(rustacity_biquad_t *bq);
 void rustacity_biquad_process(rustacity_biquad_t *bq, const float *input,
                               float *output, int num_samples);
 
-float rustacity_biquad_process_one(rustacity_biquad_t *bq, float x);
-
 /* The design functions fill `out[0..return)` with the (order+1)/2
  * cascade sections and return the number of sections written, or 0 if
  * the order is invalid.  `cap` is the capacity of `out` in entries. */

@@ -26,8 +26,11 @@ pub const B2: usize = 2;
 pub const A1: usize = 0;
 pub const A2: usize = 1;
 
-/// Chebyshev polynomials of the first kind (order 0, 1, ... 9),
-/// mirroring `Biquad::s_fChebyCoeffs`.
+/// Chebyshev polynomials of the first kind (order 0, 1, ... 9).
+///
+/// The C++ table this was ported from (`Biquad::s_fChebyCoeffs`) was
+/// deleted along with the rest of the C++ filter design code, so this
+/// is now the only copy.
 const CHEBY_COEFFS: [[f64; 11]; 10] = [
     [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
     [-1.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
