@@ -51,11 +51,6 @@ struct Biquad
    static ArrayOf<Biquad> CalcChebyshevType1Filter(int order, double fn, double fc, double ripple, int type);
    static ArrayOf<Biquad> CalcChebyshevType2Filter(int order, double fn, double fc, double ripple, int type);
 
-   static void ComplexDiv (double fNumerR, double fNumerI, double fDenomR, double fDenomI,
-                           double* pfQuotientR, double* pfQuotientI);
-   static bool BilinTransform (double fSX, double fSY, double* pfZX, double* pfZY);
-   static float Calc2D_DistSqr (double fX1, double fY1, double fX2, double fY2);
-
    static double ChebyPoly(int Order, double NormFreq);
 };
 

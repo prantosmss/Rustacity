@@ -113,51 +113,6 @@ pub extern "C" fn rustacity_biquad_design_chebyshev2(
 }
 
 #[no_mangle]
-pub extern "C" fn rustacity_biquad_complex_div(
-    numer_r: f64,
-    numer_i: f64,
-    denom_r: f64,
-    denom_i: f64,
-    quotient_r: *mut f64,
-    quotient_i: *mut f64,
-) {
-    let (r, i) = biquad::complex_div(numer_r, numer_i, denom_r, denom_i);
-    if !quotient_r.is_null() {
-        // SAFETY: non-null by check, writable by contract.
-        unsafe { *quotient_r = r };
-    }
-    if !quotient_i.is_null() {
-        // SAFETY: non-null by check, writable by contract.
-        unsafe { *quotient_i = i };
-    }
-}
-
-#[no_mangle]
-pub extern "C" fn rustacity_biquad_bilin_transform(
-    sx: f64,
-    sy: f64,
-    zx: *mut f64,
-    zy: *mut f64,
-) -> c_int {
-    let (x, y) = biquad::bilin_transform(sx, sy);
-    if !zx.is_null() {
-        // SAFETY: non-null by check, writable by contract.
-        unsafe { *zx = x };
-    }
-    if !zy.is_null() {
-        // SAFETY: non-null by check, writable by contract.
-        unsafe { *zy = y };
-    }
-    // The C++ function always returns true.
-    1
-}
-
-#[no_mangle]
-pub extern "C" fn rustacity_biquad_dist_sqr(x1: f64, y1: f64, x2: f64, y2: f64) -> f32 {
-    biquad::calc_2d_dist_sqr(x1, y1, x2, y2)
-}
-
-#[no_mangle]
 pub extern "C" fn rustacity_biquad_cheby_poly(order: c_int, norm_freq: f64) -> f64 {
     if !(biquad::MIN_ORDER..=biquad::MAX_ORDER).contains(&order) {
         return 0.0;

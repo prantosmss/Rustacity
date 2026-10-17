@@ -97,23 +97,6 @@ ArrayOf<Biquad> Biquad::CalcChebyshevType2Filter(
    return SectionArray(sections, written);
 }
 
-void Biquad::ComplexDiv (double fNumerR, double fNumerI, double fDenomR, double fDenomI,
-                         double* pfQuotientR, double* pfQuotientI)
-{
-   rustacity_biquad_complex_div(
-      fNumerR, fNumerI, fDenomR, fDenomI, pfQuotientR, pfQuotientI);
-}
-
-bool Biquad::BilinTransform (double fSX, double fSY, double* pfZX, double* pfZY)
-{
-   return rustacity_biquad_bilin_transform(fSX, fSY, pfZX, pfZY) != 0;
-}
-
-float Biquad::Calc2D_DistSqr (double fX1, double fY1, double fX2, double fY2)
-{
-   return rustacity_biquad_dist_sqr(fX1, fY1, fX2, fY2);
-}
-
 double Biquad::ChebyPoly(int Order, double NormFreq)
 {
    return rustacity_biquad_cheby_poly(Order, NormFreq);

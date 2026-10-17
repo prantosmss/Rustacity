@@ -62,17 +62,6 @@ int rustacity_biquad_design_chebyshev2(rustacity_biquad_t *out, size_t cap,
                                        int order, double fn_hz, double fc,
                                        double ripple, int subtype);
 
-void rustacity_biquad_complex_div(double numer_r, double numer_i,
-                                  double denom_r, double denom_i,
-                                  double *quotient_r, double *quotient_i);
-
-/* Always returns 1 (the C++ function always returns true). */
-int rustacity_biquad_bilin_transform(double sx, double sy, double *zx,
-                                     double *zy);
-
-/* Note: single precision, exactly like the C++ implementation. */
-float rustacity_biquad_dist_sqr(double x1, double y1, double x2, double y2);
-
 double rustacity_biquad_cheby_poly(int order, double norm_freq);
 
 /* --- EBU R128 loudness measurement ---------------------------------- */
