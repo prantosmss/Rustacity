@@ -382,6 +382,12 @@ jobs:
 
   # =========================================================================
   # SHARED: Publish a GitHub Release when a tag is pushed
+  #
+  # The release is published with the maintainer's own credentials (the
+  # RELEASE_TOKEN secret, a fine-grained token of prantosmss), not with
+  # the workflow's GITHUB_TOKEN: a release created with GITHUB_TOKEN is
+  # attributed to github-actions[bot], while one created with a personal
+  # token is attributed to its owner.  See "Releasing" in README.md.
   # =========================================================================
   release:
     name: Publish Release
@@ -390,6 +396,8 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     needs: [ build, rust-test ]
     runs-on: ubuntu-latest
+    # GITHUB_TOKEN only reads the workflow's artifacts here; the release
+    # itself is published with RELEASE_TOKEN below.
     permissions:
       contents: write
     steps:
@@ -401,9 +409,20 @@ jobs:
         with:
           path: dist
 
+      - name: Require the RELEASE_TOKEN secret
+        env:
+          RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        run: |
+          if [ -z "${RELEASE_TOKEN}" ]; then
+            echo "::error::The RELEASE_TOKEN secret is not set, so the release cannot be published under the maintainer's account."
+            echo "Add a fine-grained personal access token (Contents: Read and write on this repository) as the RELEASE_TOKEN repository secret."
+            echo "See the \"Releasing\" section of README.md."
+            exit 1
+          fi
+
       - name: Create release and upload binaries
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           set -eux
           TAG="${GITHUB_REF_NAME}"
