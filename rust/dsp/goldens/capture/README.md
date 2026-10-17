@@ -3,9 +3,9 @@
 The dumpers here compile a DSP unit of the C++ tree **on its own** (plain
 `g++`, no wxWidgets, no CMake) and print the values the Rust port has to
 reproduce byte for byte. They are the capture step of the porting rule in
-[`rust/README.md`](../../../README.md): *extract, capture, port, delete*. A
-dumper and the C++ unit it captured are deleted together, when the port is
-finished.
+[`docs/architecture.md`](../../../../docs/architecture.md): *extract, capture,
+port, delete*. A dumper and the C++ unit it captured are deleted together,
+when the port is finished.
 
 Each dumper includes exactly one header from `src/effects/` — the unit that
 was moved out of its effect class for the capture. Anything a dumper needs
