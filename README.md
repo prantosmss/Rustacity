@@ -39,3 +39,5 @@ The ported code is checked against reference values captured from the original C
 cd rust
 cargo test --workspace
 ```
+
+The ABI conventions, the panic policy and the rules for porting more of the audio engine to Rust are in [`rust/README.md`](rust/README.md).
