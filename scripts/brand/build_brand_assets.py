@@ -263,7 +263,11 @@ def write_xpm(img: Image.Image, path: Path, fallback_symbol: str) -> None:
     out += ['   "%s\tc %s",' % (keys[i], k) for i, k in enumerate(order)]
     out += ['   "%s",' % "".join(keyof[order[i]] for i in rows[y]) for y in range(h)]
     out.append("};")
-    path.write_text("\n".join(out) + "\n", encoding="utf-8", newline="")
+    # No newline= override: these XPMs are tracked text under "* text=auto", so
+    # let Python write the platform's line ending (CRLF on Windows) - the same
+    # form git checks the rest of the tree out in.  Forcing "\n" made every
+    # regenerated XPM look modified after a run even though nothing had changed.
+    path.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
 def dib_bytes(img: Image.Image) -> bytes:
