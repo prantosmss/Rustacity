@@ -6,12 +6,6 @@
 //!
 //! Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
 
-// The Biquad filter and EBU R128 loudness modules land with their ports.
+pub mod biquad;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn workspace_smoke() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+mod ffi;

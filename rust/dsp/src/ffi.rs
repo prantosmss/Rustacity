@@ -1,0 +1,175 @@
+//! C ABI of the DSP core.
+//!
+//! The declarations live in `include/rustacity_dsp.h`; every function
+//! here mirrors one C++ entry point of the original implementation.
+//! Pointers are validated before use and no panic can cross the FFI
+//! boundary (the release profile aborts instead of unwinding).
+//!
+//! Contributor: Sadik Pranto <pranto.smss.dev@gmail.com>
+
+use core::ffi::c_int;
+
+use crate::biquad::{self, Biquad};
+
+/// `rustacity_biquad_t` is 9 doubles - the C++ side asserts that the
+/// C++ `Biquad` has exactly the same size.
+const _: () =
+    assert!(core::mem::size_of::<Biquad>() == 9 * core::mem::size_of::<f64>());
+
+/// Copy `sections` into the caller's buffer, at most `cap` entries,
+/// and return how many were written.
+fn write_sections(out: *mut Biquad, cap: usize, sections: Vec<Biquad>) -> c_int {
+    if out.is_null() {
+        return 0;
+    }
+    let n = sections.len().min(cap);
+    for (i, section) in sections.into_iter().take(n).enumerate() {
+        // SAFETY: `out` is non-null and has room for `n <= cap` entries
+        // by contract of the caller.
+        unsafe { out.add(i).write(section) };
+    }
+    n as c_int
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_reset(bq: *mut Biquad) {
+    if bq.is_null() {
+        return;
+    }
+    // SAFETY: non-null, aligned and dereferenceable by contract.
+    unsafe { (*bq).reset() };
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_process(
+    bq: *mut Biquad,
+    input: *const f32,
+    output: *mut f32,
+    num_samples: c_int,
+) {
+    if bq.is_null() || input.is_null() || output.is_null() || num_samples <= 0 {
+        return;
+    }
+    // SAFETY: the caller guarantees valid pointers for `num_samples`
+    // samples; input and output may alias (the loop reads each sample
+    // before writing it), so raw pointers are used throughout.
+    let bq = unsafe { &mut *bq };
+    for i in 0..num_samples as isize {
+        let x = unsafe { *input.offset(i) };
+        let y = bq.process_one(x);
+        unsafe { *output.offset(i) = y };
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_process_one(bq: *mut Biquad, x: f32) -> f32 {
+    if bq.is_null() {
+        return 0.0;
+    }
+    // SAFETY: non-null, aligned and dereferenceable by contract.
+    unsafe { (*bq).process_one(x) }
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_design_butterworth(
+    out: *mut Biquad,
+    cap: usize,
+    order: c_int,
+    fn_hz: f64,
+    fc: f64,
+    subtype: c_int,
+) -> c_int {
+    write_sections(
+        out,
+        cap,
+        biquad::calc_butterworth_filter(order, fn_hz, fc, subtype),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_design_chebyshev1(
+    out: *mut Biquad,
+    cap: usize,
+    order: c_int,
+    fn_hz: f64,
+    fc: f64,
+    ripple: f64,
+    subtype: c_int,
+) -> c_int {
+    write_sections(
+        out,
+        cap,
+        biquad::calc_chebyshev_type1_filter(order, fn_hz, fc, ripple, subtype),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_design_chebyshev2(
+    out: *mut Biquad,
+    cap: usize,
+    order: c_int,
+    fn_hz: f64,
+    fc: f64,
+    ripple: f64,
+    subtype: c_int,
+) -> c_int {
+    write_sections(
+        out,
+        cap,
+        biquad::calc_chebyshev_type2_filter(order, fn_hz, fc, ripple, subtype),
+    )
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_complex_div(
+    numer_r: f64,
+    numer_i: f64,
+    denom_r: f64,
+    denom_i: f64,
+    quotient_r: *mut f64,
+    quotient_i: *mut f64,
+) {
+    let (r, i) = biquad::complex_div(numer_r, numer_i, denom_r, denom_i);
+    if !quotient_r.is_null() {
+        // SAFETY: non-null by check, writable by contract.
+        unsafe { *quotient_r = r };
+    }
+    if !quotient_i.is_null() {
+        // SAFETY: non-null by check, writable by contract.
+        unsafe { *quotient_i = i };
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_bilin_transform(
+    sx: f64,
+    sy: f64,
+    zx: *mut f64,
+    zy: *mut f64,
+) -> c_int {
+    let (x, y) = biquad::bilin_transform(sx, sy);
+    if !zx.is_null() {
+        // SAFETY: non-null by check, writable by contract.
+        unsafe { *zx = x };
+    }
+    if !zy.is_null() {
+        // SAFETY: non-null by check, writable by contract.
+        unsafe { *zy = y };
+    }
+    // The C++ function always returns true.
+    1
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_dist_sqr(x1: f64, y1: f64, x2: f64, y2: f64) -> f32 {
+    biquad::calc_2d_dist_sqr(x1, y1, x2, y2)
+}
+
+#[no_mangle]
+pub extern "C" fn rustacity_biquad_cheby_poly(order: c_int, norm_freq: f64) -> f64 {
+    if !(biquad::MIN_ORDER..=biquad::MAX_ORDER).contains(&order) {
+        return 0.0;
+    }
+    biquad::cheby_poly(order, norm_freq)
+}
+

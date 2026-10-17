@@ -332,11 +332,6 @@ jobs:
         # Build Rustacity
         cmake --build build --config Release
 
-        # Capture golden reference values for the Rust DSP port tests
-        # (prints "GOLDEN ..." lines checked into rust/dsp/goldens/)
-        cmake --build build --config Release --target goldendump
-        ./build/bin/goldendump
-
         # "Install" Rustacity
         cmake --install build --config Release --prefix "${DEST}"
 

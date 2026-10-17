@@ -495,6 +495,7 @@ list( APPEND SOURCES
       effects/Reverb_libSoX.h
       effects/Reverse.cpp
       effects/Reverse.h
+      effects/RustDsp.h
       effects/SBSMSEffect.cpp
       effects/SBSMSEffect.h
       effects/ScienFilter.cpp
@@ -1382,19 +1383,66 @@ source_group(
         ${_INTDIR}/CMakeFiles/Rustacity.dir/cmake_pch.hxx
 )
 
-# Temporary golden-value capture harness for the Rust DSP port: prints
-# "GOLDEN ..." reference records produced by the original C++ Biquad /
-# EBU R128 implementation (captured to rust/dsp/goldens/ by CI).
-# EXCLUDE_FROM_ALL: built only by the dedicated CI step; the target is
-# removed together with that step once the goldens are checked in.
-add_executable( goldendump EXCLUDE_FROM_ALL
-   goldendump.cpp
-   effects/Biquad.cpp
-   effects/EBUR128.cpp
+# =========================================================================
+# Rust DSP core (crate "rustacity-dsp" under rust/)
+#
+# The filter design and the sample processing live in Rust; cargo
+# compiles them into a static library that the application links
+# through the C ABI in rust/dsp/include/rustacity_dsp.h.
+# =========================================================================
+
+list( APPEND INCLUDES
+   PRIVATE
+      ${topdir}/rust/dsp/include
 )
-target_compile_definitions( goldendump PRIVATE ${DEFINES} )
-target_include_directories( goldendump PRIVATE ${INCLUDES} )
-target_link_libraries( goldendump PRIVATE wxWidgets )
+
+find_program( CARGO_EXECUTABLE cargo )
+if( NOT CARGO_EXECUTABLE )
+   message( FATAL_ERROR "cargo not found - the Rust DSP core is required" )
+endif()
+
+if( WIN32 )
+   if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+      set( RUST_TARGET_TRIPLE "x86_64-pc-windows-msvc" )
+   else()
+      set( RUST_TARGET_TRIPLE "i686-pc-windows-msvc" )
+   endif()
+   set( RUST_DSP_LIB_NAME "rustacity_dsp.lib" )
+elseif( APPLE )
+   set( RUST_TARGET_TRIPLE "x86_64-apple-darwin" )
+   set( RUST_DSP_LIB_NAME "librustacity_dsp.a" )
+elseif( CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64" )
+   set( RUST_TARGET_TRIPLE "aarch64-unknown-linux-gnu" )
+   set( RUST_DSP_LIB_NAME "librustacity_dsp.a" )
+else()
+   set( RUST_TARGET_TRIPLE "x86_64-unknown-linux-gnu" )
+   set( RUST_DSP_LIB_NAME "librustacity_dsp.a" )
+endif()
+
+set( RUST_DSP_ROOT "${topdir}/rust" )
+set( RUST_DSP_LIB
+   "${RUST_DSP_ROOT}/target/${RUST_TARGET_TRIPLE}/release/${RUST_DSP_LIB_NAME}" )
+
+file( GLOB_RECURSE RUST_DSP_SOURCES CONFIGURE_DEPENDS
+   "${RUST_DSP_ROOT}/dsp/src/*.rs" )
+list( APPEND RUST_DSP_SOURCES
+   "${RUST_DSP_ROOT}/Cargo.toml"
+   "${RUST_DSP_ROOT}/dsp/Cargo.toml"
+)
+
+add_custom_command(
+   OUTPUT "${RUST_DSP_LIB}"
+   COMMAND "${CARGO_EXECUTABLE}" build --release
+           --target "${RUST_TARGET_TRIPLE}"
+           --manifest-path "${RUST_DSP_ROOT}/Cargo.toml"
+   DEPENDS ${RUST_DSP_SOURCES}
+   WORKING_DIRECTORY "${RUST_DSP_ROOT}"
+   COMMENT "Building the Rust DSP core (${RUST_TARGET_TRIPLE})"
+   VERBATIM
+)
+
+add_custom_target( rustacity_dsp DEPENDS "${RUST_DSP_LIB}" )
+add_dependencies( ${TARGET} rustacity_dsp )
 
 target_sources( ${TARGET} PRIVATE ${HEADERS} ${SOURCES} ${RESOURCES} ${MAC_RESOURCES} ${WIN_RESOURCES} )
 target_compile_definitions( ${TARGET} PRIVATE ${DEFINES} )
@@ -1402,6 +1450,22 @@ target_compile_options( ${TARGET} PRIVATE ${OPTIONS} )
 target_include_directories( ${TARGET} PRIVATE ${INCLUDES} )
 target_link_options( ${TARGET} PRIVATE ${LDFLAGS} )
 target_link_libraries( ${TARGET} PRIVATE ${LIBRARIES} )
+
+# Link the Rust DSP core built above
+target_link_libraries( ${TARGET} PRIVATE "${RUST_DSP_LIB}" )
+
+if( MSVC )
+   # The Rust static library references Windows system libraries that
+   # are not part of CMake's default set for MSVC.
+   target_link_libraries( ${TARGET} PRIVATE
+      bcrypt
+      userenv
+      ws2_32
+      ntdll
+      dbghelp
+      psapi
+   )
+endif()
 
 if( PRECOMP )
    target_precompile_headers( ${TARGET} PRIVATE ${PRECOMP} )
