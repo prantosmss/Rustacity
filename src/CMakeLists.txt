@@ -172,8 +172,6 @@ list( APPEND SOURCES
       LyricsWindow.cpp
       LyricsWindow.h
       MacroMagic.h
-      Makefile.am
-      Makefile.in
       Matrix.cpp
       Matrix.h
       MemoryX.h
@@ -1485,7 +1483,7 @@ if( NOT "${CMAKE_GENERATOR}" MATCHES "Xcode|Visual Studio*" )
                FILES_MATCHING PATTERN "*.so" )
       install( FILES "${_INTDIR}/rustacity.desktop"
                DESTINATION "${_DATADIR}/applications" )
-      install( FILES "${topdir}/LICENSE.txt" "${topdir}/README.txt"
+      install( FILES "${topdir}/LICENSE.txt"
                DESTINATION "${_DATADIR}/doc/${RUSTACITY_NAME}" )
       install( FILES "${_SRCDIR}/rustacity.xml"
                DESTINATION "${_DATADIR}/mime/packages" )
