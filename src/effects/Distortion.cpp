@@ -19,6 +19,11 @@
 #include "../Rustacity.h"
 #include "Distortion.h"
 #include "LoadEffects.h"
+#include "rustacity_dsp.h"
+
+// The waveshaper itself lives in the Rust core (rust/dsp, crate
+// "rustacity-dsp"); this file is the C++ side of the C ABI declared in
+// rust/dsp/include/rustacity_dsp.h.
 
 #include "../Experimental.h"
 
@@ -47,8 +52,24 @@
 #include "../ShuttleGui.h"
 #include "../widgets/valnum.h"
 
-// The kinds of table are kTableType, in DistortionFilter.h, next to the
-// builders that use them.
+// The kinds of table, in the order of the effect's choice list.  The builders
+// that use them are the Rust core's (rust/dsp/src/distortion.rs), which has the
+// same order; the choice crosses the ABI as the plain index into this list.
+enum kTableType
+{
+   kHardClip,
+   kSoftClip,
+   kHalfSinCurve,
+   kExpCurve,
+   kLogCurve,
+   kCubic,
+   kEvenHarmonics,
+   kSinCurve,
+   kLeveller,
+   kRectifier,
+   kHardLimiter,
+   nTableTypes
+};
 
 static const EnumValueSymbol kTableTypeStrings[nTableTypes] =
 {
@@ -78,8 +99,8 @@ Param( Param2,          double,  wxT("Parameter 2"),    50.0,    0.0,   100.0,  
 Param( Repeats,         int,     wxT("Repeats"),        1,       0,       5,                  1    );
 
 // The number of samples the table was rebuilt after (skipsamples) is gone with
-// the code that read it: the unit in DistortionFilter.h rebuilds the table
-// whenever the settings that shape it change, which is the same table.
+// the code that read it: the Rust core rebuilds the table whenever the settings
+// that shape it change, which is the same table.
 
 const double MIN_Threshold_Linear DB_TO_LINEAR(MIN_Threshold_dB);
 
@@ -168,11 +189,17 @@ EffectDistortion::EffectDistortion()
    mParams.mRepeats = DEF_Repeats;
    mbSavedFilterState = DEF_DCBlock;
 
+   mMaster = nullptr;
+
    SetLinearEffectFlag(false);
 }
 
 EffectDistortion::~EffectDistortion()
 {
+   rustacity_distortion_free(mMaster);
+
+   for (auto slave : mSlaves)
+      rustacity_distortion_free(slave);
 }
 
 // ComponentInterface implementation
@@ -222,19 +249,39 @@ unsigned EffectDistortion::GetAudioOutCount()
 
 bool EffectDistortion::ProcessInitialize(sampleCount WXUNUSED(totalLen), ChannelNames WXUNUSED(chanMap))
 {
-   InstanceInit(mMaster, mSampleRate);
-   return true;
+   // Re-running the effect must not leak the previous run's handle; freeing a
+   // null one is a no-op.
+   rustacity_distortion_free(mMaster);
+
+   mMaster = rustacity_distortion_new(static_cast<float>(mSampleRate));
+
+   return mMaster != nullptr;
 }
 
 size_t EffectDistortion::ProcessBlock(float **inBlock, float **outBlock, size_t blockLen)
 {
-   return InstanceProcess(mMaster, inBlock, outBlock, blockLen);
+   return rustacity_distortion_process(mMaster, mParams.mTableChoiceIndx,
+                                       mParams.mDCBlock ? 1 : 0,
+                                       mParams.mThreshold_dB, mParams.mNoiseFloor,
+                                       mParams.mParam1, mParams.mParam2,
+                                       mParams.mRepeats, inBlock[0], outBlock[0],
+                                       blockLen);
+}
+
+bool EffectDistortion::ProcessFinalize()
+{
+   rustacity_distortion_free(mMaster);
+   mMaster = nullptr;
+
+   return true;
 }
 
 bool EffectDistortion::RealtimeInitialize()
 {
    SetBlockSize(512);
 
+   for (auto slave : mSlaves)
+      rustacity_distortion_free(slave);
    mSlaves.clear();
 
    return true;
@@ -242,17 +289,17 @@ bool EffectDistortion::RealtimeInitialize()
 
 bool EffectDistortion::RealtimeAddProcessor(unsigned WXUNUSED(numChannels), float sampleRate)
 {
-   EffectDistortionState slave;
-
-   InstanceInit(slave, sampleRate);
+   rustacity_distortion* slave = rustacity_distortion_new(sampleRate);
 
    mSlaves.push_back(slave);
 
-   return true;
+   return slave != nullptr;
 }
 
 bool EffectDistortion::RealtimeFinalize()
 {
+   for (auto slave : mSlaves)
+      rustacity_distortion_free(slave);
    mSlaves.clear();
 
    return true;
@@ -264,7 +311,12 @@ size_t EffectDistortion::RealtimeProcess(int group,
                                               size_t numSamples)
 {
 
-   return InstanceProcess(mSlaves[group], inbuf, outbuf, numSamples);
+   return rustacity_distortion_process(mSlaves[group], mParams.mTableChoiceIndx,
+                                       mParams.mDCBlock ? 1 : 0,
+                                       mParams.mThreshold_dB, mParams.mNoiseFloor,
+                                       mParams.mParam1, mParams.mParam2,
+                                       mParams.mRepeats, inbuf[0], outbuf[0],
+                                       numSamples);
 }
 bool EffectDistortion::DefineParams( ShuttleParams & S ){
    S.SHUTTLE_ENUM_PARAM( mParams.mTableChoiceIndx, TableTypeIndx,
@@ -512,27 +564,6 @@ bool EffectDistortion::TransferDataFromWindow()
    mThreshold = DB_TO_LINEAR(mParams.mThreshold_dB);
 
    return true;
-}
-
-void EffectDistortion::InstanceInit(EffectDistortionState & data, float sampleRate)
-{
-   data.Init(sampleRate);
-
-   return;
-}
-
-size_t EffectDistortion::InstanceProcess(EffectDistortionState& data, float** inBlock, float** outBlock, size_t blockLen)
-{
-   EffectDistortionParams params;
-   params.tableChoiceIndx = mParams.mTableChoiceIndx;
-   params.dcBlock = mParams.mDCBlock;
-   params.thresholdDb = mParams.mThreshold_dB;
-   params.noiseFloor = mParams.mNoiseFloor;
-   params.param1 = mParams.mParam1;
-   params.param2 = mParams.mParam2;
-   params.repeats = mParams.mRepeats;
-
-   return data.Process(params, inBlock[0], outBlock[0], blockLen);
 }
 
 void EffectDistortion::OnTypeChoice(wxCommandEvent& /*evt*/)

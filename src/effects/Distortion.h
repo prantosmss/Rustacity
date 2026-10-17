@@ -11,7 +11,6 @@
 #ifndef __RUSTACITY_EFFECT_DISTORTION__
 #define __RUSTACITY_EFFECT_DISTORTION__
 
-#include "DistortionFilter.h"
 #include "Effect.h"
 
 class wxSlider;
@@ -19,6 +18,10 @@ class wxStaticText;
 class wxCheckBox;
 class wxTextCtrl;
 class ShuttleGui;
+
+/// The waveshaper lives in the Rust DSP core (rust/dsp); this is an opaque
+/// handle to it.  See rust/dsp/include/rustacity_dsp.h for the C ABI.
+struct rustacity_distortion;
 
 class EffectDistortion final : public Effect
 {
@@ -56,6 +59,7 @@ public:
    unsigned GetAudioOutCount() override;
    bool ProcessInitialize(sampleCount totalLen, ChannelNames chanMap = NULL) override;
    size_t ProcessBlock(float **inBlock, float **outBlock, size_t blockLen) override;
+   bool ProcessFinalize() override;
    bool RealtimeInitialize() override;
    bool RealtimeAddProcessor(unsigned numChannels, float sampleRate) override;
    bool RealtimeFinalize() override;
@@ -87,14 +91,6 @@ private:
       ID_Param2,
       ID_Repeats,
    };
-   // EffectDistortion implementation
-
-   void InstanceInit(EffectDistortionState & data, float sampleRate);
-   size_t InstanceProcess(EffectDistortionState & data,
-                               float **inBlock,
-                               float **outBlock,
-                               size_t blockLen);
-
    // Control Handlers
 
    void OnTypeChoice(wxCommandEvent & evt);
@@ -114,9 +110,11 @@ private:
    void UpdateControlText(wxTextCtrl *textCtrl, wxString &string, bool enabled);
 
 private:
-   EffectDistortionState mMaster;
-   std::vector<EffectDistortionState> mSlaves;
+   rustacity_distortion* mMaster;
+   std::vector<rustacity_distortion*> mSlaves;
 
+   // The slider shows the linear threshold while the parameters carry dB, and
+   // the effect's signal processing takes the dB value itself.
    double mThreshold;
    bool mbSavedFilterState;
 
