@@ -1,46 +1,82 @@
-# Contributor Covenant Code of Conduct
+# Code of Conduct
 
-## Our Pledge
+Rustacity is a fork of Audacity 2.4.1, for people who write Rust and people
+who work with audio. Its community lives in this repository - issues, pull
+requests, discussions and review comments - and this code covers those spaces,
+and covers you in public when you are representing the project.
 
-In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone.
+## Our pledge
 
-## Our Standards
+We want taking part in Rustacity to be a harassment-free experience for
+everyone, whatever their age, body size, disability, ethnicity, gender
+identity and expression, level of experience, nationality, personal
+appearance, race, religion or sexual identity and orientation.
 
-Examples of behavior that contributes to creating a positive environment include:
+## Expected behaviour
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+* Be welcoming and patient, especially with people who are new to Rust or to
+  audio programming.
+* Be respectful of differing viewpoints and experiences, and discuss the code
+  rather than the person.
+* Give criticism kindly, specifically and about the work, and take it the same
+  way.
+* Show empathy towards other community members.
 
-Examples of unacceptable behavior by participants include:
+## Unacceptable behaviour
 
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information
-* The use of sexualized language or imagery and unwelcome sexual attention or advances
-* Other conduct which could reasonably be considered inappropriate in a professional setting
+* Trolling, insulting or derogatory comments, and personal or political
+  attacks.
+* Public or private harassment.
+* Publishing someone's private information without their permission.
+* Sexualised language or imagery, and unwelcome sexual attention or advances.
+* Other conduct that would reasonably be considered inappropriate in a
+  professional setting.
 
-## Our Responsibilities
+## What maintainers do
 
-Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
+Maintainers clarify these standards and take fair corrective action. They may
+edit, remove or reject comments, commits, code, issues and other contributions
+that do not follow this code, and may warn, or temporarily or permanently ban,
+a contributor for behaviour they judge inappropriate, threatening, offensive
+or harmful. Maintainers who do not follow or apply this code in good faith may
+be held accountable by the project's other maintainers.
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+## Reporting
 
-## Scope
+Report unacceptable behaviour to the project's maintainer, `@prantosmss` on
+GitHub. Two private channels work:
 
-This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.
+* the *Report a vulnerability* form under this repository's **Security** tab -
+  a private advisory is visible only to the maintainer, and using it to report
+  conduct is fine;
+* the contact details published on the maintainer's GitHub profile.
+
+If your report concerns the maintainer, GitHub's abuse reporting at
+<https://github.com/contact/report-abuse> is the channel that is not under
+their control.
+
+Reports are read and answered, and the identity of the reporter is kept
+confidential.
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at feedback@audacityteam.org. The project team will review and investigate all complaints, and will respond in a way that it deems appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+Enforcement is a ladder: a private word or a correction, then a warning, then
+a temporary ban, then a permanent ban. Serious incidents may skip steps. What
+happens in a particular case is a judgement made in good faith, and the
+reasoning is given to the person affected.
 
-Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
+## Scope
+
+This code applies in this repository's spaces, and in public spaces when
+someone is representing Rustacity - in an issue on another project, or
+speaking for the project in a forum or at an event.
 
 ## Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]
+Adapted from the [Contributor Covenant][homepage], version 2.1, available at
+<https://www.contributor-covenant.org/version/2/1/code_of_conduct/>, and used
+under its [CC BY-SA 4.0 licence][license]. It has been shortened and edited to
+name this project, its spaces and the way to report an incident here.
 
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
+[homepage]: https://www.contributor-covenant.org
+[license]: https://creativecommons.org/licenses/by-sa/4.0/
