@@ -17,6 +17,9 @@ on:
     # Remove the "#" from the next 2 lines if you need to disable this action
     #branches:
     #  - disable
+  # Runs the "Goldens" job (capture of DSP reference values) on its own,
+  # without the four platform builds, from the Actions tab.
+  workflow_dispatch:
 
 #
 # Global environment variables
@@ -35,6 +38,8 @@ jobs:
   build:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
+    # A manually dispatched run captures golden values only
+    if: github.event_name != 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:
@@ -396,6 +401,44 @@ jobs:
       # exactly what the Rust core exports (scripts/check_dsp_abi.py).
       - name: Check the DSP ABI against its header
         run: python3 scripts/check_dsp_abi.py
+
+  # =========================================================================
+  # DSP: Capture reference values from the original C++ implementations
+  #
+  # The dumpers in rust/dsp/goldens/capture/ compile one wx-free DSP unit
+  # of src/ on its own and print the values the Rust port has to reproduce
+  # (the capture step of the porting rule in rust/README.md).  What they
+  # print is checked in as rust/dsp/goldens/reference.txt, so this job is
+  # only interesting while a port is in progress; with no dumper in the
+  # tree it does nothing.
+  # =========================================================================
+  goldens:
+    name: Goldens
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Build and run the dumpers
+        run: |
+          shopt -s nullglob
+          mkdir -p out
+          for src in rust/dsp/goldens/capture/*.cpp
+          do
+            name=$(basename "${src}" .cpp)
+            echo "::group::${name}"
+            g++ -std=c++17 -O2 -Wall -Wextra -Isrc/effects \
+              -o "/tmp/${name}" "${src}"
+            "/tmp/${name}" | tee "out/${name}.txt"
+            echo "::endgroup::"
+          done
+
+      - name: Upload the captured values
+        uses: actions/upload-artifact@v7
+        with:
+          name: golden-values
+          path: out/
+          if-no-files-found: ignore
 
   # =========================================================================
   # SHARED: Publish a GitHub Release when a tag is pushed

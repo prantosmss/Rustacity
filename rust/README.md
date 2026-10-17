@@ -14,6 +14,7 @@ library.
 | `dsp/src/ffi.rs` | the C ABI: every entry point, each under a panic guard |
 | `dsp/include/rustacity_dsp.h` | the C header the C++ side includes |
 | `dsp/goldens/reference.txt` | reference values captured from the original C++ |
+| `dsp/goldens/capture/` | dumpers that print those values, one per port in progress |
 | `dsp/tests/` | golden-value tests that read that file |
 
 ## Building and testing
@@ -56,13 +57,17 @@ both copies in place grows the Rust half without shrinking the C++ half, which
 turns one port into two implementations to keep in step - exactly what the
 biquad work had to clean up afterwards.
 
-1. Capture reference values from the C++ implementation *before* changing it
-   (the values in `dsp/goldens/reference.txt` came from a throwaway harness
-   that ran in CI and was then removed).
+1. Extract the maths into a unit that compiles on its own (no wxWidgets),
+   and capture reference values from it *before* changing anything: drop a
+   dumper into `dsp/goldens/capture/` (see its `README.md`) and add what it
+   printed to `dsp/goldens/reference.txt`. The `Goldens` job of the CMake
+   Build workflow builds and runs the dumpers - on a push it rides along, or
+   run it alone with *Run workflow* in the Actions tab.
 2. Write the maths as a new module with unit tests of its own.
 3. Expose it through `ffi.rs` and the header, and thin the C++ class down to
    parameter marshalling.
-4. Delete the C++ maths, then run `cargo test --workspace` and a build.
+4. Delete the C++ maths (and, with it, its dumper), then run
+   `cargo test --workspace` and a build.
 
 `src/effects/Biquad.{h,cpp}` with `src/effects/ScienFilter.cpp` is the worked
 example: the coefficients and the sample loop are Rust, the class is a wrapper,
