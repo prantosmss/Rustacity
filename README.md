@@ -25,7 +25,7 @@ Rustacity is an easy-to-use, multi-track audio editor and recorder for Windows, 
 
 ## Getting Started
 
-Rustacity is built from source. The project ships GitHub Actions workflows (`.github/workflows/`) and `appveyor.yml` that produce CI builds.
+Rustacity is built from source with CMake. The GitHub Actions workflows in `.github/workflows/` build every supported platform, run the Rust DSP tests and the golden-value checks, and publish releases.
 
 Because Rustacity is a fork of Audacity 2.4.1, end-user documentation, forums, and developer references are still available from the upstream [Audacity website](https://www.audacityteam.org/), [Audacity Forum](https://forum.audacityteam.org/), and [Audacity Wiki](https://wiki.audacityteam.org/wiki/For_Developers).
 
