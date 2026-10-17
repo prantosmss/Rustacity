@@ -26,11 +26,24 @@ built GUI application.  This script reproduces the packing instead:
   packed bitmaps, is left exactly as it was, so there is no re-packing and no
   layout shift.
 
+Two more things the same run takes care of:
+
+* ``src/AllThemeResources.h`` declares the same palette as a fallback for the
+  case where a cache cannot be read, so ``--sync-header`` puts its colour
+  defaults through the same mapping (numbers only, formatting untouched).
+* ``src/ThemeAsCeeCode.h`` is a "theme as code" file a DarkAudacity build saved
+  into the tree.  Nothing #includes it, but it held the whole old DarkAudacity
+  bitmap set and palette; its cells do not line up with the current resource
+  list, so it cannot be patched in place and is instead rewritten with the
+  payload of the rebranded Dark theme - the theme that file stands for.
+
 Usage
 -----
     python scripts/brand/regenerate_theme_caches.py --check    # verify, no writes
-    python scripts/brand/regenerate_theme_caches.py --mock     # before/after picture
+    python scripts/brand/regenerate_theme_caches.py           # dry run: show the changes
+    python scripts/brand/regenerate_theme_caches.py --mock OUT.png
     python scripts/brand/regenerate_theme_caches.py --apply    # rewrite the caches
+    python scripts/brand/regenerate_theme_caches.py --sync-header
     python scripts/brand/regenerate_theme_caches.py --extract DIR
 
 Requires Python 3 with Pillow and the brand kit in ``brand/`` (see
@@ -89,6 +102,17 @@ THEMES = {
 
 LOGO_IMAGE = "bmpAudacityLogo48x48"
 LOGO_SIZE = 48
+
+# A compiled-in "theme as code" file that a DarkAudacity build saved into src/.
+# It is listed in the build files but not #included by any translation unit, so
+# it is not part of any binary - it still holds the whole old DarkAudacity
+# bitmap set and palette though, which is exactly what should not be left lying
+# around.  Its own layout is from an older resource list (none of its cells line
+# up with the current one, so it cannot be patched in place); it is rewritten
+# instead with the payload of the rebranded Dark theme, which is what the file
+# is for: the theme a DarkAudacity build compiles in.
+LEGACY_CACHE = ROOT / "src/ThemeAsCeeCode.h"
+LEGACY_SOURCE_THEME = "Dark"
 
 
 # ---------------------------------------------------------------------------
@@ -506,7 +530,7 @@ KEEP_SEMANTIC = (
     "clrFoxusBox", "clrMidiZebra", "clrMidiLines", "clrTextNegativeNumbers",
     "clrLabelTextEditBrush", "clrLabelSurroundPen", "clrLabelTrackText",
     "clrTrackPanelText", "clrTimeFont", "clrTimeFontFocus", "clrTimeBackFocus",
-    "clrTimeHours",
+    "clrTimeHours", "clrSpectroBackground",
 )
 
 
@@ -819,6 +843,27 @@ def main(argv=None):
                   f"{len(again)} further change(s) on a re-run")
             if issues or again:
                 problems += 1
+        if problems:
+            return 1
+
+    if args.apply:
+        # The compiled-in "theme as code" file a DarkAudacity build saved into
+        # src/: not compiled, but it still carried the old bitmap set and the old
+        # palette.  Give it the payload of the rebranded theme it stands for.
+        source = THEMES[LEGACY_SOURCE_THEME]
+        before = LEGACY_CACHE.read_bytes()
+        write_cache(LEGACY_CACHE, read_cache(source), cache_header(LEGACY_CACHE))
+        payload = read_cache(LEGACY_CACHE)
+        same_as_source = payload == read_cache(source)
+        img = decode(payload)
+        _r, _v, issues, notes = check_cache(img, image_regions, colour_regions)
+        rel = LEGACY_CACHE.relative_to(ROOT)
+        print(f"{rel}: rebuilt from the rebranded {LEGACY_SOURCE_THEME} theme "
+              f"(payload {'matches' if same_as_source else 'DIFFERS FROM'} {source.name}, "
+              f"{len(notes)} known cell quirk(s), {len(issues)} problem(s), "
+              f"{len(before)} -> {len(LEGACY_CACHE.read_bytes())} bytes)")
+        if issues or not same_as_source:
+            problems += 1
         if problems:
             return 1
 
