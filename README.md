@@ -35,27 +35,3 @@ The ported code is checked against reference values captured from the original C
 cd rust
 cargo test --workspace
 ```
-
-## Releasing
-
-Pushing an annotated tag named `rustacity-<version>` builds all four
-platforms (Windows 32/64-bit, Ubuntu and macOS) and, once those builds
-and the Rust tests pass, publishes a GitHub release with the resulting
-zips attached.
-
-The release is published with the maintainer's own account instead of the
-workflow's `GITHUB_TOKEN`, because a release created with `GITHUB_TOKEN`
-is attributed to `github-actions[bot]`. This requires a repository
-secret:
-
-| Secret | Value |
-| --- | --- |
-| `RELEASE_TOKEN` | fine-grained personal access token with **Contents: Read and write** on this repository |
-
-To create it: *Settings → Developer settings → Personal access tokens →
-Fine-grained tokens → Generate new token*, set the resource owner to
-`prantosmss`, choose *Only select repositories → Rustacity*, grant the
-repository permission *Contents: Read and write*, and then add the token
-as the `RELEASE_TOKEN` secret under *Settings → Secrets and variables →
-Actions → New repository secret*. The release job fails with an
-explanation if the secret is missing or its token has expired.
