@@ -85,6 +85,30 @@ size_t rustacity_bass_treble_process(rustacity_bass_treble_t *handle,
                                      const float *input, float *output,
                                      size_t len);
 
+/* --- EffectPhaser's allpass filter ----------------------------------- */
+
+/* Opaque state of one channel: the LFO and the allpass stages (the C++
+ * EffectPhaserState).  The C++ side keeps one handle for the master and one
+ * per realtime group. */
+typedef struct rustacity_phaser rustacity_phaser_t;
+
+/* `sample_rate` is narrowed to float, like the C++ Init() took a float. */
+rustacity_phaser_t *rustacity_phaser_new(float sample_rate);
+void rustacity_phaser_free(rustacity_phaser_t *handle);
+
+/* Filter `len` samples of one channel from `input` to `output`, which may
+ * alias, with the effect's settings for this block: the number of allpass
+ * stages (clamped to 0..24, NUM_STAGES in Phaser.h), the dry/wet mix (0..255,
+ * 255 is fully wet), the LFO frequency in Hz and its start phase in degrees,
+ * the depth (0..255), the feedback (-100..100) and the output gain in dB.
+ * Returns `len`, or 0 if the handle or a pointer is unusable. */
+size_t rustacity_phaser_process(rustacity_phaser_t *handle,
+                                int stages, int dry_wet, double freq,
+                                double phase_deg, int depth, int feedback,
+                                double out_gain_db,
+                                const float *input, float *output,
+                                size_t len);
+
 /* --- EBU R128 loudness measurement ---------------------------------- */
 
 /* Opaque loudness meter; `rate` is the sample rate in Hz and

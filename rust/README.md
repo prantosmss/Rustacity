@@ -12,6 +12,7 @@ library.
 | `dsp/src/bass_treble.rs` | EffectBassTreble's low/high shelf filters |
 | `dsp/src/biquad.rs` | biquad filter design and processing |
 | `dsp/src/ebur128.rs` | EBU R128 loudness measurement |
+| `dsp/src/phaser.rs` | EffectPhaser's allpass filter |
 | `dsp/src/ffi.rs` | the C ABI: every entry point, each under a panic guard |
 | `dsp/include/rustacity_dsp.h` | the C header the C++ side includes |
 | `dsp/goldens/reference.txt` | reference values captured from the original C++ |

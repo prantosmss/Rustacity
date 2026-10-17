@@ -9,5 +9,6 @@
 pub mod bass_treble;
 pub mod biquad;
 pub mod ebur128;
+pub mod phaser;
 
 mod ffi;
