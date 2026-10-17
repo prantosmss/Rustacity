@@ -24,3 +24,14 @@ Rustacity is an easy-to-use, multi-track audio editor and recorder for Windows, 
 Rustacity is built from source. The project ships GitHub Actions workflows (`.github/workflows/`) and `appveyor.yml` that produce CI builds.
 
 Because Rustacity is a fork of Audacity 2.4.1, end-user documentation, forums, and developer references are still available from the upstream [Audacity website](https://www.audacityteam.org/), [Audacity Forum](https://forum.audacityteam.org/), and [Audacity Wiki](https://wiki.audacityteam.org/wiki/For_Developers).
+
+### The Rust DSP core
+
+Parts of the audio processing are implemented in Rust, in the `rustacity-dsp` crate under `rust/dsp/`. The build invokes `cargo` and links the crate as a static library, so a Rust toolchain is required in addition to the C++ one; the C interface between the two halves is `rust/dsp/include/rustacity_dsp.h`.
+
+The ported code is checked against reference values captured from the original C++ implementation (`rust/dsp/goldens/reference.txt`):
+
+```
+cd rust
+cargo test --workspace
+```
