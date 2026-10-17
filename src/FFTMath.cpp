@@ -785,7 +785,13 @@ void DerivativeOfWindowFunc(int whichFunction, size_t NumSamples, bool extraSamp
       // Hamming
       // There are deltas at the ends
       const double multiplier = 2 * M_PI / NumSamples;
-      static const double coeff0 = 0.54, coeff1 = -0.46 * multiplier;
+      // The slope used to be a function-local static, so it was initialised
+      // once, from the first call's window size, and every later call at a
+      // different size multiplied a stale slope by a fresh multiplier.  The
+      // derivative window of a spectrogram came out wrong as soon as the
+      // window size changed during a session (SpectrogramSettings.cpp calls
+      // this with the user's size).  The slope belongs to the call.
+      const double coeff0 = 0.54, coeff1 = -0.46 * multiplier;
       // TODO This code should be more explicit about the precision it intends.
       // For now we get C4305 warnings, truncation from 'const double' to 'float'
       in[0] *= coeff0;
