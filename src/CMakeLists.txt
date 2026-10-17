@@ -1382,6 +1382,20 @@ source_group(
         ${_INTDIR}/CMakeFiles/Rustacity.dir/cmake_pch.hxx
 )
 
+# Temporary golden-value capture harness for the Rust DSP port: prints
+# "GOLDEN ..." reference records produced by the original C++ Biquad /
+# EBU R128 implementation (captured to rust/dsp/goldens/ by CI).
+# EXCLUDE_FROM_ALL: built only by the dedicated CI step; the target is
+# removed together with that step once the goldens are checked in.
+add_executable( goldendump EXCLUDE_FROM_ALL
+   goldendump.cpp
+   effects/Biquad.cpp
+   effects/EBUR128.cpp
+)
+target_compile_definitions( goldendump PRIVATE ${DEFINES} )
+target_include_directories( goldendump PRIVATE ${INCLUDES} )
+target_link_libraries( goldendump PRIVATE wxWidgets )
+
 target_sources( ${TARGET} PRIVATE ${HEADERS} ${SOURCES} ${RESOURCES} ${MAC_RESOURCES} ${WIN_RESOURCES} )
 target_compile_definitions( ${TARGET} PRIVATE ${DEFINES} )
 target_compile_options( ${TARGET} PRIVATE ${OPTIONS} )
