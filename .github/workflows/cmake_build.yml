@@ -443,11 +443,8 @@ jobs:
   # =========================================================================
   # SHARED: Publish a GitHub Release when a tag is pushed
   #
-  # The release is published with the maintainer's own credentials (the
-  # RELEASE_TOKEN secret, a fine-grained token of prantosmss), not with
-  # the workflow's GITHUB_TOKEN: a release created with GITHUB_TOKEN is
-  # attributed to github-actions[bot], while one created with a personal
-  # token is attributed to its owner.  See "Releasing" in README.md.
+  # The release is created with the RELEASE_TOKEN repository secret, which
+  # must be able to write this repository's contents.
   # =========================================================================
   release:
     name: Publish Release
@@ -474,9 +471,8 @@ jobs:
           RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           if [ -z "${RELEASE_TOKEN}" ]; then
-            echo "::error::The RELEASE_TOKEN secret is not set, so the release cannot be published under the maintainer's account."
-            echo "Add a fine-grained personal access token (Contents: Read and write on this repository) as the RELEASE_TOKEN repository secret."
-            echo "See the \"Releasing\" section of README.md."
+            echo "::error::The RELEASE_TOKEN secret is not set, so the release cannot be published."
+            echo "Add the RELEASE_TOKEN repository secret with write access to this repository's contents."
             exit 1
           fi
 
