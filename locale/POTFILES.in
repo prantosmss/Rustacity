@@ -70,8 +70,6 @@ src/CrashReport.h
 src/ClassicThemeAsCeeCode.h
 src/ClientData.h
 src/ClientDataHelpers.h
-src/CrossFade.cpp
-src/CrossFade.h
 src/DarkThemeAsCeeCode.h
 src/Dependencies.cpp
 src/Dependencies.h
@@ -195,8 +193,6 @@ src/ProjectWindowBase.cpp
 src/ProjectWindowBase.h
 src/RealFFTf.cpp
 src/RealFFTf.h
-src/RealFFTf48x.cpp
-src/RealFFTf48x.h
 src/RefreshCode.h
 src/Registrar.h
 src/Resample.cpp
@@ -410,8 +406,6 @@ src/effects/EffectUI.cpp
 src/effects/EffectUI.h
 src/effects/Equalization.cpp
 src/effects/Equalization.h
-src/effects/Equalization48x.cpp
-src/effects/Equalization48x.h
 src/effects/Fade.cpp
 src/effects/Fade.h
 src/effects/FindClipping.cpp
@@ -420,8 +414,6 @@ src/effects/Generator.cpp
 src/effects/Generator.h
 src/effects/Invert.cpp
 src/effects/Invert.h
-src/effects/Leveller.cpp
-src/effects/Leveller.h
 src/effects/LoadEffects.cpp
 src/effects/LoadEffects.h
 src/effects/Noise.cpp

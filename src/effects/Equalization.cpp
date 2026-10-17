@@ -114,10 +114,6 @@
 
 #include "FileDialog.h"
 
-#ifdef EXPERIMENTAL_EQ_SSE_THREADED
-#include "Equalization48x.h"
-#endif
-
 
 enum
 {
@@ -135,14 +131,6 @@ enum
    ID_Curve,
    ID_Manage,
    ID_Delete,
-#ifdef EXPERIMENTAL_EQ_SSE_THREADED
-   ID_DefaultMath,
-   ID_SSE,
-   ID_SSEThreaded,
-   ID_AVX,
-   ID_AVXThreaded,
-   ID_Bench,
-#endif
    ID_Slider,   // needs to come last
 };
 
@@ -230,15 +218,6 @@ BEGIN_EVENT_TABLE(EffectEqualization, wxEvtHandler)
    EVT_RADIOBUTTON(ID_Graphic, EffectEqualization::OnGraphicMode)
    EVT_CHECKBOX(ID_Linear, EffectEqualization::OnLinFreq)
    EVT_CHECKBOX(ID_Grid, EffectEqualization::OnGridOnOff)
-
-#ifdef EXPERIMENTAL_EQ_SSE_THREADED
-   EVT_RADIOBUTTON(ID_DefaultMath, EffectEqualization::OnProcessingRadio)
-   EVT_RADIOBUTTON(ID_SSE, EffectEqualization::OnProcessingRadio)
-   EVT_RADIOBUTTON(ID_SSEThreaded, EffectEqualization::OnProcessingRadio)
-   EVT_RADIOBUTTON(ID_AVX, EffectEqualization::OnProcessingRadio)
-   EVT_RADIOBUTTON(ID_AVXThreaded, EffectEqualization::OnProcessingRadio)
-   EVT_BUTTON(ID_Bench, EffectEqualization::OnBench)
-#endif
 END_EVENT_TABLE()
 
 EffectEqualization::EffectEqualization(int Options)
@@ -299,16 +278,6 @@ EffectEqualization::EffectEqualization(int Options)
    mWhens[NUM_PTS-1] = 1.;
    mWhenSliders[NUMBER_OF_BANDS] = 1.;
    mEQVals[NUMBER_OF_BANDS] = 0.;
-
-#ifdef EXPERIMENTAL_EQ_SSE_THREADED
-   bool useSSE;
-   GetPrivateConfig(GetCurrentSettingsGroup(), wxT("/SSE/GUI"), useSSE, false);
-   if(useSSE && !mEffectEqualization48x)
-      mEffectEqualization48x = std::make_unique<EffectEqualization48x>();
-   else if(!useSSE)
-      mEffectEqualization48x.reset();
-   mBench=false;
-#endif
 
    // We expect these Hi and Lo frequences to be overridden by Init().
    // Don't use inputTracks().  See bug 2321.
@@ -707,16 +676,6 @@ bool EffectEqualization::Init()
 
 bool EffectEqualization::Process()
 {
-#ifdef EXPERIMENTAL_EQ_SSE_THREADED
-   if(mEffectEqualization48x) {
-      if(mBench) {
-         mBench=false;
-         return mEffectEqualization48x->Benchmark(this);
-      }
-      else
-         return mEffectEqualization48x->Process(this);
-   }
-#endif
    this->CopyInputTracks(); // Set up mOutputTracks.
    CalcFilter();
    bool bGoodResult = true;
@@ -1082,63 +1041,6 @@ void EffectEqualization::PopulateOrExchange(ShuttleGui & S)
       S.EndMultiColumn();
    }
    S.EndMultiColumn();
-
-#ifdef EXPERIMENTAL_EQ_SSE_THREADED
-   if (mEffectEqualization48x)
-   {
-      // -------------------------------------------------------------------
-      // ROW 6: Processing routine selection
-      // -------------------------------------------------------------------
-
-      // Column 1 is blank
-      S.AddSpace(1, 1);
-
-      S.StartHorizontalLay();
-      {
-         S.AddUnits(XO("&Processing: "));
-
-         // update the control state
-         int mathPath = EffectEqualization48x::GetMathPath();
-         int value =
-            (mathPath & MATH_FUNCTION_SSE)
-            ? (mathPath & MATH_FUNCTION_THREADED)
-               ? 2
-               : 1
-            : false // (mathPath & MATH_FUNCTION_AVX) // not implemented
-               ? (mathPath & MATH_FUNCTION_THREADED)
-                  ? 4
-                  : 3
-               : 0;
-
-         mMathProcessingType[0] = S.Id(ID_DefaultMath)
-            .AddRadioButton(XO("D&efault"),
-                            0, value);
-         mMathProcessingType[1] = S.Id(ID_SSE)
-            .Disable(!EffectEqualization48x::GetMathCaps()->SSE)
-            .AddRadioButtonToGroup(XO("&SSE"),
-                                   1, value);
-         mMathProcessingType[2] = S.Id(ID_SSEThreaded)
-            .Disable(!EffectEqualization48x::GetMathCaps()->SSE)
-            .AddRadioButtonToGroup(XO("SSE &Threaded"),
-                                   2, value);
-         mMathProcessingType[3] = S.Id(ID_AVX)
-            // not implemented
-            .Disable(true /* !EffectEqualization48x::GetMathCaps()->AVX */)
-            .AddRadioButtonToGroup(XO("A&VX"),
-                                   3, value);
-         mMathProcessingType[4] = S.Id(ID_AVXThreaded)
-            // not implemented
-            .Disable(true /* !EffectEqualization48x::GetMathCaps()->AVX */)
-            .AddRadioButtonToGroup(XO("AV&X Threaded"),
-                                   4, value);
-         S.Id(ID_Bench).AddButton(XO("&Bench"));
-      }
-      S.EndHorizontalLay();
-
-      // Column 3 is blank
-      S.AddSpace(1, 1);
-   }
-#endif
 
    mUIParent->SetAutoLayout(false);
    if( mOptions != kEqOptionGraphic)
@@ -3015,35 +2917,6 @@ void EffectEqualization::OnLinFreq(wxCommandEvent & WXUNUSED(event))
    mFreqRuler->Refresh(false);
    ForceRecalc();
 }
-
-#ifdef EXPERIMENTAL_EQ_SSE_THREADED
-
-void EffectEqualization::OnProcessingRadio(wxCommandEvent & event)
-{
-   int testEvent=event.GetId();
-   switch(testEvent)
-   {
-   case ID_DefaultMath: EffectEqualization48x::SetMathPath(MATH_FUNCTION_ORIGINAL);
-      break;
-   case ID_SSE: EffectEqualization48x::SetMathPath(MATH_FUNCTION_SSE);
-      break;
-   case ID_SSEThreaded: EffectEqualization48x::SetMathPath(MATH_FUNCTION_THREADED | MATH_FUNCTION_SSE);
-      break;
-   case ID_AVX: testEvent = 2;
-      break;
-   case ID_AVXThreaded: testEvent = 2;
-      break;
-   }
-
-};
-
-void EffectEqualization::OnBench( wxCommandEvent & event)
-{
-   mBench=true;
-   // OnOk(event);
-}
-
-#endif
 
 //----------------------------------------------------------------------------
 // EqualizationPanel

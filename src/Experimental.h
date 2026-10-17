@@ -35,10 +35,6 @@
 #error Must include Rustacity.h before Experimental.h
 #endif
 
-// ACH 08 Jan 2014
-// EQ accelerated code
-//#define EXPERIMENTAL_EQ_SSE_THREADED
-
 // LLL, 09 Nov 2013:
 // Allow all WASAPI devices, not just loopback
 #define EXPERIMENTAL_FULL_WASAPI
