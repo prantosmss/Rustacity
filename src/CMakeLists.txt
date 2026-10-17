@@ -443,6 +443,7 @@ list( APPEND SOURCES
       effects/Contrast.h
       effects/Distortion.cpp
       effects/Distortion.h
+      effects/DistortionFilter.h
       effects/DtmfGen.cpp
       effects/DtmfGen.h
       effects/EBUR128.cpp

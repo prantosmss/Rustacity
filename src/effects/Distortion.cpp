@@ -47,21 +47,8 @@
 #include "../ShuttleGui.h"
 #include "../widgets/valnum.h"
 
-enum kTableType
-{
-   kHardClip,
-   kSoftClip,
-   kHalfSinCurve,
-   kExpCurve,
-   kLogCurve,
-   kCubic,
-   kEvenHarmonics,
-   kSinCurve,
-   kLeveller,
-   kRectifier,
-   kHardLimiter,
-   nTableTypes
-};
+// The kinds of table are kTableType, in DistortionFilter.h, next to the
+// builders that use them.
 
 static const EnumValueSymbol kTableTypeStrings[nTableTypes] =
 {
@@ -90,8 +77,9 @@ Param( Param1,          double,  wxT("Parameter 1"),    50.0,    0.0,   100.0,  
 Param( Param2,          double,  wxT("Parameter 2"),    50.0,    0.0,   100.0,                1    );
 Param( Repeats,         int,     wxT("Repeats"),        1,       0,       5,                  1    );
 
-// How many samples are processed before recomputing the lookup table again
-#define skipsamples 1000
+// The number of samples the table was rebuilt after (skipsamples) is gone with
+// the code that read it: the unit in DistortionFilter.h rebuilds the table
+// whenever the settings that shape it change, which is the same table.
 
 const double MIN_Threshold_Linear DB_TO_LINEAR(MIN_Threshold_dB);
 
@@ -178,7 +166,6 @@ EffectDistortion::EffectDistortion()
    mParams.mParam1 = DEF_Param1;
    mParams.mParam2 = DEF_Param2;
    mParams.mRepeats = DEF_Repeats;
-   mMakeupGain = 1.0;
    mbSavedFilterState = DEF_DCBlock;
 
    SetLinearEffectFlag(false);
@@ -529,101 +516,23 @@ bool EffectDistortion::TransferDataFromWindow()
 
 void EffectDistortion::InstanceInit(EffectDistortionState & data, float sampleRate)
 {
-   data.samplerate = sampleRate;
-   data.skipcount = 0;
-   data.tablechoiceindx = mParams.mTableChoiceIndx;
-   data.dcblock = mParams.mDCBlock;
-   data.threshold = mParams.mThreshold_dB;
-   data.noisefloor = mParams.mNoiseFloor;
-   data.param1 = mParams.mParam1;
-   data.param2 = mParams.mParam2;
-   data.repeats = mParams.mRepeats;
-
-   // DC block filter variables
-   data.queuetotal = 0.0;
-
-   //std::queue<float>().swap(data.queuesamples);
-   while (!data.queuesamples.empty())
-      data.queuesamples.pop();
-
-   MakeTable();
+   data.Init(sampleRate);
 
    return;
 }
 
 size_t EffectDistortion::InstanceProcess(EffectDistortionState& data, float** inBlock, float** outBlock, size_t blockLen)
 {
-   float *ibuf = inBlock[0];
-   float *obuf = outBlock[0];
+   EffectDistortionParams params;
+   params.tableChoiceIndx = mParams.mTableChoiceIndx;
+   params.dcBlock = mParams.mDCBlock;
+   params.thresholdDb = mParams.mThreshold_dB;
+   params.noiseFloor = mParams.mNoiseFloor;
+   params.param1 = mParams.mParam1;
+   params.param2 = mParams.mParam2;
+   params.repeats = mParams.mRepeats;
 
-   bool update = (mParams.mTableChoiceIndx == data.tablechoiceindx &&
-                  mParams.mNoiseFloor == data.noisefloor &&
-                  mParams.mThreshold_dB == data.threshold &&
-                  mParams.mParam1 == data.param1 &&
-                  mParams.mParam2 == data.param2 &&
-                  mParams.mRepeats == data.repeats)? false : true;
-
-   double p1 = mParams.mParam1 / 100.0;
-   double p2 = mParams.mParam2 / 100.0;
-
-   data.tablechoiceindx = mParams.mTableChoiceIndx;
-   data.threshold = mParams.mThreshold_dB;
-   data.noisefloor = mParams.mNoiseFloor;
-   data.param1 = mParams.mParam1;
-   data.repeats = mParams.mRepeats;
-
-   for (decltype(blockLen) i = 0; i < blockLen; i++) {
-      if (update && ((data.skipcount++) % skipsamples == 0)) {
-         MakeTable();
-      }
-
-      switch (mParams.mTableChoiceIndx)
-      {
-      case kHardClip:
-         // Param2 = make-up gain.
-         obuf[i] = WaveShaper(ibuf[i]) * ((1 - p2) + (mMakeupGain * p2));
-         break;
-      case kSoftClip:
-         // Param2 = make-up gain.
-         obuf[i] = WaveShaper(ibuf[i]) * ((1 - p2) + (mMakeupGain * p2));
-         break;
-      case kHalfSinCurve:
-         obuf[i] = WaveShaper(ibuf[i]) * p2;
-         break;
-      case kExpCurve:
-         obuf[i] = WaveShaper(ibuf[i]) * p2;
-         break;
-      case kLogCurve:
-         obuf[i] = WaveShaper(ibuf[i]) * p2;
-         break;
-      case kCubic:
-         obuf[i] = WaveShaper(ibuf[i]) * p2;
-         break;
-      case kEvenHarmonics:
-         obuf[i] = WaveShaper(ibuf[i]);
-         break;
-      case kSinCurve:
-         obuf[i] = WaveShaper(ibuf[i]) * p2;
-         break;
-      case kLeveller:
-         obuf[i] = WaveShaper(ibuf[i]);
-         break;
-      case kRectifier:
-         obuf[i] = WaveShaper(ibuf[i]);
-         break;
-      case kHardLimiter:
-         // Mix equivalent to LADSPA effect's "Wet / Residual" mix
-         obuf[i] = (WaveShaper(ibuf[i]) * (p1 - p2)) + (ibuf[i] * p2);
-         break;
-      default:
-         obuf[i] = WaveShaper(ibuf[i]);
-      }
-      if (mParams.mDCBlock) {
-         obuf[i] = DCFilter(data, obuf[i]);
-      }
-   }
-
-   return blockLen;
+   return data.Process(params, inBlock[0], outBlock[0], blockLen);
 }
 
 void EffectDistortion::OnTypeChoice(wxCommandEvent& /*evt*/)
@@ -982,353 +891,3 @@ void EffectDistortion::UpdateControlText(wxTextCtrl* textCtrl, wxString& string,
    }
 }
 
-void EffectDistortion::MakeTable()
-{
-   switch (mParams.mTableChoiceIndx)
-   {
-      case kHardClip:
-         HardClip();
-         break;
-      case kSoftClip:
-         SoftClip();
-         break;
-      case kHalfSinCurve:
-         HalfSinTable();
-         break;
-      case kExpCurve:
-         ExponentialTable();
-         break;
-      case kLogCurve:
-         LogarithmicTable();
-         break;
-      case kCubic:
-         CubicTable();
-         break;
-      case kEvenHarmonics:
-         EvenHarmonicTable();
-         break;
-      case kSinCurve:
-         SineTable();
-         break;
-      case kLeveller:
-         Leveller();
-         break;
-      case kRectifier:
-         Rectifier();
-         break;
-      case kHardLimiter:
-         HardLimiter();
-         break;
-   }
-}
-
-
-//
-// Preset tables for gain lookup
-//
-
-void EffectDistortion::HardClip()
-{
-   double lowThresh = 1 - mThreshold;
-   double highThresh = 1 + mThreshold;
-
-   for (int n = 0; n < TABLESIZE; n++) {
-      if (n < (STEPS * lowThresh))
-         mTable[n] = - mThreshold;
-      else if (n > (STEPS * highThresh))
-         mTable[n] = mThreshold;
-      else
-         mTable[n] = n/(double)STEPS - 1;
-
-      mMakeupGain = 1.0 / mThreshold;
-   }
-}
-
-void EffectDistortion::SoftClip()
-{
-   double threshold = 1 + mThreshold;
-   double amount = std::pow(2.0, 7.0 * mParams.mParam1 / 100.0); // range 1 to 128
-   double peak = LogCurve(mThreshold, 1.0, amount);
-   mMakeupGain = 1.0 / peak;
-   mTable[STEPS] = 0.0;   // origin
-
-   // positive half of table
-   for (int n = STEPS; n < TABLESIZE; n++) {
-      if (n < (STEPS * threshold)) // origin to threshold
-         mTable[n] = n/(float)STEPS - 1;
-      else
-         mTable[n] = LogCurve(mThreshold, n/(double)STEPS - 1, amount);
-   }
-   CopyHalfTable();
-}
-
-float EffectDistortion::LogCurve(double threshold, float value, double ratio)
-{
-   return threshold + ((std::exp(ratio * (threshold - value)) - 1) / -ratio);
-}
-
-void EffectDistortion::ExponentialTable()
-{
-   double amount = std::min(0.999, DB_TO_LINEAR(-1 * mParams.mParam1));   // avoid divide by zero
-
-   for (int n = STEPS; n < TABLESIZE; n++) {
-      double linVal = n/(float)STEPS;
-      double scale = -1.0 / (1.0 - amount);   // unity gain at 0dB
-      double curve = std::exp((linVal - 1) * std::log(amount));
-      mTable[n] = scale * (curve -1);
-   }
-   CopyHalfTable();
-}
-
-void EffectDistortion::LogarithmicTable()
-{
-   double amount = mParams.mParam1;
-   double stepsize = 1.0 / STEPS;
-   double linVal = 0;
-
-   if (amount == 0){
-      for (int n = STEPS; n < TABLESIZE; n++) {
-      mTable[n] = linVal;
-      linVal += stepsize;
-      }
-   }
-   else {
-      for (int n = STEPS; n < TABLESIZE; n++) {
-         mTable[n] = std::log(1 + (amount * linVal)) / std::log(1 + amount);
-         linVal += stepsize;
-      }
-   }
-   CopyHalfTable();
-}
-
-void EffectDistortion::HalfSinTable()
-{
-   int iter = std::floor(mParams.mParam1 / 20.0);
-   double fractionalpart = (mParams.mParam1 / 20.0) - iter;
-   double stepsize = 1.0 / STEPS;
-   double linVal = 0;
-
-   for (int n = STEPS; n < TABLESIZE; n++) {
-      mTable[n] = linVal;
-      for (int i = 0; i < iter; i++) {
-         mTable[n] = std::sin(mTable[n] * M_PI_2);
-      }
-      mTable[n] += ((std::sin(mTable[n] * M_PI_2) - mTable[n]) * fractionalpart);
-      linVal += stepsize;
-   }
-   CopyHalfTable();
-}
-
-void EffectDistortion::CubicTable()
-{
-   double amount = mParams.mParam1 * std::sqrt(3.0) / 100.0;
-   double gain = 1.0;
-   if (amount != 0.0)
-      gain = 1.0 / Cubic(std::min(amount, 1.0));
-
-   double stepsize = amount / STEPS;
-   double x = -amount;
-   
-   if (amount == 0) {
-      for (int i = 0; i < TABLESIZE; i++) {
-         mTable[i] = (i / (double)STEPS) - 1.0;
-      }
-   }
-   else {
-      for (int i = 0; i < TABLESIZE; i++) {
-         mTable[i] = gain * Cubic(x);
-         for (int j = 0; j < mParams.mRepeats; j++) {
-            mTable[i] = gain * Cubic(mTable[i] * amount);
-         }
-         x += stepsize;
-      }
-   }
-}
-
-double EffectDistortion::Cubic(double x)
-{
-   if (mParams.mParam1 == 0.0)
-      return x;
-
-   return x - (std::pow(x, 3.0) / 3.0);
-}
-
-
-void EffectDistortion::EvenHarmonicTable()
-{
-   double amount = mParams.mParam1 / -100.0;
-   // double C = std::sin(std::max(0.001, mParams.mParam2) / 100.0) * 10.0;
-   double C = std::max(0.001, mParams.mParam2) / 10.0;
-
-   double step = 1.0 / STEPS;
-   double xval = -1.0;
-
-   for (int i = 0; i < TABLESIZE; i++) {
-      mTable[i] = ((1 + amount) * xval) -
-                  (xval * (amount / std::tanh(C)) * std::tanh(C * xval));
-      xval += step;
-   }
-}
-
-void EffectDistortion::SineTable()
-{
-   int iter = std::floor(mParams.mParam1 / 20.0);
-   double fractionalpart = (mParams.mParam1 / 20.0) - iter;
-   double stepsize = 1.0 / STEPS;
-   double linVal = 0.0;
-
-   for (int n = STEPS; n < TABLESIZE; n++) {
-      mTable[n] = linVal;
-      for (int i = 0; i < iter; i++) {
-         mTable[n] = (1.0 + std::sin((mTable[n] * M_PI) - M_PI_2)) / 2.0;
-      }
-      mTable[n] += (((1.0 + std::sin((mTable[n] * M_PI) - M_PI_2)) / 2.0) - mTable[n]) * fractionalpart;
-      linVal += stepsize;
-   }
-   CopyHalfTable();
-}
-
-void EffectDistortion::Leveller()
-{
-   double noiseFloor = DB_TO_LINEAR(mParams.mNoiseFloor);
-   int numPasses = mParams.mRepeats;
-   double fractionalPass = mParams.mParam1 / 100.0;
-
-   const int numPoints = 6;
-   const double gainFactors[numPoints] = { 0.80, 1.00, 1.20, 1.20, 1.00, 0.80 };
-   double gainLimits[numPoints] = { 0.0001, 0.0, 0.1, 0.3, 0.5, 1.0 };
-   double addOnValues[numPoints];
-
-   gainLimits[1] = noiseFloor;
-   /* In the original Leveller effect, behaviour was undefined for threshold > 20 dB.
-    * If we want to support > 20 dB we need to scale the points to keep them non-decreasing.
-    * 
-    * if (noiseFloor > gainLimits[2]) {
-    *    for (int i = 3; i < numPoints; i++) {
-    *    gainLimits[i] = noiseFloor + ((1 - noiseFloor)*((gainLimits[i] - 0.1) / 0.9));
-    * }
-    * gainLimits[2] = noiseFloor;
-    * }
-    */
-
-   // Calculate add-on values
-   addOnValues[0] = 0.0;
-   for (int i = 0; i < numPoints-1; i++) {
-      addOnValues[i+1] = addOnValues[i] + (gainLimits[i] * (gainFactors[i] - gainFactors[1 + i]));
-   }
-
-   // Positive half of table.
-   // The original effect increased the 'strength' of the effect by
-   // repeated passes over the audio data.
-   // Here we model that more efficiently by repeated passes over a linear table.
-   for (int n = STEPS; n < TABLESIZE; n++) {
-      mTable[n] = ((double) (n - STEPS) / (double) STEPS);
-      for (int j = 0; j < numPasses; j++) {
-         // Find the highest index for gain adjustment
-         int index = numPoints - 1;
-         for (int i = index; i >= 0 && mTable[n] < gainLimits[i]; i--) {
-            index = i;
-         }
-         // the whole number of 'repeats'
-         mTable[n] = (mTable[n] * gainFactors[index]) + addOnValues[index];
-      }
-      // Extrapolate for fine adjustment.
-      // tiny fractions are not worth the processing time
-      if (fractionalPass > 0.001) {
-         int index = numPoints - 1;
-         for (int i = index; i >= 0 && mTable[n] < gainLimits[i]; i--) {
-            index = i;
-         }
-         mTable[n] += fractionalPass * ((mTable[n] * (gainFactors[index] - 1)) + addOnValues[index]);
-      }
-   }
-   CopyHalfTable();
-}
-
-void EffectDistortion::Rectifier()
-{
-   double amount = (mParams.mParam1 / 50.0) - 1;
-   double stepsize = 1.0 / STEPS;
-   int index = STEPS;
-
-   // positive half of waveform is passed unaltered.
-   for  (int n = 0; n <= STEPS; n++) {
-      mTable[index] = n * stepsize;
-      index += 1;
-   }
-
-   // negative half of table
-   index = STEPS - 1;
-   for (int n = 1; n <= STEPS; n++) {
-      mTable[index] = n * stepsize * amount;
-      index--;
-   }
-}
-
-void EffectDistortion::HardLimiter()
-{
-   // The LADSPA "hardLimiter 1413" is basically hard clipping,
-   // but with a 'kind of' wet/dry mix:
-   // out = ((wet-residual)*clipped) + (residual*in)
-   HardClip();
-}
-
-
-// Helper functions for lookup tables
-
-void EffectDistortion::CopyHalfTable()
-{
-   // Copy negative half of table from positive half
-   int count = TABLESIZE - 1;
-   for (int n = 0; n < STEPS; n++) {
-      mTable[n] = -mTable[count];
-      count--;
-   }
-}
-
-
-float EffectDistortion::WaveShaper(float sample)
-{
-   float out;
-   int index;
-   double xOffset;
-   double amount = 1;
-
-   switch (mParams.mTableChoiceIndx)
-   {
-      // Do any pre-processing here
-      case kHardClip:
-         // Pre-gain
-         amount = mParams.mParam1 / 100.0;
-         sample *= 1+amount;
-         break;
-      default: break;
-   }
-
-   index = std::floor(sample * STEPS) + STEPS;
-   index = wxMax<int>(wxMin<int>(index, 2 * STEPS - 1), 0);
-   xOffset = ((1 + sample) * STEPS) - index;
-   xOffset = wxMin<double>(wxMax<double>(xOffset, 0.0), 1.0);   // Clip at 0dB
-
-   // linear interpolation: y = y0 + (y1-y0)*(x-x0)
-   out = mTable[index] + (mTable[index + 1] - mTable[index]) * xOffset;
-
-   return out;
-}
-
-
-float EffectDistortion::DCFilter(EffectDistortionState& data, float sample)
-{
-   // Rolling average gives less offset at the start than an IIR filter.
-   const unsigned int queueLength = std::floor(data.samplerate / 20.0);
-
-   data.queuetotal += sample;
-   data.queuesamples.push(sample);
-
-   if (data.queuesamples.size() > queueLength) {
-      data.queuetotal -= data.queuesamples.front();
-      data.queuesamples.pop();
-   }
-
-   return sample - (data.queuetotal / data.queuesamples.size());
-}
